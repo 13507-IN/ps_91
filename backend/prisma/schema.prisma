@@ -1,0 +1,389 @@
+// ============================================================
+// UdyamSetu AI — Prisma Schema
+// Database: PostgreSQL + PostGIS (Neon)
+// ============================================================
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_DATABASE_URL")
+  extensions = [postgis]
+}
+
+// ===================== ENUMS =====================
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum SocialCategory {
+  GENERAL
+  SC
+  ST
+  OBC
+  MINORITY
+}
+
+enum BusinessCategory {
+  DAIRY
+  FOOD_PROCESSING
+  RETAIL
+  TEXTILES_TAILORING
+  POULTRY
+  AGRICULTURE
+  LIVESTOCK
+  TRANSPORT
+  HANDICRAFT
+  SERVICES
+  OTHER
+}
+
+enum OperatingStatus {
+  ACTIVE
+  INACTIVE
+  SEASONAL
+  UNKNOWN
+}
+
+enum BusinessScale {
+  MICRO
+  SMALL
+  MEDIUM
+}
+
+enum PriceRange {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum DataSource {
+  CENSUS
+  UDYAM
+  LGD
+  COMMUNITY_REPORT
+  SURVEY
+  AI_INFERRED
+  AGMARKNET
+  GOVERNMENT
+  OTHER
+}
+
+enum VerificationStatus {
+  VERIFIED
+  UNVERIFIED
+  DISPUTED
+}
+
+enum Confidence {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum CropSeason {
+  KHARIF
+  RABI
+  ZAID
+  WHOLE_YEAR
+}
+
+enum RoadType {
+  NATIONAL_HIGHWAY
+  STATE_HIGHWAY
+  DISTRICT_ROAD
+  PMGSY_ROAD
+  VILLAGE_ROAD
+  OTHER
+}
+
+enum AnalysisStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+// ===================== USERS & AUTH =====================
+
+model User {
+  id            String          @id @default(cuid())
+  phone         String          @unique
+  name          String?
+  email         String?         @unique
+  passwordHash  String
+  gender        Gender?
+  dateOfBirth   DateTime?
+  category      SocialCategory?
+  isMinority    Boolean         @default(false)
+  location      Json?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  refreshTokens RefreshToken[]
+  analyses      Analysis[]
+
+  @@index([phone])
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
+}
+
+// ===================== GEOGRAPHY (LGD) =====================
+
+model State {
+  id        Int        @id
+  name      String
+  nameLocal String?
+  districts District[]
+}
+
+model District {
+  id        Int     @id
+  name      String
+  nameLocal String?
+  stateId   Int
+  state     State   @relation(fields: [stateId], references: [id])
+  blocks    Block[]
+
+  @@index([stateId])
+}
+
+model Block {
+  id         Int       @id
+  name       String
+  nameLocal  String?
+  districtId Int
+  district   District  @relation(fields: [districtId], references: [id])
+  villages   Village[]
+
+  @@index([districtId])
+}
+
+model Village {
+  id          Int                @id
+  name        String
+  nameLocal   String?
+  blockId     Int
+  block       Block              @relation(fields: [blockId], references: [id])
+  latitude    Float?
+  longitude   Float?
+  censusData  CensusData?
+  livestock   LivestockData[]
+  crops       CropData[]
+  businesses  Business[]
+  roads       RoadConnectivity[]
+  amenities   VillageAmenity?
+
+  // NOTE: PostGIS geometry column 'geom' added via raw SQL migration.
+  // Use $queryRaw for spatial queries (ST_DWithin, ST_Distance, etc.)
+
+  @@index([blockId])
+  @@index([name])
+}
+
+// ===================== DEMOGRAPHIC DATA =====================
+
+model CensusData {
+  id                    String     @id @default(cuid())
+  villageId             Int        @unique
+  village               Village    @relation(fields: [villageId], references: [id])
+  totalPopulation       Int?
+  malePopulation        Int?
+  femalePopulation      Int?
+  totalHouseholds       Int?
+  scPopulation          Int?
+  stPopulation          Int?
+  literacyRate          Float?
+  workingPopulation     Int?
+  mainWorkers           Int?
+  marginalWorkers       Int?
+  nonWorkers            Int?
+  cultivators           Int?
+  agriculturalLabourers Int?
+  householdWorkers      Int?
+  otherWorkers          Int?
+  censusYear            Int        @default(2011)
+  source                String     @default("Census of India")
+  confidence            Confidence @default(HIGH)
+  updatedAt             DateTime   @updatedAt
+}
+
+// ===================== BUSINESS / ENTERPRISE DATA =====================
+
+model Business {
+  id                 String             @id @default(cuid())
+  villageId          Int?
+  village            Village?           @relation(fields: [villageId], references: [id])
+  name               String?
+  category           BusinessCategory
+  subcategory        String?
+  products           String[]
+  latitude           Float?
+  longitude          Float?
+  operatingStatus    OperatingStatus    @default(ACTIVE)
+  scale              BusinessScale?
+  priceRange         PriceRange?
+  seasonality        String?
+  source             DataSource
+  verificationStatus VerificationStatus @default(UNVERIFIED)
+  lastVerified       DateTime?
+  confidence         Confidence         @default(MEDIUM)
+  registrationId     String?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // NOTE: PostGIS geometry column 'geom' added via raw SQL migration.
+
+  @@index([category])
+  @@index([villageId])
+}
+
+// ===================== LIVESTOCK DATA =====================
+
+model LivestockData {
+  id            String     @id @default(cuid())
+  villageId     Int
+  village       Village    @relation(fields: [villageId], references: [id])
+  animalType    String
+  count         Int?
+  milkProducing Int?
+  censusYear    Int?
+  source        DataSource
+  confidence    Confidence @default(MEDIUM)
+  updatedAt     DateTime   @updatedAt
+
+  @@index([villageId])
+  @@index([animalType])
+}
+
+// ===================== CROP / AGRICULTURE DATA =====================
+
+model CropData {
+  id               String         @id @default(cuid())
+  villageId        Int?
+  village          Village?       @relation(fields: [villageId], references: [id])
+  districtName     String?
+  cropName         String
+  season           CropSeason
+  areaHectares     Float?
+  productionTonnes Float?
+  yieldPerHectare  Float?
+  year             Int?
+  source           DataSource     @default(GOVERNMENT)
+  confidence       Confidence     @default(HIGH)
+  updatedAt        DateTime       @updatedAt
+
+  @@index([villageId])
+  @@index([cropName])
+}
+
+// ===================== MARKET PRICES =====================
+
+model CommodityPrice {
+  id         String     @id @default(cuid())
+  commodity  String
+  variety    String?
+  market     String
+  district   String
+  state      String
+  minPrice   Float?
+  maxPrice   Float?
+  modalPrice Float?
+  unit       String     @default("Quintal")
+  date       DateTime
+  source     DataSource @default(AGMARKNET)
+  confidence Confidence @default(HIGH)
+  createdAt  DateTime   @default(now())
+
+  @@index([commodity, district, date(sort: Desc)])
+}
+
+// ===================== ROAD CONNECTIVITY =====================
+
+model RoadConnectivity {
+  id          String     @id @default(cuid())
+  villageId   Int
+  village     Village    @relation(fields: [villageId], references: [id])
+  roadType    RoadType
+  surfaceType String?
+  nearestTown String?
+  distanceKm  Float?
+  source      DataSource @default(GOVERNMENT)
+  updatedAt   DateTime   @updatedAt
+
+  @@index([villageId])
+}
+
+// ===================== VILLAGE AMENITIES =====================
+
+model VillageAmenity {
+  id               String     @id @default(cuid())
+  villageId        Int        @unique
+  village          Village    @relation(fields: [villageId], references: [id])
+  hasPrimarySchool Boolean?
+  hasMiddleSchool  Boolean?
+  hasHighSchool    Boolean?
+  hasPHC           Boolean?
+  hasPostOffice    Boolean?
+  hasBankBranch    Boolean?
+  hasATM           Boolean?
+  hasElectricity   Boolean?
+  hasBusService    Boolean?
+  hasRailway       Boolean?
+  hasMobileNetwork Boolean?
+  hasInternet      Boolean?
+  nearestTownKm    Float?
+  source           DataSource @default(CENSUS)
+  censusYear       Int        @default(2011)
+  updatedAt        DateTime   @updatedAt
+}
+
+// ===================== ANALYSIS (Feasibility Request) =====================
+
+model Analysis {
+  id                   String           @id @default(cuid())
+  userId               String
+  user                 User             @relation(fields: [userId], references: [id])
+  villageId            Int?
+  latitude             Float
+  longitude            Float
+  catchmentRadiusKm    Float            @default(10)
+  businessCategory     BusinessCategory
+  businessIdea         String?
+  availableCapital     Float
+  businessExperience   String?
+  availableLand        String?
+  availableEquipment   String?
+  expectedWorkingHours Float?
+  marketIntelligence   Json?
+  competitorAnalysis   Json?
+  opportunityAnalysis  Json?
+  financialPlan        Json?
+  schemeMatch          Json?
+  riskAssessment       Json?
+  feasibilityScore     Json?
+  actionPlan           Json?
+  aiRecommendation     Json?
+  status               AnalysisStatus   @default(PENDING)
+  confidence           Confidence       @default(MEDIUM)
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+
+  @@index([userId, createdAt(sort: Desc)])
+}
