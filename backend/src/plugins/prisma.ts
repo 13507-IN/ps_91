@@ -21,8 +21,18 @@ async function prismaPlugin(fastify: FastifyInstance): Promise<void> {
           ],
   });
 
-  await prisma.$connect();
-  fastify.log.info('✅ Prisma connected to database');
+  try {
+    await prisma.$connect();
+    fastify.log.info('✅ Prisma connected to database');
+  } catch (err) {
+    if (process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'test') {
+      fastify.log.warn(
+        '⚠️ Prisma database connection failed. Ensure PostgreSQL / Neon is running and DATABASE_URL in .env is configured.',
+      );
+    } else {
+      throw err;
+    }
+  }
 
   // Log slow queries in development
   if (process.env['NODE_ENV'] === 'development') {

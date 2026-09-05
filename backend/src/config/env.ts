@@ -36,6 +36,14 @@ let _env: Env | undefined;
 export function loadEnv(): Env {
   if (_env) return _env;
 
+  try {
+    if (typeof (process as unknown as { loadEnvFile?: () => void }).loadEnvFile === 'function') {
+      (process as unknown as { loadEnvFile: () => void }).loadEnvFile();
+    }
+  } catch {
+    // .env not found or already loaded
+  }
+
   const result = envSchema.safeParse(process.env);
 
   if (!result.success) {
@@ -57,7 +65,7 @@ export function loadEnv(): Env {
 
 export function getEnv(): Env {
   if (!_env) {
-    throw new Error('Environment not loaded. Call loadEnv() first.');
+    return loadEnv();
   }
   return _env;
 }

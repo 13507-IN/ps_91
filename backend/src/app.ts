@@ -15,6 +15,9 @@ import swaggerPlugin from './plugins/swagger.js';
 // Routes
 import { authRoutes } from './modules/auth/auth.routes.js';
 import { userRoutes } from './modules/user/user.routes.js';
+import { adminRoutes } from './modules/admin/admin.routes.js';
+import { financialRoutes } from './modules/financial/financial.routes.js';
+import { schemeRoutes } from './modules/scheme/scheme.routes.js';
 
 // ============================================================
 // App Factory — creates and configures the Fastify instance
@@ -135,6 +138,7 @@ export async function buildApp() {
   // ---- API Routes ----
   await app.register(authRoutes, { prefix: `${API_PREFIX}/auth` });
   await app.register(userRoutes, { prefix: `${API_PREFIX}/users` });
+  await app.register(adminRoutes, { prefix: `${API_PREFIX}/admin` });
 
   return app;
 }
