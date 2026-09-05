@@ -18,6 +18,11 @@ import { userRoutes } from './modules/user/user.routes.js';
 import { adminRoutes } from './modules/admin/admin.routes.js';
 import { financialRoutes } from './modules/financial/financial.routes.js';
 import { schemeRoutes } from './modules/scheme/scheme.routes.js';
+import { locationRoutes } from './modules/location/location.routes.js';
+import { marketRoutes } from './modules/market/market.routes.js';
+import { businessRoutes } from './modules/business/business.routes.js';
+import { aiRoutes } from './modules/ai/ai.routes.js';
+import { feasibilityRoutes } from './modules/feasibility/feasibility.routes.js';
 
 // ============================================================
 // App Factory — creates and configures the Fastify instance
@@ -139,6 +144,13 @@ export async function buildApp() {
   await app.register(authRoutes, { prefix: `${API_PREFIX}/auth` });
   await app.register(userRoutes, { prefix: `${API_PREFIX}/users` });
   await app.register(adminRoutes, { prefix: `${API_PREFIX}/admin` });
+  await app.register(financialRoutes, { prefix: `${API_PREFIX}/financial` });
+  await app.register(schemeRoutes, { prefix: `${API_PREFIX}/schemes` });
+  await app.register(locationRoutes, { prefix: `${API_PREFIX}/locations` });
+  await app.register(marketRoutes, { prefix: `${API_PREFIX}/market` });
+  await app.register(businessRoutes, { prefix: `${API_PREFIX}/businesses` });
+  await app.register(aiRoutes, { prefix: `${API_PREFIX}/ai` });
+  await app.register(feasibilityRoutes, { prefix: `${API_PREFIX}/feasibility` });
 
   return app;
 }
