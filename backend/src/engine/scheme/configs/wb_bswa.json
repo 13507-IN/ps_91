@@ -1,0 +1,39 @@
+{
+  "schemeId": "wb_bhabishyat",
+  "name": "West Bengal Bhabishyat Credit Card Scheme (WB-BCCS)",
+  "shortName": "WB Bhabishyat",
+  "description": "West Bengal State Scheme providing collateral-free loans up to ₹5 Lakh with 10% government subsidy for youth starting micro enterprises.",
+  "nodalAgency": "Department of Micro, Small & Medium Enterprises and Textiles, Govt of West Bengal",
+  "targetAudience": "Youth residing in West Bengal aged 18 to 45 years",
+  "eligibility": {
+    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
+    "gender": ["MALE", "FEMALE", "OTHER"],
+    "ageMin": 18,
+    "ageMax": 45,
+    "businessCategories": ["DAIRY", "FOOD_PROCESSING", "RETAIL", "TEXTILES_TAILORING", "POULTRY", "HANDICRAFT", "SERVICES"],
+    "minProjectCost": 50000,
+    "maxProjectCost": 500000,
+    "states": ["West Bengal"]
+  },
+  "financial": {
+    "maxLoanAmount": 500000,
+    "interestRate": 4.0,
+    "subsidyPercentage": 10,
+    "maxSubsidy": 25000,
+    "marginPercentage": 0,
+    "tenureMonths": 60,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "Residential Proof of West Bengal",
+    "Age Proof Certificate",
+    "Project Scheme Proposal",
+    "Bank Passbook Details"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01"
+}

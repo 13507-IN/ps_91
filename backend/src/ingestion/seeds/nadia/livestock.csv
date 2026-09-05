@@ -1,0 +1,9 @@
+village_code,animal_type,total_count,milk_producing,census_year
+321501,Cattle,420,185,2019
+321501,Goat,310,0,2019
+321501,Poultry,2400,0,2019
+321601,Cattle,290,120,2019
+321601,Goat,450,0,2019
+321701,Cattle,580,240,2019
+321701,Buffalo,110,45,2019
+321701,Poultry,8500,0,2019

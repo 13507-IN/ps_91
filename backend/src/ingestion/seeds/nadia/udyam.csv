@@ -1,0 +1,6 @@
+udyam_id,enterprise_name,category,subcategory,products,village_code,latitude,longitude,scale,price_range,seasonality
+UDYAM-WB-10-0012345,Nadia Dairy Co-op,DAIRY,Milk Processing,"Milk, Paneer, Curd",321501,23.4015,88.5012,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-0012346,Phulia Handloom Weavers,TEXTILES_TAILORING,Handloom Sarees,"Taant Saree, Cotton Dupatta",321601,23.2415,88.5135,SMALL,HIGH,Year-round
+UDYAM-WB-10-0012347,Maa Tara Poultry Farm,POULTRY,Egg & Broiler,"Broiler Chicken, Eggs",321701,23.1785,88.5638,MICRO,LOW,Year-round
+UDYAM-WB-10-0012348,Santipur Jute Crafts,HANDICRAFT,Jute Products,"Jute Bags, Mats",321602,23.2291,88.4908,MICRO,MEDIUM,Oct-Mar
+UDYAM-WB-10-0012349,Deypara Grocery & General Store,RETAIL,General Store,"FMCG, Grocery",321502,23.3858,88.4725,MICRO,LOW,Year-round

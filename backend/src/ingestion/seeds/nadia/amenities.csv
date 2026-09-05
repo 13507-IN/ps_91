@@ -1,0 +1,6 @@
+village_code,primary_school,middle_school,high_school,phc,post_office,bank_branch,atm,electricity,bus_service,railway,mobile_network,internet,nearest_town_km
+321501,YES,YES,YES,YES,YES,YES,YES,YES,YES,NO,YES,YES,4.5
+321502,YES,YES,NO,NO,NO,NO,NO,YES,YES,NO,YES,YES,8.0
+321601,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,2.0
+321602,YES,NO,NO,NO,NO,NO,NO,YES,NO,NO,YES,NO,6.5
+321701,YES,YES,YES,NO,YES,YES,NO,YES,YES,YES,YES,YES,5.0

@@ -1,0 +1,7 @@
+district_name,village_code,crop_name,season,area_hectares,production_tonnes,yield_per_hectare,year
+Nadia,321501,Rice (Aman),KHARIF,450.5,1350.0,2.99,2023
+Nadia,321501,Jute,KHARIF,180.0,432.0,2.40,2023
+Nadia,321501,Mustard,RABI,120.0,168.0,1.40,2023
+Nadia,321601,Rice (Boro),RABI,310.0,1085.0,3.50,2023
+Nadia,321601,Potato,RABI,85.0,1955.0,23.00,2023
+Nadia,321701,Rice (Aman),KHARIF,520.0,1612.0,3.10,2023

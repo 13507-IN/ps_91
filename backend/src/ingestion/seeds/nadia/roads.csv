@@ -1,0 +1,6 @@
+village_code,road_type,surface_type,nearest_town,distance_km
+321501,STATE_HIGHWAY,Paved,Krishnanagar,4.5
+321502,PMGSY_ROAD,Paved,Krishnanagar,8.0
+321601,DISTRICT_ROAD,Paved,Santipur,2.0
+321602,VILLAGE_ROAD,Unpaved,Santipur,6.5
+321701,STATE_HIGHWAY,Paved,Ranaghat,5.0

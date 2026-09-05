@@ -1,0 +1,6 @@
+commodity,variety,market,district,state,min_price,max_price,modal_price,unit,date
+Milk,Cow,Krishnanagar Mandi,Nadia,West Bengal,38.0,44.0,42.0,Litre,2026-09-01
+Paddy,Common,Ranaghat Mandi,Nadia,West Bengal,2180.0,2300.0,2250.0,Quintal,2026-09-01
+Jute,TD-5,Santipur Mandi,Nadia,West Bengal,5200.0,5600.0,5450.0,Quintal,2026-09-01
+Potato,Jyoti,Krishnanagar Mandi,Nadia,West Bengal,1400.0,1650.0,1520.0,Quintal,2026-09-01
+Broiler Chicken,Live,Ranaghat Mandi,Nadia,West Bengal,110.0,130.0,122.0,Kg,2026-09-01

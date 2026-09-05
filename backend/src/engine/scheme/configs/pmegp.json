@@ -1,0 +1,38 @@
+{
+  "schemeId": "pmegp_micro",
+  "name": "Prime Minister's Employment Generation Programme (PMEGP)",
+  "shortName": "PMEGP",
+  "description": "Credit-linked subsidy scheme offering 25-35% subsidy for setting up micro enterprises in rural areas.",
+  "nodalAgency": "KVIC / Ministry of MSME",
+  "targetAudience": "Rural entrepreneurs, SC/ST, OBC, Women, Minorities",
+  "eligibility": {
+    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
+    "gender": ["MALE", "FEMALE", "OTHER"],
+    "ageMin": 18,
+    "ageMax": 60,
+    "businessCategories": ["FOOD_PROCESSING", "TEXTILES_TAILORING", "POULTRY", "DAIRY", "HANDICRAFT", "SERVICES"],
+    "minProjectCost": 100000,
+    "maxProjectCost": 5000000
+  },
+  "financial": {
+    "maxLoanAmount": 2500000,
+    "interestRate": 10.5,
+    "subsidyPercentage": 35,
+    "maxSubsidy": 875000,
+    "marginPercentage": 5,
+    "tenureMonths": 84,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "Caste Certificate (for SC/ST/OBC)",
+    "Educational Qualification Certificate (Class 8 pass for projects > 10L)",
+    "Detailed Project Report (DPR)",
+    "EDP Training Certificate"
+  ],
+  "priority": 2,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01"
+}

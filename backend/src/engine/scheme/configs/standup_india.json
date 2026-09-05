@@ -1,0 +1,38 @@
+{
+  "schemeId": "standup_india",
+  "name": "Stand-Up India Scheme",
+  "shortName": "Stand-Up India",
+  "description": "Bank loans between ₹10 lakh and ₹1 Crore to SC/ST or Women borrowers for setting up greenfield enterprises.",
+  "nodalAgency": "Department of Financial Services (DFS), Ministry of Finance",
+  "targetAudience": "SC/ST entrepreneurs and Women entrepreneurs",
+  "eligibility": {
+    "categories": ["SC", "ST"],
+    "gender": ["FEMALE"],
+    "ageMin": 18,
+    "ageMax": 65,
+    "businessCategories": ["FOOD_PROCESSING", "TEXTILES_TAILORING", "RETAIL", "DAIRY", "SERVICES"],
+    "minProjectCost": 1000000,
+    "maxProjectCost": 10000000
+  },
+  "financial": {
+    "maxLoanAmount": 10000000,
+    "interestRate": 8.0,
+    "subsidyPercentage": 0,
+    "maxSubsidy": 0,
+    "marginPercentage": 15,
+    "tenureMonths": 84,
+    "moratoriumMonths": 18,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "Caste / Category Certificate",
+    "Proof of Business Premises",
+    "Project Report",
+    "Bank Account Statement"
+  ],
+  "priority": 3,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01"
+}

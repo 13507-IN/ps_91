@@ -1,0 +1,38 @@
+{
+  "schemeId": "scheme_template",
+  "name": "Scheme Template Name",
+  "shortName": "TEMPLATE",
+  "description": "Description of the government loan / subsidy scheme",
+  "nodalAgency": "Nodal Ministry or Department Name",
+  "targetAudience": "Rural entrepreneurs, SC/ST, Women",
+  "eligibility": {
+    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
+    "gender": ["MALE", "FEMALE", "OTHER"],
+    "ageMin": 18,
+    "ageMax": 65,
+    "isMinority": null,
+    "businessCategories": ["DAIRY", "FOOD_PROCESSING", "RETAIL", "TEXTILES_TAILORING", "POULTRY"],
+    "minProjectCost": 10000,
+    "maxProjectCost": 10000000
+  },
+  "financial": {
+    "maxLoanAmount": 1000000,
+    "interestRate": 8.5,
+    "subsidyPercentage": 15,
+    "maxSubsidy": 150000,
+    "marginPercentage": 10,
+    "tenureMonths": 60,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "PAN Card",
+    "Project Report",
+    "Bank Account Statement (6 months)"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01"
+}
