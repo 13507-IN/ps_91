@@ -1,6 +1,6 @@
 import type { PrismaClient } from '@prisma/client';
 import type { DataPipeline, IngestionResult } from '../types.js';
-import { parseCsvFile } from '../parsers/index.js';
+import { parseCsvFile, parseJsonFile } from '../parsers/index.js';
 import { processRecords, safeInt, cleanString } from '../utils.js';
 
 // ============================================================
@@ -28,47 +28,48 @@ interface LgdVillageRow {
  * Transform a raw CSV row into an LGD record.
  * Handles various column name formats from different LGD data dumps.
  */
-function transformRow(row: Record<string, string>, _index: number): LgdVillageRow {
-  // LGD CSV columns can vary — handle common column name patterns
+function transformRow(row: Record<string, unknown>, _index: number): LgdVillageRow {
+  const r = row as Record<string, string | number>;
+  // LGD CSV/JSON columns can vary — handle common column name patterns
   const stateCode = safeInt(
-    row['State Code'] ?? row['state_code'] ?? row['State Code (LGD)'] ?? row['stateCode'],
+    r['State Code'] ?? r['state_code'] ?? r['State Code (LGD)'] ?? r['stateCode'],
   );
   const stateName = cleanString(
-    row['State Name'] ?? row['state_name'] ?? row['State Name (In English)'] ?? row['stateName'],
+    r['State Name'] ?? r['state_name'] ?? r['State Name (In English)'] ?? r['stateName'],
   );
   const districtCode = safeInt(
-    row['District Code'] ??
-      row['district_code'] ??
-      row['District Code (LGD)'] ??
-      row['districtCode'],
+    r['District Code'] ??
+      r['district_code'] ??
+      r['District Code (LGD)'] ??
+      r['districtCode'],
   );
   const districtName = cleanString(
-    row['District Name'] ??
-      row['district_name'] ??
-      row['District Name (In English)'] ??
-      row['districtName'],
+    r['District Name'] ??
+      r['district_name'] ??
+      r['District Name (In English)'] ??
+      r['districtName'],
   );
   const blockCode = safeInt(
-    row['Block Code'] ?? row['block_code'] ?? row['Sub-District Code (LGD)'] ?? row['blockCode'],
+    r['Block Code'] ?? r['block_code'] ?? r['Sub-District Code (LGD)'] ?? r['blockCode'],
   );
   const blockName = cleanString(
-    row['Block Name'] ??
-      row['block_name'] ??
-      row['Sub-District Name (In English)'] ??
-      row['blockName'],
+    r['Block Name'] ??
+      r['block_name'] ??
+      r['Sub-District Name (In English)'] ??
+      r['blockName'],
   );
   const villageCode = safeInt(
-    row['Village Code'] ??
-      row['village_code'] ??
-      row['Village/Town Code'] ??
-      row['Census 2011 Code'] ??
-      row['villageCode'],
+    r['Village Code'] ??
+      r['village_code'] ??
+      r['Village/Town Code'] ??
+      r['Census 2011 Code'] ??
+      r['villageCode'],
   );
   const villageName = cleanString(
-    row['Village Name'] ??
-      row['village_name'] ??
-      row['Village/Town Name (In English)'] ??
-      row['villageName'],
+    r['Village Name'] ??
+      r['village_name'] ??
+      r['Village/Town Name (In English)'] ??
+      r['villageName'],
   );
 
   if (!stateCode || !stateName || !districtCode || !districtName) {
@@ -85,22 +86,22 @@ function transformRow(row: Record<string, string>, _index: number): LgdVillageRo
     stateCode,
     stateName,
     stateNameLocal: cleanString(
-      row['State Name (In Local Language)'] ?? row['state_name_local'] ?? null,
+      r['State Name (In Local Language)'] ?? r['state_name_local'] ?? r['stateNameLocal'] ?? null,
     ),
     districtCode,
     districtName,
     districtNameLocal: cleanString(
-      row['District Name (In Local Language)'] ?? row['district_name_local'] ?? null,
+      r['District Name (In Local Language)'] ?? r['district_name_local'] ?? r['districtNameLocal'] ?? null,
     ),
     blockCode,
     blockName,
     blockNameLocal: cleanString(
-      row['Block Name (In Local Language)'] ?? row['block_name_local'] ?? null,
+      r['Block Name (In Local Language)'] ?? r['block_name_local'] ?? r['blockNameLocal'] ?? null,
     ),
     villageCode,
     villageName,
     villageNameLocal: cleanString(
-      row['Village Name (In Local Language)'] ?? row['village_name_local'] ?? null,
+      r['Village Name (In Local Language)'] ?? r['village_name_local'] ?? r['villageNameLocal'] ?? null,
     ),
   };
 }
@@ -123,7 +124,10 @@ export class LgdPipeline implements DataPipeline {
     filePath: string,
     options?: { dryRun?: boolean; batchSize?: number },
   ): Promise<IngestionResult> {
-    const records = await parseCsvFile<LgdVillageRow>(filePath, transformRow, validateRow);
+    const isJson = filePath.endsWith('.json');
+    const records = isJson
+      ? await parseJsonFile<LgdVillageRow>(filePath, transformRow, validateRow)
+      : await parseCsvFile<LgdVillageRow>(filePath, (row) => transformRow(row, 0), validateRow);
 
     // We need a special upsert strategy for LGD:
     // First deduplicate and upsert states, then districts, then blocks, then villages.
@@ -238,6 +242,7 @@ export class LgdPipeline implements DataPipeline {
               update: { name: data.name, nameLocal: data.nameLocal },
             }),
           ),
+          { maxWait: 10000, timeout: 30000 },
         );
       }
 

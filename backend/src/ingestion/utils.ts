@@ -66,32 +66,38 @@ export async function processRecords<T>(
   for (let i = 0; i < validRecords.length; i += batchSize) {
     const batch = validRecords.slice(i, i + batchSize);
 
-    // Use a transaction per batch for atomicity
-    await prisma.$transaction(async (tx: any) => {
-      for (const record of batch) {
-        try {
-          const result = await upsertFn(record.data, tx as unknown as PrismaClient);
-          switch (result) {
-            case 'inserted':
-              inserted++;
-              break;
-            case 'updated':
-              updated++;
-              break;
-            case 'skipped':
-              skipped++;
-              break;
-          }
-        } catch (err) {
-          errorCount++;
-          if (errorDetails.length < 100) {
-            errorDetails.push(
-              `Row ${record.rowIndex}: ${err instanceof Error ? err.message : String(err)}`,
-            );
+    // Use a transaction per batch for atomicity (with extended timeout for seeding)
+    await prisma.$transaction(
+      async (tx: any) => {
+        for (const record of batch) {
+          try {
+            const result = await upsertFn(record.data, tx as unknown as PrismaClient);
+            switch (result) {
+              case 'inserted':
+                inserted++;
+                break;
+              case 'updated':
+                updated++;
+                break;
+              case 'skipped':
+                skipped++;
+                break;
+            }
+          } catch (err) {
+            errorCount++;
+            if (errorDetails.length < 100) {
+              errorDetails.push(
+                `Row ${record.rowIndex}: ${err instanceof Error ? err.message : String(err)}`,
+              );
+            }
           }
         }
-      }
-    });
+      },
+      {
+        maxWait: 10000,
+        timeout: 30000,
+      },
+    );
   }
 
   return {
@@ -109,38 +115,46 @@ export async function processRecords<T>(
 }
 
 /**
- * Safe number parser — returns undefined for empty/invalid values.
+ * Safe number parser — handles strings and numbers safely.
  */
-export function safeInt(value: string | undefined | null): number | undefined {
-  if (!value || value.trim() === '' || value.trim() === '-') return undefined;
-  const num = parseInt(value.trim(), 10);
+export function safeInt(value: string | number | undefined | null): number | undefined {
+  if (value === undefined || value === null) return undefined;
+  if (typeof value === 'number') return isNaN(value) ? undefined : Math.floor(value);
+  const str = String(value).trim();
+  if (str === '' || str === '-') return undefined;
+  const num = parseInt(str, 10);
   return isNaN(num) ? undefined : num;
 }
 
 /**
- * Safe float parser — returns undefined for empty/invalid values.
+ * Safe float parser — handles strings and numbers safely.
  */
-export function safeFloat(value: string | undefined | null): number | undefined {
-  if (!value || value.trim() === '' || value.trim() === '-') return undefined;
-  const num = parseFloat(value.trim());
+export function safeFloat(value: string | number | undefined | null): number | undefined {
+  if (value === undefined || value === null) return undefined;
+  if (typeof value === 'number') return isNaN(value) ? undefined : value;
+  const str = String(value).trim();
+  if (str === '' || str === '-') return undefined;
+  const num = parseFloat(str);
   return isNaN(num) ? undefined : num;
 }
 
 /**
  * Clean a string value — trim, return null if empty.
  */
-export function cleanString(value: string | undefined | null): string | null {
-  if (!value) return null;
-  const trimmed = value.trim();
-  return trimmed === '' || trimmed === '-' || trimmed === 'NA' ? null : trimmed;
+export function cleanString(value: string | number | undefined | null): string | null {
+  if (value === undefined || value === null) return null;
+  const str = String(value).trim();
+  return str === '' || str === '-' || str === 'NA' ? null : str;
 }
 
 /**
  * Clean a boolean value from various representations.
  */
-export function safeBool(value: string | undefined | null): boolean | null {
-  if (!value) return null;
-  const v = value.trim().toLowerCase();
+export function safeBool(value: string | boolean | number | undefined | null): boolean | null {
+  if (value === undefined || value === null) return null;
+  if (typeof value === 'boolean') return value;
+  if (typeof value === 'number') return value === 1 ? true : value === 0 ? false : null;
+  const v = String(value).trim().toLowerCase();
   if (['yes', 'y', '1', 'true', 'available'].includes(v)) return true;
   if (['no', 'n', '0', 'false', 'not available', 'na'].includes(v)) return false;
   return null;

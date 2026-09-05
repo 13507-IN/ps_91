@@ -1,7 +1,7 @@
 import type { PrismaClient, BusinessCategory } from '@prisma/client';
 import type { DataPipeline, IngestionResult } from '../types.js';
 import { parseCsvFile } from '../parsers/index.js';
-import { processRecords, safeInt, cleanString } from '../utils.js';
+import { processRecords, safeInt, safeFloat, cleanString } from '../utils.js';
 
 // ============================================================
 // UDYAM / MSME Pipeline
@@ -81,28 +81,56 @@ function nicToCategory(nicCode: string | null | undefined, description: string |
   return 'OTHER';
 }
 
-function transformRow(row: Record<string, string>, _index: number): UdyamRow {
+function transformRow(row: Record<string, unknown>, _index: number): UdyamRow {
+  const r = row as Record<string, string | number>;
   const registrationId = cleanString(
-    row['UDYAM Registration Number'] ??
-      row['Registration No'] ??
-      row['udyam_registration_number'] ??
-      row['registrationId'],
+    r['UDYAM Registration Number'] ??
+      r['Registration No'] ??
+      r['udyam_registration_number'] ??
+      r['udyam_id'] ??
+      r['registrationId'],
   );
 
   if (!registrationId) {
     throw new Error('Missing UDYAM Registration Number');
   }
 
-  const nicCode = cleanString(row['NIC Code'] ?? row['NIC 2 Digit Code'] ?? row['nic_code']);
-  const description = cleanString(
-    row['Activity Description'] ??
-      row['Major Activity'] ??
-      row['Enterprise Type'] ??
-      row['activity_description'],
+  const name = cleanString(
+    r['Enterprise Name'] ?? r['Name of Enterprise'] ?? r['enterprise_name'] ?? r['name'],
   );
 
+  const nicCode = cleanString(r['NIC Code'] ?? r['NIC 2 Digit Code'] ?? r['nic_code']);
+  const description = cleanString(
+    r['Activity Description'] ??
+      r['Major Activity'] ??
+      r['subcategory'] ??
+      r['activity_description'],
+  );
+
+  const categoryRaw = cleanString(r['Category'] ?? r['category']);
+  const validCategories: BusinessCategory[] = [
+    'AGRICULTURE',
+    'LIVESTOCK',
+    'DAIRY',
+    'POULTRY',
+    'FOOD_PROCESSING',
+    'TEXTILES_TAILORING',
+    'HANDICRAFT',
+    'RETAIL',
+    'SERVICES',
+    'TRANSPORT',
+    'MANUFACTURING',
+    'OTHER',
+  ];
+  let category: BusinessCategory;
+  if (categoryRaw && validCategories.includes(categoryRaw as BusinessCategory)) {
+    category = categoryRaw as BusinessCategory;
+  } else {
+    category = nicToCategory(nicCode, description);
+  }
+
   const scaleRaw = cleanString(
-    row['Enterprise Type'] ?? row['Type of Enterprise'] ?? row['enterprise_type'],
+    r['Enterprise Type'] ?? r['Type of Enterprise'] ?? r['enterprise_type'] ?? r['scale'],
   );
   let scale: 'MICRO' | 'SMALL' | 'MEDIUM' | null = null;
   if (scaleRaw) {
@@ -113,21 +141,21 @@ function transformRow(row: Record<string, string>, _index: number): UdyamRow {
   }
 
   const productsRaw = cleanString(
-    row['Products/Services'] ?? row['Major Products'] ?? row['products'],
+    r['Products/Services'] ?? r['Major Products'] ?? r['products'],
   );
 
   return {
     registrationId,
-    name: cleanString(row['Enterprise Name'] ?? row['Name of Enterprise'] ?? row['name']),
-    category: nicToCategory(nicCode, description),
+    name,
+    category,
     subcategory: description,
-    districtName: cleanString(row['District'] ?? row['district_name'] ?? row['district']),
+    districtName: cleanString(r['District'] ?? r['district_name'] ?? r['district']),
     villageName: cleanString(
-      row['Village'] ?? row['City/Village'] ?? row['village_name'] ?? row['village'],
+      r['Village'] ?? r['City/Village'] ?? r['village_name'] ?? r['village'],
     ),
-    villageCode: safeInt(row['Village Code'] ?? row['village_code']),
-    latitude: undefined, // UDYAM data usually doesn't have coordinates
-    longitude: undefined,
+    villageCode: safeInt(r['Village Code'] ?? r['village_code']),
+    latitude: safeFloat(r['latitude'] ?? r['lat']),
+    longitude: safeFloat(r['longitude'] ?? r['lng'] ?? r['lon']),
     scale,
     nicCode,
     products: productsRaw ? productsRaw.split(/[,;]/).map((p) => p.trim()).filter(Boolean) : [],
@@ -178,6 +206,8 @@ export class UdyamPipeline implements DataPipeline {
               category: data.category,
               subcategory: data.subcategory,
               products: data.products.length > 0 ? data.products : existing.products,
+              latitude: data.latitude ?? existing.latitude,
+              longitude: data.longitude ?? existing.longitude,
               scale: data.scale,
               source: 'UDYAM',
               verificationStatus: 'VERIFIED',
@@ -193,6 +223,8 @@ export class UdyamPipeline implements DataPipeline {
             category: data.category,
             subcategory: data.subcategory,
             products: data.products,
+            latitude: data.latitude,
+            longitude: data.longitude,
             operatingStatus: 'ACTIVE',
             scale: data.scale,
             source: 'UDYAM',
