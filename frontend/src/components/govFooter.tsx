@@ -1,0 +1,190 @@
+import React from 'react';
+import Link from 'next/link';
+
+export default function GovFooter() {
+  return (
+    <footer className="bg-[#1A3A6B] text-white mt-0" role="contentinfo">
+      {/* Tricolor top bar */}
+      <div className="tricolor-divider w-full" aria-hidden="true" />
+
+      {/* Main footer grid */}
+      <div className="max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 2xl:px-16 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+
+          {/* Col 1 — Brand */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-3 mb-4">
+              {/* Mini emblem */}
+              <div className="w-12 h-12 rounded-full border-2 border-[#FF9933] flex items-center justify-center bg-white flex-shrink-0">
+                <svg viewBox="0 0 40 40" width="32" height="32" fill="none" aria-hidden="true">
+                  <circle cx="20" cy="20" r="18" stroke="#1A3A6B" strokeWidth="1.5" fill="none" />
+                  <circle cx="20" cy="20" r="12" stroke="#E65C00" strokeWidth="1" fill="none" />
+                  <circle cx="20" cy="20" r="3" fill="#1A3A6B" />
+                  {Array.from({ length: 8 }).map((_, i) => {
+                    const angle = (i * 45 * Math.PI) / 180;
+                    const x1 = 20 + 5 * Math.cos(angle);
+                    const y1 = 20 + 5 * Math.sin(angle);
+                    const x2 = 20 + 11 * Math.cos(angle);
+                    const y2 = 20 + 11 * Math.sin(angle);
+                    return (
+                      <line
+                        key={i}
+                        x1={x1} y1={y1} x2={x2} y2={y2}
+                        stroke="#1A3A6B"
+                        strokeWidth="1"
+                      />
+                    );
+                  })}
+                </svg>
+              </div>
+              <div>
+                <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest">
+                  उद्यमसेतु AI
+                </div>
+                <div className="text-white font-bold text-lg leading-tight">UdyamSetu AI</div>
+              </div>
+            </div>
+            <p className="text-sm text-white/65 leading-relaxed mb-3">
+              Evidence-backed business intelligence for rural and semi-urban entrepreneurs across India.
+            </p>
+            <p className="text-xs text-white/45">
+              উদ্যমসেতু AI — গ্রামীণ উদ্যোক্তাদের জন্য
+            </p>
+          </div>
+
+          {/* Col 2 — Quick Links */}
+          <div>
+            <h3 className="text-white font-bold text-sm mb-4 uppercase tracking-wider border-b border-white/15 pb-2">
+              Quick Links
+            </h3>
+            <ul className="space-y-2 text-sm">
+              {[
+                { href: '/', label: 'Home' },
+                { href: '/assessment-wizard', label: 'Start Assessment' },
+                { href: '/schemes', label: 'Schemes' },
+                { href: '/feasibility-report', label: 'Sample Report' },
+                { href: '/dashboard', label: 'Dashboard' },
+                { href: '/settings', label: 'Profile & Settings' },
+                { href: '/admin', label: 'Admin Panel' },
+              ].map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="text-white/60 hover:text-[#FF9933] transition-colors"
+                  >
+                    › {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 3 — Data Sources */}
+          <div>
+            <h3 className="text-white font-bold text-sm mb-4 uppercase tracking-wider border-b border-white/15 pb-2">
+              Data Sources
+            </h3>
+            <ul className="space-y-2 text-sm text-white/60">
+              {[
+                'Census of India',
+                'UDYAM / MSME Registry',
+                'AGMARKNET (Mandi Prices)',
+                'Livestock Census',
+                'PMGSY Road Network',
+                'LGD Location Database',
+                'Crop Cultivation Statistics',
+              ].map((s) => (
+                <li key={s} className="flex items-start gap-1.5">
+                  <span className="text-[#FF9933] mt-0.5">•</span>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 4 — Legal + Language */}
+          <div>
+            <h3 className="text-white font-bold text-sm mb-4 uppercase tracking-wider border-b border-white/15 pb-2">
+              Legal
+            </h3>
+            <ul className="space-y-2 text-sm mb-6">
+              {[
+                'Privacy Policy',
+                'Terms of Use',
+                'Disclaimer',
+                'Accessibility Statement',
+                'Contact Us',
+              ].map((l) => (
+                <li key={l}>
+                  <a href="#" className="text-white/60 hover:text-[#FF9933] transition-colors">
+                    › {l}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            {/* Language selector */}
+            <div className="pt-4 border-t border-white/15">
+              <p className="text-xs text-white/50 mb-2 uppercase tracking-wider">Language / ভাষা</p>
+              <div className="flex gap-2 text-xs">
+                <a
+                  href="#"
+                  className="px-3 py-1.5 rounded border border-[#FF9933] text-[#FF9933] font-semibold hover:bg-[#FF9933] hover:text-white transition-colors"
+                >
+                  English
+                </a>
+                <a
+                  href="#"
+                  className="px-3 py-1.5 rounded border border-white/30 text-white/60 font-semibold hover:border-[#FF9933] hover:text-[#FF9933] transition-colors"
+                >
+                  বাংলা
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Scheme partner logos bar */}
+        <div className="border-t border-white/15 border-b border-white/15 py-6 mb-8">
+          <p className="text-xs text-white/50 uppercase tracking-wider mb-4">Scheme Partners</p>
+          <div className="flex flex-wrap gap-3">
+            {[
+              { label: 'PMEGP', sub: 'Prime Minister Employment Generation Programme' },
+              { label: 'MUDRA', sub: 'Micro Units Development Refinance Agency' },
+              { label: 'Stand-Up India', sub: 'SC/ST & Women Entrepreneurs' },
+              { label: 'PMFME', sub: 'Formalisation of Micro Food Enterprises' },
+              { label: 'UDYAM', sub: 'MSME Registration Portal' },
+            ].map((scheme) => (
+              <div
+                key={scheme.label}
+                className="px-4 py-2.5 rounded border border-white/20 bg-white/5 hover:border-[#FF9933]/50 transition-colors"
+                title={scheme.sub}
+              >
+                <div className="text-xs font-bold text-white">{scheme.label}</div>
+                <div className="text-[10px] text-white/45 max-w-[120px] leading-tight mt-0.5 hidden sm:block">
+                  {scheme.sub}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom disclaimer + copyright */}
+        <div className="flex flex-col md:flex-row gap-4 items-start justify-between">
+          <p className="text-xs text-white/45 leading-relaxed max-w-3xl">
+            <strong className="text-white/60">Disclaimer:</strong> This is an independent platform
+            and not an official Government of India website. All feasibility assessments are advisory
+            in nature and should be validated with local authorities, financial institutions, and
+            qualified advisors before making investment decisions.
+          </p>
+          <p className="text-xs text-white/35 whitespace-nowrap">
+            © 2026 UdyamSetu AI · v2.0
+          </p>
+        </div>
+      </div>
+
+      {/* Tricolor bottom strip */}
+      <div className="tricolor-divider w-full" aria-hidden="true" />
+    </footer>
+  );
+}
