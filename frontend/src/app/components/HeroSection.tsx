@@ -169,67 +169,8 @@ export default function HeroSection() {
         aria-hidden="true"
       />
 
-      {/* ── Main content ── */}
-      <div className="relative z-20 max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 2xl:px-16 w-full py-20 lg:py-28">
-        <div className="max-w-2xl">
-
-          {/* Source badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white/90 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 backdrop-blur-sm">
-            <Shield size={12} className="text-[#FF9933] flex-shrink-0" />
-            Census · UDYAM · AGMARKNET · Govt. of India Data
-          </div>
-
-          {/* Headline */}
-          <h1
-            key={`h-${active}`}
-            className="text-4xl sm:text-5xl lg:text-[3.4rem] xl:text-[4rem] font-extrabold text-white mb-4 leading-[1.1] animate-fadeIn"
-          >
-            {slide.heading}
-            <span className="block mt-0.5" style={{ color: '#FF9933' }}>
-              {slide.highlight}
-            </span>
-          </h1>
-
-          {/* Sub-text */}
-          <p
-            key={`p-${active}`}
-            className="text-white/80 text-base sm:text-lg leading-relaxed mb-8 max-w-xl animate-fadeIn"
-          >
-            {slide.sub}
-          </p>
-
-          {/* CTA row */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link
-              href={slide.ctaHref}
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded text-base font-bold text-white bg-[#E65C00] hover:bg-[#CC5200] transition-colors shadow-lg"
-            >
-              {slide.cta}
-              <ArrowRight size={17} />
-            </Link>
-            <Link
-              href={slide.secondaryHref ?? '/'}
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded text-base font-semibold border-2 border-white/40 text-white hover:bg-white/10 transition-colors"
-            >
-              {slide.secondaryCta}
-            </Link>
-          </div>
-
-          {/* Trust signals */}
-          <div className="flex flex-wrap gap-5 mt-10">
-            {[
-              { icon: MapPin, text: '6,40,000+ Villages Mapped' },
-              { icon: TrendingUp, text: '48 Government Schemes' },
-              { icon: Shield, text: 'Free · Register to Save' },
-            ].map((item) => (
-              <div key={item.text} className="flex items-center gap-2 text-white/70 text-sm">
-                <item.icon size={13} style={{ color: '#FF9933' }} className="flex-shrink-0" />
-                {item.text}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* ── Empty content area; headlines moved to ticker in the header ── */}
+      <div className="relative z-20 max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 2xl:px-16 w-full py-20 lg:py-28" aria-hidden="true" />
 
       {/* ── Slide counter — bottom-right (MHA-style) ── */}
       <div className="absolute bottom-10 right-6 z-20 hidden sm:flex items-center gap-1.5 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1.5 select-none">

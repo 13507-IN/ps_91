@@ -43,6 +43,17 @@ const NAV_LINKS = (t: Record<string, string>) => [
   { href: '/admin',              label: t.admin,        icon: ShieldCheck,    requiresAuth: true  },
 ];
 
+const HEADER_TICKER_ITEMS = [
+  'Is Your Business Idea Viable in Your Village?',
+  'Scheme-Matched Financial Plans Built on Real Data',
+  'Local Market Intelligence for 6,40,000+ Villages',
+  'Stress-Tested Business Plans Built for Rural Reality',
+  'Financial Literacy for Every Entrepreneur',
+  'Risk Assessment Honest & Explainable',
+  '30-Day Action Plan From Idea to Funding',
+  'Government Scheme Matching Done Automatically',
+];
+
 export default function GovHeaderBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [lang, setLang] = useState<Lang>('EN');
@@ -79,6 +90,20 @@ export default function GovHeaderBar() {
 
   return (
     <header className="w-full sticky top-0 z-50" role="banner">
+
+      {/* ── Scrolling headline ticker ── */}
+      <div className="overflow-hidden border-b border-white/10 bg-[#0d1f47] text-white">
+        <div className="ticker-mask relative mx-auto max-w-screen-2xl">
+          <div className="ticker-track flex min-w-max items-center gap-8 whitespace-nowrap py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/90 sm:text-xs">
+            {[...HEADER_TICKER_ITEMS, ...HEADER_TICKER_ITEMS].map((item, idx) => (
+              <div key={`${item}-${idx}`} className="flex items-center gap-3">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#FF9933]" aria-hidden="true" />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* ── Main header bar: White logo / brand bar ── */}
       <div className="gov-logo-bar px-4 py-3 shadow-sm">

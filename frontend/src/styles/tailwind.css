@@ -89,8 +89,22 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.6s ease forwards;
+}
+
+.ticker-track {
+  animation: tickerScroll 26s linear infinite;
+}
+
+.ticker-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
 }
 
 @layer utilities {
