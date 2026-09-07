@@ -8,7 +8,7 @@ import StepCapital from './StepCapital';
 import StepReview from './StepReview';
 import type { WizardDraft } from '@/types';
 
-export const LAST_REPORT_KEY = 'udyamsetu-last-report';
+export { LAST_REPORT_KEY } from '@/lib/constants';
 const TOTAL_STEPS = 4;
 
 const stepTitles = [

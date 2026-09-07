@@ -71,6 +71,7 @@ export interface StressTestScenario {
 export interface StressTestOutput {
   base: StressTestScenario;
   scenarios: StressTestScenario[];
+  overallRiskLevel?: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
 }
 
 export interface MatchedSchemeResult {
@@ -87,19 +88,21 @@ export interface MatchedSchemeResult {
   reason: string;
 }
 
+export interface CropSummary {
+  cropName: string;
+  areaHectares?: number;
+  productionTonnes?: number;
+}
+
 export interface MarketIntelligence {
   totalPopulation: number;
   totalHouseholds: number;
   literacyRate: number;
   catchmentRadiusKm: number;
   amenitiesCount: Record<string, number>;
-  topCrops: string[];
+  topCrops: Array<string | CropSummary>;
   livestock: Record<string, number>;
-  infrastructure: {
-    hasAllWeatherRoad: boolean;
-    nearestTownDistanceKm: number;
-    mobileConnectivity: string;
-  };
+  infrastructure: Record<string, unknown>;
   confidence: Confidence;
 }
 
@@ -125,10 +128,12 @@ export interface OpportunityAnalysis {
   keyDrivers: string[];
 }
 
+export type RiskLevel = 'HIGH' | 'MEDIUM' | 'LOW';
+
 export interface RiskFactor {
   name: string;
-  probability: number;
-  impact: number;
+  probability: number | RiskLevel;
+  impact: number | RiskLevel;
   mitigation: string;
 }
 

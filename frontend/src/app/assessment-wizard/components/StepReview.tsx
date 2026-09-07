@@ -1,8 +1,11 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 
-import { MapPin, Briefcase, IndianRupee, User, Loader2, ArrowRight } from 'lucide-react';
+import { MapPin, Briefcase, IndianRupee, User, Loader2, ArrowRight, AlertTriangle } from 'lucide-react';
 import { inr } from '@/lib/format';
+import { LAST_REPORT_KEY, LAST_REPORT_ID_KEY } from '@/lib/constants';
+import { api, apiEndpoints } from '@/lib/api/client';
+import { toFeasibilityReport, type BackendFeasibilityResult } from '@/lib/api/feasibility';
 import type { WizardDraft } from '@/types';
 
 interface StepReviewProps {
@@ -20,13 +23,64 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 export default function StepReview({ draft, onBack, isSubmitting, setIsSubmitting }: StepReviewProps) {
-  function handleAnalyze() {
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleAnalyze() {
+    // Validate required fields before hitting the backend
+    if (draft.latitude === undefined || draft.longitude === undefined) {
+      setError('Please go back and choose a village with coordinates before analyzing.');
+      return;
+    }
+    if (!draft.businessIdea || draft.businessIdea.trim().length < 2) {
+      setError('Please describe your business idea (at least 2 characters).');
+      return;
+    }
+    if (typeof draft.availableCapital !== 'number' || draft.availableCapital <= 0) {
+      setError('Please enter your available capital before analyzing.');
+      return;
+    }
+
+    setError(null);
     setIsSubmitting(true);
-    // Backend integration: POST /api/feasibility/analyze with draft data
-    setTimeout(() => {
+
+    const body = {
+      latitude: draft.latitude,
+      longitude: draft.longitude,
+      villageId: draft.villageId,
+      catchmentRadiusKm: draft.catchmentRadiusKm ?? 10,
+      businessCategory: draft.businessCategory,
+      businessIdea: draft.businessIdea.trim(),
+      availableCapital: draft.availableCapital,
+      age: draft.age,
+      gender: draft.gender,
+      category: draft.category,
+      isMinority: draft.isMinority,
+      businessExperience: draft.businessExperience,
+      availableLand: draft.availableLand,
+      availableEquipment: draft.availableEquipment,
+      expectedWorkingHours: draft.expectedWorkingHours,
+    };
+
+    try {
+      const result = await api<BackendFeasibilityResult>(
+        apiEndpoints.feasibility.analyze,
+        {
+          method: 'POST',
+          body: JSON.stringify(body),
+        },
+      );
+
+      const report = toFeasibilityReport(result);
+      if (report.id) {
+        window.sessionStorage.setItem(LAST_REPORT_ID_KEY, report.id);
+      }
+      window.sessionStorage.setItem(LAST_REPORT_KEY, JSON.stringify(report));
+      window.location.href = '/feasibility-report?from=assessment';
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+      setError(message);
       setIsSubmitting(false);
-      window.location.href = '/feasibility-report';
-    }, 2200);
+    }
   }
 
   return (
@@ -116,26 +170,34 @@ export default function StepReview({ draft, onBack, isSubmitting, setIsSubmittin
       </div>
 
       <div className="flex justify-between pt-2">
-        <button type="button" onClick={onBack} className="px-6 py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors">
+        <button type="button" onClick={onBack} disabled={isSubmitting} className="px-6 py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors disabled:opacity-50">
           Back
         </button>
-        <button
-          onClick={handleAnalyze}
-          disabled={isSubmitting}
-          className="btn-saffron px-8 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 min-w-[180px] justify-center"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 size={16} className="animate-spin" />
-              Analyzing...
-            </>
-          ) : (
-            <>
-              Run Feasibility Analysis
-              <ArrowRight size={16} />
-            </>
+        <div className="flex items-center gap-3">
+          {error && (
+            <div className="flex items-center gap-2 text-xs text-grade-poor bg-red-50 border border-red-200 rounded-lg px-3 py-2 max-w-xs">
+              <AlertTriangle size={14} className="flex-shrink-0" />
+              {error}
+            </div>
           )}
-        </button>
+          <button
+            onClick={handleAnalyze}
+            disabled={isSubmitting}
+            className="btn-saffron px-8 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 min-w-[180px] justify-center"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 size={16} className="animate-spin" />
+                Analyzing...
+              </>
+            ) : (
+              <>
+                Run Feasibility Analysis
+                <ArrowRight size={16} />
+              </>
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );

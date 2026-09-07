@@ -17,6 +17,17 @@ const SOURCE_LABELS: Record<IngestionSource, string> = {
   amenities: 'Amenities',
 };
 
+const SEED_FILES: Record<IngestionSource, string> = {
+  lgd: 'src/ingestion/seeds/nadia/lgd.json',
+  census: 'src/ingestion/seeds/nadia/census.csv',
+  udyam: 'src/ingestion/seeds/nadia/udyam.csv',
+  livestock: 'src/ingestion/seeds/nadia/livestock.csv',
+  crop: 'src/ingestion/seeds/nadia/crop.csv',
+  agmarknet: 'src/ingestion/seeds/nadia/agmarknet.csv',
+  roads: 'src/ingestion/seeds/nadia/roads.csv',
+  amenities: 'src/ingestion/seeds/nadia/amenities.csv',
+};
+
 export default function AdminPage() {
   const [selectedSource, setSelectedSource] = useState<IngestionSource | ''>('');
   const [jobId, setJobId] = useState<string | null>(null);
@@ -36,20 +47,22 @@ export default function AdminPage() {
     isLoading: jobLoading,
   } = useQuery({
     queryKey: ['admin-job', jobId],
-    queryFn: () => api<JobStatus>(`${apiEndpoints.admin.ingestStatus}/${jobId}`),
+    queryFn: () => api<JobStatus>(`${apiEndpoints.admin.ingestStatus}?jobId=${jobId}`),
     enabled: Boolean(jobId),
     refetchInterval: 2000,
   });
 
   const triggerIngestion = useMutation({
     mutationFn: (source: IngestionSource | 'all') =>
-      api<{ id: string }>(
-        source === 'all'
-          ? '/api/admin/ingest/all'
-          : `/api/admin/ingest/${source}`,
-        { method: 'POST' }
-      ),
-    onSuccess: (data) => setJobId(data.id),
+      api<{ jobId: string }>(source === 'all' ? '/api/admin/ingest/all' : `/api/admin/ingest/${source}`, {
+        method: 'POST',
+        body: JSON.stringify(
+          source === 'all'
+            ? { fileMap: SEED_FILES, dryRun: false, batchSize: 500 }
+            : { filePath: SEED_FILES[source], dryRun: false, batchSize: 500 },
+        ),
+      }),
+    onSuccess: (data) => setJobId(data.jobId),
   });
 
   if (!hasSession()) {

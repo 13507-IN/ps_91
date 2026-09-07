@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api, apiEndpoints } from '@/lib/api/client';
-import { LAST_REPORT_KEY } from '@/app/assessment-wizard/components/AssesmentWizardClient';
+import { LAST_REPORT_KEY } from '@/lib/constants';
 import { mockReport } from './mockReportData';
 import type { FeasibilityReport } from '@/types';
 import { ReportHeader } from './ReportHeader';

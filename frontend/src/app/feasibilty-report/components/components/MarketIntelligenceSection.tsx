@@ -47,7 +47,7 @@ export function MarketIntelligenceSection({ market }: { market: MarketIntelligen
               <li className="text-xs text-slate-500">No crop data available.</li>
             )}
             {topCrops.map((c) => {
-              const cropObj = typeof c === 'object' && c !== null ? (c as Record<string, unknown>) : null;
+              const cropObj = typeof c === 'object' && c !== null ? (c as unknown as Record<string, unknown>) : null;
               const cropName = cropObj ? String(cropObj.cropName ?? c) : String(c);
               const area = cropObj?.areaHectares ? number(Number(cropObj.areaHectares)) : null;
               return (
