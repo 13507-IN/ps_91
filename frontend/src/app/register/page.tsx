@@ -55,7 +55,7 @@ export default function RegisterPage() {
       });
       setTokens(data.tokens);
       setSession(data.user);
-      router.replace('/assessment-wizard');
+      router.replace('/dashboard');
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Registration failed.';
       if (msg.toLowerCase().includes('already') || msg.toLowerCase().includes('duplicate')) {

@@ -24,9 +24,9 @@ export default function LoginPage() {
 
   // Read ?next= param for post-login redirect
   const [nextPath] = React.useState(() => {
-    if (typeof window === 'undefined') return '/assessment-wizard';
+    if (typeof window === 'undefined') return '/dashboard';
     const p = new URLSearchParams(window.location.search).get('next');
-    return p && p.startsWith('/') ? p : '/assessment-wizard';
+    return p && p.startsWith('/') ? p : '/dashboard';
   });
 
   async function handleSubmit(e: React.FormEvent) {
