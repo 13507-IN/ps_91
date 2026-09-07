@@ -1,7 +1,7 @@
 import type { PrismaClient } from '@prisma/client';
 import type { DataPipeline, IngestionResult } from '../types.js';
 import { parseCsvFile, parseJsonFile } from '../parsers/index.js';
-import { processRecords, safeInt, cleanString } from '../utils.js';
+import { processRecords, safeInt, safeFloat, cleanString } from '../utils.js';
 
 // ============================================================
 // LGD (Local Government Directory) Pipeline
@@ -22,6 +22,8 @@ interface LgdVillageRow {
   villageCode: number;
   villageName: string;
   villageNameLocal: string | null;
+  latitude?: number;
+  longitude?: number;
 }
 
 /**
@@ -71,6 +73,8 @@ function transformRow(row: Record<string, unknown>, _index: number): LgdVillageR
       r['Village/Town Name (In English)'] ??
       r['villageName'],
   );
+  const latitude = safeFloat(r['latitude'] ?? r['Latitude']);
+  const longitude = safeFloat(r['longitude'] ?? r['Longitude']);
 
   if (!stateCode || !stateName || !districtCode || !districtName) {
     throw new Error('Missing required fields: State Code, State Name, District Code, District Name');
@@ -103,6 +107,8 @@ function transformRow(row: Record<string, unknown>, _index: number): LgdVillageR
     villageNameLocal: cleanString(
       r['Village Name (In Local Language)'] ?? r['village_name_local'] ?? r['villageNameLocal'] ?? null,
     ),
+    latitude,
+    longitude,
   };
 }
 
@@ -171,7 +177,7 @@ export class LgdPipeline implements DataPipeline {
     >();
     const villages = new Map<
       number,
-      { name: string; nameLocal: string | null; blockId: number }
+      { name: string; nameLocal: string | null; blockId: number; latitude?: number | null; longitude?: number | null }
     >();
 
     for (const rec of validRecords) {
@@ -191,6 +197,8 @@ export class LgdPipeline implements DataPipeline {
         name: r.villageName,
         nameLocal: r.villageNameLocal,
         blockId: r.blockCode,
+        latitude: r.latitude ?? null,
+        longitude: r.longitude ?? null,
       });
     }
 
@@ -235,13 +243,27 @@ export class LgdPipeline implements DataPipeline {
       for (let i = 0; i < villageEntries.length; i += batchSize) {
         const batch = villageEntries.slice(i, i + batchSize);
         await this.prisma.$transaction(
-          batch.map(([id, data]) =>
-            this.prisma.village.upsert({
-              where: { id },
-              create: { id, name: data.name, nameLocal: data.nameLocal, blockId: data.blockId },
-              update: { name: data.name, nameLocal: data.nameLocal },
-            }),
-          ),
+          async (tx) => {
+            for (const [id, data] of batch) {
+              await tx.village.upsert({
+                where: { id },
+                create: {
+                  id,
+                  name: data.name,
+                  nameLocal: data.nameLocal,
+                  blockId: data.blockId,
+                  latitude: data.latitude,
+                  longitude: data.longitude,
+                },
+                update: {
+                  name: data.name,
+                  nameLocal: data.nameLocal,
+                  latitude: data.latitude,
+                  longitude: data.longitude,
+                },
+              });
+            }
+          },
           { maxWait: 10000, timeout: 30000 },
         );
       }

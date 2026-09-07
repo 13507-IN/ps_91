@@ -92,7 +92,7 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
 
   function selectVillage(v: VillageSearchResult) {
     setSelected(v);
-    setPinned(null);
+    setPinned((prev) => (v.latitude != null && v.longitude != null ? null : prev));
     setQuery(v.name);
     setResults([]);
     updateDraft({
@@ -196,6 +196,9 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
             {selected.latitude !== null && selected.longitude !== null ? (
               <div className="text-xs text-ink-subtle mt-1 font-tabular">
                 {selected.latitude.toFixed(4)}°N, {selected.longitude.toFixed(4)}°E
+                <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-teal-100 px-2 py-0.5 text-[10px] font-semibold text-teal-700">
+                  <MapPin size={10} /> Pinned on map
+                </span>
               </div>
             ) : (
               <div className="text-xs text-grade-poor mt-1 font-medium">
