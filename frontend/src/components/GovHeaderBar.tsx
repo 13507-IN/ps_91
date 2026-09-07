@@ -80,62 +80,7 @@ export default function GovHeaderBar() {
   return (
     <header className="w-full sticky top-0 z-50" role="banner">
 
-      {/* ══════════════════════════════════════════════════════
-          Bar 0 — Government Initiative Badges (MHA top strip)
-          Uses the actual /public/9.png image (668×127 px)
-         ══════════════════════════════════════════════════════ */}
-      <div className="bg-white border-b border-[#E8E8E8] hidden sm:block">
-        <div className="max-w-screen-2xl mx-auto px-4 flex items-center justify-between py-1.5">
-          {/* Left — Gov of India text */}
-          <div className="text-[10px] leading-tight flex-shrink-0">
-            <div className="font-bold tracking-wider text-[#1A3A6B]">भारत सरकार</div>
-            <div className="font-semibold tracking-widest uppercase text-[#555] text-[9px]">Government of India</div>
-          </div>
-
-          {/* Right — 9.png badge strip */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/9.png"
-            alt="Government initiative badges — Swachh Bharat, G20, Yoga, Cyber Dost"
-            height={50}
-            style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
-          />
-        </div>
-      </div>
-
-      {/* ── Bar 1: Gov utility strip (light gray) ── */}
-      <div className="gov-utility-bar px-4 py-1.5">
-        <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <a href="#main-content" className="sr-only focus:not-sr-only focus:text-[#E65C00] underline text-xs">
-              {t.skipToMain}
-            </a>
-            <span className="font-semibold text-[#1A3A6B] text-xs tracking-wide">{t.govIndia}</span>
-          </div>
-          <div className="flex items-center gap-4 text-xs text-[#555555]">
-            {/* Text-size controls (A- / A / A+) */}
-            <div className="hidden sm:flex items-center gap-1" aria-label="Text size">
-              {['A-', 'A', 'A+'].map((s) => (
-                <button key={s}
-                  className="w-5 h-5 rounded border border-[#CCCCCC] text-[10px] font-bold hover:bg-[#E65C00] hover:text-white hover:border-[#E65C00] transition-colors"
-                  aria-label={`Text size ${s}`}
-                >{s}</button>
-              ))}
-            </div>
-            <span className="hidden sm:inline text-[#CCCCCC]">|</span>
-            <button
-              onClick={() => setLang(lang === 'EN' ? 'BN' : 'EN')}
-              className="flex items-center gap-1 text-[#1A3A6B] hover:text-[#E65C00] transition-colors font-medium"
-              aria-label="Toggle language"
-            >
-              <Globe size={12} />
-              <span>{t.language}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Bar 2: White logo / brand bar ── */}
+      {/* ── Main header bar: White logo / brand bar ── */}
       <div className="gov-logo-bar px-4 py-3 shadow-sm">
         <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-4">
 
@@ -165,22 +110,16 @@ export default function GovHeaderBar() {
             </div>
           </Link>
 
-          {/* Right side: scheme badges + auth buttons */}
+          {/* Right side: scheme image + auth buttons */}
           <div className="hidden lg:flex items-center gap-4">
-            {/* Scheme partner badges */}
-            <div className="flex items-center gap-2">
-              {[
-                { label: 'PMEGP', color: '#1A3A6B' },
-                { label: 'MUDRA', color: '#138808' },
-                { label: 'UDYAM', color: '#E65C00' },
-                { label: 'PMFME', color: '#8B0000' },
-              ].map((b) => (
-                <div key={b.label}
-                  className="w-14 h-14 rounded-lg border-2 flex items-center justify-center bg-white shadow-sm text-xs font-bold"
-                  style={{ borderColor: b.color, color: b.color }}
-                  aria-label={b.label}
-                >{b.label}</div>
-              ))}
+            {/* Government initiative badge image */}
+            <div className="flex items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/9.png"
+                alt="Government initiative badges"
+                className="h-14 w-auto object-contain"
+              />
             </div>
 
             {/* Auth buttons */}

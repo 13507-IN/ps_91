@@ -1,3 +1,5 @@
+declare module '*.css';
+
 import type { Metadata } from 'next';
 import { Providers } from '@/lib/api/Providers';
 import GovHeaderBar from '@/components/GovHeaderBar';
