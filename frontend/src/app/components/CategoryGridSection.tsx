@@ -99,13 +99,16 @@ const categories = [
 
 export default function CategoryGridSection() {
   return (
-    <section className="py-20 bg-paper-dark">
+    <section className="py-20 bg-[#F5F5F5]">
       <div className="max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 2xl:px-16">
         <div className="mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-teal-900 mb-4">
+          <div className="inline-block text-xs font-bold uppercase tracking-widest text-[#E65C00] mb-3 border-b-2 border-[#E65C00] pb-1">
+            Business Categories
+          </div>
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#1A3A6B] mb-4">
             11 Business Categories Covered
           </h2>
-          <p className="text-ink-muted text-lg max-w-xl">
+          <p className="text-[#4A5568] text-lg max-w-xl">
             From dairy farming to transport services — each category loaded with local investment
             benchmarks, scheme eligibility, and demand estimates.
           </p>
@@ -118,7 +121,7 @@ export default function CategoryGridSection() {
               <Link
                 key={`cat-${cat.code}`}
                 href={`/assessment-wizard?category=${cat.code}`}
-                className="group bg-white rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#146C64]"
+                className="group bg-white rounded-xl border border-[#DDDDDD] overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E65C00]"
               >
                 {/* Illustration placeholder */}
                 <div className={`relative h-28 bg-gradient-to-br ${cat.bg} flex items-center justify-center overflow-hidden`}>
@@ -132,9 +135,9 @@ export default function CategoryGridSection() {
                 </div>
 
                 <div className="p-3">
-                  <div className="font-bold text-teal-900 text-sm mb-0.5">{cat.name}</div>
-                  <div className="text-ink-subtle text-xs mb-2 leading-snug">{cat.description}</div>
-                  <div className="text-xs text-teal-600 font-semibold font-tabular">
+                  <div className="font-bold text-[#1A3A6B] text-sm mb-0.5">{cat.name}</div>
+                  <div className="text-[#718096] text-xs mb-2 leading-snug">{cat.description}</div>
+                  <div className="text-xs text-[#E65C00] font-semibold font-tabular">
                     {inr(cat.range[0], true)} – {inr(cat.range[1], true)}
                   </div>
                 </div>

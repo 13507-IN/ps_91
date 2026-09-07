@@ -63,24 +63,28 @@ export default function LanguagePickerModal() {
 
         <div className="p-8 text-center">
           {/* Logo mark */}
-          <div className="mx-auto w-14 h-14 rounded-xl bg-[#E98A15] flex items-center justify-center mb-5">
-            <svg viewBox="0 0 40 40" width="32" height="32" fill="none" aria-hidden="true">
-              <path
-                d="M20 4 L34 10 L34 22 C34 30 20 36 20 36 C20 36 6 30 6 22 L6 10 Z"
-                fill="#F5A832"
-                stroke="#0B3D3A"
-                strokeWidth="1"
-              />
-              <path d="M20 12 L26 18 L20 24 L14 18 Z" fill="#FAF8F3" />
-              <rect x="6" y="26" width="28" height="3" fill="#0F7A4E" opacity="0.9" />
+          <div className="mx-auto w-16 h-16 rounded-full border-2 border-[#1A3A6B] flex items-center justify-center mb-5 bg-white shadow-sm">
+            <svg viewBox="0 0 40 40" width="40" height="40" fill="none" aria-hidden="true">
+              <circle cx="20" cy="20" r="18" stroke="#1A3A6B" strokeWidth="1.5" fill="none" />
+              <circle cx="20" cy="20" r="12" stroke="#E65C00" strokeWidth="1" fill="none" />
+              <circle cx="20" cy="20" r="3" fill="#1A3A6B" />
+              {Array.from({ length: 8 }).map((_, i) => {
+                const angle = (i * 45 * Math.PI) / 180;
+                const x1 = 20 + 5 * Math.cos(angle);
+                const y1 = 20 + 5 * Math.sin(angle);
+                const x2 = 20 + 11 * Math.cos(angle);
+                const y2 = 20 + 11 * Math.sin(angle);
+                return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#1A3A6B" strokeWidth="1" />;
+              })}
             </svg>
           </div>
 
-          <h2 id="lang-modal-title" className="text-xl font-bold text-[#0B3D3A] mb-1">
+          <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest mb-1">उद्यमसेतु AI</div>
+          <h2 id="lang-modal-title" className="text-xl font-bold text-[#1A3A6B] mb-1">
             UdyamSetu AI
           </h2>
 
-          <p className="text-[#0B3D3A] font-semibold mt-4 mb-1">Choose Language / ভাষা বেছে নিন</p>
+          <p className="text-[#1A3A6B] font-semibold mt-4 mb-1">Choose Language / ভাষা বেছে নিন</p>
           <p className="text-sm text-[#718096] mb-7">
             Select your preferred language to continue
             <br />
@@ -91,7 +95,7 @@ export default function LanguagePickerModal() {
             {/* English */}
             <button
               onClick={() => pick('EN')}
-              className="flex-1 flex flex-col items-center gap-2 px-5 py-4 rounded-xl border-2 border-[#0B3D3A] hover:bg-[#0B3D3A] hover:text-white transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E98A15]"
+              className="flex-1 flex flex-col items-center gap-2 px-5 py-4 rounded-xl border-2 border-[#1A3A6B] hover:bg-[#1A3A6B] hover:text-white transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E65C00]"
             >
               <span className="text-2xl" aria-hidden="true">🇮🇳</span>
               <span className="font-bold text-base">English</span>
@@ -101,7 +105,7 @@ export default function LanguagePickerModal() {
             {/* Bengali */}
             <button
               onClick={() => pick('BN')}
-              className="flex-1 flex flex-col items-center gap-2 px-5 py-4 rounded-xl border-2 border-[#E98A15] hover:bg-[#E98A15] hover:text-white transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B3D3A]"
+              className="flex-1 flex flex-col items-center gap-2 px-5 py-4 rounded-xl border-2 border-[#E65C00] hover:bg-[#E65C00] hover:text-white transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1A3A6B]"
             >
               <span className="text-2xl" aria-hidden="true">বা</span>
               <span className="font-bold text-base">বাংলা</span>
