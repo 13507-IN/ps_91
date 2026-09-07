@@ -1,5 +1,6 @@
 import HeroSection from './components/HeroSection';
 import { TrustStatsStrip } from './components/TrustStatsStrip';
+import { PhotoGallerySection } from './components/PhotoGallerySection';
 import { HowitWorksSection } from './components/HowitWorksSection';
 import CategoryGridSection from './components/CategoryGridSection';
 import { TrustDataSourcesStrip } from './components/TrustDataSourcesStrip';
@@ -10,6 +11,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <TrustStatsStrip />
+      <PhotoGallerySection />
       <HowitWorksSection />
       <CategoryGridSection />
       <TrustDataSourcesStrip />
