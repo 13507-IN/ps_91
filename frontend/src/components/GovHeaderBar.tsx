@@ -82,159 +82,24 @@ export default function GovHeaderBar() {
 
       {/* ══════════════════════════════════════════════════════
           Bar 0 — Government Initiative Badges (MHA top strip)
-          White background, logo row left-aligned, right side
-          mirrors the MHA.gov.in badge row exactly in spirit.
+          Uses the actual /public/9.png image (668×127 px)
          ══════════════════════════════════════════════════════ */}
-      <div className="bg-white border-b border-[#E8E8E8] px-4 py-2 hidden sm:block">
-        <div className="max-w-screen-2xl mx-auto flex items-center justify-between">
-
-          {/* Left — "भारत सरकार | GOVERNMENT OF INDIA" text mark */}
-          <div className="flex items-center gap-3">
-            <div className="text-[10px] leading-tight text-[#333]">
-              <div className="font-bold tracking-wider text-[#1A3A6B]">भारत सरकार</div>
-              <div className="font-semibold tracking-widest uppercase text-[#555]">Government of India</div>
-            </div>
+      <div className="bg-white border-b border-[#E8E8E8] hidden sm:block">
+        <div className="max-w-screen-2xl mx-auto px-4 flex items-center justify-between py-1.5">
+          {/* Left — Gov of India text */}
+          <div className="text-[10px] leading-tight flex-shrink-0">
+            <div className="font-bold tracking-wider text-[#1A3A6B]">भारत सरकार</div>
+            <div className="font-semibold tracking-widest uppercase text-[#555] text-[9px]">Government of India</div>
           </div>
 
-          {/* Right — 4 initiative badges matching the MHA row */}
-          <div className="flex items-center gap-4">
-
-            {/* Badge 1 — Swachh Bharat Mission style */}
-            <div className="flex flex-col items-center gap-0.5 group cursor-default" title="Swachh Bharat Mission">
-              <div className="w-12 h-12 relative flex items-center justify-center">
-                <svg viewBox="0 0 56 56" width="48" height="48" fill="none" aria-hidden="true">
-                  {/* Outer circle with Gandhi-glasses motif */}
-                  <circle cx="28" cy="28" r="26" stroke="#222" strokeWidth="1.5" fill="white"/>
-                  {/* Left lens */}
-                  <circle cx="18" cy="28" r="8" stroke="#222" strokeWidth="1.5" fill="none"/>
-                  {/* Right lens */}
-                  <circle cx="38" cy="28" r="8" stroke="#222" strokeWidth="1.5" fill="none"/>
-                  {/* Bridge */}
-                  <line x1="26" y1="28" x2="30" y2="28" stroke="#222" strokeWidth="1.5"/>
-                  {/* Left temple arm */}
-                  <line x1="2" y1="28" x2="10" y2="28" stroke="#222" strokeWidth="1.5"/>
-                  {/* Right temple arm */}
-                  <line x1="46" y1="28" x2="54" y2="28" stroke="#222" strokeWidth="1.5"/>
-                  {/* Tricolor stripe in left lens */}
-                  <clipPath id="lensL"><circle cx="18" cy="28" r="7.5"/></clipPath>
-                  <rect x="10.5" y="24" width="15" height="2.7" fill="#FF9933" clipPath="url(#lensL)"/>
-                  <rect x="10.5" y="26.7" width="15" height="2.6" fill="white" clipPath="url(#lensL)"/>
-                  <rect x="10.5" y="29.3" width="15" height="2.7" fill="#138808" clipPath="url(#lensL)"/>
-                  {/* Tricolor stripe in right lens */}
-                  <clipPath id="lensR"><circle cx="38" cy="28" r="7.5"/></clipPath>
-                  <rect x="30.5" y="24" width="15" height="2.7" fill="#FF9933" clipPath="url(#lensR)"/>
-                  <rect x="30.5" y="26.7" width="15" height="2.6" fill="white" clipPath="url(#lensR)"/>
-                  <rect x="30.5" y="29.3" width="15" height="2.7" fill="#138808" clipPath="url(#lensR)"/>
-                </svg>
-              </div>
-              <div className="text-center leading-none">
-                <div className="text-[9px] font-bold text-[#E65C00]">स्वच्छ भारत</div>
-                <div className="text-[7.5px] text-[#555] mt-0.5">एक कदम स्वच्छता की ओर</div>
-              </div>
-            </div>
-
-            {/* Vertical rule */}
-            <div className="w-px h-12 bg-[#E0E0E0]" aria-hidden="true"/>
-
-            {/* Badge 2 — G20 India 2023 style */}
-            <div className="flex flex-col items-center gap-0.5 group cursor-default" title="G20 India 2023">
-              <div className="w-12 h-12 flex items-center justify-center">
-                <svg viewBox="0 0 56 56" width="48" height="48" fill="none" aria-hidden="true">
-                  <rect width="56" height="56" rx="6" fill="#FFF8F0"/>
-                  {/* "G20" text mark */}
-                  <text x="28" y="26" textAnchor="middle" fontSize="14" fontWeight="900"
-                    fill="#1A3A6B" fontFamily="Arial,sans-serif">G20</text>
-                  {/* Lotus petals (India presidency symbol) */}
-                  {[0,40,80,120,160,200,240,280,320].map((deg, i) => {
-                    const r = (deg * Math.PI) / 180;
-                    const cx = 28 + 11 * Math.cos(r);
-                    const cy = 38 + 11 * Math.sin(r);
-                    return (
-                      <ellipse key={i} cx={cx} cy={cy} rx="3.5" ry="6"
-                        transform={`rotate(${deg + 90},${cx},${cy})`}
-                        fill={i % 3 === 0 ? '#FF9933' : i % 3 === 1 ? '#138808' : '#1A3A6B'}
-                        opacity="0.75"/>
-                    );
-                  })}
-                  {/* Centre dot */}
-                  <circle cx="28" cy="38" r="3" fill="#1A3A6B"/>
-                </svg>
-              </div>
-              <div className="text-center leading-none">
-                <div className="text-[9px] font-bold text-[#1A3A6B]">भारत 2023</div>
-                <div className="text-[7px] text-[#555] mt-0.5">ONE EARTH · ONE FAMILY</div>
-              </div>
-            </div>
-
-            {/* Vertical rule */}
-            <div className="w-px h-12 bg-[#E0E0E0]" aria-hidden="true"/>
-
-            {/* Badge 3 — Yoga / Wellness India style */}
-            <div className="flex flex-col items-center gap-0.5 group cursor-default" title="International Day of Yoga">
-              <div className="w-12 h-12 flex items-center justify-center">
-                <svg viewBox="0 0 56 56" width="48" height="48" fill="none" aria-hidden="true">
-                  {/* Sky-blue circle bg */}
-                  <circle cx="28" cy="28" r="27" fill="#E8F4FF" stroke="#7EC8E3" strokeWidth="1"/>
-                  {/* Sun at top */}
-                  <circle cx="28" cy="10" r="5" fill="#FF9933"/>
-                  {[0,45,90,135,180,225,270,315].map((deg) => {
-                    const r = (deg * Math.PI) / 180;
-                    return <line key={deg}
-                      x1={28 + 6 * Math.cos(r)} y1={10 + 6 * Math.sin(r)}
-                      x2={28 + 9 * Math.cos(r)} y2={10 + 9 * Math.sin(r)}
-                      stroke="#FF9933" strokeWidth="1.2"/>;
-                  })}
-                  {/* Yoga figure — sitting pose silhouette */}
-                  {/* Head */}
-                  <circle cx="28" cy="22" r="4" fill="#1A3A6B"/>
-                  {/* Body */}
-                  <path d="M28 26 Q20 32 22 38 Q28 34 34 38 Q36 32 28 26Z" fill="#138808"/>
-                  {/* Arms in tree/prayer pose */}
-                  <path d="M22 30 Q16 26 18 22" stroke="#1A3A6B" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  <path d="M34 30 Q40 26 38 22" stroke="#1A3A6B" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  {/* Ground line */}
-                  <path d="M14 43 Q28 40 42 43" stroke="#138808" strokeWidth="1.5" fill="none"/>
-                  {/* Legs */}
-                  <path d="M22 38 Q18 43 22 44" stroke="#1A3A6B" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                  <path d="M34 38 Q38 43 34 44" stroke="#1A3A6B" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <div className="text-center leading-none">
-                <div className="text-[9px] font-bold text-[#1A3A6B]">Yoga</div>
-                <div className="text-[7px] text-[#555] mt-0.5">Harmony &amp; Peace</div>
-              </div>
-            </div>
-
-            {/* Vertical rule */}
-            <div className="w-px h-12 bg-[#E0E0E0]" aria-hidden="true"/>
-
-            {/* Badge 4 — Cyber Dost / Digital Safety style */}
-            <div className="flex flex-col items-center gap-0.5 group cursor-default" title="Cyber Dost — Stay Safe Online">
-              <div className="w-12 h-12 flex items-center justify-center">
-                <svg viewBox="0 0 56 56" width="48" height="48" fill="none" aria-hidden="true">
-                  {/* Circular badge bg */}
-                  <circle cx="28" cy="28" r="27" fill="#FFF3E0" stroke="#E65C00" strokeWidth="2"/>
-                  {/* Outer ring accent */}
-                  <circle cx="28" cy="28" r="22" stroke="#1A3A6B" strokeWidth="1" fill="none" strokeDasharray="4 2"/>
-                  {/* Shield shape */}
-                  <path d="M28 10 L38 15 L38 26 C38 33 28 40 28 40 C28 40 18 33 18 26 L18 15 Z"
-                    fill="#1A3A6B"/>
-                  {/* Lock body */}
-                  <rect x="24" y="27" width="8" height="7" rx="1.5" fill="#FF9933"/>
-                  {/* Lock shackle */}
-                  <path d="M25 27 L25 24 Q28 21 31 24 L31 27" stroke="#FF9933" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
-                  {/* "CD" text below shield */}
-                  <text x="28" y="52" textAnchor="middle" fontSize="7.5" fontWeight="800"
-                    fill="#1A3A6B" fontFamily="Arial,sans-serif" letterSpacing="1">CYBER DOST</text>
-                </svg>
-              </div>
-              <div className="text-center leading-none">
-                <div className="text-[9px] font-bold text-[#E65C00]">Cyber Dost</div>
-                <div className="text-[7px] text-[#555] mt-0.5">Stay Safe Online</div>
-              </div>
-            </div>
-
-          </div>
+          {/* Right — 9.png badge strip */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/9.png"
+            alt="Government initiative badges — Swachh Bharat, G20, Yoga, Cyber Dost"
+            height={50}
+            style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
+          />
         </div>
       </div>
 
