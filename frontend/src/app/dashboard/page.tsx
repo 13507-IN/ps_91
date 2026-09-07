@@ -2,18 +2,19 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Save, Loader2, User, MapPin, Shield } from 'lucide-react';
-import { api, apiEndpoints, hasSession } from '@/lib/api/client';
+import { Save, Loader2, User, MapPin } from 'lucide-react';
+import { api, apiEndpoints } from '@/lib/api/client';
+import AuthGuard from '@/components/AuthGuard';
 import type { UserProfile, UpdateUserProfileBody } from '@/types';
 
-const genderOptions: { value: string; label: string }[] = [
+const genderOptions = [
   { value: '', label: 'Not specified' },
   { value: 'MALE', label: 'Male' },
   { value: 'FEMALE', label: 'Female' },
   { value: 'OTHER', label: 'Other' },
 ];
 
-const categoryOptions: { value: string; label: string }[] = [
+const categoryOptions = [
   { value: '', label: 'Not specified' },
   { value: 'GENERAL', label: 'General' },
   { value: 'SC', label: 'SC' },
@@ -22,21 +23,15 @@ const categoryOptions: { value: string; label: string }[] = [
   { value: 'MINORITY', label: 'Minority' },
 ];
 
-export default function DashboardPage() {
+function DashboardContent() {
   const queryClient = useQueryClient();
   const [saved, setSaved] = useState(false);
+  const [form, setForm] = useState<Partial<UserProfile>>({});
 
-  const {
-    data: user,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data: user, isLoading, isError } = useQuery({
     queryKey: ['user-me'],
     queryFn: () => api<UserProfile>(apiEndpoints.users.me),
-    enabled: hasSession(),
   });
-
-  const [form, setForm] = useState<Partial<UserProfile>>({});
 
   const updateProfile = useMutation({
     mutationFn: (body: UpdateUserProfileBody) =>
@@ -46,33 +41,18 @@ export default function DashboardPage() {
       }),
     onSuccess: (data) => {
       queryClient.setQueryData(['user-me'], data);
-      setForm(data);
+      setForm({});
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
     },
   });
 
-  if (!hasSession()) {
-    return (
-      <div className="mx-auto max-w-xl px-4 py-20 text-center">
-        <Shield className="mx-auto h-12 w-12 text-slate-300" />
-        <h1 className="mt-4 text-xl font-bold text-slate-900">Login required</h1>
-        <p className="mt-2 text-sm text-slate-500">
-          Please login to view your profile and saved reports.
-        </p>
-        <a href="/login" className="btn-primary mt-6">
-          Go to Login
-        </a>
-      </div>
-    );
-  }
-
   if (isLoading) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16">
         <div className="animate-pulse space-y-4">
-          <div className="h-8 w-48 rounded bg-slate-200" />
-          <div className="h-64 rounded-2xl bg-slate-100" />
+          <div className="h-8 w-48 rounded bg-gray-200" />
+          <div className="h-64 rounded-2xl bg-gray-100" />
         </div>
       </div>
     );
@@ -81,11 +61,9 @@ export default function DashboardPage() {
   if (isError || !user) {
     return (
       <div className="mx-auto max-w-xl px-4 py-20 text-center">
-        <h1 className="text-xl font-bold text-slate-900">Unable to load profile</h1>
-        <p className="mt-2 text-sm text-slate-500">
-          Your session may have expired. Please login again.
-        </p>
-        <a href="/login" className="btn-primary mt-6">
+        <h1 className="text-xl font-bold text-[#1A3A6B]">Unable to load profile</h1>
+        <p className="mt-2 text-sm text-[#666]">Your session may have expired. Please login again.</p>
+        <a href="/login" className="inline-block mt-6 px-6 py-2.5 bg-[#E65C00] text-white rounded-lg font-semibold text-sm hover:bg-[#CC5200] transition-colors">
           Login
         </a>
       </div>
@@ -105,42 +83,43 @@ export default function DashboardPage() {
     if (JSON.stringify(current.location) !== JSON.stringify(user.location)) {
       body.location = current.location;
     }
-    if (Object.keys(body).length > 0) {
-      updateProfile.mutate(body);
-    }
+    if (Object.keys(body).length > 0) updateProfile.mutate(body);
   };
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">Your Profile</h1>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#1A3A6B]">Your Profile</h1>
+          <p className="text-sm text-[#666] mt-0.5">
+            {user.phone && <span className="font-medium">{user.phone}</span>}
+            {user.name && <span className="ml-2 text-[#999]">· {user.name}</span>}
+          </p>
+        </div>
         {saved && (
-          <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
-            Saved
+          <span className="rounded-full bg-green-50 border border-green-200 px-3 py-1 text-xs font-semibold text-green-700">
+            ✓ Saved
           </span>
         )}
       </div>
 
-      <div className="mt-6 space-y-6">
-        <section className="rounded-2xl border border-slate-200 bg-white p-6">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-            <User className="h-5 w-5 text-brand-600" /> Personal Details
+      <div className="space-y-6">
+        {/* Personal Details */}
+        <section className="rounded-2xl border border-[#DDDDDD] bg-white p-6">
+          <h2 className="flex items-center gap-2 text-base font-bold text-[#1A3A6B] mb-4">
+            <User className="h-5 w-5 text-[#E65C00]" /> Personal Details
           </h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="label-base">Phone</label>
-              <input
-                className="input-base bg-slate-50"
-                value={current.phone ?? ''}
-                disabled
-              />
+              <input className="input-base bg-gray-50 cursor-not-allowed" value={current.phone ?? ''} disabled />
             </div>
             <div>
               <label className="label-base">Name</label>
               <input
                 className="input-base"
                 value={current.name ?? ''}
-                placeholder="Your name"
+                placeholder="Your full name"
                 onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
               />
             </div>
@@ -155,7 +134,7 @@ export default function DashboardPage() {
               />
             </div>
             <div>
-              <label className="label-base">Date of birth</label>
+              <label className="label-base">Date of Birth</label>
               <input
                 type="date"
                 className="input-base"
@@ -168,103 +147,60 @@ export default function DashboardPage() {
               <select
                 className="input-base"
                 value={current.gender ?? ''}
-                onChange={(e) =>
-                  setForm((f) => ({
-                    ...f,
-                    gender: (e.target.value || undefined) as UserProfile['gender'],
-                  }))
-                }
+                onChange={(e) => setForm((f) => ({ ...f, gender: (e.target.value || undefined) as UserProfile['gender'] }))}
               >
-                {genderOptions.map((g) => (
-                  <option key={g.value} value={g.value}>
-                    {g.label}
-                  </option>
-                ))}
+                {genderOptions.map((g) => <option key={g.value} value={g.value}>{g.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="label-base">Social category</label>
+              <label className="label-base">Social Category</label>
               <select
                 className="input-base"
                 value={current.category ?? ''}
-                onChange={(e) =>
-                  setForm((f) => ({
-                    ...f,
-                    category: (e.target.value || undefined) as UserProfile['category'],
-                  }))
-                }
+                onChange={(e) => setForm((f) => ({ ...f, category: (e.target.value || undefined) as UserProfile['category'] }))}
               >
-                {categoryOptions.map((c) => (
-                  <option key={c.value} value={c.value}>
-                    {c.label}
-                  </option>
-                ))}
+                {categoryOptions.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
               </select>
+            </div>
+            <div className="sm:col-span-2 flex items-center gap-3">
+              <input
+                id="is-minority"
+                type="checkbox"
+                checked={current.isMinority ?? false}
+                onChange={(e) => setForm((f) => ({ ...f, isMinority: e.target.checked }))}
+                className="w-4 h-4 accent-[#E65C00]"
+              />
+              <label htmlFor="is-minority" className="text-sm text-[#444]">
+                I belong to a minority community
+              </label>
             </div>
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-6">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-            <MapPin className="h-5 w-5 text-brand-600" /> Location
+        {/* Location */}
+        <section className="rounded-2xl border border-[#DDDDDD] bg-white p-6">
+          <h2 className="flex items-center gap-2 text-base font-bold text-[#1A3A6B] mb-4">
+            <MapPin className="h-5 w-5 text-[#E65C00]" /> Location
           </h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className="label-base">Village</label>
-              <input
-                className="input-base"
-                value={current.location?.village ?? ''}
-                placeholder="Village name"
-                onChange={(e) =>
-                  setForm((f) => ({
-                    ...f,
-                    location: { ...f.location, village: e.target.value },
-                  }))
-                }
-              />
-            </div>
-            <div>
-              <label className="label-base">Block</label>
-              <input
-                className="input-base"
-                value={current.location?.block ?? ''}
-                placeholder="Block"
-                onChange={(e) =>
-                  setForm((f) => ({
-                    ...f,
-                    location: { ...f.location, block: e.target.value },
-                  }))
-                }
-              />
-            </div>
-            <div>
-              <label className="label-base">District</label>
-              <input
-                className="input-base"
-                value={current.location?.district ?? ''}
-                placeholder="District"
-                onChange={(e) =>
-                  setForm((f) => ({
-                    ...f,
-                    location: { ...f.location, district: e.target.value },
-                  }))
-                }
-              />
-            </div>
-            <div>
-              <label className="label-base">State</label>
-              <input
-                className="input-base"
-                value={current.location?.state ?? ''}
-                placeholder="State"
-                onChange={(e) =>
-                  setForm((f) => ({
-                    ...f,
-                    location: { ...f.location, state: e.target.value },
-                  }))
-                }
-              />
-            </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              { key: 'village', label: 'Village', placeholder: 'Village name' },
+              { key: 'block', label: 'Block', placeholder: 'Block / Taluka' },
+              { key: 'district', label: 'District', placeholder: 'District' },
+              { key: 'state', label: 'State', placeholder: 'State' },
+            ].map(({ key, label, placeholder }) => (
+              <div key={key}>
+                <label className="label-base">{label}</label>
+                <input
+                  className="input-base"
+                  value={(current.location as Record<string, string>)?.[key] ?? ''}
+                  placeholder={placeholder}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, location: { ...f.location, [key]: e.target.value } }))
+                  }
+                />
+              </div>
+            ))}
           </div>
         </section>
 
@@ -272,17 +208,21 @@ export default function DashboardPage() {
           <button
             onClick={handleSave}
             disabled={updateProfile.isPending}
-            className="btn-primary"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#1A3A6B] hover:bg-[#1E4A8A] disabled:opacity-60 text-white font-semibold text-sm transition-colors"
           >
-            {updateProfile.isPending ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Save className="h-4 w-4" />
-            )}
+            {updateProfile.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
             Save Changes
           </button>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <AuthGuard>
+      <DashboardContent />
+    </AuthGuard>
   );
 }
