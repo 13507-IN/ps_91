@@ -124,7 +124,7 @@ export default function HeroSection() {
   return (
     <section
       id="main-content"
-      className="relative min-h-[88vh] flex items-center overflow-hidden bg-[#0d1f47]"
+      className="relative min-h-[88vh] flex items-center overflow-hidden bg-[#111827]"
       aria-label="Hero banner"
     >
       {/* ── All slide background images ── */}
@@ -152,8 +152,8 @@ export default function HeroSection() {
         className="absolute inset-0 pointer-events-none z-10"
         style={{
           background: [
-            'linear-gradient(to right, rgba(8,18,50,0.93) 0%, rgba(8,18,50,0.80) 35%, rgba(8,18,50,0.45) 62%, rgba(8,18,50,0.08) 100%)',
-            'linear-gradient(to top, rgba(8,18,50,0.72) 0%, transparent 42%)',
+            'linear-gradient(to right, rgba(15,15,18,0.82) 0%, rgba(15,15,18,0.70) 32%, rgba(15,15,18,0.42) 62%, rgba(15,15,18,0.12) 100%)',
+            'linear-gradient(to top, rgba(15,15,18,0.55) 0%, transparent 42%)',
           ].join(', '),
         }}
         aria-hidden="true"
