@@ -1,8 +1,22 @@
 'use client';
 import React, { useEffect, useState, useCallback } from 'react';
+import dynamic from 'next/dynamic';
 import { Search, MapPin, CheckCircle, Loader2, AlertTriangle } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import type { WizardDraft } from '@/types';
+import type { PickedLocation } from './LocationPickerMap';
+
+const LocationPickerMap = dynamic(
+  () => import('./LocationPickerMap').then((m) => m.LocationPickerMap),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-full w-full rounded-xl flex items-center justify-center bg-paper-dark">
+        <Loader2 size={20} className="animate-spin text-ink-subtle" />
+      </div>
+    ),
+  },
+);
 
 interface StepLocationProps {
   draft: WizardDraft;
@@ -28,6 +42,8 @@ interface LocationSearchResponse {
   villages: VillageSearchResult[];
 }
 
+const DEFAULT_CENTER: PickedLocation = { latitude: 23.4, longitude: 88.5 };
+
 export default function StepLocation({ draft, updateDraft, onNext }: StepLocationProps) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<VillageSearchResult[]>([]);
@@ -35,6 +51,11 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<VillageSearchResult | null>(
     draft.villageId ? { id: draft.villageId, name: draft.villageName ?? '', nameLocal: null, blockName: draft.block ?? '', districtName: draft.district ?? '', stateName: draft.state ?? '', latitude: draft.latitude ?? null, longitude: draft.longitude ?? null } : null,
+  );
+  const [pinned, setPinned] = useState<PickedLocation | null>(
+    draft.latitude !== undefined && draft.longitude !== undefined && !draft.villageId
+      ? { latitude: draft.latitude, longitude: draft.longitude }
+      : null,
   );
 
   const handleSearch = useCallback((q: string) => {
@@ -71,6 +92,7 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
 
   function selectVillage(v: VillageSearchResult) {
     setSelected(v);
+    setPinned(null);
     setQuery(v.name);
     setResults([]);
     updateDraft({
@@ -84,7 +106,20 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
     });
   }
 
-  const canContinue = !!selected;
+  function handleMapPick(loc: PickedLocation) {
+    setPinned(loc);
+    updateDraft({ latitude: loc.latitude, longitude: loc.longitude });
+  }
+
+  const selectedCoords =
+    selected?.latitude != null && selected?.longitude != null
+      ? { latitude: selected.latitude, longitude: selected.longitude }
+      : null;
+
+  const mapCenter: PickedLocation = selectedCoords ?? pinned ?? DEFAULT_CENTER;
+  const mapMarker: PickedLocation | null = pinned ?? selectedCoords;
+
+  const canContinue = !!selected || !!pinned;
 
   return (
     <div className="space-y-6">
@@ -117,7 +152,7 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
         {/* No results state */}
         {!loading && !error && query.trim().length >= 2 && results.length === 0 && (
           <div className="mt-1 border border-border rounded-lg px-4 py-3 text-xs text-ink-muted shadow-gov-md bg-white">
-            No villages found for &ldquo;{query.trim()}&rdquo;. Try another name.
+            No villages found for &ldquo;{query.trim()}&rdquo;. Try another name or pin a location on the map below.
           </div>
         )}
 
@@ -164,7 +199,7 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
               </div>
             ) : (
               <div className="text-xs text-grade-poor mt-1 font-medium">
-                No coordinates recorded — add coordinates in the review step or search another village.
+                No coordinates recorded — pin a location on the map below.
               </div>
             )}
           </div>
@@ -177,19 +212,42 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
         </div>
       )}
 
-      {/* Map placeholder */}
+      {/* Pinned location card */}
+      {pinned && (
+        <div className="bg-teal-50 border border-teal-600/30 rounded-xl p-5 flex items-start gap-4">
+          <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0">
+            <MapPin size={18} className="text-white" />
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="font-bold text-teal-900 text-base">Pinned location</span>
+              <CheckCircle size={15} className="text-flag-green" />
+            </div>
+            <div className="text-xs text-ink-subtle font-tabular">
+              {pinned.latitude.toFixed(5)}°N, {pinned.longitude.toFixed(5)}°E
+            </div>
+            <div className="text-xs text-ink-muted mt-1">
+              Analysis will use these coordinates for your catchment area.
+            </div>
+          </div>
+          <button
+            onClick={() => { setPinned(null); updateDraft({ latitude: undefined, longitude: undefined }); }}
+            className="text-ink-subtle hover:text-grade-poor text-xs underline"
+          >
+            Clear
+          </button>
+        </div>
+      )}
+
+      {/* Map */}
       <div className="bg-paper-dark border border-border rounded-xl overflow-hidden">
         <div className="px-4 py-3 border-b border-border bg-white flex items-center gap-2">
           <MapPin size={14} className="text-teal-600" />
           <span className="text-sm font-medium text-ink">Or pin on map</span>
-          <span className="text-xs text-ink-subtle ml-1">(Leaflet map — connect react-leaflet here)</span>
+          <span className="text-xs text-ink-subtle ml-1">Click anywhere on the map to set your location</span>
         </div>
-        <div className="h-48 flex items-center justify-center bg-gradient-to-br from-teal-900/5 to-teal-600/10">
-          <div className="text-center">
-            <MapPin size={32} className="text-teal-400 mx-auto mb-2" />
-            <p className="text-ink-muted text-sm">Interactive map loads here</p>
-            <p className="text-ink-subtle text-xs">Click to pin your location</p>
-          </div>
+        <div className="h-56">
+          <LocationPickerMap center={mapCenter} marker={mapMarker} onPick={handleMapPick} />
         </div>
       </div>
 
