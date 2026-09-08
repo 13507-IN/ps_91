@@ -50,7 +50,7 @@ export async function buildApp() {
 
   // ---- Security ----
   await app.register(cors, {
-    origin: env.NODE_ENV === 'production' ? false : true, // Configure for production
+    origin: true, // Allow all origins for the hackathon/demo
     credentials: true,
   });
 
