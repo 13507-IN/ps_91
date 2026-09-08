@@ -6,25 +6,6 @@ const LANG_KEY = 'udyamsetu_lang';
 
 type Lang = 'EN' | 'BN';
 
-const CONTENT = {
-  EN: {
-    title: 'Choose Your Language',
-    subtitle: 'Select your preferred language to continue',
-    btn: 'Continue in English',
-    alt: 'বাংলায় চালিয়ে যান',
-    altLang: 'BN' as Lang,
-    note: 'You can change this later from the top menu.',
-  },
-  BN: {
-    title: 'আপনার ভাষা বেছে নিন',
-    subtitle: 'চালিয়ে যেতে আপনার পছন্দের ভাষা নির্বাচন করুন',
-    btn: 'বাংলায় চালিয়ে যান',
-    alt: 'Continue in English',
-    altLang: 'EN' as Lang,
-    note: 'আপনি পরে উপরের মেনু থেকে এটি পরিবর্তন করতে পারেন।',
-  },
-};
-
 export default function LanguagePickerModal() {
   const [open, setOpen] = useState(false);
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import {
-  Menu, X, Globe, LayoutDashboard, ShieldCheck, Settings,
+  Menu, X, LayoutDashboard, ShieldCheck, Settings,
   Home, FileText, BookOpen, ClipboardList,
   LogIn, LogOut, UserPlus, User,
 } from 'lucide-react';
@@ -57,6 +57,7 @@ const HEADER_TICKER_ITEMS = [
 export default function GovHeaderBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [lang, setLang] = useState<Lang>('EN');
+  void setLang;
   const [loggedIn, setLoggedIn] = useState(false);
 
   const pathname = usePathname();
