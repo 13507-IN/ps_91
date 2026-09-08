@@ -13,6 +13,8 @@ import type {
   RecommendationOutput,
   ActionPlanInput,
   ActionPlanOutput,
+  AssessmentInput,
+  AssessmentOutput,
 } from './ai.schema.js';
 import { BusinessCategory } from '@prisma/client';
 
@@ -121,6 +123,22 @@ export class AiClient {
       return this.fallbackActionPlan(input);
     }
   }
+
+  /**
+   * Run the full unified assessment pipeline.
+   * This is the preferred method for the end-to-end feasibility workflow.
+   */
+  async runUnifiedAssessment(input: AssessmentInput): Promise<AssessmentOutput> {
+    try {
+      return await httpRequest<AssessmentOutput>(`${this.baseUrl}/ai/assessment`, {
+        method: 'POST',
+        body: input,
+        timeoutMs: this.timeoutMs * 2, // Orchestrator takes longer
+      });
+    } catch (err) {
+      return this.fallbackUnifiedAssessment(input);
+    }
+  };
 
   // ============================================================
   // Deterministic Fallback Implementations
@@ -416,6 +434,82 @@ export class AiClient {
         'Equipment vendor quotations',
         'Udyam registration certificate',
       ],
+    };
+  }
+
+  private fallbackUnifiedAssessment(input: AssessmentInput): AssessmentOutput {
+    // Generate deterministic fallbacks for each sub-component
+    const classResult = this.fallbackClassify(input.business_idea || input.business_category);
+    
+    // Calculate deterministic scores
+    const marketScore = 55;
+    const oppScore = 65;
+    const riskScore = 40;
+    const viabilityScore = 60;
+
+    return {
+      market_score: marketScore,
+      opportunity_score: oppScore,
+      risk_score: riskScore,
+      viability_score: viabilityScore,
+      market_analysis: {
+        demand_level: 'medium',
+        market_condition: 'moderate',
+        reasoning: ['Deterministic fallback used because AI service is unavailable.'],
+        confidence: 'low'
+      },
+      market_gaps: [
+        {
+          name: 'General gap',
+          opportunity: 'medium',
+          reason: 'Standard fallback'
+        }
+      ],
+      competition_analysis: {
+        competition_level: 'moderate',
+        verified_businesses: input.competition.verified,
+        reported_businesses: input.competition.reported,
+        estimated_informal: { min: 2, max: 5 },
+        informal_interpretation: 'Deterministic fallback interpretation.',
+        confidence: 'low'
+      },
+      recommended_business_model: {
+        name: `Hybrid ${input.business_category}`,
+        reasoning: ['Deterministic fallback model recommendation.'],
+        capital_fit: 'Unknown due to offline AI service.'
+      },
+      swot: {
+        strengths: ['Standard micro-enterprise strength'],
+        weaknesses: ['Standard micro-enterprise weakness'],
+        opportunities: ['Local demand growth'],
+        threats: ['Informal competition']
+      },
+      risks: [
+        {
+          risk: 'Market Risk',
+          category: 'market',
+          probability: 'medium',
+          impact: 'medium',
+          severity: 'medium',
+          evidence: 'General rural market conditions.',
+          mitigation: 'Validate demand locally.'
+        }
+      ],
+      pricing_strategy: {
+        recommended_price_range: { min: 10, max: 100 },
+        strategy: 'market matching',
+        reasoning: 'Fallback pricing strategy.',
+        confidence: 'low'
+      },
+      reasoning: [
+        {
+          claim: 'Fallback assessment',
+          evidence: ['AI service is unreachable'],
+          inference: true,
+          confidence: 0.1
+        }
+      ],
+      confidence: 'low'
     };
   }
 }

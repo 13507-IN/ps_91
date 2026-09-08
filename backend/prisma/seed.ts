@@ -3,6 +3,7 @@ import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import { runAllPipelines } from '../src/ingestion/runner.js';
 import type { IngestionSource } from '../src/ingestion/types.js';
+import { seedDemoUsers } from '../src/ingestion/seeds/demo_users/index.js';
 
 const prisma = new PrismaClient();
 
@@ -38,6 +39,9 @@ async function main() {
   );
 
   console.log('\n✅ Database seeding finished successfully!');
+
+  // Seed demo users for UI testing
+  await seedDemoUsers(prisma);
 }
 
 main()
