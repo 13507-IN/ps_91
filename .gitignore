@@ -31,5 +31,12 @@ coverage/
 # Prisma
 backend/prisma/migrations/**/migration_lock.toml
 
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+
 # Misc
 *.tsbuildinfo
