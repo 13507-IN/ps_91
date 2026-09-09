@@ -200,6 +200,7 @@ export interface FeasibilityReport {
   competitorAnalysis: CompetitorAnalysis;
   opportunityAnalysis: OpportunityAnalysis;
   financialPlan: FinancialPlan;
+  localSuppliers?: SupplierItem[];
   schemeMatches: MatchedSchemeResult[];
   riskAssessment: RiskAssessment;
   feasibilityScore: FeasibilityScore;
@@ -252,6 +253,15 @@ export type AnalyzeFeasibilityBody = WizardDraft;
 export interface CompetitorSummary {
   name: string;
   scale: BusinessScale;
+  distance: number;
+}
+
+export interface SupplierItem {
+  id: string;
+  name: string | null;
+  category: BusinessCategory;
+  subcategory: string | null;
+  scale: BusinessScale | null;
   distance: number;
 }
 

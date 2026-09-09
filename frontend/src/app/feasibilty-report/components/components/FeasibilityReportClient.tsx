@@ -16,6 +16,7 @@ import { RiskAssessmentSection } from './RiskAssessmentSection';
 import { AIRecommendationSection } from './AIRecommendationSection';
 import { ActionPlanSection } from './ActionPlanSection';
 import { ScoreBreakdownChart } from './ScoreBreakdownChart';
+import { LocalSuppliersSection } from '../LocalSuppliersSection';
 
 export function FeasibilityReportClient({
   reportId,
@@ -107,6 +108,9 @@ export function FeasibilityReportClient({
               competitors={report.competitorAnalysis}
               opportunity={report.opportunityAnalysis}
             />
+            {report.localSuppliers && report.localSuppliers.length > 0 && (
+              <LocalSuppliersSection suppliers={report.localSuppliers} />
+            )}
           </div>
         </div>
 

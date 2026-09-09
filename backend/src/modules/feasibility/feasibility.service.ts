@@ -63,6 +63,7 @@ export interface FeasibilityAnalysisResult {
     breakEven: BreakEvenOutput;
     stressTest: StressTestOutput;
   };
+  localSuppliers: Record<string, unknown>[];
   schemeMatches: MatchedSchemeResult[];
   riskAssessment: Record<string, unknown>;
   feasibilityScore: FeasibilityScoreBreakdown;
@@ -99,10 +100,11 @@ export class FeasibilityService {
       category = classification.category;
     }
 
-    // 2. Query Market Intelligence & Competitors in parallel
-    const [marketIntel, competitorIntel] = await Promise.all([
+    // 2. Query Market Intelligence, Competitors, and Suppliers in parallel
+    const [marketIntel, competitorIntel, localSuppliers] = await Promise.all([
       this.marketService.getMarketIntelligence(lat, lng, radiusKm, category),
       this.marketService.getCompetitorAnalysis(lat, lng, radiusKm, category),
+      this.marketService.getLocalSuppliers(lat, lng, radiusKm, category),
     ]);
 
     // 3. Skip individual AI opportunity discovery and AI risk assessment.
@@ -326,6 +328,7 @@ export class FeasibilityService {
         recommendedModel: assessmentResult.recommended_business_model.name,
         opportunityScore: assessmentResult.opportunity_score
       } as unknown as Record<string, unknown>,
+      localSuppliers: localSuppliers as unknown as Record<string, unknown>[],
       financialPlan,
       schemeMatches,
       riskAssessment: {
@@ -363,7 +366,8 @@ export class FeasibilityService {
             marketGaps: assessmentResult.market_gaps.map(g => g.name),
             potentialNiches: assessmentResult.market_gaps.map(g => g.reason),
             recommendedModel: assessmentResult.recommended_business_model.name,
-            opportunityScore: assessmentResult.opportunity_score
+            opportunityScore: assessmentResult.opportunity_score,
+            localSuppliers: localSuppliers
           } as never,
           financialPlan: financialPlan as never,
           schemeMatch: schemeMatches as never,
