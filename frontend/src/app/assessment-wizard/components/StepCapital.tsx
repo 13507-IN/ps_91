@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { IndianRupee, ChevronDown } from 'lucide-react';
 import { inr } from '@/lib/format';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { WizardDraft } from '@/types';
 
 const schema = z.object({
@@ -31,6 +32,7 @@ interface StepCapitalProps {
 }
 
 export default function StepCapital({ draft, updateDraft, onNext, onBack }: StepCapitalProps) {
+  const { t } = useTranslation();
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [capitalInput, setCapitalInput] = useState(draft.availableCapital ? String(draft.availableCapital) : '');
 
@@ -66,8 +68,8 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Capital input */}
       <div>
-        <label className="label-gov">Available Capital (Own Contribution)</label>
-        <p className="text-xs text-ink-muted mb-3">This is the money you can invest from your own savings — not the total project cost.</p>
+        <label className="label-gov">{t.capital.availableCapital}</label>
+        <p className="text-xs text-ink-muted mb-3">{t.capital.capitalHint}</p>
 
         {/* Quick chips */}
         <div className="flex flex-wrap gap-2 mb-3">
@@ -98,7 +100,7 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
                 updateDraft({ availableCapital: num });
               }
             }}
-            placeholder="Enter amount in ₹"
+            placeholder={t.capital.capitalPlaceholder}
             className="input-gov pl-9 font-tabular"
           />
         </div>
@@ -123,14 +125,14 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
             size={15}
             className={`transition-transform ${showAdvanced ? 'rotate-180' : ''}`}
           />
-          {showAdvanced ? 'Hide' : 'Add'} Profile Details (improves scheme matching)
+          {t.capital.personalOptional}
         </button>
 
         {showAdvanced && (
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-paper-dark rounded-xl border border-border">
             {/* Age */}
             <div>
-              <label className="label-gov">Age</label>
+              <label className="label-gov">{t.common.age}</label>
               <input
                 type="number"
                 {...register('age', { valueAsNumber: true })}
@@ -142,69 +144,68 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
 
             {/* Gender */}
             <div>
-              <label className="label-gov">Gender</label>
+              <label className="label-gov">{t.capital.gender}</label>
               <select {...register('gender')} className="input-gov">
-                <option value="">Select gender</option>
-                <option value="MALE">Male</option>
-                <option value="FEMALE">Female</option>
-                <option value="OTHER">Other</option>
+                <option value="">{t.common.notSelected}</option>
+                <option value="MALE">{t.capital.genderMale}</option>
+                <option value="FEMALE">{t.capital.genderFemale}</option>
+                <option value="OTHER">{t.capital.genderOther}</option>
               </select>
             </div>
 
             {/* Category */}
             <div>
-              <label className="label-gov">Social Category</label>
-              <p className="text-xs text-ink-muted mb-1.5">Used only for scheme eligibility matching</p>
+              <label className="label-gov">{t.capital.socialCategory}</label>
               <select {...register('category')} className="input-gov">
-                <option value="">Select category</option>
-                <option value="GENERAL">General</option>
-                <option value="SC">SC (Scheduled Caste)</option>
-                <option value="ST">ST (Scheduled Tribe)</option>
+                <option value="">{t.common.notSelected}</option>
+                <option value="GENERAL">{t.capital.general}</option>
+                <option value="SC">SC</option>
+                <option value="ST">ST</option>
                 <option value="OBC">OBC</option>
-                <option value="MINORITY">Minority</option>
+                <option value="MINORITY">{t.capital.minority}</option>
               </select>
             </div>
 
             {/* Experience */}
             <div>
-              <label className="label-gov">Business Experience</label>
+              <label className="label-gov">{t.capital.experience}</label>
               <input
                 type="text"
                 {...register('businessExperience')}
-                placeholder="e.g. 2 years selling milk locally"
+                placeholder={t.capital.expPlaceholder}
                 className="input-gov"
               />
             </div>
 
             {/* Land */}
             <div>
-              <label className="label-gov">Available Land / Space</label>
+              <label className="label-gov">{t.capital.land}</label>
               <input
                 type="text"
                 {...register('availableLand')}
-                placeholder="e.g. 200 sq ft shop, 0.5 bigha land"
+                placeholder={t.capital.landPlaceholder}
                 className="input-gov"
               />
             </div>
 
             {/* Equipment */}
             <div>
-              <label className="label-gov">Available Equipment / Assets</label>
+              <label className="label-gov">{t.capital.equipment}</label>
               <input
                 type="text"
                 {...register('availableEquipment')}
-                placeholder="e.g. 1 motorcycle, milking machine"
+                placeholder={t.capital.equipPlaceholder}
                 className="input-gov"
               />
             </div>
 
             {/* Working hours */}
             <div>
-              <label className="label-gov">Expected Daily Working Hours</label>
+              <label className="label-gov">{t.capital.workingHours}</label>
               <input
                 type="number"
                 {...register('expectedWorkingHours', { valueAsNumber: true })}
-                placeholder="e.g. 8"
+                placeholder={t.capital.hoursPlaceholder}
                 className="input-gov font-tabular"
                 min={1} max={16}
               />
@@ -219,7 +220,7 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
                 className="w-4 h-4 accent-teal-900"
               />
               <label htmlFor="isMinority" className="text-sm text-ink-muted cursor-pointer">
-                I belong to a minority community
+                {t.capital.isMinority}
               </label>
             </div>
           </div>
@@ -228,13 +229,13 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
 
       <div className="flex justify-between pt-2">
         <button type="button" onClick={onBack} className="px-6 py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors">
-          Back
+          {t.common.back}
         </button>
         <button
           type="submit"
           className="btn-saffron px-7 py-2.5 rounded-lg text-sm font-semibold"
         >
-          Review & Analyze
+          {t.capital.continueToReview}
         </button>
       </div>
     </form>

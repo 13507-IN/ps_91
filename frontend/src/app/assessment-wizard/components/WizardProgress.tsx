@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { Check } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 interface WizardProgressProps {
   currentStep: number;
@@ -9,10 +10,11 @@ interface WizardProgressProps {
 }
 
 export default function WizardProgress({ currentStep, totalSteps, stepTitles }: WizardProgressProps) {
+  const { t } = useTranslation();
   return (
     <div className="bg-white rounded-xl border border-border shadow-gov-sm p-5 sticky top-6">
       <h3 className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-5">
-        Assessment Steps
+        {t.wizard.assessmentSteps}
       </h3>
       <div className="flex flex-col gap-0">
         {stepTitles.map((title, i) => {
@@ -53,10 +55,10 @@ export default function WizardProgress({ currentStep, totalSteps, stepTitles }: 
                   {title}
                 </div>
                 {isActive && (
-                  <div className="text-xs text-ink-muted mt-0.5">In progress</div>
+                  <div className="text-xs text-ink-muted mt-0.5">{t.wizard.inProgress}</div>
                 )}
                 {isComplete && (
-                  <div className="text-xs text-flag-green mt-0.5">Completed</div>
+                  <div className="text-xs text-flag-green mt-0.5">{t.wizard.completed}</div>
                 )}
               </div>
             </div>
@@ -67,7 +69,7 @@ export default function WizardProgress({ currentStep, totalSteps, stepTitles }: 
       {/* Progress bar */}
       <div className="mt-4 pt-4 border-t border-border">
         <div className="flex items-center justify-between text-xs text-ink-muted mb-2">
-          <span>Progress</span>
+          <span>{t.wizard.progress}</span>
           <span className="font-tabular font-medium">{Math.round(((currentStep - 1) / (totalSteps - 1)) * 100)}%</span>
         </div>
         <div className="h-1.5 bg-muted rounded-full overflow-hidden">

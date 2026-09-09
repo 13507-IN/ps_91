@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { api, apiEndpoints } from '@/lib/api/client';
+import { api, apiEndpoints, hasSession } from '@/lib/api/client';
 import { LAST_REPORT_KEY } from '@/lib/constants';
 import { mockReport } from './mockReportData';
 import type { FeasibilityReport } from '@/types';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 import { ReportHeader } from './ReportHeader';
 import { VerdictHeroSection } from './VerdictHeroSection';
 import { MarketIntelligenceSection } from './MarketIntelligenceSection';
@@ -78,14 +79,16 @@ export function FeasibilityReportClient({
     return <LoadingSkeleton />;
   }
 
+  const { t } = useTranslation();
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       {isNew && (
-        <div className="mb-4 rounded-xl border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-800">
-          Your report is ready! It is saved in this tab. Login to keep it permanently.
+        <div className={`mb-4 rounded-xl border px-4 py-3 text-sm ${hasSession() ? 'border-green-200 bg-green-50 text-green-800' : 'border-brand-200 bg-brand-50 text-brand-800'}`}>
+          {hasSession() ? t.report.reportReady : t.report.reportReadyGuest}
         </div>
       )}
-      <ReportHeader category={report.businessCategory} showSavePrompt={Boolean(isNew)} />
+      <ReportHeader category={report.businessCategory} showSavePrompt={Boolean(isNew) && !hasSession()} />
       <div className="space-y-6">
         <VerdictHeroSection report={report} />
 

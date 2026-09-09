@@ -4,6 +4,7 @@ import AppImage from '@/components/ui/AppImage';
 import { CATEGORY_PHOTOS } from '@/lib/constants/landing-media';
 import { Check, Sparkles, Loader2 } from 'lucide-react';
 import { inr } from '@/lib/format';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { WizardDraft, BusinessCategory } from '@/types';
 
 interface StepBusinessProps {
@@ -28,6 +29,7 @@ const CATEGORIES = [
 ];
 
 export default function StepBusiness({ draft, updateDraft, onNext, onBack }: StepBusinessProps) {
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<BusinessCategory | undefined>(draft.businessCategory);
   const [idea, setIdea] = useState(draft.businessIdea || '');
   const [classifying, setClassifying] = useState(false);
@@ -54,14 +56,14 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
     <div className="space-y-6">
       {/* Free-text idea */}
       <div>
-        <label className="label-gov">Describe Your Business Idea (optional)</label>
-        <p className="text-xs text-ink-muted mb-2">Our AI will suggest the right category for you</p>
+        <label className="label-gov">{t.business.describeIdea} (optional)</label>
+        <p className="text-xs text-ink-muted mb-2">{t.business.ideaHint}</p>
         <div className="relative">
           <textarea
             value={idea}
             onChange={(e) => { setIdea(e.target.value); updateDraft({ businessIdea: e.target.value }); }}
             onBlur={handleIdeaBlur}
-            placeholder="e.g. I want to start a small dairy unit with 3 cows and sell milk in my village..."
+            placeholder={t.business.ideaPlaceholder}
             className="input-gov min-h-[80px] resize-none"
             rows={3}
           />
@@ -75,7 +77,7 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
         {aiSuggestion && (
           <div className="mt-2 flex items-center gap-2 text-xs bg-saffron-soft border border-saffron/30 rounded-lg px-3 py-2">
             <Sparkles size={13} className="text-saffron" />
-            <span className="text-ink-muted">AI suggests: <strong className="text-teal-900">{CATEGORIES.find(c => c.code === aiSuggestion)?.name}</strong></span>
+            <span className="text-ink-muted">AI suggests: <strong className="text-teal-900">{t.business.categories[aiSuggestion as BusinessCategory]}</strong></span>
             <button
               onClick={() => selectCategory(aiSuggestion as BusinessCategory)}
               className="ml-auto text-teal-600 font-semibold hover:text-teal-900 transition-colors"
@@ -88,7 +90,7 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
 
       {/* Category grid */}
       <div>
-        <label className="label-gov">Select Business Category</label>
+        <label className="label-gov">{t.business.selectCategory}</label>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-2">
           {CATEGORIES.map((cat) => (
             <button
@@ -116,7 +118,7 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
                 )}
               </div>
               <div className="p-2.5">
-                <div className="font-semibold text-teal-900 text-xs mb-0.5">{cat.name}</div>
+                <div className="font-semibold text-teal-900 text-xs mb-0.5">{t.business.categories[cat.code]}</div>
                 <div className="text-ink-subtle text-xs font-tabular">
                   {inr(cat.range[0], true)}–{inr(cat.range[1], true)}
                 </div>
@@ -130,7 +132,7 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
       {selected && (
         <div className="bg-paper-dark border border-border rounded-xl p-4">
           <div className="font-semibold text-teal-900 mb-2">
-            {CATEGORIES.find(c => c.code === selected)?.name} — Subcategories
+            {t.business.categories[selected]}
           </div>
           <div className="flex flex-wrap gap-2">
             {CATEGORIES.find(c => c.code === selected)?.subcategories.map((sub) => (
@@ -144,7 +146,7 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
 
       <div className="flex justify-between pt-2">
         <button onClick={onBack} className="px-6 py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors">
-          Back
+          {t.common.back}
         </button>
         <button
           onClick={onNext}
@@ -152,7 +154,7 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
           className={`px-7 py-2.5 rounded-lg text-sm font-semibold transition-all ${canContinue ? 'btn-saffron' : 'bg-muted text-ink-subtle cursor-not-allowed'
             }`}
         >
-          Continue to Capital
+          {t.business.continueToCapital}
         </button>
       </div>
     </div>
