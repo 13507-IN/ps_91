@@ -23,7 +23,7 @@ export async function processRecords<T>(
   options?: { batchSize?: number; dryRun?: boolean },
 ): Promise<IngestionResult> {
   const startTime = Date.now();
-  const batchSize = options?.batchSize ?? 500;
+  const batchSize = options?.batchSize ?? 10;
   const dryRun = options?.dryRun ?? false;
 
   let inserted = 0;
@@ -94,8 +94,8 @@ export async function processRecords<T>(
         }
       },
       {
-        maxWait: 10000,
-        timeout: 30000,
+        maxWait: 30000,
+        timeout: 120000,
       },
     );
   }

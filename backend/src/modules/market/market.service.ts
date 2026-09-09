@@ -98,7 +98,7 @@ export class MarketService {
     radiusKm = 10,
     businessCategory?: BusinessCategory,
   ): Promise<MarketIntelligenceResult> {
-    const key = cacheKey('intel', lat.toFixed(3), lng.toFixed(3), radiusKm, businessCategory ?? 'ALL');
+    const key = cacheKey('intel_v2', lat.toFixed(3), lng.toFixed(3), radiusKm, businessCategory ?? 'ALL');
     const cached = await cacheGet<MarketIntelligenceResult>(key);
     if (cached) {
       return { ...cached, cachedAt: 'from_redis' };
@@ -306,7 +306,7 @@ export class MarketService {
     radiusKm = 10,
     category?: BusinessCategory,
   ): Promise<CompetitorAnalysisResult> {
-    const key = cacheKey('comp', lat.toFixed(3), lng.toFixed(3), radiusKm, category ?? 'ALL');
+    const key = cacheKey('comp_v2', lat.toFixed(3), lng.toFixed(3), radiusKm, category ?? 'ALL');
     const cached = await cacheGet<CompetitorAnalysisResult>(key);
     if (cached) return cached;
 

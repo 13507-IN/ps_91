@@ -151,6 +151,10 @@ export class LocationService {
         LIMIT ${limit};
       `;
 
+      if (rawResults.length === 0) {
+        throw new Error('PostGIS returned 0 results, attempting Haversine fallback');
+      }
+
       return rawResults;
     } catch {
       // Fallback: Haversine bounding-box search via Prisma when PostGIS geom column is not populated

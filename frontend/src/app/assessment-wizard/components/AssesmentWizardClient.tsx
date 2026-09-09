@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import WizardProgress from './WizardProgress';
 import StepLocation from './StepLocation';
@@ -7,6 +7,7 @@ import StepBusiness from './StepBusiness';
 import StepCapital from './StepCapital';
 import StepReview from './StepReview';
 import { useTranslation } from '@/lib/i18n/useTranslation';
+import { useAuthStore } from '@/lib/store/auth';
 import type { WizardDraft } from '@/types';
 
 export { LAST_REPORT_KEY } from '@/lib/constants';
@@ -14,8 +15,39 @@ const TOTAL_STEPS = 4;
 
 export default function AssessmentWizardClient() {
   const { t } = useTranslation();
+  const user = useAuthStore((s) => s.user);
+
+  // Compute age from dateOfBirth if available
+  const initialDraft = useMemo<WizardDraft>(() => {
+    const base: WizardDraft = { step: 1 };
+    if (!user) return base;
+
+    // Auto-fill age from date of birth
+    if (user.dateOfBirth) {
+      const dob = new Date(user.dateOfBirth);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const monthDiff = today.getMonth() - dob.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      if (age >= 18 && age <= 80) base.age = age;
+    }
+
+    // Auto-fill gender
+    if (user.gender) base.gender = user.gender;
+
+    // Auto-fill social category
+    if (user.category) base.category = user.category;
+
+    // Auto-fill minority status
+    if (user.isMinority !== undefined) base.isMinority = user.isMinority;
+
+    return base;
+  }, [user]);
+
   const [currentStep, setCurrentStep] = useState(1);
-  const [draft, setDraft] = useState<WizardDraft>({ step: 1 });
+  const [draft, setDraft] = useState<WizardDraft>(initialDraft);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
 
