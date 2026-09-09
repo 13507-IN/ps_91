@@ -227,13 +227,13 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
         )}
       </div>
 
-      <div className="flex justify-between pt-2">
-        <button type="button" onClick={onBack} className="px-6 py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors">
+      <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 sm:gap-4 pt-4">
+        <button type="button" onClick={onBack} className="w-full sm:w-auto px-6 py-3 sm:py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors">
           {t.common.back}
         </button>
         <button
           type="submit"
-          className="btn-saffron px-7 py-2.5 rounded-lg text-sm font-semibold"
+          className="btn-saffron w-full sm:w-auto px-7 py-3 sm:py-2.5 rounded-lg text-sm font-semibold"
         >
           {t.capital.continueToReview}
         </button>

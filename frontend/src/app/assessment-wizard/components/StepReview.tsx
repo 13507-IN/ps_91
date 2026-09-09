@@ -165,11 +165,11 @@ export default function StepReview({ draft, onBack, isSubmitting, setIsSubmittin
         </ul>
       </div>
 
-      <div className="flex justify-between pt-2">
-        <button type="button" onClick={onBack} disabled={isSubmitting} className="px-6 py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors disabled:opacity-50">
+      <div className="flex flex-col-reverse sm:flex-row justify-between gap-4 pt-4">
+        <button type="button" onClick={onBack} disabled={isSubmitting} className="w-full sm:w-auto px-6 py-3 sm:py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors disabled:opacity-50">
           {t.common.back}
         </button>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
           {error && (
             <div className="flex items-center gap-2 text-xs text-grade-poor bg-red-50 border border-red-200 rounded-lg px-3 py-2 max-w-xs">
               <AlertTriangle size={14} className="flex-shrink-0" />
@@ -179,7 +179,7 @@ export default function StepReview({ draft, onBack, isSubmitting, setIsSubmittin
           <button
             onClick={handleAnalyze}
             disabled={isSubmitting}
-            className="btn-saffron px-8 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 min-w-[180px] justify-center"
+            className="btn-saffron w-full sm:w-auto px-8 py-3 sm:py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 min-w-[180px] justify-center"
           >
             {isSubmitting ? (
               <>

@@ -59,6 +59,10 @@ async function geocodeVillage(
     `${villageName}, ${blockName}, ${districtName}, ${stateName}, India`,
     `${villageName}, ${districtName}, ${stateName}, India`,
     `${villageName}, ${stateName}, India`,
+    // Fallback: If village name is too obscure or contains census designations (e.g. "Rural"), try Block level
+    `${blockName}, ${districtName}, ${stateName}, India`,
+    // Fallback: Try District level
+    `${districtName}, ${stateName}, India`,
   ];
 
   for (const q of queries) {
@@ -254,14 +258,14 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
 
       {/* Selected village card */}
       {selected && (
-        <div className="bg-saffron-soft border border-saffron/30 rounded-xl p-5 flex items-start gap-4">
+        <div className="bg-saffron-soft border border-saffron/30 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
           <div className="w-10 h-10 rounded-full bg-saffron flex items-center justify-center flex-shrink-0">
             <MapPin size={18} className="text-white" />
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
-              <span className="font-bold text-teal-900 text-base">{selected.name}</span>
-              <CheckCircle size={15} className="text-flag-green" />
+              <span className="font-bold text-teal-900 text-sm sm:text-base">{selected.name}</span>
+              <CheckCircle size={15} className="text-flag-green flex-shrink-0" />
             </div>
             <div className="text-ink-muted text-sm">
               {selected.blockName} Block · {selected.districtName} District · {selected.stateName}
@@ -290,14 +294,14 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
 
       {/* Pinned location card (only when no village is selected) */}
       {pinned && !selected && (
-        <div className="bg-teal-50 border border-teal-600/30 rounded-xl p-5 flex items-start gap-4">
+        <div className="bg-teal-50 border border-teal-600/30 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
           <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0">
             <MapPin size={18} className="text-white" />
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
-              <span className="font-bold text-teal-900 text-base">{t.location.pinnedLocation}</span>
-              <CheckCircle size={15} className="text-flag-green" />
+              <span className="font-bold text-teal-900 text-sm sm:text-base">{t.location.pinnedLocation}</span>
+              <CheckCircle size={15} className="text-flag-green flex-shrink-0" />
             </div>
             <div className="text-xs text-ink-subtle font-tabular">
               {pinned.latitude.toFixed(5)}°N, {pinned.longitude.toFixed(5)}°E
@@ -331,7 +335,7 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
             </>
           )}
         </div>
-        <div className="h-56">
+        <div className="h-64 sm:h-72 lg:h-96">
           <LocationPickerMap center={mapCenter} marker={mapMarker} onPick={handleMapPick} />
         </div>
       </div>
@@ -341,7 +345,7 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
         <button
           onClick={onNext}
           disabled={!canContinue}
-          className={`px-7 py-2.5 rounded-lg text-sm font-semibold transition-all ${canContinue
+          className={`w-full sm:w-auto px-7 py-3 sm:py-2.5 rounded-lg text-sm font-semibold transition-all ${canContinue
               ? 'btn-saffron' : 'bg-muted text-ink-subtle cursor-not-allowed'
             }`}
         >

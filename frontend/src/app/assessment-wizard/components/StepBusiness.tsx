@@ -64,7 +64,7 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
             onChange={(e) => { setIdea(e.target.value); updateDraft({ businessIdea: e.target.value }); }}
             onBlur={handleIdeaBlur}
             placeholder={t.business.ideaPlaceholder}
-            className="input-gov min-h-[80px] resize-none"
+            className="input-gov min-h-[120px] resize-none"
             rows={3}
           />
           {classifying && (
@@ -91,7 +91,7 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
       {/* Category grid */}
       <div>
         <label className="label-gov">{t.business.selectCategory}</label>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-2">
           {CATEGORIES.map((cat) => (
             <button
               key={`cat-pick-${cat.code}`}
@@ -144,14 +144,14 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
         </div>
       )}
 
-      <div className="flex justify-between pt-2">
-        <button onClick={onBack} className="px-6 py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors">
+      <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 sm:gap-4 pt-4">
+        <button onClick={onBack} className="w-full sm:w-auto px-6 py-3 sm:py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors">
           {t.common.back}
         </button>
         <button
           onClick={onNext}
           disabled={!canContinue}
-          className={`px-7 py-2.5 rounded-lg text-sm font-semibold transition-all ${canContinue ? 'btn-saffron' : 'bg-muted text-ink-subtle cursor-not-allowed'
+          className={`w-full sm:w-auto px-7 py-3 sm:py-2.5 rounded-lg text-sm font-semibold transition-all ${canContinue ? 'btn-saffron' : 'bg-muted text-ink-subtle cursor-not-allowed'
             }`}
         >
           {t.business.continueToCapital}
