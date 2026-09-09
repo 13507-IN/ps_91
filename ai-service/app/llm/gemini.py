@@ -1,7 +1,7 @@
 """
 UdyamSetu AI — Gemini LLM Provider.
 
-Wraps the Google GenAI SDK for Gemini 2.5 Flash.
+Wraps the Google GenAI SDK for Gemini 3.6 Flash.
 """
 
 from __future__ import annotations
