@@ -27,6 +27,7 @@ export function FeasibilityReportClient({
   // Hydration-safe: only touch sessionStorage after mount.
   const [mounted, setMounted] = useState(false);
   const [localReport, setLocalReport] = useState<FeasibilityReport | null>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     try {
@@ -78,8 +79,6 @@ export function FeasibilityReportClient({
   if (!report) {
     return <LoadingSkeleton />;
   }
-
-  const { t } = useTranslation();
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">

@@ -22,10 +22,12 @@ interface FeasibilityAnalysisSummary {
 export function PastAssessments() {
   const { t } = useTranslation();
   
-  const { data: analyses, isLoading, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['feasibility-analyses'],
-    queryFn: () => api<FeasibilityAnalysisSummary[]>(apiEndpoints.feasibility.analyses),
+    queryFn: () => api<{ total: number; analyses: FeasibilityAnalysisSummary[] }>(apiEndpoints.feasibility.analyses),
   });
+
+  const analyses = data?.analyses ?? [];
 
   if (isLoading) {
     return (
@@ -40,7 +42,7 @@ export function PastAssessments() {
     );
   }
 
-  if (isError || !analyses) {
+  if (isError || !data) {
     return (
       <div className="rounded-2xl border border-[#DDDDDD] bg-white p-6">
         <h2 className="flex items-center gap-2 text-base font-bold text-[#1A3A6B] mb-4">
