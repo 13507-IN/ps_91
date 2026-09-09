@@ -9,60 +9,25 @@ import {
 } from 'lucide-react';
 import { hasSession, setTokens, getRefreshToken, api, apiEndpoints } from '@/lib/api/client';
 import { useAuthStore } from '@/lib/store/auth';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
-type Lang = 'EN' | 'BN';
-
-const NAV_LABELS: Record<Lang, Record<string, string>> = {
-  EN: {
-    home: 'Home', assess: 'Start Assessment', schemes: 'Schemes',
-    sampleReport: 'Sample Report', dashboard: 'Dashboard', admin: 'Admin',
-    settings: 'Settings', freeAssessment: 'Free Assessment',
-    tagline: 'Rural Business Intelligence Platform',
-    language: 'বাংলা', govIndia: 'भारत सरकार | Government of India',
-    skipToMain: 'Skip to Main Content',
-    login: 'Login', register: 'Register', logout: 'Logout',
-  },
-  BN: {
-    home: 'হোম', assess: 'মূল্যায়ন শুরু করুন', schemes: 'প্রকল্পসমূহ',
-    sampleReport: 'নমুনা রিপোর্ট', dashboard: 'ড্যাশবোর্ড', admin: 'অ্যাডমিন',
-    settings: 'সেটিংস', freeAssessment: 'বিনামূল্যে মূল্যায়ন',
-    tagline: 'গ্রামীণ ব্যবসায়িক তথ্য প্ল্যাটফর্ম',
-    language: 'English', govIndia: 'ভারত সরকার | Government of India',
-    skipToMain: 'মূল বিষয়বস্তুতে যান',
-    login: 'লগইন', register: 'নিবন্ধন', logout: 'লগআউট',
-  },
-};
-
-const NAV_LINKS = (t: Record<string, string>) => [
-  { href: '/',                   label: t.home,         icon: Home,           requiresAuth: false },
-  { href: '/assessment-wizard',  label: t.assess,       icon: ClipboardList,  requiresAuth: true  },
-  { href: '/schemes',            label: t.schemes,      icon: BookOpen,       requiresAuth: false },
-  { href: '/feasibility-report', label: t.sampleReport, icon: FileText,       requiresAuth: false },
-  { href: '/dashboard',          label: t.dashboard,    icon: LayoutDashboard,requiresAuth: true  },
-  { href: '/settings',           label: t.settings,     icon: Settings,       requiresAuth: true  },
-  { href: '/admin',              label: t.admin,        icon: ShieldCheck,    requiresAuth: true  },
-];
-
-const HEADER_TICKER_ITEMS = [
-  'Is Your Business Idea Viable in Your Village?',
-  'Scheme-Matched Financial Plans Built on Real Data',
-  'Local Market Intelligence for 6,40,000+ Villages',
-  'Stress-Tested Business Plans Built for Rural Reality',
-  'Financial Literacy for Every Entrepreneur',
-  'Risk Assessment Honest & Explainable',
-  '30-Day Action Plan From Idea to Funding',
-  'Government Scheme Matching Done Automatically',
+const NAV_LINKS = (t: ReturnType<typeof useTranslation>['t']) => [
+  { href: '/',                   label: t.nav.home,         icon: Home,           requiresAuth: false },
+  { href: '/assessment-wizard',  label: t.nav.assess,       icon: ClipboardList,  requiresAuth: true  },
+  { href: '/schemes',            label: t.nav.schemes,      icon: BookOpen,       requiresAuth: false },
+  { href: '/feasibility-report', label: t.nav.sampleReport, icon: FileText,       requiresAuth: false },
+  { href: '/dashboard',          label: t.nav.dashboard,    icon: LayoutDashboard,requiresAuth: true  },
+  { href: '/settings',           label: t.nav.settings,     icon: Settings,       requiresAuth: true  },
+  { href: '/admin',              label: t.nav.admin,        icon: ShieldCheck,    requiresAuth: true  },
 ];
 
 export default function GovHeaderBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [lang, setLang] = useState<Lang>('EN');
-  void setLang;
   const [loggedIn, setLoggedIn] = useState(false);
 
   const pathname = usePathname();
   const router   = useRouter();
-  const t        = NAV_LABELS[lang];
+  const { t, lang, setLang } = useTranslation();
   const navLinks = NAV_LINKS(t);
 
   const { user, logout: storeLogout } = useAuthStore();
@@ -96,7 +61,7 @@ export default function GovHeaderBar() {
       <div className="overflow-hidden border-b border-white/10 bg-[#0d1f47] text-white">
         <div className="ticker-mask relative mx-auto max-w-screen-2xl">
           <div className="ticker-track flex min-w-max items-center gap-8 whitespace-nowrap py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/90 sm:text-xs">
-            {[...HEADER_TICKER_ITEMS, ...HEADER_TICKER_ITEMS].map((item, idx) => (
+            {[...t.ticker.items, ...t.ticker.items].map((item, idx) => (
               <div key={`${item}-${idx}`} className="flex items-center gap-3">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#FF9933]" aria-hidden="true" />
                 <span>{item}</span>
@@ -148,8 +113,14 @@ export default function GovHeaderBar() {
               />
             </div>
 
-            {/* Auth buttons */}
+            {/* Language Toggle + Auth buttons */}
             <div className="flex items-center gap-2 border-l border-[#EEEEEE] pl-4">
+              <button
+                onClick={() => setLang(lang === 'EN' ? 'BN' : 'EN')}
+                className="flex items-center gap-1.5 px-3 py-1.5 mr-2 rounded border border-[#1A3A6B] text-xs font-semibold text-[#1A3A6B] hover:bg-[#1A3A6B] hover:text-white transition-colors"
+              >
+                {t.nav.language}
+              </button>
               {loggedIn ? (
                 <>
                   {user?.name && (
@@ -169,11 +140,11 @@ export default function GovHeaderBar() {
                 <>
                   <Link href="/login"
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#1A3A6B] text-xs font-semibold text-[#1A3A6B] hover:bg-[#1A3A6B] hover:text-white transition-colors">
-                    <LogIn size={13} /> {t.login}
+                    <LogIn size={13} /> {t.nav.login}
                   </Link>
                   <Link href="/register"
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#E65C00] text-xs font-bold text-white hover:bg-[#CC5200] transition-colors">
-                    <UserPlus size={13} /> {t.register}
+                    <UserPlus size={13} /> {t.nav.register}
                   </Link>
                 </>
               )}
@@ -214,12 +185,12 @@ export default function GovHeaderBar() {
             {loggedIn ? (
               <Link href="/assessment-wizard"
                 className="inline-flex items-center gap-1.5 bg-[#E65C00] hover:bg-[#CC5200] text-white font-bold text-sm px-5 py-2 rounded transition-colors">
-                {t.freeAssessment} →
+                {t.nav.freeAssessment} →
               </Link>
             ) : (
               <Link href="/register"
                 className="inline-flex items-center gap-1.5 bg-[#E65C00] hover:bg-[#CC5200] text-white font-bold text-sm px-5 py-2 rounded transition-colors">
-                <UserPlus size={14} /> {t.register} →
+                <UserPlus size={14} /> {t.nav.register} →
               </Link>
             )}
           </div>
@@ -258,7 +229,7 @@ export default function GovHeaderBar() {
                 >
                   <link.icon size={16} className="flex-shrink-0" />
                   {link.label}
-                  {blocked && <span className="ml-auto text-[10px] text-white/40">Login required</span>}
+                  {blocked && <span className="ml-auto text-[10px] text-white/40">{t.common.loginRequired}</span>}
                 </Link>
               );
             })}
@@ -276,18 +247,18 @@ export default function GovHeaderBar() {
                     onClick={() => { setMobileOpen(false); handleLogout(); }}
                     className="w-full flex items-center gap-3 px-4 py-3 rounded text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors"
                   >
-                    <LogOut size={16} /> {t.logout}
+                    <LogOut size={16} /> {t.nav.logout}
                   </button>
                 </>
               ) : (
                 <>
                   <Link href="/login" onClick={() => setMobileOpen(false)}
                     className="flex items-center gap-3 px-4 py-3 rounded text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors">
-                    <LogIn size={16} /> {t.login}
+                    <LogIn size={16} /> {t.nav.login}
                   </Link>
                   <Link href="/register" onClick={() => setMobileOpen(false)}
                     className="flex items-center justify-center gap-2 bg-[#E65C00] hover:bg-[#CC5200] text-white font-bold px-5 py-3 rounded text-sm transition-colors mt-1">
-                    <UserPlus size={16} /> {t.register}
+                    <UserPlus size={16} /> {t.nav.register}
                   </Link>
                 </>
               )}
