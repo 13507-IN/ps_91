@@ -114,9 +114,21 @@ const translations = {
     stepBusiness:  { EN: 'Business',     BN: 'ব্যবসা' },
     stepCapital:   { EN: 'Capital',      BN: 'মূলধন' },
     stepReview:    { EN: 'Review',       BN: 'পর্যালোচনা' },
-    title:         { EN: 'Business Feasibility Assessment', BN: 'ব্যবসা সম্ভাব্যতা মূল্যায়ন' },
-    subtitle:      { EN: 'Answer a few questions to get a data-backed viability report for your business idea.',
-                     BN: 'আপনার ব্যবসার ধারণার জন্য তথ্য-ভিত্তিক সম্ভাব্যতা রিপোর্ট পেতে কিছু প্রশ্নের উত্তর দিন।' },
+    pageTitle:     { EN: 'Business Feasibility Assessment', BN: 'ব্যবসা সম্ভাব্যতা মূল্যায়ন' },
+    pageDescription: { EN: 'Answer a few questions to get a data-backed viability report for your business idea.',
+                       BN: 'আপনার ব্যবসার ধারণার জন্য তথ্য-ভিত্তিক সম্ভাব্যতা রিপোর্ট পেতে কিছু প্রশ্নের উত্তর দিন।' },
+    assessmentSteps: { EN: 'Assessment Steps', BN: 'মূল্যায়নের ধাপসমূহ' },
+    inProgress:    { EN: 'In Progress', BN: 'চলমান' },
+    completed:     { EN: 'Completed', BN: 'সম্পন্ন' },
+    progress:      { EN: 'Progress', BN: 'অগ্রগতি' },
+    stepTitles: {
+      EN: ['Location', 'Business', 'Capital', 'Review'],
+      BN: ['অবস্থান', 'ব্যবসা', 'মূলধন', 'পর্যালোচনা'],
+    },
+    stepDescriptions: {
+      EN: ['Choose location', 'Business details', 'Financial info', 'Final check'],
+      BN: ['অবস্থান নির্বাচন করুন', 'ব্যবসার বিবরণ', 'আর্থিক তথ্য', 'চূড়ান্ত যাচাই'],
+    },
   },
 
   // ─── Step: Location ───
@@ -369,6 +381,17 @@ const translations = {
     saveChanges:    { EN: 'Save Changes',                  BN: 'পরিবর্তন সংরক্ষণ করুন' },
     saved:          { EN: '✓ Saved',                       BN: '✓ সংরক্ষিত' },
     unableToLoad:   { EN: 'Unable to load profile',        BN: 'প্রোফাইল লোড করতে অক্ষম' },
+    profileError:   { EN: 'Error loading profile',         BN: 'প্রোফাইল লোড করতে ত্রুটি' },
+    dob:            { EN: 'Date of Birth',                 BN: 'জন্ম তারিখ' },
+    locationLabel:  { EN: 'Location',                      BN: 'অবস্থান' },
+    villageLabel:   { EN: 'Village',                       BN: 'গ্রাম' },
+    villagePlaceholder: { EN: 'Village name',              BN: 'গ্রামের নাম' },
+    blockLabel:     { EN: 'Block',                         BN: 'ব্লক' },
+    blockPlaceholder:{ EN: 'Block / Taluka',               BN: 'ব্লক / তালুক' },
+    districtLabel:  { EN: 'District',                      BN: 'জেলা' },
+    districtPlaceholder:{ EN: 'District name',             BN: 'জেলার নাম' },
+    stateLabel:     { EN: 'State',                         BN: 'রাজ্য' },
+    statePlaceholder:{ EN: 'State name',                   BN: 'রাজ্যের নাম' },
     sessionExpired: { EN: 'Your session may have expired. Please login again.',
                       BN: 'আপনার সেশন শেষ হয়ে গেছে। অনুগ্রহ করে আবার লগইন করুন।' },
     // Past assessments
@@ -424,14 +447,14 @@ function extractLang(obj: any, lang: Lang): any {
 }
 
 // Type helper: replaces { EN: string, BN: string } leaves with string
-type TranslationValues = {
-  [K in keyof Translations]: Translations[K] extends { EN: infer E }
-    ? E
-    : {
-        [K2 in keyof Translations[K]]: Translations[K][K2] extends { EN: infer E2 }
-          ? E2
-          : Translations[K][K2];
-      };
-};
+type ExtractLangType<T> = T extends { EN: infer E }
+  ? E
+  : T extends readonly any[]
+  ? { [K in keyof T]: ExtractLangType<T[K]> }
+  : T extends object
+  ? { [K in keyof T]: ExtractLangType<T[K]> }
+  : T;
+
+type TranslationValues = ExtractLangType<Translations>;
 
 export default translations;

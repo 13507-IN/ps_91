@@ -97,7 +97,7 @@ export default function GovHeaderBar() {
             <div>
               <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest leading-none mb-0.5">उद्यमसेतु AI</div>
               <div className="text-[#1A3A6B] font-extrabold text-2xl leading-tight tracking-tight">UdyamSetu AI</div>
-              <div className="text-[#555555] text-xs font-normal leading-none mt-0.5">{t.tagline}</div>
+              <div className="text-[#555555] text-xs font-normal leading-none mt-0.5">{t.common.tagline}</div>
             </div>
           </Link>
 
@@ -133,7 +133,7 @@ export default function GovHeaderBar() {
                     onClick={handleLogout}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#DDDDDD] text-xs font-semibold text-[#555] hover:border-red-400 hover:text-red-600 transition-colors"
                   >
-                    <LogOut size={13} /> {t.logout}
+                    <LogOut size={13} /> {t.nav.logout}
                   </button>
                 </>
               ) : (

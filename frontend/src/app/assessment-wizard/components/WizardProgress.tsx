@@ -6,7 +6,7 @@ import { useTranslation } from '@/lib/i18n/useTranslation';
 interface WizardProgressProps {
   currentStep: number;
   totalSteps: number;
-  stepTitles: string[];
+  stepTitles: readonly string[];
 }
 
 export default function WizardProgress({ currentStep, totalSteps, stepTitles }: WizardProgressProps) {

@@ -85,7 +85,7 @@ export function PastAssessments() {
             >
               <div className="flex justify-between items-start mb-2">
                 <div className="font-semibold text-sm text-[#1A3A6B] group-hover:text-[#E65C00] transition-colors">
-                  {t.business?.categories?.[analysis.businessCategory] || analysis.businessCategory}
+                  {t.business?.categories?.[analysis.businessCategory as keyof typeof t.business.categories] || analysis.businessCategory}
                 </div>
                 {analysis.overallScore !== null && (
                   <div className={`px-2 py-0.5 rounded text-[10px] font-bold ${
