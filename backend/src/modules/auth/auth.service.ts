@@ -1,5 +1,5 @@
 import type { FastifyInstance } from 'fastify';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import crypto from 'node:crypto';
 import type { RegisterInput, LoginInput, AuthResponse, AuthTokens } from './auth.schema.js';
 import { ConflictError, UnauthorizedError } from '../../lib/errors.js';
