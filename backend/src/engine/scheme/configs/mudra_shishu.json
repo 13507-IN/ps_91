@@ -1,0 +1,38 @@
+{
+  "schemeId": "mudra_shishu",
+  "name": "Pradhan Mantri MUDRA Yojana (PMMY) - Shishu",
+  "shortName": "MUDRA Shishu",
+  "description": "Collateral-free micro loans up to ₹50,000 for starting small businesses.",
+  "nodalAgency": "Ministry of Micro, Small and Medium Enterprises (MSME)",
+  "targetAudience": "Micro entrepreneurs in manufacturing, trading, and services",
+  "eligibility": {
+    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
+    "gender": ["MALE", "FEMALE", "OTHER"],
+    "ageMin": 18,
+    "ageMax": 65,
+    "businessCategories": ["DAIRY", "FOOD_PROCESSING", "RETAIL", "TEXTILES_TAILORING", "POULTRY", "AGRICULTURE", "SERVICES", "HANDICRAFT"],
+    "minProjectCost": 0,
+    "maxProjectCost": 50000
+  },
+  "financial": {
+    "maxLoanAmount": 50000,
+    "interestRate": 8.5,
+    "subsidyPercentage": 0,
+    "maxSubsidy": 0,
+    "marginPercentage": 5,
+    "tenureMonths": 60,
+    "moratoriumMonths": 3,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "PAN Card",
+    "Bank Account Details",
+    "Quotations of Machinery/Equipment",
+    "Udyam Registration Certificate"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01"
+}

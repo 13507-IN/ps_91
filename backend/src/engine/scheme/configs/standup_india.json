@@ -6,6 +6,7 @@
   "nodalAgency": "Department of Financial Services (DFS), Ministry of Finance",
   "targetAudience": "SC/ST entrepreneurs and Women entrepreneurs",
   "eligibility": {
+    "eligibilityMode": "OR",
     "categories": ["SC", "ST"],
     "gender": ["FEMALE"],
     "ageMin": 18,

@@ -10,7 +10,7 @@
     "gender": ["MALE", "FEMALE", "OTHER"],
     "ageMin": 18,
     "ageMax": 60,
-    "businessCategories": ["FOOD_PROCESSING", "TEXTILES_TAILORING", "POULTRY", "DAIRY", "HANDICRAFT", "SERVICES"],
+    "businessCategories": ["FOOD_PROCESSING", "TEXTILES_TAILORING", "POULTRY", "DAIRY", "HANDICRAFT", "SERVICES", "RETAIL", "AGRICULTURE"],
     "minProjectCost": 100000,
     "maxProjectCost": 5000000
   },
