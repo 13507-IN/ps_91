@@ -3,18 +3,25 @@
 import type { FeasibilityScore } from '@/types';
 
 const dimensions = [
-  { key: 'marketDemandScore', label: 'Market Demand', color: 'bg-emerald-500' },
-  { key: 'competitionScore', label: 'Competition', color: 'bg-sky-500' },
-  { key: 'financialViabilityScore', label: 'Financial Viability', color: 'bg-amber-500' },
-  { key: 'capitalAdequacyScore', label: 'Capital Adequacy', color: 'bg-violet-500' },
-  { key: 'riskResilienceScore', label: 'Risk Resilience', color: 'bg-rose-500' },
+  { key: 'marketDemandScore', label: 'Market Demand' },
+  { key: 'competitionScore', label: 'Competition' },
+  { key: 'financialViabilityScore', label: 'Financial Viability' },
+  { key: 'capitalAdequacyScore', label: 'Capital Adequacy' },
+  { key: 'riskResilienceScore', label: 'Risk Resilience' },
 ] as const;
+
+function getScoreColor(value: number): string {
+  if (value >= 14) return 'bg-emerald-500';
+  if (value >= 8) return 'bg-amber-500';
+  return 'bg-rose-500';
+}
 
 export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
   return (
     <div className="space-y-3">
-      {dimensions.map(({ key, label, color }) => {
+      {dimensions.map(({ key, label }) => {
         const value = score[key];
+        const color = getScoreColor(value);
         return (
           <div key={key}>
             <div className="mb-1 flex items-center justify-between text-sm">
@@ -23,7 +30,7 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
             </div>
             <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
               <div
-                className={`h-full rounded-full ${color}`}
+                className={`h-full rounded-full ${color} transition-all duration-1000 ease-out`}
                 style={{ width: `${(value / 20) * 100}%` }}
               />
             </div>

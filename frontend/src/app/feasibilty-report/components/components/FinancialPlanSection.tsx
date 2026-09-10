@@ -38,11 +38,15 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
 
       {/* Matched scheme */}
       <div className="mt-5 rounded-xl border border-brand-100 bg-brand-50 p-4">
-        <div className="text-xs font-medium uppercase tracking-wide text-brand-800">Matched scheme</div>
+        <div className="flex items-center justify-between">
+          <div className="text-xs font-medium uppercase tracking-wide text-brand-800">Top Recommended Scheme</div>
+          {schemeNames.length > 0 && (
+            <div className="rounded-full bg-brand-200 px-2 py-0.5 text-[10px] font-bold text-brand-800">
+              {schemeNames.length} Match{schemeNames.length > 1 ? 'es' : ''}
+            </div>
+          )}
+        </div>
         <div className="mt-1 text-base font-semibold text-slate-900">{plan.matchedSchemeName}</div>
-        {schemeNames.length > 0 && (
-          <p className="mt-0.5 text-xs text-slate-500">{schemeNames.join(' · ')}</p>
-        )}
         <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div>
             <div className="text-xs text-slate-500">Interest</div>
@@ -61,6 +65,12 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
             <div className="text-sm font-bold text-brand-700">{inr(plan.emi.emi)}</div>
           </div>
         </div>
+        {schemeNames.length > 1 && (
+          <div className="mt-4 border-t border-brand-200/60 pt-3">
+            <div className="text-[11px] font-medium uppercase text-brand-700">Alternative Options</div>
+            <p className="mt-1 text-xs text-slate-600">{schemeNames.filter(n => n !== plan.matchedSchemeName).join(' · ')}</p>
+          </div>
+        )}
       </div>
 
       <div className="mt-6 space-y-6">
