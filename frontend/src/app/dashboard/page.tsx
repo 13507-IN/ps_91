@@ -361,6 +361,7 @@ function DashboardContent() {
               )}
               {!villageLoading &&
                 !villageError &&
+                villageReadyId == null &&
                 villageQuery.trim().length >= 2 &&
                 villageResults.length === 0 && (
                   <button
