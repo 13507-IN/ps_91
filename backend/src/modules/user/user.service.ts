@@ -73,7 +73,8 @@ export class UserService {
         ...(input.dateOfBirth !== undefined && { dateOfBirth: new Date(input.dateOfBirth) }),
         ...(input.category !== undefined && { category: input.category }),
         ...(input.isMinority !== undefined && { isMinority: input.isMinority }),
-        ...(input.location !== undefined && { location: input.location }),
+        ...(input.location !== undefined &&
+          Object.keys(input.location).length > 0 && { location: input.location }),
       },
       select: {
         id: true,

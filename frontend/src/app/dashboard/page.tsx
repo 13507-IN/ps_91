@@ -121,15 +121,33 @@ function DashboardContent() {
 
   const handleSave = () => {
     const body: UpdateUserProfileBody = {};
+
+    const cleanLocation = (
+      loc: UserProfile['location'],
+    ): Record<string, string | number> | null => {
+      if (!loc || typeof loc !== 'object') return null;
+      const out: Record<string, string | number> = {};
+      for (const k of ['village', 'block', 'district', 'state'] as const) {
+        const v = loc[k];
+        if (typeof v === 'string' && v.trim()) out[k] = v.trim();
+      }
+      if (typeof loc.latitude === 'number') out.latitude = loc.latitude;
+      if (typeof loc.longitude === 'number') out.longitude = loc.longitude;
+      return Object.keys(out).length > 0 ? out : null;
+    };
+
+    const clean = cleanLocation(current.location);
+    const saved = cleanLocation(user.location);
+    if (clean && JSON.stringify(clean) !== JSON.stringify(saved)) {
+      body.location = clean;
+    }
+
     if (current.name !== user.name) body.name = current.name;
     if (current.email !== user.email) body.email = current.email;
     if (current.gender !== user.gender) body.gender = current.gender;
     if (current.dateOfBirth && current.dateOfBirth !== user.dateOfBirth) body.dateOfBirth = current.dateOfBirth;
     if (current.category !== user.category) body.category = current.category;
     if (current.isMinority !== user.isMinority) body.isMinority = current.isMinority;
-    if (JSON.stringify(current.location) !== JSON.stringify(user.location)) {
-      body.location = current.location;
-    }
     if (Object.keys(body).length > 0) updateProfile.mutate(body);
   };
 

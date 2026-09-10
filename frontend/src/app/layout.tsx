@@ -5,6 +5,7 @@ import GovFooter from '@/components/govFooter';
 import LanguagePickerModal from '@/components/LanguagePickerModal';
 import ChatWidget from '@/components/ChatBot/ChatWidget';
 import PWARegistry from '@/components/pwa/pwa-registry';
+import { Toaster } from 'react-hot-toast';
 import '../styles/index.css';
 
 export const metadata: Metadata = {
@@ -43,6 +44,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main-content" className="flex-1">{children}</main>
           <GovFooter />
           <ChatWidget />
+          <Toaster 
+            position="top-right" 
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: '#fff',
+                color: '#1e293b',
+                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+                border: '1px solid #e2e8f0',
+                borderRadius: '0.75rem',
+                fontSize: '0.875rem',
+              },
+              error: {
+                iconTheme: { primary: '#ef4444', secondary: '#fff' },
+              },
+              success: {
+                iconTheme: { primary: '#10b981', secondary: '#fff' },
+              }
+            }} 
+          />
         </Providers>
       </body>
     </html>

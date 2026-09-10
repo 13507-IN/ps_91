@@ -1,4 +1,7 @@
 import type { ApiError, AuthTokens } from '@/types';
+import type { z } from 'zod';
+import { useAuthStore } from './store/auth';
+import toast from 'react-hot-toast';
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://ps-91.onrender.com';
@@ -131,6 +134,19 @@ export class ApiRequestError extends Error {
     this.name = 'ApiRequestError';
     this.statusCode = status;
     this.code = payload.code ?? 'HTTP_ERROR';
+  }
+}
+
+/**
+ * Global helper to format and show API errors in a toast.
+ */
+export function handleApiError(error: unknown, fallbackMessage = 'Something went wrong. Please try again.') {
+  if (error instanceof ApiRequestError) {
+    toast.error(error.message);
+  } else if (error instanceof Error) {
+    toast.error(error.message || fallbackMessage);
+  } else {
+    toast.error(fallbackMessage);
   }
 }
 
