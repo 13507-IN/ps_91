@@ -3,7 +3,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { MessageCircle, X, Send, Trash2 } from 'lucide-react';
 import { useAuthStore } from '@/lib/store/auth';
-import { apiBaseUrl, getAccessToken } from '@/lib/api/client';
+import { apiBaseUrl, getAccessToken, hasSession } from '@/lib/api/client';
+import toast from 'react-hot-toast';
 import ChatBubble, { TypingIndicator } from './ChatBubble';
 import QuickActions from './QuickActions';
 
@@ -24,6 +25,7 @@ const WELCOME_MESSAGE: Message = {
 
 export default function ChatWidget() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const [isAllowed, setIsAllowed] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [inputText, setInputText] = useState('');
@@ -37,6 +39,11 @@ export default function ChatWidget() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Check session on mount to avoid SSR hydration mismatch
+  useEffect(() => {
+    setIsAllowed(isAuthenticated || hasSession());
+  }, [isAuthenticated]);
 
   // Focus input when chat opens
   useEffect(() => {
@@ -127,6 +134,7 @@ export default function ChatWidget() {
                       : m,
                   ),
                 );
+                toast.error(data.error || 'Chat error occurred.');
               }
             } catch {
               // skip malformed JSON
@@ -143,6 +151,7 @@ export default function ChatWidget() {
       );
     } catch (err) {
       console.error('Chat error:', err);
+      toast.error('Failed to connect to SaathiBot.');
       setMessages((prev) =>
         prev.map((m) =>
           m.id === botMsgId

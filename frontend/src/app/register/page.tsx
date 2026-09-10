@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Phone, Lock, User, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { api, apiEndpoints, setTokens } from '@/lib/api/client';
+import { api, apiEndpoints, setTokens, handleApiError } from '@/lib/api/client';
 import { useAuthStore } from '@/lib/store/auth';
 import type { AuthTokens, UserProfile } from '@/types';
 
@@ -57,11 +57,10 @@ export default function RegisterPage() {
       setSession(data.user);
       router.replace('/dashboard');
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Registration failed.';
-      if (msg.toLowerCase().includes('already') || msg.toLowerCase().includes('duplicate')) {
+      if (err instanceof Error && (err.message.toLowerCase().includes('already') || err.message.toLowerCase().includes('duplicate'))) {
         setError('This mobile number is already registered. Please login instead.');
       } else {
-        setError(msg);
+        handleApiError(err, 'Registration failed.');
       }
     } finally {
       setLoading(false);

@@ -1,6 +1,6 @@
 import type { ApiError, AuthTokens } from '@/types';
 import type { z } from 'zod';
-import { useAuthStore } from './store/auth';
+import { useAuthStore } from '../store/auth';
 import toast from 'react-hot-toast';
 
 const API_BASE_URL =

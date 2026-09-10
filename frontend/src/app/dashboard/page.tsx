@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Save, Loader2, User, MapPin, Plus } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
+import toast from 'react-hot-toast';
 import AuthGuard from '@/components/AuthGuard';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { PastAssessments } from './components/PastAssessments';
@@ -201,8 +202,10 @@ function DashboardContent() {
           longitude: created.longitude ?? undefined,
         },
       }));
+      toast.success(t.dashboard.villageReady || 'Village added!');
     } catch {
       setVillageError(true);
+      toast.error(t.dashboard.villageSaveError || 'Failed to add village');
     } finally {
       setAddingVillage(false);
     }

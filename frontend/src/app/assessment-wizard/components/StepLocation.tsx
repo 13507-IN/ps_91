@@ -1,8 +1,9 @@
 'use client';
 import React, { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import { Search, MapPin, CheckCircle, Loader2, AlertTriangle, Navigation } from 'lucide-react';
+import { Search, MapPin, CheckCircle, Loader2, AlertTriangle, Navigation, Map } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
+import toast from 'react-hot-toast';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { WizardDraft } from '@/types';
 import type { PickedLocation } from './LocationPickerMap';
@@ -186,11 +187,13 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
 
   function handleDetectLocation() {
     if (!navigator.geolocation) {
-      setError('Geolocation is not supported by your browser.');
+      toast.error('Geolocation is not supported by your browser.');
       return;
     }
 
     setGpsLoading(true);
+    const toastId = toast.loading('Detecting your location...');
+    
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const coords = {
@@ -200,10 +203,11 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
         setPinned(coords);
         updateDraft({ latitude: coords.latitude, longitude: coords.longitude });
         setGpsLoading(false);
+        toast.success('Location detected accurately!', { id: toastId });
       },
       (err) => {
         console.error('GPS error:', err);
-        setError('Failed to detect your location. Please check your browser permissions.');
+        toast.error('Failed to detect your location. Please check browser permissions.', { id: toastId });
         setGpsLoading(false);
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
@@ -223,11 +227,13 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
           setPinned(coords);
           updateDraft({ latitude: coords.latitude, longitude: coords.longitude });
         } else {
-          setError('Could not find that exact address. Try picking on the map.');
+          toast.error('Could not find that exact address. Try picking on the map.');
         }
+      } else {
+        toast.error('Address search failed.');
       }
     } catch {
-      setError('Address search failed.');
+      toast.error('Address search failed due to a network error.');
     }
     setGeocoding(false);
   }

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Phone, Lock, ArrowRight, AlertCircle } from 'lucide-react';
-import { api, apiEndpoints, setTokens } from '@/lib/api/client';
+import { api, apiEndpoints, setTokens, handleApiError } from '@/lib/api/client';
 import { useAuthStore } from '@/lib/store/auth';
 import type { AuthTokens, UserProfile } from '@/types';
 
@@ -46,8 +46,7 @@ export default function LoginPage() {
       setSession(data.user);
       router.replace(nextPath);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Login failed. Please try again.';
-      setError(msg.includes('credentials') || msg.includes('401') ? 'Invalid phone or password.' : msg);
+      handleApiError(err, 'Login failed. Please try again.');
     } finally {
       setLoading(false);
     }

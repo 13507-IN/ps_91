@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { MapPin, Briefcase, IndianRupee, User, Loader2, ArrowRight, AlertTriangle } from 'lucide-react';
 import { inr } from '@/lib/format';
 import { LAST_REPORT_KEY, LAST_REPORT_ID_KEY } from '@/lib/constants';
-import { api, apiEndpoints } from '@/lib/api/client';
+import { api, apiEndpoints, handleApiError } from '@/lib/api/client';
 import { toFeasibilityReport, type BackendFeasibilityResult } from '@/lib/api/feasibility';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { WizardDraft } from '@/types';
@@ -73,8 +73,8 @@ export default function StepReview({ draft, onBack, isSubmitting, setIsSubmittin
       window.sessionStorage.setItem(LAST_REPORT_KEY, JSON.stringify(report));
       window.location.href = '/feasibility-report?from=assessment';
     } catch (err) {
-      const message = err instanceof Error ? err.message : t.review.errorGeneric;
-      setError(message);
+      handleApiError(err, t.review.errorGeneric);
+      setError(err instanceof Error ? err.message : t.review.errorGeneric);
       setIsSubmitting(false);
     }
   }
