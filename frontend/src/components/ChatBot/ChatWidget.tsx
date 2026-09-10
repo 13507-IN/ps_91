@@ -183,7 +183,7 @@ export default function ChatWidget() {
   };
 
   // Don't render for unauthenticated users
-  if (!isAuthenticated) return null;
+  if (!isAllowed) return null;
 
   return (
     <>
