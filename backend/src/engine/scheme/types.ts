@@ -4,6 +4,7 @@ import { SocialCategory, Gender, BusinessCategory } from '@prisma/client';
 export const SchemeEligibilitySchema = z.object({
   categories: z.array(z.nativeEnum(SocialCategory)).optional(), // Allowed social categories
   gender: z.array(z.nativeEnum(Gender)).optional(),              // Allowed genders
+  eligibilityMode: z.enum(['AND', 'OR']).default('AND'),         // AND = all must match, OR = any match
   ageMin: z.number().int().min(14).optional(),
   ageMax: z.number().int().max(100).optional(),
   isMinority: z.boolean().nullable().optional(),
