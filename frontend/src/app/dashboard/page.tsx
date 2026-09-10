@@ -68,7 +68,7 @@ function DashboardContent() {
     if (current.name !== user.name) body.name = current.name;
     if (current.email !== user.email) body.email = current.email;
     if (current.gender !== user.gender) body.gender = current.gender;
-    if (current.dateOfBirth !== user.dateOfBirth) body.dateOfBirth = current.dateOfBirth;
+    if (current.dateOfBirth && current.dateOfBirth !== user.dateOfBirth) body.dateOfBirth = current.dateOfBirth;
     if (current.category !== user.category) body.category = current.category;
     if (current.isMinority !== user.isMinority) body.isMinority = current.isMinority;
     if (JSON.stringify(current.location) !== JSON.stringify(user.location)) {
@@ -130,7 +130,9 @@ function DashboardContent() {
                 type="date"
                 className="input-base"
                 value={current.dateOfBirth ? current.dateOfBirth.slice(0, 10) : ''}
-                onChange={(e) => setForm((f) => ({ ...f, dateOfBirth: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, dateOfBirth: e.target.value ? new Date(e.target.value).toISOString() : '' }))
+                }
               />
             </div>
             <div>
