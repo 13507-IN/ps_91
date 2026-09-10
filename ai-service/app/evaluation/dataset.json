@@ -1,0 +1,215 @@
+[
+  {
+    "id": "scenario_01_dairy_high_demand",
+    "description": "Dairy farm in a large village with high unmet demand and low competition.",
+    "input": {
+      "location": {
+        "village": "Shamnagar",
+        "block": "Chakdaha",
+        "district": "Nadia",
+        "state": "West Bengal"
+      },
+      "business_category": "DAIRY",
+      "business_idea": "Milk production and doorstep delivery",
+      "market": {
+        "population": 8500,
+        "households": 1800,
+        "estimated_demand": 2700,
+        "estimated_supply": 1200
+      },
+      "competition": {
+        "verified": 2,
+        "reported": 3
+      },
+      "pricing": {
+        "min": 45,
+        "max": 55,
+        "modal": 50,
+        "unit": "per litre"
+      },
+      "livestock": [
+        {
+          "animal_type": "Cattle",
+          "total_count": 450,
+          "milk_producing_count": 200
+        }
+      ],
+      "infrastructure": {
+        "has_electricity": true,
+        "has_cold_storage": false,
+        "nearest_town_km": 12
+      },
+      "financial": {
+        "margin": 50000,
+        "project_cost": 300000,
+        "loan": 250000,
+        "interest_rate": 10.5,
+        "tenure_months": 60,
+        "monthly_emi": 5373,
+        "monthly_revenue_estimate": 45000,
+        "monthly_operating_cost": 28000
+      }
+    }
+  },
+  {
+    "id": "scenario_02_retail_saturated",
+    "description": "Kirana store in a small village with very high competition.",
+    "input": {
+      "location": {
+        "village": "Belpukur",
+        "block": "Krishnanagar",
+        "district": "Nadia",
+        "state": "West Bengal"
+      },
+      "business_category": "RETAIL",
+      "business_idea": "General grocery store",
+      "market": {
+        "population": 2100,
+        "households": 450,
+        "estimated_demand": 67500,
+        "estimated_supply": 75000
+      },
+      "competition": {
+        "verified": 6,
+        "reported": 12
+      },
+      "pricing": null,
+      "livestock": [],
+      "infrastructure": {
+        "has_electricity": true,
+        "has_cold_storage": false,
+        "nearest_town_km": 5
+      },
+      "financial": {
+        "margin": 30000,
+        "project_cost": 150000,
+        "loan": 120000,
+        "monthly_emi": 2579,
+        "monthly_revenue_estimate": 25000,
+        "monthly_operating_cost": 18000
+      }
+    }
+  },
+  {
+    "id": "scenario_03_poultry_moderate",
+    "description": "Broiler poultry farm with moderate market conditions.",
+    "input": {
+      "location": {
+        "village": "Majhdia",
+        "block": "Krishnaganj",
+        "district": "Nadia",
+        "state": "West Bengal"
+      },
+      "business_category": "POULTRY",
+      "business_idea": "Broiler chicken farming 1000 birds",
+      "market": {
+        "population": 5200,
+        "households": 1100,
+        "estimated_demand": 330,
+        "estimated_supply": 250
+      },
+      "competition": {
+        "verified": 1,
+        "reported": 4
+      },
+      "pricing": {
+        "min": 130,
+        "max": 160,
+        "modal": 140,
+        "unit": "per kg live"
+      },
+      "livestock": [
+        {
+          "animal_type": "Poultry",
+          "total_count": 3500
+        }
+      ],
+      "infrastructure": {
+        "has_electricity": true,
+        "has_cold_storage": false,
+        "nearest_town_km": 18
+      },
+      "financial": {
+        "margin": 100000,
+        "project_cost": 450000,
+        "loan": 350000,
+        "monthly_emi": 7523,
+        "monthly_revenue_estimate": 65000,
+        "monthly_operating_cost": 48000
+      }
+    }
+  },
+  {
+    "id": "scenario_04_food_processing_low_capital",
+    "description": "Flour mill with very tight capital constraints.",
+    "input": {
+      "location": {
+        "village": "Palashipara",
+        "block": "Tehatta",
+        "district": "Nadia",
+        "state": "West Bengal"
+      },
+      "business_category": "FOOD_PROCESSING",
+      "business_idea": "Custom flour and spice milling",
+      "market": {
+        "population": 6800,
+        "households": 1450,
+        "estimated_demand": 1160,
+        "estimated_supply": 800
+      },
+      "competition": {
+        "verified": 2,
+        "reported": 1
+      },
+      "pricing": null,
+      "top_crops": [
+        {
+          "crop_name": "Wheat",
+          "total_production_tonnes": 450
+        },
+        {
+          "crop_name": "Mustard",
+          "total_production_tonnes": 120
+        }
+      ],
+      "infrastructure": {
+        "has_electricity": true,
+        "nearest_town_km": 25
+      },
+      "financial": {
+        "margin": 10000,
+        "project_cost": 250000,
+        "loan": 240000,
+        "monthly_emi": 5158,
+        "monthly_revenue_estimate": 22000,
+        "monthly_operating_cost": 12000
+      }
+    }
+  },
+  {
+    "id": "scenario_05_missing_data",
+    "description": "Edge case testing robustness to missing data.",
+    "input": {
+      "location": {
+        "village": "Unknown Village",
+        "block": "Unknown Block",
+        "district": "Unknown District",
+        "state": "Unknown State"
+      },
+      "business_category": "SERVICES",
+      "market": {
+        "population": 0,
+        "households": 0
+      },
+      "competition": {
+        "verified": 0,
+        "reported": 0
+      },
+      "financial": {
+        "margin": 50000,
+        "project_cost": 150000,
+        "loan": 100000
+      }
+    }
+  }
+]

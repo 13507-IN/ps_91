@@ -63,6 +63,7 @@ export interface FeasibilityAnalysisResult {
     breakEven: BreakEvenOutput;
     stressTest: StressTestOutput;
   };
+  localSuppliers: Record<string, unknown>[];
   schemeMatches: MatchedSchemeResult[];
   riskAssessment: Record<string, unknown>;
   feasibilityScore: FeasibilityScoreBreakdown;
@@ -99,20 +100,18 @@ export class FeasibilityService {
       category = classification.category;
     }
 
-    // 2. Query Market Intelligence & Competitors in parallel
-    const [marketIntel, competitorIntel] = await Promise.all([
+    // 2. Query Market Intelligence, Competitors, and Suppliers in parallel
+    const [marketIntel, competitorIntel, localSuppliers] = await Promise.all([
       this.marketService.getMarketIntelligence(lat, lng, radiusKm, category),
       this.marketService.getCompetitorAnalysis(lat, lng, radiusKm, category),
+      this.marketService.getLocalSuppliers(lat, lng, radiusKm, category),
     ]);
 
-    // 3. AI Opportunity Discovery
-    const oppAnalysis = await this.aiClient.discoverOpportunities({
-      businessCategory: category,
-      existingCompetitors: competitorIntel.totalObserved + competitorIntel.totalReported,
-      estimatedDemandUnits: competitorIntel.totalEstimatedMin * 20,
-      topCrops: marketIntel.topCrops.map((c) => c.cropName),
-      livestockCount: marketIntel.livestock.reduce((sum, l) => sum + l.totalCount, 0),
-    });
+    // 3. Skip individual AI opportunity discovery and AI risk assessment.
+    // The unified Python orchestrator handles this in a single pipeline pass.
+    
+    // We do still calculate base financial/scheme metrics locally since the backend
+    // remains the source of truth for calculations. The AI just interprets them.
 
     // 4. Financial Calculations: Margin -> Project Cost -> Loan
     const baseProjectCost = calculateProjectCost({
@@ -192,22 +191,48 @@ export class FeasibilityService {
       monthlyEmi: emiResult.emi,
     });
 
-    // 8. AI Risk Assessment
-    const riskAssessment = await this.aiClient.assessRisk({
-      businessCategory: category,
-      projectCost: baseProjectCost.projectCost,
-      loanAmount: netLoanAmount,
-      monthlyEmi: emiResult.emi,
-      postEmiCashflow: cashflowResult.monthlyCashflow[0]?.netCashflow ?? 0,
+    // 8. Run Unified AI Assessment Pipeline
+    // Assemble all deterministic data into the AssessmentInput structure
+    const assessmentResult = await this.aiClient.runUnifiedAssessment({
+      location: {
+        village: 'Unknown Village', // In a real app, query village details from DB
+        block: 'Unknown Block',
+        district: 'Nadia',
+        state: 'West Bengal',
+        latitude: lat,
+        longitude: lng,
+      },
+      business_category: category,
+      business_idea: body.businessIdea,
+      market: {
+        population: marketIntel.demographics.totalPopulation,
+        households: marketIntel.demographics.totalHouseholds,
+        estimated_demand: competitorIntel.totalEstimatedMin * 20,
+        estimated_supply: competitorIntel.totalEstimatedMin * 10, // heuristic
+      },
+      competition: {
+        verified: competitorIntel.totalObserved,
+        reported: competitorIntel.totalReported,
+        density_per_sq_km: competitorIntel.densityPerSqKm,
+      },
+      financial: {
+        margin: body.availableCapital,
+        project_cost: baseProjectCost.projectCost,
+        loan: netLoanAmount,
+        interest_rate: interestRate,
+        tenure_months: tenureMonths,
+        monthly_emi: emiResult.emi,
+        monthly_revenue_estimate: estimatedMonthlyRevenue,
+        monthly_operating_cost: totalMonthlyOperating,
+        subsidy_amount: subsidyAmount,
+        scheme_name: topScheme?.name,
+      }
     });
 
     // 9. Multi-Dimensional Feasibility Scoring (0 to 100)
     // Dimension 1: Market Demand (0-20)
-    let demandScore = 14;
-    if (marketIntel.demographics.totalPopulation > 5000) demandScore += 4;
-    else if (marketIntel.demographics.totalPopulation > 2000) demandScore += 2;
-    if (oppAnalysis.opportunityScore > 75) demandScore += 2;
-    demandScore = Math.min(20, demandScore);
+    let demandScore = Math.round(assessmentResult.market_score / 5);
+    demandScore = Math.min(20, Math.max(0, demandScore));
 
     // Dimension 2: Competition Intensity (0-20)
     let compScore = 15;
@@ -228,13 +253,12 @@ export class FeasibilityService {
     capScore = Math.min(20, capScore);
 
     // Dimension 5: Risk Resilience (0-20)
-    let riskResScore = 15;
-    if (stressTestResult.overallRiskLevel === 'LOW') riskResScore = 18;
-    else if (stressTestResult.overallRiskLevel === 'MEDIUM') riskResScore = 15;
-    else if (stressTestResult.overallRiskLevel === 'HIGH') riskResScore = 10;
-    else riskResScore = 5;
+    let riskResScore = 20 - Math.round(assessmentResult.risk_score / 5);
+    riskResScore = Math.min(20, Math.max(0, riskResScore));
 
-    const totalScore = demandScore + compScore + finScore + capScore + riskResScore;
+    // The AI orchestrator calculates the final viability score.
+    // We will sync our total score with the AI's viability score to ensure consistency.
+    const totalScore = assessmentResult.viability_score;
     const grade =
       totalScore >= 80 ? 'EXCELLENT' : totalScore >= 65 ? 'GOOD' : totalScore >= 50 ? 'MODERATE' : 'POOR';
 
@@ -248,22 +272,25 @@ export class FeasibilityService {
       grade,
     };
 
-    // 10. AI Recommendation & Action Plan
-    const [aiRecommendation, actionPlan] = await Promise.all([
-      this.aiClient.generateRecommendation({
-        businessCategory: category,
-        businessIdea: body.businessIdea,
-        opportunityScore: oppAnalysis.opportunityScore,
-        financialViabilityScore: finScore * 5,
-        riskScore: riskAssessment.overallRiskScore,
-        matchedScheme: topScheme?.name ?? 'MUDRA / Micro-Enterprise Scheme',
-      }),
-      this.aiClient.generateActionPlan({
-        businessCategory: category,
-        loanAmount: netLoanAmount,
-        schemeName: topScheme?.name ?? 'Government Scheme',
-      }),
-    ]);
+    // 10. AI Recommendation & Action Plan (Generated by the unified assessment)
+    // We map the unified output to the existing expected properties
+    const aiRecommendation = {
+      decision: assessmentResult.viability_score >= 65 ? 'PROCEED' : 'REVIEW',
+      viabilityScore: assessmentResult.viability_score,
+      summary: assessmentResult.reasoning.map(r => r.claim).join('. '),
+      strengths: assessmentResult.swot.strengths,
+      weaknesses: assessmentResult.swot.weaknesses,
+      recommendedNextStep: `Review the recommended business model: ${assessmentResult.recommended_business_model.name}`,
+    };
+    
+    // We will generate the action plan locally via fallback for now, or you could extend the unified AI for this.
+    // To match the existing Node schema without making a second AI call, we use the fallback method natively.
+    // @ts-expect-error accessing private method for fallback
+    const actionPlan = this.aiClient.fallbackActionPlan({
+      businessCategory: category,
+      loanAmount: netLoanAmount,
+      schemeName: topScheme?.name ?? 'Government Scheme',
+    });
 
     const financialPlan = {
       projectCost: baseProjectCost.projectCost,
@@ -295,10 +322,20 @@ export class FeasibilityService {
       },
       marketIntelligence: marketIntel as unknown as Record<string, unknown>,
       competitorAnalysis: competitorIntel as unknown as Record<string, unknown>,
-      opportunityAnalysis: oppAnalysis as unknown as Record<string, unknown>,
+      opportunityAnalysis: {
+        marketGaps: assessmentResult.market_gaps.map(g => g.name),
+        potentialNiches: assessmentResult.market_gaps.map(g => g.reason),
+        recommendedModel: assessmentResult.recommended_business_model.name,
+        opportunityScore: assessmentResult.opportunity_score
+      } as unknown as Record<string, unknown>,
+      localSuppliers: localSuppliers as unknown as Record<string, unknown>[],
       financialPlan,
       schemeMatches,
-      riskAssessment: riskAssessment as unknown as Record<string, unknown>,
+      riskAssessment: {
+        riskFactors: assessmentResult.risks,
+        overallRiskScore: assessmentResult.risk_score,
+        riskRating: assessmentResult.risk_score > 65 ? 'HIGH' : 'LOW'
+      } as unknown as Record<string, unknown>,
       feasibilityScore,
       actionPlan: actionPlan as unknown as Record<string, unknown>,
       aiRecommendation: aiRecommendation as unknown as Record<string, unknown>,
@@ -325,10 +362,20 @@ export class FeasibilityService {
           expectedWorkingHours: body.expectedWorkingHours,
           marketIntelligence: marketIntel as never,
           competitorAnalysis: competitorIntel as never,
-          opportunityAnalysis: oppAnalysis as never,
+          opportunityAnalysis: {
+            marketGaps: assessmentResult.market_gaps.map(g => g.name),
+            potentialNiches: assessmentResult.market_gaps.map(g => g.reason),
+            recommendedModel: assessmentResult.recommended_business_model.name,
+            opportunityScore: assessmentResult.opportunity_score,
+            localSuppliers: localSuppliers
+          } as never,
           financialPlan: financialPlan as never,
           schemeMatch: schemeMatches as never,
-          riskAssessment: riskAssessment as never,
+          riskAssessment: {
+            riskFactors: assessmentResult.risks,
+            overallRiskScore: assessmentResult.risk_score,
+            riskRating: assessmentResult.risk_score > 65 ? 'HIGH' : 'LOW'
+          } as never,
           feasibilityScore: feasibilityScore as never,
           actionPlan: actionPlan as never,
           aiRecommendation: aiRecommendation as never,

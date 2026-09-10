@@ -1,16 +1,7 @@
 'use client';
 
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  CartesianGrid,
-  ReferenceLine,
-} from 'recharts';
+import { Line } from 'react-chartjs-2';
+import { chartDefaults, formatINR } from '@/lib/chart-setup';
 import { inrCompact } from '@/lib/format';
 import type { BreakEvenOutput } from '@/types';
 
@@ -25,12 +16,74 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
     const units = Math.round((i / 11) * maxUnits);
     const revenue = Math.round(units * price);
     const totalCost = Math.round(fixedCosts + units * unitCost);
-    return {
-      name: units.toLocaleString('en-IN'),
-      revenue,
-      totalCost,
-    };
+    return { name: units.toLocaleString('en-IN'), revenue, totalCost };
   });
+
+  const breakEvenLabel = breakeven.breakEvenUnits.toLocaleString('en-IN');
+
+  const chartData = {
+    labels: data.map((d) => d.name),
+    datasets: [
+      {
+        label: 'Revenue',
+        data: data.map((d) => d.revenue),
+        borderColor: '#1e9275',
+        backgroundColor: 'rgba(30, 146, 117, 0.08)',
+        borderWidth: 2.5,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: '#1e9275',
+        tension: 0.3,
+        fill: true,
+      },
+      {
+        label: 'Total Cost',
+        data: data.map((d) => d.totalCost),
+        borderColor: '#f43f5e',
+        backgroundColor: 'rgba(244, 63, 94, 0.06)',
+        borderWidth: 2.5,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: '#f43f5e',
+        tension: 0.3,
+        fill: true,
+      },
+    ],
+  };
+
+  const options = {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      tooltip: {
+        ...chartDefaults.plugins.tooltip,
+        callbacks: {
+          title: (items: any) => `${items[0].label} units`,
+          label: (ctx: any) => `${ctx.dataset.label}: ${formatINR(ctx.parsed.y)}`,
+        },
+      },
+      annotation: undefined,
+    },
+    scales: {
+      ...chartDefaults.scales,
+      x: {
+        ...chartDefaults.scales.x,
+        title: {
+          display: true,
+          text: 'Units',
+          font: { size: 11, family: 'Inter, sans-serif', weight: '500' as const },
+          color: '#64748b',
+        },
+      },
+      y: {
+        ...chartDefaults.scales.y,
+        ticks: {
+          ...chartDefaults.scales.y.ticks,
+          callback: (v: any) => formatINR(v),
+        },
+      },
+    },
+  };
 
   return (
     <div>
@@ -57,29 +110,13 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
           <div className="text-xs text-slate-500">Break-even revenue</div>
           <div className="text-lg font-bold text-slate-900">{inrCompact(breakeven.breakEvenRevenue)}</div>
         </div>
+        <div className="rounded-xl bg-slate-50 p-3">
           <div className="text-xs text-slate-500">Break-even Month</div>
           <div className="text-lg font-bold text-slate-900">{breakeven.breakEvenMonth ? `Month ${breakeven.breakEvenMonth}` : 'N/A'}</div>
+        </div>
       </div>
-      <div className="mt-3 h-56 w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-            <XAxis dataKey="name" fontSize={10} tickLine={false} axisLine={false} label="units" />
-            <YAxis fontSize={10} tickLine={false} axisLine={false} />
-            <Tooltip
-              formatter={(value) => `₹${Number(value).toLocaleString('en-IN')}`}
-              contentStyle={{ borderRadius: 12, border: '1px solid #e2e8f0', fontSize: 12 }}
-            />
-            <Legend wrapperStyle={{ fontSize: 12 }} />
-            <ReferenceLine
-              x={breakeven.breakEvenUnits.toLocaleString('en-IN')}
-              stroke="#f59e0b"
-              strokeDasharray="4 4"
-            />
-            <Line type="monotone" dataKey="revenue" stroke="#1e9275" strokeWidth={2} dot={false} />
-            <Line type="monotone" dataKey="totalCost" stroke="#f43f5e" strokeWidth={2} dot={false} />
-          </LineChart>
-        </ResponsiveContainer>
+      <div className="relative mt-3 h-56 w-full">
+        <Line data={chartData} options={options as any} />
       </div>
     </div>
   );

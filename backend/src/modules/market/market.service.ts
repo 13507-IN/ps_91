@@ -61,6 +61,15 @@ export interface CompetitorItem {
   verificationStatus: string;
 }
 
+export interface SupplierItem {
+  id: string;
+  name: string | null;
+  category: BusinessCategory;
+  subcategory: string | null;
+  scale: string | null;
+  distance: number;
+}
+
 export interface CompetitorAnalysisResult {
   catchment: {
     lat: number;
@@ -98,7 +107,7 @@ export class MarketService {
     radiusKm = 10,
     businessCategory?: BusinessCategory,
   ): Promise<MarketIntelligenceResult> {
-    const key = cacheKey('intel', lat.toFixed(3), lng.toFixed(3), radiusKm, businessCategory ?? 'ALL');
+    const key = cacheKey('intel_v2', lat.toFixed(3), lng.toFixed(3), radiusKm, businessCategory ?? 'ALL');
     const cached = await cacheGet<MarketIntelligenceResult>(key);
     if (cached) {
       return { ...cached, cachedAt: 'from_redis' };
@@ -306,7 +315,7 @@ export class MarketService {
     radiusKm = 10,
     category?: BusinessCategory,
   ): Promise<CompetitorAnalysisResult> {
-    const key = cacheKey('comp', lat.toFixed(3), lng.toFixed(3), radiusKm, category ?? 'ALL');
+    const key = cacheKey('comp_v2', lat.toFixed(3), lng.toFixed(3), radiusKm, category ?? 'ALL');
     const cached = await cacheGet<CompetitorAnalysisResult>(key);
     if (cached) return cached;
 
@@ -491,6 +500,70 @@ export class MarketService {
       amenities: village.amenities,
       roads: village.roads,
     };
+  }
+
+  /**
+   * Find local raw material suppliers based on the business category.
+   */
+  async getLocalSuppliers(
+    lat: number,
+    lng: number,
+    radiusKm = 10,
+    category: BusinessCategory,
+  ): Promise<SupplierItem[]> {
+    const supplierMapping: Record<BusinessCategory, BusinessCategory[]> = {
+      DAIRY: ['AGRICULTURE', 'LIVESTOCK'],
+      FOOD_PROCESSING: ['AGRICULTURE', 'POULTRY', 'DAIRY'],
+      RETAIL: ['FOOD_PROCESSING', 'HANDICRAFT', 'TEXTILES_TAILORING', 'DAIRY'],
+      TEXTILES_TAILORING: ['AGRICULTURE'], // e.g. Cotton/Jute
+      POULTRY: ['AGRICULTURE'], // Feed
+      AGRICULTURE: ['SERVICES'],
+      LIVESTOCK: ['AGRICULTURE'],
+      TRANSPORT: ['SERVICES'],
+      HANDICRAFT: ['AGRICULTURE'],
+      SERVICES: [],
+      OTHER: [],
+    };
+
+    const targetCategories = supplierMapping[category] || [];
+    if (targetCategories.length === 0) return [];
+
+    const nearbyVillages = await this.locationService.getNearbyVillages(lat, lng, radiusKm, 300);
+    const villageIds = nearbyVillages.map((v) => v.id);
+
+    // Get businesses in nearby villages that match the target supplier categories
+    const businesses = await this.prisma.business.findMany({
+      where: {
+        villageId: { in: villageIds },
+        category: { in: targetCategories },
+        operatingStatus: 'ACTIVE',
+      },
+      select: {
+        id: true,
+        name: true,
+        category: true,
+        subcategory: true,
+        scale: true,
+        villageId: true,
+      },
+    });
+
+    // Map the distance using the village distance
+    const villageMap = new Map(nearbyVillages.map(v => [v.id, v.distanceKm]));
+
+    const suppliers = businesses.map(b => ({
+      id: b.id,
+      name: b.name,
+      category: b.category,
+      subcategory: b.subcategory,
+      scale: b.scale,
+      distance: (b.villageId ? villageMap.get(b.villageId) : undefined) ?? 0
+    }));
+
+    // Sort by distance
+    suppliers.sort((a, b) => a.distance - b.distance);
+
+    return suppliers.slice(0, 15); // Return top 15 nearest suppliers
   }
 
   getCompetitors = this.getCompetitorAnalysis;

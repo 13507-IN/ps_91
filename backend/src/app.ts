@@ -1,40 +1,51 @@
 import Fastify, { type FastifyInstance } from 'fastify';
 import cors from '@fastify/cors';
 import helmet from '@fastify/helmet';
-
 import { getEnv } from './config/env.js';
-import authPlugin from './plugins/auth.js';
+import { API_PREFIX } from './config/constants.js';
+import { AppError } from './lib/errors.js';
+
+// Plugins
 import prismaPlugin from './plugins/prisma.js';
-import rateLimitPlugin from './plugins/rateLimit.js';
 import redisPlugin from './plugins/redis.js';
+import authPlugin from './plugins/auth.js';
+import rateLimitPlugin from './plugins/rateLimit.js';
 import swaggerPlugin from './plugins/swagger.js';
 
+// Routes
 import { authRoutes } from './modules/auth/auth.routes.js';
 import { userRoutes } from './modules/user/user.routes.js';
-import { schemeRoutes } from './modules/scheme/scheme.routes.js';
-import { marketRoutes } from './modules/market/market.routes.js';
-import { feasibilityRoutes } from './modules/feasibility/feasibility.routes.js';
-import { businessRoutes } from './modules/business/business.routes.js';
-import { locationRoutes } from './modules/location/location.routes.js';
-import { financialRoutes } from './modules/financial/financial.routes.js';
-import { aiRoutes } from './modules/ai/ai.routes.js';
 import { adminRoutes } from './modules/admin/admin.routes.js';
+import { financialRoutes } from './modules/financial/financial.routes.js';
+import { schemeRoutes } from './modules/scheme/scheme.routes.js';
+import { locationRoutes } from './modules/location/location.routes.js';
+import { marketRoutes } from './modules/market/market.routes.js';
+import { businessRoutes } from './modules/business/business.routes.js';
+import { aiRoutes } from './modules/ai/ai.routes.js';
+import { feasibilityRoutes } from './modules/feasibility/feasibility.routes.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const env = getEnv();
 
   const app = Fastify({
-    logger:
-      env.NODE_ENV === 'development'
-        ? {
-            transport: {
+    logger: {
+      level: env.NODE_ENV === 'production' ? 'info' : 'debug',
+      transport:
+        env.NODE_ENV === 'development'
+          ? {
               target: 'pino-pretty',
-            },
-          }
-        : true,
+              options: {
+                colorize: true,
+                translateTime: 'HH:MM:ss Z',
+                ignore: 'pid,hostname',
+              },
+            }
+          : undefined,
+    },
     ignoreTrailingSlash: true,
   });
 
+  // ---- Security ----
   await app.register(cors, {
     origin: true,
     credentials: true,
@@ -42,30 +53,98 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   await app.register(helmet, {
     global: true,
+    contentSecurityPolicy: env.NODE_ENV === 'production' ? undefined : false,
   });
 
-  await app.register(rateLimitPlugin);
+  // ---- Swagger (before routes so it picks up schemas) ----
   await app.register(swaggerPlugin);
+
+  // ---- Rate Limiting ----
+  await app.register(rateLimitPlugin);
+
+  // ---- Database & Cache ----
   await app.register(prismaPlugin);
   await app.register(redisPlugin);
+
+  // ---- Auth ----
   await app.register(authPlugin);
 
-  await app.register(authRoutes, { prefix: '/api/auth' });
-  await app.register(userRoutes, { prefix: '/api/users' });
-  await app.register(schemeRoutes, { prefix: '/api/schemes' });
-  await app.register(marketRoutes, { prefix: '/api/market' });
-  await app.register(feasibilityRoutes, { prefix: '/api/feasibility' });
-  await app.register(businessRoutes, { prefix: '/api/business' });
-  await app.register(locationRoutes, { prefix: '/api/location' });
-  await app.register(financialRoutes, { prefix: '/api/financial' });
-  await app.register(aiRoutes, { prefix: '/api/ai' });
-  await app.register(adminRoutes, { prefix: '/api/admin' });
+  // ---- Global Error Handler ----
+  app.setErrorHandler((error: any, request, reply) => {
+    if (error instanceof AppError) {
+      return reply.status(error.statusCode).send({
+        statusCode: error.statusCode,
+        code: error.code,
+        message: error.message,
+      });
+    }
 
-  app.get('/health', async () => ({
-    ok: true,
-    service: 'udyamsetu-backend',
-    environment: env.NODE_ENV,
-  }));
+    if (error.validation) {
+      return reply.status(400).send({
+        statusCode: 400,
+        code: 'VALIDATION_ERROR',
+        message: error.message,
+      });
+    }
+
+    if (error.statusCode === 429) {
+      return reply.status(429).send({
+        statusCode: 429,
+        code: 'TOO_MANY_REQUESTS',
+        message: error.message,
+      });
+    }
+
+    request.log.error(error, 'Unhandled error');
+    return reply.status(500).send({
+      statusCode: 500,
+      code: 'INTERNAL_ERROR',
+      message:
+        env.NODE_ENV === 'production' ? 'An internal error occurred' : error.message,
+    });
+  });
+
+  // ---- Health Check ----
+  app.get(
+    '/health',
+    {
+      schema: {
+        tags: ['Health'],
+        summary: 'Health check',
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              status: { type: 'string' },
+              timestamp: { type: 'string' },
+              uptime: { type: 'number' },
+              version: { type: 'string' },
+            },
+          },
+        },
+      },
+    },
+    async (_request, reply) => {
+      return reply.send({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        version: '0.1.0',
+      });
+    },
+  );
+
+  // ---- API Routes ----
+  await app.register(authRoutes, { prefix: `${API_PREFIX}/auth` });
+  await app.register(userRoutes, { prefix: `${API_PREFIX}/users` });
+  await app.register(adminRoutes, { prefix: `${API_PREFIX}/admin` });
+  await app.register(financialRoutes, { prefix: `${API_PREFIX}/financial` });
+  await app.register(schemeRoutes, { prefix: `${API_PREFIX}/schemes` });
+  await app.register(locationRoutes, { prefix: `${API_PREFIX}/locations` });
+  await app.register(marketRoutes, { prefix: `${API_PREFIX}/market` });
+  await app.register(businessRoutes, { prefix: `${API_PREFIX}/businesses` });
+  await app.register(aiRoutes, { prefix: `${API_PREFIX}/ai` });
+  await app.register(feasibilityRoutes, { prefix: `${API_PREFIX}/feasibility` });
 
   return app;
 }

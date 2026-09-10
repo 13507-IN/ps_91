@@ -5,6 +5,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Save, Loader2, User, MapPin } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import AuthGuard from '@/components/AuthGuard';
+import { useTranslation } from '@/lib/i18n/useTranslation';
+import { PastAssessments } from './components/PastAssessments';
 import type { UserProfile, UpdateUserProfileBody } from '@/types';
 
 const genderOptions = [
@@ -24,6 +26,7 @@ const categoryOptions = [
 ];
 
 function DashboardContent() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [saved, setSaved] = useState(false);
   const [form, setForm] = useState<Partial<UserProfile>>({});
@@ -61,10 +64,10 @@ function DashboardContent() {
   if (isError || !user) {
     return (
       <div className="mx-auto max-w-xl px-4 py-20 text-center">
-        <h1 className="text-xl font-bold text-[#1A3A6B]">Unable to load profile</h1>
-        <p className="mt-2 text-sm text-[#666]">Your session may have expired. Please login again.</p>
+        <h1 className="text-xl font-bold text-[#1A3A6B]">{t.dashboard.profileError}</h1>
+        <p className="mt-2 text-sm text-[#666]">{t.dashboard.sessionExpired}</p>
         <a href="/login" className="inline-block mt-6 px-6 py-2.5 bg-[#E65C00] text-white rounded-lg font-semibold text-sm hover:bg-[#CC5200] transition-colors">
-          Login
+          {t.nav.login}
         </a>
       </div>
     );
@@ -90,7 +93,7 @@ function DashboardContent() {
     <div className="mx-auto max-w-3xl px-4 py-8">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-[#1A3A6B]">Your Profile</h1>
+          <h1 className="text-2xl font-bold text-[#1A3A6B]">{t.dashboard.yourProfile}</h1>
           <p className="text-sm text-[#666] mt-0.5">
             {user.phone && <span className="font-medium">{user.phone}</span>}
             {user.name && <span className="ml-2 text-[#999]">· {user.name}</span>}
@@ -98,7 +101,7 @@ function DashboardContent() {
         </div>
         {saved && (
           <span className="rounded-full bg-green-50 border border-green-200 px-3 py-1 text-xs font-semibold text-green-700">
-            ✓ Saved
+            ✓ {t.dashboard.saved}
           </span>
         )}
       </div>
@@ -107,24 +110,24 @@ function DashboardContent() {
         {/* Personal Details */}
         <section className="rounded-2xl border border-[#DDDDDD] bg-white p-6">
           <h2 className="flex items-center gap-2 text-base font-bold text-[#1A3A6B] mb-4">
-            <User className="h-5 w-5 text-[#E65C00]" /> Personal Details
+            <User className="h-5 w-5 text-[#E65C00]" /> {t.dashboard.personalDetails}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="label-base">Phone</label>
+              <label className="label-base">{t.dashboard.phone}</label>
               <input className="input-base bg-gray-50 cursor-not-allowed" value={current.phone ?? ''} disabled />
             </div>
             <div>
-              <label className="label-base">Name</label>
+              <label className="label-base">{t.dashboard.name}</label>
               <input
                 className="input-base"
                 value={current.name ?? ''}
-                placeholder="Your full name"
+                placeholder={t.dashboard.namePlaceholder}
                 onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
               />
             </div>
             <div>
-              <label className="label-base">Email</label>
+              <label className="label-base">{t.dashboard.email}</label>
               <input
                 type="email"
                 className="input-base"
@@ -134,7 +137,7 @@ function DashboardContent() {
               />
             </div>
             <div>
-              <label className="label-base">Date of Birth</label>
+              <label className="label-base">{t.dashboard.dob}</label>
               <input
                 type="date"
                 className="input-base"
@@ -143,23 +146,31 @@ function DashboardContent() {
               />
             </div>
             <div>
-              <label className="label-base">Gender</label>
+              <label className="label-base">{t.capital.gender}</label>
               <select
                 className="input-base"
                 value={current.gender ?? ''}
                 onChange={(e) => setForm((f) => ({ ...f, gender: (e.target.value || undefined) as UserProfile['gender'] }))}
               >
-                {genderOptions.map((g) => <option key={g.value} value={g.value}>{g.label}</option>)}
+                <option value="">{t.common.notSelected}</option>
+                <option value="MALE">{t.capital.genderMale}</option>
+                <option value="FEMALE">{t.capital.genderFemale}</option>
+                <option value="OTHER">{t.capital.genderOther}</option>
               </select>
             </div>
             <div>
-              <label className="label-base">Social Category</label>
+              <label className="label-base">{t.capital.socialCategory}</label>
               <select
                 className="input-base"
                 value={current.category ?? ''}
                 onChange={(e) => setForm((f) => ({ ...f, category: (e.target.value || undefined) as UserProfile['category'] }))}
               >
-                {categoryOptions.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
+                <option value="">{t.common.notSelected}</option>
+                <option value="GENERAL">{t.capital.general}</option>
+                <option value="SC">SC</option>
+                <option value="ST">ST</option>
+                <option value="OBC">OBC</option>
+                <option value="MINORITY">{t.capital.minority}</option>
               </select>
             </div>
             <div className="sm:col-span-2 flex items-center gap-3">
@@ -171,7 +182,7 @@ function DashboardContent() {
                 className="w-4 h-4 accent-[#E65C00]"
               />
               <label htmlFor="is-minority" className="text-sm text-[#444]">
-                I belong to a minority community
+                {t.capital.isMinority}
               </label>
             </div>
           </div>
@@ -180,14 +191,14 @@ function DashboardContent() {
         {/* Location */}
         <section className="rounded-2xl border border-[#DDDDDD] bg-white p-6">
           <h2 className="flex items-center gap-2 text-base font-bold text-[#1A3A6B] mb-4">
-            <MapPin className="h-5 w-5 text-[#E65C00]" /> Location
+            <MapPin className="h-5 w-5 text-[#E65C00]" /> {t.dashboard.locationLabel}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              { key: 'village', label: 'Village', placeholder: 'Village name' },
-              { key: 'block', label: 'Block', placeholder: 'Block / Taluka' },
-              { key: 'district', label: 'District', placeholder: 'District' },
-              { key: 'state', label: 'State', placeholder: 'State' },
+              { key: 'village', label: t.dashboard.villageLabel, placeholder: t.dashboard.villagePlaceholder },
+              { key: 'block', label: t.dashboard.blockLabel, placeholder: t.dashboard.blockPlaceholder },
+              { key: 'district', label: t.dashboard.districtLabel, placeholder: t.dashboard.districtPlaceholder },
+              { key: 'state', label: t.dashboard.stateLabel, placeholder: t.dashboard.statePlaceholder },
             ].map(({ key, label, placeholder }) => (
               <div key={key}>
                 <label className="label-base">{label}</label>
@@ -211,9 +222,11 @@ function DashboardContent() {
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#1A3A6B] hover:bg-[#1E4A8A] disabled:opacity-60 text-white font-semibold text-sm transition-colors"
           >
             {updateProfile.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
-            Save Changes
+            {t.dashboard.saveChanges}
           </button>
         </div>
+
+        <PastAssessments />
       </div>
     </div>
   );

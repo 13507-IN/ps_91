@@ -1,21 +1,39 @@
 'use client';
 
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-interface PickedLocation {
+export interface PickedLocation {
   latitude: number;
   longitude: number;
 }
 
-function MapArea({
+function FlyToCenter({ lat, lng }: { lat: number; lng: number }) {
+  const map = useMap();
+  useEffect(() => {
+    map.setView([lat, lng], Math.max(map.getZoom(), 12), { animate: true });
+  }, [map, lat, lng]);
+  return null;
+}
+
+function ClickLayer({ onPick }: { onPick: (loc: PickedLocation) => void }) {
+  useMapEvents({
+    click(e) {
+      onPick({ latitude: e.latlng.lat, longitude: e.latlng.lng });
+    },
+  });
+  return null;
+}
+
+export function LocationPickerMap({
   center,
   marker,
   onPick,
 }: {
-  center: [number, number];
-  marker: [number, number];
+  center: PickedLocation;
+  marker?: PickedLocation | null;
   onPick: (loc: PickedLocation) => void;
 }) {
   const icon = L.divIcon({
@@ -25,44 +43,17 @@ function MapArea({
     iconAnchor: [8, 8],
   });
 
-  function ClickHandler() {
-    useMapEvents({
-      click(e) {
-        onPick({ latitude: e.latlng.lat, longitude: e.latlng.lng });
-      },
-    });
-    return null;
-  }
+  const mapCenter: [number, number] = [center.latitude, center.longitude];
 
   return (
-    <MapContainer
-      center={center}
-      zoom={12}
-      className="h-full w-full rounded-xl"
-      scrollWheelZoom
-    >
+    <MapContainer center={mapCenter} zoom={12} className="h-full w-full rounded-xl" scrollWheelZoom>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <ClickHandler />
-      <Marker position={marker} icon={icon} />
+      <FlyToCenter lat={mapCenter[0]} lng={mapCenter[1]} />
+      <ClickLayer onPick={onPick} />
+      {marker && <Marker position={[marker.latitude, marker.longitude]} icon={icon} />}
     </MapContainer>
-  );
-}
-
-export function LocationPickerMap({
-  center,
-  onPick,
-}: {
-  center: PickedLocation;
-  onPick: (loc: PickedLocation) => void;
-}) {
-  return (
-    <MapArea
-      center={[center.latitude, center.longitude]}
-      marker={[center.latitude, center.longitude]}
-      onPick={onPick}
-    />
   );
 }

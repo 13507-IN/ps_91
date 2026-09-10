@@ -1,5 +1,5 @@
 import { Engine } from 'json-rules-engine';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SchemeConfigSchema, type SchemeConfig, type UserSchemeFacts } from './types.js';
@@ -18,7 +18,13 @@ export class RuleEngine {
    * Load and validate all scheme JSON files from configs directory.
    */
   public loadConfigs(dirPath?: string): void {
-    const targetDir = dirPath ?? path.resolve(__dirname, 'configs');
+    let targetDir = dirPath ?? path.resolve(__dirname, 'configs');
+    
+    // Fallback if running from /dist and configs weren't copied by tsc
+    if (!dirPath && !existsSync(targetDir)) {
+      targetDir = path.resolve(process.cwd(), 'src/engine/scheme/configs');
+    }
+
     this.schemes = [];
 
     try {

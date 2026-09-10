@@ -1,8 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowRight, MapPin, TrendingUp, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const SLIDES = [
   {
@@ -118,8 +117,6 @@ export default function HeroSection() {
     goTo(idx);
     resetTimer();
   }
-
-  const slide = SLIDES[active];
 
   return (
     <section

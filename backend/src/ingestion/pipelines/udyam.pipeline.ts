@@ -119,7 +119,6 @@ function transformRow(row: Record<string, unknown>, _index: number): UdyamRow {
     'RETAIL',
     'SERVICES',
     'TRANSPORT',
-    'MANUFACTURING',
     'OTHER',
   ];
   let category: BusinessCategory;
