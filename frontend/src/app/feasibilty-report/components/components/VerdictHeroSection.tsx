@@ -6,12 +6,19 @@ import { ConfidenceBadge } from '@/components/ConfidenceBadge';
 import { decisionColor, gradeBadge, dateTime } from '@/lib/format';
 import type { FeasibilityReport } from '@/types';
 
+const bgGradient: Record<string, string> = {
+  EXCELLENT: 'bg-gradient-to-br from-emerald-50 to-teal-50/50 border-emerald-200',
+  GOOD: 'bg-gradient-to-br from-teal-50 to-sky-50/50 border-teal-200',
+  MODERATE: 'bg-gradient-to-br from-amber-50 to-orange-50/50 border-amber-200',
+  POOR: 'bg-gradient-to-br from-rose-50 to-red-50/50 border-rose-200',
+};
+
 export function VerdictHeroSection({ report }: { report: FeasibilityReport }) {
   const { feasibilityScore, aiRecommendation, confidence, catchment, createdAt, businessIdea } =
     report;
 
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-6">
+    <section className={`rounded-2xl border p-6 ${bgGradient[feasibilityScore.grade] || 'bg-white border-slate-200'}`}>
       <div className="flex flex-col items-center gap-6 md:flex-row md:items-center">
         <VerdictGauge score={feasibilityScore.totalScore} grade={feasibilityScore.grade} />
         <div className="flex-1 text-center md:text-left">

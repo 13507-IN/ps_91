@@ -66,12 +66,15 @@ export const gradeBadge: Record<string, string> = {
 
 export const decisionColor: Record<string, string> = {
   PROCEED: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+  PROCEED_WITH_MODIFICATIONS: 'bg-teal-100 text-teal-800 border-teal-300',
   MODIFY: 'bg-amber-100 text-amber-800 border-amber-300',
+  HIGH_RISK: 'bg-rose-100 text-rose-800 border-rose-300',
   INSUFFICIENT_DATA: 'bg-slate-100 text-slate-800 border-slate-300',
 };
 
 export const riskColor: Record<string, string> = {
   LOW: 'text-emerald-600 bg-emerald-50 border-emerald-200',
+  MODERATE: 'text-amber-600 bg-amber-50 border-amber-200',
   MEDIUM: 'text-amber-600 bg-amber-50 border-amber-200',
   HIGH: 'text-rose-600 bg-rose-50 border-rose-200',
 };

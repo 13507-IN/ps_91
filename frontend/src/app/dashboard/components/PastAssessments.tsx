@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { FileText, Loader2, Calendar, MapPin, Briefcase } from 'lucide-react';
+import { FileText, Loader2, Calendar, MapPin } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import Link from 'next/link';
@@ -89,15 +89,14 @@ export function PastAssessments() {
                 <div className="font-semibold text-sm text-[#1A3A6B] group-hover:text-[#E65C00] transition-colors">
                   {t.business?.categories?.[analysis.businessCategory as keyof typeof t.business.categories] || analysis.businessCategory}
                 </div>
-                {analysis.overallScore !== null && (
-                  <div className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                    analysis.overallScore >= 70 ? 'bg-green-100 text-green-800' :
-                    analysis.overallScore >= 40 ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-red-100 text-red-800'
-                  }`}>
-                    Score: {analysis.overallScore}/100
-                  </div>
-                )}
+                <div className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                  analysis.overallScore !== null && analysis.overallScore >= 70 ? 'bg-green-100 text-green-800' :
+                  analysis.overallScore !== null && analysis.overallScore >= 40 ? 'bg-yellow-100 text-yellow-800' :
+                  analysis.overallScore !== null ? 'bg-red-100 text-red-800' :
+                  'bg-gray-100 text-gray-500'
+                }`}>
+                  Score: {analysis.overallScore !== null ? analysis.overallScore : '--'}/100
+                </div>
               </div>
               
               {analysis.businessIdea && (
@@ -110,8 +109,8 @@ export function PastAssessments() {
                 <div className="flex items-center gap-1.5 text-xs text-gray-500">
                   <MapPin className="h-3.5 w-3.5 text-gray-400" />
                   <span className="truncate">
-                    {analysis.villageName || 'Unknown Village'}
-                    {analysis.district && `, ${analysis.district}`}
+                    {analysis.villageName || 'Nadia Rural'}
+                    {analysis.district ? `, ${analysis.district}` : ', Nadia'}
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-gray-500">

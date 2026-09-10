@@ -16,12 +16,6 @@ interface StepReviewProps {
   setIsSubmitting: (v: boolean) => void;
 }
 
-const CATEGORY_LABELS: Record<string, string> = {
-  DAIRY: 'Dairy', FOOD_PROCESSING: 'Food Processing', RETAIL: 'Retail Shop',
-  TEXTILES_TAILORING: 'Textiles & Tailoring', POULTRY: 'Poultry', AGRICULTURE: 'Agriculture',
-  LIVESTOCK: 'Livestock', TRANSPORT: 'Transport', HANDICRAFT: 'Handicraft',
-  SERVICES: 'Services', OTHER: 'Other',
-};
 
 export default function StepReview({ draft, onBack, isSubmitting, setIsSubmitting }: StepReviewProps) {
   const { t } = useTranslation();

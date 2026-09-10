@@ -71,23 +71,30 @@ export class RuleEngine {
 
     for (const scheme of this.schemes) {
       const elig = scheme.eligibility;
-      const notes: string[] = [];
       let isEligible = true;
 
-      // Age check
+      // Age check (always AND)
       if (facts.age !== undefined) {
         if (elig.ageMin !== undefined && facts.age < elig.ageMin) isEligible = false;
         if (elig.ageMax !== undefined && facts.age > elig.ageMax) isEligible = false;
       }
 
-      // Gender check
-      if (facts.gender && elig.gender && elig.gender.length > 0) {
-        if (!elig.gender.includes(facts.gender)) isEligible = false;
-      }
-
-      // Social Category check
-      if (facts.category && elig.categories && elig.categories.length > 0) {
-        if (!elig.categories.includes(facts.category)) isEligible = false;
+      // Gender + Category check — supports OR mode for schemes like StandUp India
+      // OR mode: eligible if gender matches OR category matches (e.g. SC/ST or Female)
+      // AND mode (default): both must match if specified
+      if (isEligible && elig.eligibilityMode === 'OR') {
+        const genderMatch = !facts.gender || !elig.gender || elig.gender.length === 0 || elig.gender.includes(facts.gender);
+        const categoryMatch = !facts.category || !elig.categories || elig.categories.length === 0 || elig.categories.includes(facts.category);
+        // In OR mode, at least one of gender or category must match
+        if (!genderMatch && !categoryMatch) isEligible = false;
+      } else {
+        // Default AND mode
+        if (facts.gender && elig.gender && elig.gender.length > 0) {
+          if (!elig.gender.includes(facts.gender)) isEligible = false;
+        }
+        if (facts.category && elig.categories && elig.categories.length > 0) {
+          if (!elig.categories.includes(facts.category)) isEligible = false;
+        }
       }
 
       // Business Category check

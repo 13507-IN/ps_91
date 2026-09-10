@@ -1,0 +1,36 @@
+{
+  "schemeId": "pm_svanidhi",
+  "name": "PM Street Vendor's AtmaNirbhar Nidhi (PM SVANidhi)",
+  "shortName": "PM SVANidhi",
+  "description": "Special micro-credit facility for street vendors to access affordable working capital loan.",
+  "nodalAgency": "Ministry of Housing and Urban Affairs (MoHUA)",
+  "targetAudience": "Street vendors, hawkers, small retail traders",
+  "eligibility": {
+    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
+    "gender": ["MALE", "FEMALE", "OTHER"],
+    "ageMin": 18,
+    "ageMax": 65,
+    "businessCategories": ["RETAIL", "SERVICES", "FOOD_PROCESSING"],
+    "minProjectCost": 0,
+    "maxProjectCost": 50000
+  },
+  "financial": {
+    "maxLoanAmount": 50000,
+    "interestRate": 7.0,
+    "subsidyPercentage": 0,
+    "maxSubsidy": 0,
+    "marginPercentage": 0,
+    "tenureMonths": 12,
+    "moratoriumMonths": 0,
+    "moratoriumType": "NO_PAYMENT"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "Vending Certificate / ID Card",
+    "Bank Account Details"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01"
+}
