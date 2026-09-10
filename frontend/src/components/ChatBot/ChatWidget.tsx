@@ -45,9 +45,6 @@ export default function ChatWidget() {
     }
   }, [isOpen]);
 
-  // Don't render for unauthenticated users
-  if (!isAuthenticated) return null;
-
   const sendMessage = useCallback(async (text: string) => {
     if (!text.trim() || isLoading) return;
 
@@ -175,6 +172,9 @@ export default function ChatWidget() {
     setSessionId(null);
     setHasInteracted(false);
   };
+
+  // Don't render for unauthenticated users
+  if (!isAuthenticated) return null;
 
   return (
     <>

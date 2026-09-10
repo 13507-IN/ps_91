@@ -1,6 +1,7 @@
 'use client';
 
 import { Bar } from 'react-chartjs-2';
+import type { ChartOptions, TooltipItem } from 'chart.js';
 import type { FeasibilityScore } from '@/types';
 
 const dimensions = [
@@ -33,8 +34,8 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
     ],
   };
 
-  const options = {
-    indexAxis: 'y' as const,
+  const options: ChartOptions<'bar'> = {
+    indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -46,7 +47,7 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
         padding: 10,
         cornerRadius: 8,
         callbacks: {
-          label: (ctx: any) => `${ctx.parsed.x} / 20`,
+          label: (ctx: TooltipItem<'bar'>) => `${ctx.parsed.x} / 20`,
         },
       },
     },
@@ -54,7 +55,7 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
       x: {
         min: 0,
         max: 20,
-        grid: { color: '#f1f5f9', drawBorder: false },
+        grid: { color: '#f1f5f9' },
         border: { display: false },
         ticks: { font: { size: 11, family: 'Inter, sans-serif' }, color: '#64748b', stepSize: 5 },
       },
@@ -69,35 +70,37 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
   return (
     <div className="space-y-3">
       <div className="h-[180px] w-full">
-        <Bar data={chartData} options={options as any} />
+        <Bar data={chartData} options={options} />
       </div>
       <div className="flex items-center justify-between rounded-xl bg-slate-900 px-4 py-3 text-white">
-      {dimensions.map(({ key, label }) => {
-        const value = score[key];
-        const color = getScoreColor(value);
-        return (
-          <div key={key}>
-            <div className="mb-1 flex items-center justify-between text-sm">
-              <span className="text-slate-600">{label}</span>
-              <span className="font-semibold text-slate-900">{value}/20</span>
-            </div>
-            <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
-              <div
-                className={`h-full rounded-full ${color} transition-all duration-1000 ease-out`}
-                style={{ width: `${(value / 20) * 100}%` }}
-              />
-            </div>
+        <div className="w-full space-y-2">
+          {dimensions.map(({ key, label }) => {
+            const value = score[key];
+            const color = getScoreColor(value);
+            return (
+              <div key={key}>
+                <div className="mb-1 flex items-center justify-between text-sm">
+                  <span className="text-slate-300">{label}</span>
+                  <span className="font-semibold text-white">{value}/20</span>
+                </div>
+                <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-700">
+                  <div
+                    className={`h-full rounded-full ${color} transition-all duration-1000 ease-out`}
+                    style={{ width: `${(value / 20) * 100}%` }}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="ml-6 shrink-0 text-right">
+          <span className="text-sm font-medium">Total Score</span>
+          <div className="text-lg font-bold">
+            {score.totalScore}
+            <span className="ml-1 text-xs font-normal text-slate-400">/ 100 · {score.grade}</span>
           </div>
-        );
-      })}
-      <div className="mt-4 flex items-center justify-between rounded-xl bg-slate-900 px-4 py-3 text-white">
-        <span className="text-sm font-medium">Total Score</span>
-        <span className="text-lg font-bold">
-          {score.totalScore}
-          <span className="ml-1 text-xs font-normal text-slate-400">/ 100 · {score.grade}</span>
-        </span>
+        </div>
       </div>
     </div>
-  </div>
   );
 }

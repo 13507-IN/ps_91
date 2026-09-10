@@ -2,6 +2,7 @@
 
 import { Scatter } from 'react-chartjs-2';
 import { chartDefaults } from '@/lib/chart-setup';
+import type { ChartOptions, TooltipItem } from 'chart.js';
 import type { RiskFactor } from '@/types';
 
 const toNum = (v: number | string): number => {
@@ -38,7 +39,7 @@ export function RiskMatrixChart({ risks }: { risks: RiskFactor[] }) {
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'scatter'> = {
     ...chartDefaults,
     plugins: {
       ...chartDefaults.plugins,
@@ -46,15 +47,15 @@ export function RiskMatrixChart({ risks }: { risks: RiskFactor[] }) {
       tooltip: {
         ...chartDefaults.plugins.tooltip,
         callbacks: {
-          title: (items: any) => {
+          title: (items: TooltipItem<'scatter'>[]) => {
             const idx = items[0].dataIndex;
             return points[idx]?.name ?? '';
           },
-          label: (ctx: any) => {
+          label: (ctx: TooltipItem<'scatter'>) => {
             const pt = points[ctx.dataIndex];
             return [`Probability: ${(pt.p * 100).toFixed(0)}%`, `Impact: ${(pt.i * 100).toFixed(0)}%`];
           },
-          afterLabel: (ctx: any) => {
+          afterLabel: (ctx: TooltipItem<'scatter'>) => {
             const pt = points[ctx.dataIndex];
             return pt.mitigation ? `Mitigation: ${pt.mitigation}` : '';
           },
@@ -69,12 +70,12 @@ export function RiskMatrixChart({ risks }: { risks: RiskFactor[] }) {
         title: {
           display: true,
           text: 'Probability →',
-          font: { size: 11, family: 'Inter, sans-serif', weight: '500' as const },
+          font: { size: 11, family: 'Inter, sans-serif', weight: 500 },
           color: '#64748b',
         },
         ticks: {
           ...chartDefaults.scales.x.ticks,
-          callback: (v: any) => {
+          callback: (v: string | number) => {
             if (v === 0) return 'Low';
             if (v === 0.5) return 'Medium';
             if (v === 1) return 'High';
@@ -89,12 +90,12 @@ export function RiskMatrixChart({ risks }: { risks: RiskFactor[] }) {
         title: {
           display: true,
           text: 'Impact →',
-          font: { size: 11, family: 'Inter, sans-serif', weight: '500' as const },
+          font: { size: 11, family: 'Inter, sans-serif', weight: 500 },
           color: '#64748b',
         },
         ticks: {
           ...chartDefaults.scales.y.ticks,
-          callback: (v: any) => {
+          callback: (v: string | number) => {
             if (v === 0) return 'Low';
             if (v === 0.5) return 'Medium';
             if (v === 1) return 'High';
@@ -108,7 +109,7 @@ export function RiskMatrixChart({ risks }: { risks: RiskFactor[] }) {
   return (
     <div className="min-w-[420px]">
       <div className="h-64 w-full">
-        <Scatter data={chartData} options={options as any} />
+        <Scatter data={chartData} options={options} />
       </div>
       <div className="mt-2 flex flex-wrap gap-3 text-[11px] text-slate-500">
         {points.map((point, idx) => (

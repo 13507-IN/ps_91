@@ -3,6 +3,7 @@
 import { Line } from 'react-chartjs-2';
 import { chartDefaults, formatINR } from '@/lib/chart-setup';
 import { inrCompact } from '@/lib/format';
+import type { ChartOptions, TooltipItem } from 'chart.js';
 import type { BreakEvenOutput } from '@/types';
 
 export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
@@ -18,8 +19,6 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
     const totalCost = Math.round(fixedCosts + units * unitCost);
     return { name: units.toLocaleString('en-IN'), revenue, totalCost };
   });
-
-  const breakEvenLabel = breakeven.breakEvenUnits.toLocaleString('en-IN');
 
   const chartData = {
     labels: data.map((d) => d.name),
@@ -51,18 +50,17 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'line'> = {
     ...chartDefaults,
     plugins: {
       ...chartDefaults.plugins,
       tooltip: {
         ...chartDefaults.plugins.tooltip,
         callbacks: {
-          title: (items: any) => `${items[0].label} units`,
-          label: (ctx: any) => `${ctx.dataset.label}: ${formatINR(ctx.parsed.y)}`,
+          title: (items: TooltipItem<'line'>[]) => `${items[0].label} units`,
+          label: (ctx: TooltipItem<'line'>) => `${ctx.dataset.label}: ${formatINR(ctx.parsed.y ?? 0)}`,
         },
       },
-      annotation: undefined,
     },
     scales: {
       ...chartDefaults.scales,
@@ -71,7 +69,7 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
         title: {
           display: true,
           text: 'Units',
-          font: { size: 11, family: 'Inter, sans-serif', weight: '500' as const },
+          font: { size: 11, family: 'Inter, sans-serif', weight: 500 },
           color: '#64748b',
         },
       },
@@ -79,7 +77,7 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
         ...chartDefaults.scales.y,
         ticks: {
           ...chartDefaults.scales.y.ticks,
-          callback: (v: any) => formatINR(v),
+          callback: (v: string | number) => formatINR(Number(v)),
         },
       },
     },
@@ -116,7 +114,7 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
         </div>
       </div>
       <div className="relative mt-3 h-56 w-full">
-        <Line data={chartData} options={options as any} />
+        <Line data={chartData} options={options} />
       </div>
     </div>
   );

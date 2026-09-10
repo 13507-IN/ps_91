@@ -1,7 +1,8 @@
 'use client';
 
 import { Doughnut } from 'react-chartjs-2';
-import { gradeColor, clamp } from '@/lib/format';
+import { clamp } from '@/lib/format';
+import type { ChartOptions } from 'chart.js';
 import type { Grade } from '@/types';
 
 const gradeColors: Record<Grade, string> = {
@@ -29,7 +30,7 @@ export function VerdictGauge({ score, grade }: { score: number; grade: Grade }) 
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'doughnut'> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -41,7 +42,7 @@ export function VerdictGauge({ score, grade }: { score: number; grade: Grade }) 
   return (
     <div className="relative inline-flex h-44 w-44 items-end justify-center">
       <div className="h-full w-full">
-        <Doughnut data={chartData} options={options as any} />
+        <Doughnut data={chartData} options={options} />
       </div>
       <div className="absolute inset-x-0 bottom-2 text-center">
         <div className="text-4xl font-bold text-slate-900">{value}</div>

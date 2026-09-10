@@ -2,6 +2,7 @@
 
 import { Chart } from 'react-chartjs-2';
 import { chartDefaults, formatINR } from '@/lib/chart-setup';
+import type { ChartData, ChartOptions, TooltipItem } from 'chart.js';
 import type { CashflowOutput } from '@/types';
 
 export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
@@ -20,11 +21,11 @@ export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
 
   const labels = data.map((d) => d.name);
 
-  const chartData = {
+  const chartData: ChartData<'bar' | 'line', number[]> = {
     labels,
     datasets: [
       {
-        type: 'bar' as const,
+        type: 'bar',
         label: 'Revenue',
         data: data.map((d) => d.revenue),
         backgroundColor: 'rgba(30, 146, 117, 0.85)',
@@ -34,7 +35,7 @@ export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
         order: 2,
       },
       {
-        type: 'bar' as const,
+        type: 'bar',
         label: 'Operating Costs',
         data: data.map((d) => d.operatingCosts),
         backgroundColor: 'rgba(245, 158, 11, 0.8)',
@@ -44,7 +45,7 @@ export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
         order: 3,
       },
       {
-        type: 'line' as const,
+        type: 'line',
         label: 'Net Cashflow',
         data: data.map((d) => d.netCashflow),
         borderColor: '#0f172a',
@@ -60,14 +61,14 @@ export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'bar' | 'line'> = {
     ...chartDefaults,
     plugins: {
       ...chartDefaults.plugins,
       tooltip: {
         ...chartDefaults.plugins.tooltip,
         callbacks: {
-          label: (ctx: any) => `${ctx.dataset.label}: ${formatINR(ctx.parsed.y)}`,
+          label: (ctx: TooltipItem<'bar' | 'line'>) => `${ctx.dataset.label}: ${formatINR(ctx.parsed.y ?? 0)}`,
         },
       },
     },
@@ -81,7 +82,7 @@ export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
         ...chartDefaults.scales.y,
         ticks: {
           ...chartDefaults.scales.y.ticks,
-          callback: (v: any) => formatINR(v),
+          callback: (v: string | number) => formatINR(Number(v)),
         },
       },
     },
@@ -102,7 +103,7 @@ export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
         </span>
       </div>
       <div className="h-72 w-full">
-        <Chart type="bar" data={chartData as any} options={options as any} />
+        <Chart type="bar" data={chartData} options={options} />
       </div>
     </div>
   );

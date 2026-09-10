@@ -2,14 +2,20 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+}
 
 export default function InstallPrompt() {
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [visible, setVisible] = useState(false);
 
   const handleBeforeInstall = useCallback((e: Event) => {
     e.preventDefault();
-    setDeferredPrompt(e);
+    setDeferredPrompt(e as BeforeInstallPromptEvent);
     setTimeout(() => setVisible(true), 2500);
   }, []);
 
@@ -48,7 +54,7 @@ export default function InstallPrompt() {
           </button>
 
           <div className="flex items-center gap-3 mb-3">
-            <img src="/logo.png" alt="UdyamSetu AI" className="h-12 w-12 rounded-full border border-gray-200 object-contain dark:border-neutral-600" />
+            <Image src="/logo.png" alt="UdyamSetu AI" width={48} height={48} className="h-12 w-12 rounded-full border border-gray-200 object-contain dark:border-neutral-600" />
             <div>
               <h3 className="font-bold text-[#1A3A6B] dark:text-white">UdyamSetu AI</h3>
               <p className="text-xs text-gray-500 dark:text-neutral-400">Business intelligence for entrepreneurs</p>

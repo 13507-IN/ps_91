@@ -3,6 +3,7 @@
 import { Bar } from 'react-chartjs-2';
 import { chartDefaults, formatINR } from '@/lib/chart-setup';
 import { riskColor } from '@/lib/format';
+import type { ChartOptions, TooltipItem } from 'chart.js';
 import type { StressTestOutput } from '@/types';
 
 export function StressTestChart({ stressTest }: { stressTest: StressTestOutput }) {
@@ -42,7 +43,7 @@ export function StressTestChart({ stressTest }: { stressTest: StressTestOutput }
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'bar'> = {
     ...chartDefaults,
     plugins: {
       ...chartDefaults.plugins,
@@ -50,8 +51,8 @@ export function StressTestChart({ stressTest }: { stressTest: StressTestOutput }
       tooltip: {
         ...chartDefaults.plugins.tooltip,
         callbacks: {
-          label: (ctx: any) => {
-            const val = ctx.parsed.y;
+          label: (ctx: TooltipItem<'bar'>) => {
+            const val = ctx.parsed.y ?? 0;
             return `Cashflow: ${formatINR(val)}${val < 0 ? ' (cannot service EMI)' : ''}`;
           },
         },
@@ -72,7 +73,7 @@ export function StressTestChart({ stressTest }: { stressTest: StressTestOutput }
         ...chartDefaults.scales.y,
         ticks: {
           ...chartDefaults.scales.y.ticks,
-          callback: (v: any) => formatINR(v),
+          callback: (v: string | number) => formatINR(Number(v)),
         },
       },
     },
@@ -89,7 +90,7 @@ export function StressTestChart({ stressTest }: { stressTest: StressTestOutput }
         </span>
       </div>
       <div className="h-60 w-full">
-        <Bar data={chartData} options={options as any} />
+        <Bar data={chartData} options={options} />
       </div>
       <p className="mt-2 text-xs text-slate-500">
         Red bars mean the business cannot cover its EMI under that scenario.
