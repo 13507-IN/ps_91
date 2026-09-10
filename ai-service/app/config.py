@@ -25,7 +25,7 @@ class Settings:
 
     # LLM — Primary: Gemini
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
-    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
     # LLM — Fallback: Groq
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
@@ -46,11 +46,13 @@ class Settings:
 
     @property
     def has_gemini(self) -> bool:
-        return bool(self.GEMINI_API_KEY)
+        key = self.GEMINI_API_KEY
+        return bool(key) and not key.startswith("your_")
 
     @property
     def has_groq(self) -> bool:
-        return bool(self.GROQ_API_KEY)
+        key = self.GROQ_API_KEY
+        return bool(key) and not key.startswith("your_")
 
     @property
     def has_any_llm(self) -> bool:

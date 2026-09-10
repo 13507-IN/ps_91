@@ -32,6 +32,13 @@ export class AiClient {
    * Classify user free-text business idea into BusinessCategory and subcategory.
    */
   async classifyBusiness(input: ClassifyBusinessInput): Promise<ClassifyBusinessOutput> {
+    // Try deterministic fallback first to minimize AI calls
+    const fallbackResult = this.fallbackClassify(input.idea);
+    if (fallbackResult.category !== BusinessCategory.OTHER && fallbackResult.confidence >= 0.8) {
+      return fallbackResult;
+    }
+
+    // Call AI only if fallback has low confidence or returned 'OTHER'
     try {
       return await httpRequest<ClassifyBusinessOutput>(`${this.baseUrl}/ai/classify-business`, {
         method: 'POST',
@@ -39,8 +46,7 @@ export class AiClient {
         timeoutMs: this.timeoutMs,
       });
     } catch (err) {
-      // Graceful fallback: Keyword-based deterministic classification
-      return this.fallbackClassify(input.idea);
+      return fallbackResult;
     }
   }
 

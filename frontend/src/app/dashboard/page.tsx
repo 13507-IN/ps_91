@@ -43,7 +43,10 @@ function DashboardContent() {
         body: JSON.stringify(body),
       }),
     onSuccess: (data) => {
+      // Update cache and reset form
       queryClient.setQueryData(['user-me'], data);
+      queryClient.invalidateQueries({ queryKey: ['user-me'] });
+      queryClient.invalidateQueries({ queryKey: ['feasibility-analyses'] });
       setForm({});
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);

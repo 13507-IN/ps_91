@@ -1,11 +1,12 @@
 """
 UdyamSetu AI — Gemini LLM Provider.
 
-Wraps the Google GenAI SDK for Gemini 3.6 Flash.
+Wraps the Google GenAI SDK for Gemini 2.5 Flash.
 """
 
 from __future__ import annotations
 
+import asyncio
 import time
 import structlog
 from google import genai
@@ -45,12 +46,16 @@ class GeminiProvider:
         if system:
             config.system_instruction = system
 
-        try:
-            response = self.client.models.generate_content(
+        def _sync_call():
+            return self.client.models.generate_content(
                 model=self.model,
                 contents=prompt,
                 config=config,
             )
+
+        try:
+            # Run the synchronous SDK call in a thread pool to avoid blocking the event loop
+            response = await asyncio.to_thread(_sync_call)
             elapsed_ms = round((time.perf_counter() - start) * 1000)
             text = response.text or ""
 
