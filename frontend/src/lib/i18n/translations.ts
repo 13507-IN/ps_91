@@ -449,7 +449,7 @@ function extractLang(obj: any, lang: Lang): any {
 // Type helper: replaces { EN: string, BN: string } leaves with string
 type ExtractLangType<T> = T extends { EN: infer E }
   ? E
-  : T extends readonly any[]
+  : T extends readonly unknown[]
   ? { [K in keyof T]: ExtractLangType<T[K]> }
   : T extends object
   ? { [K in keyof T]: ExtractLangType<T[K]> }

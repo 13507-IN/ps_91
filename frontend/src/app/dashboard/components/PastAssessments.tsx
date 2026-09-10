@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { FileText, Loader2, Calendar, MapPin, Briefcase } from 'lucide-react';
+import { FileText, Loader2, Calendar, MapPin } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import Link from 'next/link';

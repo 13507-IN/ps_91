@@ -132,7 +132,7 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
       clearTimeout(timer);
       controller.abort();
     };
-  }, [query]);
+  }, [query, t.location.searchError]);
 
   async function selectVillage(v: VillageSearchResult) {
     setSelected(v);

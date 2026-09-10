@@ -9,21 +9,6 @@ import { useTranslation } from '@/lib/i18n/useTranslation';
 import { PastAssessments } from './components/PastAssessments';
 import type { UserProfile, UpdateUserProfileBody } from '@/types';
 
-const genderOptions = [
-  { value: '', label: 'Not specified' },
-  { value: 'MALE', label: 'Male' },
-  { value: 'FEMALE', label: 'Female' },
-  { value: 'OTHER', label: 'Other' },
-];
-
-const categoryOptions = [
-  { value: '', label: 'Not specified' },
-  { value: 'GENERAL', label: 'General' },
-  { value: 'SC', label: 'SC' },
-  { value: 'ST', label: 'ST' },
-  { value: 'OBC', label: 'OBC' },
-  { value: 'MINORITY', label: 'Minority' },
-];
 
 function DashboardContent() {
   const { t } = useTranslation();
