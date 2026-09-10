@@ -19,6 +19,10 @@ const envSchema = z.object({
   AI_SERVICE_URL: z.string().url().default('http://localhost:8000'),
   AI_SERVICE_TIMEOUT_MS: z.coerce.number().positive().default(30000),
 
+  // Gemini (Chat)
+  GEMINI_API_KEY: z.string().optional(),
+  GEMINI_MODEL: z.string().default('gemini-2.0-flash'),
+
   // Server
   PORT: z.coerce.number().positive().default(3000),
   HOST: z.string().default('0.0.0.0'),

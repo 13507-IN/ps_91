@@ -23,6 +23,7 @@ import { marketRoutes } from './modules/market/market.routes.js';
 import { businessRoutes } from './modules/business/business.routes.js';
 import { aiRoutes } from './modules/ai/ai.routes.js';
 import { feasibilityRoutes } from './modules/feasibility/feasibility.routes.js';
+import { chatRoutes } from './modules/chat/chat.routes.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const env = getEnv();
@@ -145,6 +146,7 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(businessRoutes, { prefix: `${API_PREFIX}/businesses` });
   await app.register(aiRoutes, { prefix: `${API_PREFIX}/ai` });
   await app.register(feasibilityRoutes, { prefix: `${API_PREFIX}/feasibility` });
+  await app.register(chatRoutes, { prefix: `${API_PREFIX}/chat` });
 
   return app;
 }

@@ -3,6 +3,7 @@ import { Providers } from '@/lib/api/Providers';
 import GovHeaderBar from '@/components/GovHeaderBar';
 import GovFooter from '@/components/govFooter';
 import LanguagePickerModal from '@/components/LanguagePickerModal';
+import ChatWidget from '@/components/ChatBot/ChatWidget';
 import PWARegistry from '@/components/pwa/pwa-registry';
 import '../styles/index.css';
 
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <GovHeaderBar />
           <main id="main-content" className="flex-1">{children}</main>
           <GovFooter />
+          <ChatWidget />
         </Providers>
       </body>
     </html>
