@@ -68,8 +68,8 @@ export async function userRoutes(fastify: FastifyInstance): Promise<void> {
             location: {
               type: 'object',
               properties: {
-                latitude: { type: 'number', minimum: -90, maximum: 90 },
-                longitude: { type: 'number', minimum: -180, maximum: 180 },
+                latitude: { type: 'number', minimum: -90, maximum: 90, nullable: true },
+                longitude: { type: 'number', minimum: -180, maximum: 180, nullable: true },
                 village: { type: 'string' },
                 block: { type: 'string' },
                 district: { type: 'string' },

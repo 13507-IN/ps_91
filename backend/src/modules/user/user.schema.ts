@@ -13,8 +13,8 @@ export const updateUserSchema = z.object({
   isMinority: z.boolean().optional(),
   location: z
     .object({
-      latitude: z.number().min(-90).max(90),
-      longitude: z.number().min(-180).max(180),
+      latitude: z.number().min(-90).max(90).nullish(),
+      longitude: z.number().min(-180).max(180).nullish(),
       village: z.string().optional(),
       block: z.string().optional(),
       district: z.string().optional(),

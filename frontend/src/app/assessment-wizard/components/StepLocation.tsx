@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import { Search, MapPin, CheckCircle, Loader2, AlertTriangle } from 'lucide-react';
+import { Search, MapPin, CheckCircle, Loader2, AlertTriangle, Navigation, Map } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { WizardDraft } from '@/types';
@@ -101,6 +101,8 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
       ? { latitude: draft.latitude, longitude: draft.longitude }
       : null,
   );
+  const [exactAddress, setExactAddress] = useState('');
+  const [gpsLoading, setGpsLoading] = useState(false);
 
   const handleSearch = useCallback((q: string) => {
     setQuery(q);
@@ -182,6 +184,54 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
     updateDraft({ latitude: loc.latitude, longitude: loc.longitude });
   }
 
+  function handleDetectLocation() {
+    if (!navigator.geolocation) {
+      setError('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    setGpsLoading(true);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const coords = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
+        setPinned(coords);
+        updateDraft({ latitude: coords.latitude, longitude: coords.longitude });
+        setGpsLoading(false);
+      },
+      (err) => {
+        console.error('GPS error:', err);
+        setError('Failed to detect your location. Please check your browser permissions.');
+        setGpsLoading(false);
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+  }
+
+  async function handleGeocodeAddress() {
+    if (!exactAddress.trim()) return;
+    setGeocoding(true);
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(exactAddress)}&format=json&limit=1&countrycodes=in`;
+      const res = await fetch(url, { headers: { 'User-Agent': 'UdyamSetu/1.0' } });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.length > 0 && data[0].lat && data[0].lon) {
+          const coords = { latitude: parseFloat(data[0].lat), longitude: parseFloat(data[0].lon) };
+          setPinned(coords);
+          updateDraft({ latitude: coords.latitude, longitude: coords.longitude });
+        } else {
+          setError('Could not find that exact address. Try picking on the map.');
+        }
+      }
+    } catch {
+      setError('Address search failed.');
+    }
+    setGeocoding(false);
+  }
+
   const selectedCoords =
     selected?.latitude != null && selected?.longitude != null
       ? { latitude: selected.latitude, longitude: selected.longitude }
@@ -246,6 +296,48 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
             ))}
           </div>
         )}
+      </div>
+
+      <div className="relative flex items-center py-2">
+        <div className="flex-grow border-t border-slate-200"></div>
+        <span className="flex-shrink-0 mx-4 text-xs font-semibold text-slate-400 uppercase tracking-widest">For Hyperlocal Accuracy</span>
+        <div className="flex-grow border-t border-slate-200"></div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        {/* Exact Address */}
+        <div>
+          <label className="label-gov text-xs">Enter Exact Address / Landmark</label>
+          <div className="flex gap-2 mt-1">
+            <input
+              type="text"
+              value={exactAddress}
+              onChange={(e) => setExactAddress(e.target.value)}
+              placeholder="e.g. 123 Station Road..."
+              className="input-gov flex-1"
+            />
+            <button
+              onClick={handleGeocodeAddress}
+              disabled={geocoding || !exactAddress.trim()}
+              className="px-3 rounded-lg bg-teal-50 text-teal-700 border border-teal-200 hover:bg-teal-100 transition-colors disabled:opacity-50"
+            >
+              <Search size={16} />
+            </button>
+          </div>
+        </div>
+
+        {/* GPS Button */}
+        <div>
+          <label className="label-gov text-xs opacity-0 hidden sm:block">GPS</label>
+          <button
+            onClick={handleDetectLocation}
+            disabled={gpsLoading}
+            className="w-full mt-1 sm:mt-0 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-teal-200 bg-teal-50 hover:bg-teal-100 text-teal-800 font-medium transition-all shadow-sm active:scale-95 disabled:opacity-50"
+          >
+            {gpsLoading ? <Loader2 size={18} className="animate-spin" /> : <Navigation size={18} />}
+            Detect My Exact Location
+          </button>
+        </div>
       </div>
 
       {/* Geocoding indicator */}
