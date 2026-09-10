@@ -1,16 +1,7 @@
 'use client';
 
-import {
-  ResponsiveContainer,
-  ComposedChart,
-  Bar,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  CartesianGrid,
-} from 'recharts';
+import { Chart } from 'react-chartjs-2';
+import { chartDefaults, formatINR } from '@/lib/chart-setup';
 import type { CashflowOutput } from '@/types';
 
 export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
@@ -24,9 +15,77 @@ export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
     name: `M${row.month}`,
     revenue: row.revenue,
     operatingCosts: row.operatingCosts,
-    emi: row.emi,
     netCashflow: row.netCashflow,
   }));
+
+  const labels = data.map((d) => d.name);
+
+  const chartData = {
+    labels,
+    datasets: [
+      {
+        type: 'bar' as const,
+        label: 'Revenue',
+        data: data.map((d) => d.revenue),
+        backgroundColor: 'rgba(30, 146, 117, 0.85)',
+        hoverBackgroundColor: 'rgba(30, 146, 117, 1)',
+        borderRadius: 6,
+        borderSkipped: false,
+        order: 2,
+      },
+      {
+        type: 'bar' as const,
+        label: 'Operating Costs',
+        data: data.map((d) => d.operatingCosts),
+        backgroundColor: 'rgba(245, 158, 11, 0.8)',
+        hoverBackgroundColor: 'rgba(245, 158, 11, 1)',
+        borderRadius: 6,
+        borderSkipped: false,
+        order: 3,
+      },
+      {
+        type: 'line' as const,
+        label: 'Net Cashflow',
+        data: data.map((d) => d.netCashflow),
+        borderColor: '#0f172a',
+        backgroundColor: 'rgba(15, 23, 42, 0.05)',
+        borderWidth: 2.5,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: '#0f172a',
+        tension: 0.3,
+        fill: true,
+        order: 1,
+      },
+    ],
+  };
+
+  const options = {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      tooltip: {
+        ...chartDefaults.plugins.tooltip,
+        callbacks: {
+          label: (ctx: any) => `${ctx.dataset.label}: ${formatINR(ctx.parsed.y)}`,
+        },
+      },
+    },
+    scales: {
+      ...chartDefaults.scales,
+      x: {
+        ...chartDefaults.scales.x,
+        stacked: false,
+      },
+      y: {
+        ...chartDefaults.scales.y,
+        ticks: {
+          ...chartDefaults.scales.y.ticks,
+          callback: (v: any) => formatINR(v),
+        },
+      },
+    },
+  };
 
   return (
     <div>
@@ -42,22 +101,8 @@ export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
           {cashflow.isCashflowPositive ? 'Positive' : 'At Risk'}
         </span>
       </div>
-      <div className="h-64 w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-            <XAxis dataKey="name" fontSize={11} tickLine={false} axisLine={false} />
-            <YAxis fontSize={11} tickLine={false} axisLine={false} />
-            <Tooltip
-              formatter={(value) => `₹${Number(value).toLocaleString('en-IN')}`}
-              contentStyle={{ borderRadius: 12, border: '1px solid #e2e8f0', fontSize: 12 }}
-            />
-            <Legend wrapperStyle={{ fontSize: 12 }} />
-            <Bar dataKey="revenue" fill="#1e9275" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="operatingCosts" fill="#f59e0b" radius={[4, 4, 0, 0]} />
-            <Line type="monotone" dataKey="netCashflow" stroke="#0f172a" strokeWidth={2} dot={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
+      <div className="h-72 w-full">
+        <Chart type="bar" data={chartData as any} options={options as any} />
       </div>
     </div>
   );

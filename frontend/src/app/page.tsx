@@ -5,6 +5,7 @@ import { HowitWorksSection } from './components/HowitWorksSection';
 import CategoryGridSection from './components/CategoryGridSection';
 import { TrustDataSourcesStrip } from './components/TrustDataSourcesStrip';
 import { LandingCTA } from './components/LandingCTA';
+import InstallPrompt from '@/components/pwa/install-prompt';
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
       <CategoryGridSection />
       <TrustDataSourcesStrip />
       <LandingCTA />
+      <InstallPrompt />
     </>
   );
 }

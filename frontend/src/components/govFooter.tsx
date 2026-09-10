@@ -19,26 +19,8 @@ export default function GovFooter() {
             <div className="flex items-center gap-3 mb-4">
               {/* Mini emblem */}
               <div className="w-12 h-12 rounded-full border-2 border-[#FF9933] flex items-center justify-center bg-white flex-shrink-0">
-                <svg viewBox="0 0 40 40" width="32" height="32" fill="none" aria-hidden="true">
-                  <circle cx="20" cy="20" r="18" stroke="#1A3A6B" strokeWidth="1.5" fill="none" />
-                  <circle cx="20" cy="20" r="12" stroke="#E65C00" strokeWidth="1" fill="none" />
-                  <circle cx="20" cy="20" r="3" fill="#1A3A6B" />
-                  {Array.from({ length: 8 }).map((_, i) => {
-                    const angle = (i * 45 * Math.PI) / 180;
-                    const x1 = 20 + 5 * Math.cos(angle);
-                    const y1 = 20 + 5 * Math.sin(angle);
-                    const x2 = 20 + 11 * Math.cos(angle);
-                    const y2 = 20 + 11 * Math.sin(angle);
-                    return (
-                      <line
-                        key={i}
-                        x1={x1} y1={y1} x2={x2} y2={y2}
-                        stroke="#1A3A6B"
-                        strokeWidth="1"
-                      />
-                    );
-                  })}
-                </svg>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo.png" alt="UdyamSetu AI Logo" className="w-9 h-9 rounded-full object-contain" />
               </div>
               <div>
                 <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest">

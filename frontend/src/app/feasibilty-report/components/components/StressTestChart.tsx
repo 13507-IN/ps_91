@@ -1,15 +1,7 @@
 'use client';
 
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Cell,
-  CartesianGrid,
-} from 'recharts';
+import { Bar } from 'react-chartjs-2';
+import { chartDefaults, formatINR } from '@/lib/chart-setup';
 import { riskColor } from '@/lib/format';
 import type { StressTestOutput } from '@/types';
 
@@ -22,7 +14,69 @@ export function StressTestChart({ stressTest }: { stressTest: StressTestOutput }
   }));
 
   const rawTest = stressTest as unknown as Record<string, unknown>;
-  const overallRisk = (typeof rawTest.overallRiskLevel === 'string' ? rawTest.overallRiskLevel : null) ?? (stressTest.base?.canServiceDebt ? 'LOW' : 'MEDIUM');
+  const overallRisk =
+    (typeof rawTest.overallRiskLevel === 'string' ? rawTest.overallRiskLevel : null) ??
+    (stressTest.base?.canServiceDebt ? 'LOW' : 'MEDIUM');
+
+  const colors = data.map((d) =>
+    d.postEmiCashflow >= 0
+      ? 'rgba(30, 146, 117, 0.85)'
+      : 'rgba(244, 63, 94, 0.85)',
+  );
+  const hoverColors = data.map((d) =>
+    d.postEmiCashflow >= 0 ? 'rgba(30, 146, 117, 1)' : 'rgba(244, 63, 94, 1)',
+  );
+
+  const chartData = {
+    labels: data.map((d) => d.name),
+    datasets: [
+      {
+        label: 'Post-EMI Cashflow',
+        data: data.map((d) => d.postEmiCashflow),
+        backgroundColor: colors,
+        hoverBackgroundColor: hoverColors,
+        borderRadius: 6,
+        borderSkipped: false,
+        barThickness: 40,
+      },
+    ],
+  };
+
+  const options = {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      legend: { display: false },
+      tooltip: {
+        ...chartDefaults.plugins.tooltip,
+        callbacks: {
+          label: (ctx: any) => {
+            const val = ctx.parsed.y;
+            return `Cashflow: ${formatINR(val)}${val < 0 ? ' (cannot service EMI)' : ''}`;
+          },
+        },
+      },
+    },
+    scales: {
+      ...chartDefaults.scales,
+      x: {
+        ...chartDefaults.scales.x,
+        ticks: {
+          ...chartDefaults.scales.x.ticks,
+          maxRotation: 25,
+          minRotation: 0,
+          font: { size: 10, family: 'Inter, sans-serif' },
+        },
+      },
+      y: {
+        ...chartDefaults.scales.y,
+        ticks: {
+          ...chartDefaults.scales.y.ticks,
+          callback: (v: any) => formatINR(v),
+        },
+      },
+    },
+  };
 
   return (
     <div>
@@ -34,23 +88,8 @@ export function StressTestChart({ stressTest }: { stressTest: StressTestOutput }
           Risk: {overallRisk}
         </span>
       </div>
-      <div className="h-56 w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-            <XAxis dataKey="name" fontSize={10} tickLine={false} axisLine={false} interval={0} angle={-15} height={50} textAnchor="end" />
-            <YAxis fontSize={10} tickLine={false} axisLine={false} />
-            <Tooltip
-              formatter={(value) => `₹${Number(value).toLocaleString('en-IN')}`}
-              contentStyle={{ borderRadius: 12, border: '1px solid #e2e8f0', fontSize: 12 }}
-            />
-            <Bar dataKey="postEmiCashflow" radius={[4, 4, 0, 0]}>
-              {data.map((row, i) => (
-                <Cell key={i} fill={row.postEmiCashflow >= 0 ? '#1e9275' : '#f43f5e'} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+      <div className="h-60 w-full">
+        <Bar data={chartData} options={options as any} />
       </div>
       <p className="mt-2 text-xs text-slate-500">
         Red bars mean the business cannot cover its EMI under that scenario.

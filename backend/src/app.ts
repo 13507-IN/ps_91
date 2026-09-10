@@ -1,4 +1,4 @@
-import Fastify from 'fastify';
+import Fastify, { type FastifyInstance } from 'fastify';
 import cors from '@fastify/cors';
 import helmet from '@fastify/helmet';
 import { getEnv } from './config/env.js';
@@ -24,11 +24,7 @@ import { businessRoutes } from './modules/business/business.routes.js';
 import { aiRoutes } from './modules/ai/ai.routes.js';
 import { feasibilityRoutes } from './modules/feasibility/feasibility.routes.js';
 
-// ============================================================
-// App Factory ΓÇö creates and configures the Fastify instance
-// ============================================================
-
-export async function buildApp() {
+export async function buildApp(): Promise<FastifyInstance> {
   const env = getEnv();
 
   const app = Fastify({
@@ -46,15 +42,17 @@ export async function buildApp() {
             }
           : undefined,
     },
+    ignoreTrailingSlash: true,
   });
 
   // ---- Security ----
   await app.register(cors, {
-    origin: true, // Allow all origins for the hackathon/demo
+    origin: true,
     credentials: true,
   });
 
   await app.register(helmet, {
+    global: true,
     contentSecurityPolicy: env.NODE_ENV === 'production' ? undefined : false,
   });
 
@@ -73,7 +71,6 @@ export async function buildApp() {
 
   // ---- Global Error Handler ----
   app.setErrorHandler((error: any, request, reply) => {
-    // Handle our custom AppErrors
     if (error instanceof AppError) {
       return reply.status(error.statusCode).send({
         statusCode: error.statusCode,
@@ -82,7 +79,6 @@ export async function buildApp() {
       });
     }
 
-    // Handle Fastify validation errors
     if (error.validation) {
       return reply.status(400).send({
         statusCode: 400,
@@ -91,7 +87,6 @@ export async function buildApp() {
       });
     }
 
-    // Handle rate limit errors
     if (error.statusCode === 429) {
       return reply.status(429).send({
         statusCode: 429,
@@ -100,7 +95,6 @@ export async function buildApp() {
       });
     }
 
-    // Unexpected errors
     request.log.error(error, 'Unhandled error');
     return reply.status(500).send({
       statusCode: 500,

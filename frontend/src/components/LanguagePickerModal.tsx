@@ -45,19 +45,8 @@ export default function LanguagePickerModal() {
         <div className="p-8 text-center">
           {/* Logo mark */}
           <div className="mx-auto w-16 h-16 rounded-full border-2 border-[#1A3A6B] flex items-center justify-center mb-5 bg-white shadow-sm">
-            <svg viewBox="0 0 40 40" width="40" height="40" fill="none" aria-hidden="true">
-              <circle cx="20" cy="20" r="18" stroke="#1A3A6B" strokeWidth="1.5" fill="none" />
-              <circle cx="20" cy="20" r="12" stroke="#E65C00" strokeWidth="1" fill="none" />
-              <circle cx="20" cy="20" r="3" fill="#1A3A6B" />
-              {Array.from({ length: 8 }).map((_, i) => {
-                const angle = (i * 45 * Math.PI) / 180;
-                const x1 = 20 + 5 * Math.cos(angle);
-                const y1 = 20 + 5 * Math.sin(angle);
-                const x2 = 20 + 11 * Math.cos(angle);
-                const y2 = 20 + 11 * Math.sin(angle);
-                return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#1A3A6B" strokeWidth="1" />;
-              })}
-            </svg>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="UdyamSetu AI Logo" className="w-12 h-12 rounded-full object-contain" />
           </div>
 
           <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest mb-1">उद्यमसेतु AI</div>

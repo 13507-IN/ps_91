@@ -78,21 +78,8 @@ export default function GovHeaderBar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-4 group" aria-label="UdyamSetu AI — Home">
             <div className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-[#1A3A6B] flex items-center justify-center bg-white shadow-sm">
-              <svg viewBox="0 0 60 60" width="48" height="48" fill="none" aria-hidden="true">
-                <circle cx="30" cy="30" r="27" stroke="#1A3A6B" strokeWidth="2"   fill="none" />
-                <circle cx="30" cy="30" r="20" stroke="#E65C00" strokeWidth="1.5" fill="none" />
-                <circle cx="30" cy="30" r="4"  fill="#1A3A6B" />
-                {Array.from({ length: 12 }).map((_, i) => {
-                  const a = (i * 30 * Math.PI) / 180;
-                  return (
-                    <line key={i}
-                      x1={30 + 7  * Math.cos(a)} y1={30 + 7  * Math.sin(a)}
-                      x2={30 + 18 * Math.cos(a)} y2={30 + 18 * Math.sin(a)}
-                      stroke="#1A3A6B" strokeWidth="1.2"
-                    />
-                  );
-                })}
-              </svg>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt="UdyamSetu AI Logo" className="w-12 h-12 rounded-full object-contain" />
             </div>
             <div>
               <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest leading-none mb-0.5">उद्यमसेतु AI</div>
