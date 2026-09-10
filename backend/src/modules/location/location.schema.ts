@@ -16,6 +16,16 @@ export const nearbyVillagesQuerySchema = z.object({
   limit: z.coerce.number().int().min(1).max(200).default(50),
 });
 
+export const createVillageSchema = z.object({
+  name: z.string().trim().min(1).max(120, 'Village name is too long'),
+  block: z.string().trim().max(120).optional(),
+  district: z.string().trim().max(120).optional(),
+  state: z.string().trim().max(120).optional(),
+  latitude: z.number().min(-90).max(90).optional(),
+  longitude: z.number().min(-180).max(180).optional(),
+});
+
 export type SearchVillagesQuery = z.infer<typeof searchVillagesQuerySchema>;
 export type GetVillageParams = z.infer<typeof getVillageParamsSchema>;
 export type NearbyVillagesQuery = z.infer<typeof nearbyVillagesQuerySchema>;
+export type CreateVillageInput = z.infer<typeof createVillageSchema>;

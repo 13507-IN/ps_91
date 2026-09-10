@@ -1,5 +1,7 @@
-import type { PrismaClient } from '@prisma/client';
+import type { PrismaClient, Village, Block, District, State } from '@prisma/client';
 import { NotFoundError } from '../../lib/errors.js';
+import { geocodePlace, type Geocoder } from './geocode.js';
+import type { CreateVillageInput } from './location.schema.js';
 
 export interface VillageSummary {
   id: number;
@@ -16,7 +18,10 @@ export interface VillageSummary {
 }
 
 export class LocationService {
-  constructor(private prisma: PrismaClient) {}
+  constructor(
+    private prisma: PrismaClient,
+    private geocoder: Geocoder = geocodePlace,
+  ) {}
 
   /**
    * Fuzzy / text search villages by name.
@@ -52,7 +57,19 @@ export class LocationService {
       },
     });
 
-    return villages.map((v) => ({
+    return villages.map((v) => this.toVillageSummary(v));
+  }
+
+  /**
+   * Map a village (with nested block -> district -> state + censusData) to a summary shape.
+   */
+  private toVillageSummary(
+    v: Village & {
+      block: Block & { district: District & { state: State } };
+      censusData?: { totalPopulation: number | null; totalHouseholds: number | null } | null;
+    },
+  ): VillageSummary {
+    return {
       id: v.id,
       name: v.name,
       nameLocal: v.nameLocal,
@@ -63,7 +80,141 @@ export class LocationService {
       longitude: v.longitude,
       totalPopulation: v.censusData?.totalPopulation ?? null,
       totalHouseholds: v.censusData?.totalHouseholds ?? null,
-    }));
+    };
+  }
+
+  // IDs for user-created geography rows are generated well above the LGD code
+  // ranges (states < 100, districts < 10k, blocks < 100k, villages < 10M) so
+  // they can never collide with future official ingestion.
+  private async nextStateId(): Promise<number> {
+    const agg = await this.prisma.state.aggregate({ _max: { id: true } });
+    return Math.max(100_000, (agg._max.id ?? 0) + 1);
+  }
+
+  private async nextDistrictId(): Promise<number> {
+    const agg = await this.prisma.district.aggregate({ _max: { id: true } });
+    return Math.max(1_000_000, (agg._max.id ?? 0) + 1);
+  }
+
+  private async nextBlockId(): Promise<number> {
+    const agg = await this.prisma.block.aggregate({ _max: { id: true } });
+    return Math.max(10_000_000, (agg._max.id ?? 0) + 1);
+  }
+
+  private async nextVillageId(): Promise<number> {
+    const agg = await this.prisma.village.aggregate({ _max: { id: true } });
+    return Math.max(100_000_000, (agg._max.id ?? 0) + 1);
+  }
+
+  /**
+   * Create (or reuse) a village in the DB with coordinates.
+   * Resolves/creates the State -> District -> Block hierarchy by name, geocodes
+   * via Nominatim when no coordinates are supplied, and backfills missing
+   * coordinates on an existing village.
+   */
+  async createVillage(input: CreateVillageInput): Promise<VillageSummary> {
+    const stateName = input.state?.trim() || input.district?.trim() || input.block?.trim() || 'Unknown';
+    const districtName = input.district?.trim() || input.block?.trim() || stateName;
+    const blockName = input.block?.trim() || districtName;
+
+    let state = await this.prisma.state.findFirst({
+      where: { name: { equals: stateName, mode: 'insensitive' } },
+    });
+    if (!state) {
+      state = await this.prisma.state.create({ data: { id: await this.nextStateId(), name: stateName } });
+    }
+
+    let district = await this.prisma.district.findFirst({
+      where: { name: { equals: districtName, mode: 'insensitive' }, stateId: state.id },
+    });
+    if (!district) {
+      district = await this.prisma.district.create({
+        data: { id: await this.nextDistrictId(), name: districtName, stateId: state.id },
+      });
+    }
+
+    let block = await this.prisma.block.findFirst({
+      where: { name: { equals: blockName, mode: 'insensitive' }, districtId: district.id },
+    });
+    if (!block) {
+      block = await this.prisma.block.create({
+        data: { id: await this.nextBlockId(), name: blockName, districtId: district.id },
+      });
+    }
+
+    // Avoid duplicate villages inside the same block.
+    let village = await this.prisma.village.findFirst({
+      where: { name: { equals: input.name, mode: 'insensitive' }, blockId: block.id },
+      include: {
+        block: { include: { district: { include: { state: true } } } },
+        censusData: { select: { totalPopulation: true, totalHouseholds: true } },
+      },
+    });
+
+    let latitude = input.latitude;
+    let longitude = input.longitude;
+    if (latitude == null || longitude == null) {
+      const coords = await this.geocoder({
+        village: input.name,
+        block: blockName,
+        district: districtName,
+        state: stateName,
+      });
+      if (coords) {
+        latitude = coords.latitude;
+        longitude = coords.longitude;
+      }
+    }
+
+    if (village) {
+      if (latitude != null && longitude != null && (village.latitude == null || village.longitude == null)) {
+        village = await this.prisma.village.update({
+          where: { id: village.id },
+          data: { latitude, longitude },
+          include: {
+            block: { include: { district: { include: { state: true } } } },
+            censusData: { select: { totalPopulation: true, totalHouseholds: true } },
+          },
+        });
+        await this.setGeom(village.id, longitude, latitude);
+      }
+      return this.toVillageSummary(village);
+    }
+
+    village = await this.prisma.village.create({
+      data: {
+        id: await this.nextVillageId(),
+        name: input.name,
+        blockId: block.id,
+        latitude,
+        longitude,
+      },
+      include: {
+        block: { include: { district: { include: { state: true } } } },
+        censusData: { select: { totalPopulation: true, totalHouseholds: true } },
+      },
+    });
+
+    if (latitude != null && longitude != null) {
+      await this.setGeom(village.id, longitude, latitude);
+    }
+
+    return this.toVillageSummary(village);
+  }
+
+  /**
+   * Best-effort write of the PostGIS geometry column. Ignored when PostGIS is unavailable.
+   */
+  private async setGeom(villageId: number, lng: number, lat: number): Promise<void> {
+    try {
+      await this.prisma.$executeRaw`
+        UPDATE "Village"
+        SET geom = ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)
+        WHERE id = ${villageId}
+      `;
+    } catch {
+      // PostGIS extension not available — coordinates still stored on the row.
+    }
   }
 
   /**

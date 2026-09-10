@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Save, Loader2, User, MapPin } from 'lucide-react';
+import { Save, Loader2, User, MapPin, Plus } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import AuthGuard from '@/components/AuthGuard';
 import { useTranslation } from '@/lib/i18n/useTranslation';
@@ -10,16 +10,72 @@ import { PastAssessments } from './components/PastAssessments';
 import type { UserProfile, UpdateUserProfileBody } from '@/types';
 
 
+interface VillageSearchResult {
+  id: number;
+  name: string;
+  nameLocal: string | null;
+  blockName: string;
+  districtName: string;
+  stateName: string;
+  latitude: number | null;
+  longitude: number | null;
+}
+
 function DashboardContent() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [saved, setSaved] = useState(false);
   const [form, setForm] = useState<Partial<UserProfile>>({});
+  const [villageQuery, setVillageQuery] = useState('');
+  const [villageResults, setVillageResults] = useState<VillageSearchResult[]>([]);
+  const [villageLoading, setVillageLoading] = useState(false);
+  const [villageError, setVillageError] = useState(false);
+  const [addingVillage, setAddingVillage] = useState(false);
+  const [villageReadyId, setVillageReadyId] = useState<number | null>(null);
 
   const { data: user, isLoading, isError } = useQuery({
     queryKey: ['user-me'],
     queryFn: () => api<UserProfile>(apiEndpoints.users.me),
   });
+
+  useEffect(() => {
+    if (user?.location?.village) setVillageQuery(user.location.village);
+  }, [user]);
+
+  useEffect(() => {
+    const q = villageQuery.trim();
+    if (q.length < 2) {
+      setVillageResults([]);
+      return;
+    }
+    setVillageLoading(true);
+    setVillageError(false);
+    let cancelled = false;
+    const controller = new AbortController();
+    const timer = setTimeout(() => {
+      api<{ total: number; villages: VillageSearchResult[] }>(
+        `${apiEndpoints.locations.search}?q=${encodeURIComponent(q)}&limit=20`,
+        { signal: controller.signal, cache: 'no-store' },
+      )
+        .then((data) => {
+          if (!cancelled) setVillageResults(data.villages ?? []);
+        })
+        .catch((err) => {
+          if (cancelled) return;
+          if (err instanceof DOMException && err.name === 'AbortError') return;
+          setVillageError(true);
+          setVillageResults([]);
+        })
+        .finally(() => {
+          if (!cancelled) setVillageLoading(false);
+        });
+    }, 350);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [villageQuery]);
 
   const updateProfile = useMutation({
     mutationFn: (body: UpdateUserProfileBody) =>
@@ -76,6 +132,63 @@ function DashboardContent() {
     }
     if (Object.keys(body).length > 0) updateProfile.mutate(body);
   };
+
+  function selectVillage(v: VillageSearchResult) {
+    setVillageQuery(v.name);
+    setVillageResults([]);
+    setVillageError(false);
+    setVillageReadyId(v.id);
+    setForm((f) => ({
+      ...f,
+      location: {
+        ...f.location,
+        village: v.name,
+        block: v.blockName,
+        district: v.districtName,
+        state: v.stateName,
+        latitude: v.latitude ?? undefined,
+        longitude: v.longitude ?? undefined,
+      },
+    }));
+  }
+
+  async function handleAddVillage() {
+    const name = villageQuery.trim();
+    if (!name || addingVillage) return;
+    setAddingVillage(true);
+    setVillageError(false);
+    try {
+      const loc = current.location ?? {};
+      const created = await api<VillageSearchResult>(apiEndpoints.locations.create, {
+        method: 'POST',
+        body: JSON.stringify({
+          name,
+          block: typeof loc.block === 'string' && loc.block ? loc.block : undefined,
+          district: typeof loc.district === 'string' && loc.district ? loc.district : undefined,
+          state: typeof loc.state === 'string' && loc.state ? loc.state : undefined,
+        }),
+      });
+      setVillageQuery(created.name);
+      setVillageResults([]);
+      setVillageReadyId(created.id);
+      setForm((f) => ({
+        ...f,
+        location: {
+          ...f.location,
+          village: created.name,
+          block: created.blockName,
+          district: created.districtName,
+          state: created.stateName,
+          latitude: created.latitude ?? undefined,
+          longitude: created.longitude ?? undefined,
+        },
+      }));
+    } catch {
+      setVillageError(true);
+    } finally {
+      setAddingVillage(false);
+    }
+  }
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
@@ -184,8 +297,74 @@ function DashboardContent() {
             <MapPin className="h-5 w-5 text-[#E65C00]" /> {t.dashboard.locationLabel}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
+            <div className="relative">
+              <label className="label-base">{t.dashboard.villageLabel}</label>
+              <input
+                className="input-base pr-9"
+                value={villageQuery}
+                placeholder={t.dashboard.villageSearchPlaceholder}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setVillageQuery(value);
+                  setVillageReadyId(null);
+                  setForm((f) => ({
+                    ...f,
+                    location: {
+                      ...f.location,
+                      village: value || undefined,
+                      latitude: undefined,
+                      longitude: undefined,
+                    },
+                  }));
+                }}
+                onBlur={() => setTimeout(() => setVillageResults([]), 150)}
+              />
+              {villageLoading && (
+                <Loader2 className="absolute right-3 top-[38px] h-4 w-4 -translate-y-1/2 animate-spin text-slate-400" />
+              )}
+              {villageResults.length > 0 && (
+                <div className="absolute z-20 mt-1 w-full max-h-56 overflow-y-auto rounded-lg border border-slate-200 bg-white shadow-lg">
+                  {villageResults.map((v) => (
+                    <button
+                      key={v.id}
+                      onClick={() => selectVillage(v)}
+                      className="block w-full px-3 py-2.5 text-left text-sm hover:bg-slate-50"
+                    >
+                      <span className="font-medium text-slate-800">{v.name}</span>
+                      <span className="ml-2 text-xs text-slate-500">
+                        {v.blockName} · {v.districtName} · {v.stateName}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
+              {!villageLoading &&
+                !villageError &&
+                villageQuery.trim().length >= 2 &&
+                villageResults.length === 0 && (
+                  <button
+                    onClick={handleAddVillage}
+                    disabled={addingVillage}
+                    className="mt-1.5 inline-flex w-full items-center gap-1.5 rounded-lg border border-dashed border-orange-300 bg-orange-50 px-3 py-2 text-left text-xs font-medium text-orange-700 transition-colors hover:bg-orange-100 disabled:opacity-60"
+                  >
+                    {addingVillage ? (
+                      <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" />
+                    ) : (
+                      <Plus className="h-3.5 w-3.5 shrink-0" />
+                    )}
+                    {addingVillage
+                      ? t.dashboard.addingVillage
+                      : t.dashboard.addNewVillage.replace('{name}', villageQuery.trim())}
+                  </button>
+                )}
+              {villageError && (
+                <p className="mt-1.5 text-xs text-rose-600">{t.dashboard.villageSaveError}</p>
+              )}
+              {!villageError && villageReadyId != null && (
+                <p className="mt-1.5 text-xs font-medium text-emerald-700">{t.dashboard.villageReady}</p>
+              )}
+            </div>
             {[
-              { key: 'village', label: t.dashboard.villageLabel, placeholder: t.dashboard.villagePlaceholder },
               { key: 'block', label: t.dashboard.blockLabel, placeholder: t.dashboard.blockPlaceholder },
               { key: 'district', label: t.dashboard.districtLabel, placeholder: t.dashboard.districtPlaceholder },
               { key: 'state', label: t.dashboard.stateLabel, placeholder: t.dashboard.statePlaceholder },

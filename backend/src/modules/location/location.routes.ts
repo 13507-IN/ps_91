@@ -4,6 +4,7 @@ import {
   searchVillagesQuerySchema,
   getVillageParamsSchema,
   nearbyVillagesQuerySchema,
+  createVillageSchema,
 } from './location.schema.js';
 
 export const locationRoutes: FastifyPluginAsync = async (fastify) => {
@@ -94,4 +95,53 @@ export const locationRoutes: FastifyPluginAsync = async (fastify) => {
       return reply.send(village);
     },
   });
+
+  /**
+   * POST /api/locations/villages
+   * Add a village that is missing from the DB: resolves/creates the admin
+   * hierarchy by name and fetches coordinates via geocoding when not supplied.
+   */
+  fastify.post(
+    '/villages',
+    {
+      onRequest: [fastify.authenticate],
+      schema: {
+        tags: ['Geospatial & Location'],
+        summary: 'Add a new village (with coordinates) to the database',
+        security: [{ bearerAuth: [] }],
+        body: {
+          type: 'object',
+          required: ['name'],
+          properties: {
+            name: { type: 'string', minLength: 1, maxLength: 120, description: 'Village name' },
+            block: { type: 'string', maxLength: 120 },
+            district: { type: 'string', maxLength: 120 },
+            state: { type: 'string', maxLength: 120 },
+            latitude: { type: 'number', minimum: -90, maximum: 90 },
+            longitude: { type: 'number', minimum: -180, maximum: 180 },
+          },
+        },
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              name: { type: 'string' },
+              nameLocal: { type: 'string', nullable: true },
+              blockName: { type: 'string' },
+              districtName: { type: 'string' },
+              stateName: { type: 'string' },
+              latitude: { type: 'number', nullable: true },
+              longitude: { type: 'number', nullable: true },
+            },
+          },
+        },
+      },
+    },
+    async (request, reply) => {
+      const input = createVillageSchema.parse(request.body);
+      const village = await service.createVillage(input);
+      return reply.code(200).send(village);
+    },
+  );
 };

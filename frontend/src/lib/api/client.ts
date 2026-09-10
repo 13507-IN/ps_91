@@ -158,6 +158,7 @@ export const apiEndpoints = {
   locations: {
     search: '/api/locations/search',
     nearby: '/api/locations/nearby',
+    create: '/api/locations/villages',
   },
   market: {
     intelligence: '/api/market/intelligence',

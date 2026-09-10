@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import { Search, MapPin, CheckCircle, Loader2, AlertTriangle, Navigation, Map } from 'lucide-react';
+import { Search, MapPin, CheckCircle, Loader2, AlertTriangle, Navigation } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { WizardDraft } from '@/types';
