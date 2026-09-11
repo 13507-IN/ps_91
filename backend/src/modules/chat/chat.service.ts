@@ -3,14 +3,12 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 
-// ============================================================
 // SaathiBot — Conversational Business Advisor Service
-// ============================================================
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ---- In-memory session store (per-server, good for MVP) ----
+// ---- In-memory session store (per-server) ----
 interface ChatMessage {
   role: 'user' | 'model';
   parts: { text: string }[];
