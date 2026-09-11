@@ -11,9 +11,11 @@ import {
   Clock,
   Banknote,
   Percent,
+  ExternalLink,
 } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import { inr, percent } from '@/lib/format';
+import { getSchemePortalUrl } from '@/lib/api/feasibility';
 import type { SchemeConfig } from '@/types';
 
 export default function SchemeDetailPage() {
@@ -54,6 +56,7 @@ export default function SchemeDetailPage() {
 
   const el = scheme.eligibility;
   const fin = scheme.financial;
+  const portalUrl = scheme.applyUrl || getSchemePortalUrl(scheme.name);
 
   const eligibilityItems = [
     el.categories && el.categories.length > 0 && `Social categories: ${el.categories.join(', ')}`,
@@ -73,19 +76,29 @@ export default function SchemeDetailPage() {
         <ArrowLeft className="h-3.5 w-3.5" /> All Schemes
       </Link>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6">
-        <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-50">
-            <Landmark className="h-6 w-6 text-brand-600" />
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
+          <div className="flex items-start gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-50">
+              <Landmark className="h-6 w-6 text-brand-600" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-slate-900">{scheme.name}</h1>
+              {scheme.shortName && (
+                <p className="text-sm text-slate-500">{scheme.shortName}</p>
+              )}
+              <p className="mt-1 text-sm text-slate-600">{scheme.description}</p>
+              <p className="mt-1 text-xs text-slate-400">Nodal Agency: {scheme.nodalAgency}</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-2xl font-bold text-slate-900">{scheme.name}</h1>
-            {scheme.shortName && (
-              <p className="text-sm text-slate-500">{scheme.shortName}</p>
-            )}
-            <p className="mt-1 text-sm text-slate-600">{scheme.description}</p>
-            <p className="mt-1 text-xs text-slate-400">Nodal Agency: {scheme.nodalAgency}</p>
-          </div>
+          <a
+            href={portalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#E65C00] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#cc5200] shadow-sm"
+          >
+            Apply Online <ExternalLink className="h-4 w-4" />
+          </a>
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

@@ -2,9 +2,10 @@
 
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { Landmark, ArrowRight } from 'lucide-react';
+import { Landmark, ArrowRight, ExternalLink } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import { inr, percent } from '@/lib/format';
+import { getSchemePortalUrl } from '@/lib/api/feasibility';
 import type { SchemeConfig } from '@/types';
 
 export default function SchemesPage() {
@@ -48,53 +49,74 @@ export default function SchemesPage() {
 
       {data && data.length > 0 && (
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {data.map((scheme) => (
-            <Link
-              key={scheme.schemeId}
-              href={`/schemes/${scheme.schemeId}`}
-              className="card group p-5 transition-shadow hover:shadow-md"
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50">
-                  <Landmark className="h-5 w-5 text-brand-600" />
-                </div>
-                <ArrowRight className="h-4 w-4 text-slate-300 transition-colors group-hover:text-brand-600" />
-              </div>
-              <h3 className="mt-3 text-base font-semibold text-slate-900">{scheme.name}</h3>
-              <p className="mt-1 text-xs text-slate-500 line-clamp-2">{scheme.description}</p>
-              <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
-                <div className="rounded-lg bg-slate-50 p-2.5">
-                  <div className="text-slate-500">Max Loan</div>
-                  <div className="mt-0.5 font-bold text-slate-900">
-                    {inr(scheme.financial.maxLoanAmount)}
+          {data.map((scheme) => {
+            const portalUrl = scheme.applyUrl || getSchemePortalUrl(scheme.name);
+            return (
+              <div
+                key={scheme.schemeId}
+                className="card group p-5 flex flex-col justify-between transition-all hover:shadow-md border border-slate-200 rounded-2xl bg-white"
+              >
+                <div>
+                  <div className="flex items-start justify-between">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50">
+                      <Landmark className="h-5 w-5 text-brand-600" />
+                    </div>
+                    <Link
+                      href={`/schemes/${scheme.schemeId}`}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-brand-600 hover:text-brand-800"
+                    >
+                      Details <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
                   </div>
-                </div>
-                <div className="rounded-lg bg-slate-50 p-2.5">
-                  <div className="text-slate-500">Interest</div>
-                  <div className="mt-0.5 font-bold text-slate-900">
-                    {percent(scheme.financial.interestRate)}
-                  </div>
-                </div>
-                {scheme.financial.subsidyPercentage > 0 && (
-                  <div className="rounded-lg bg-emerald-50 p-2.5">
-                    <div className="text-emerald-600">Subsidy</div>
-                    <div className="mt-0.5 font-bold text-emerald-800">
-                      {percent(scheme.financial.subsidyPercentage)}
+                  <h3 className="mt-3 text-base font-semibold text-slate-900">{scheme.name}</h3>
+                  <p className="mt-1 text-xs text-slate-500 line-clamp-2">{scheme.description}</p>
+
+                  <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
+                    <div className="rounded-lg bg-slate-50 p-2.5">
+                      <div className="text-slate-500">Max Loan</div>
+                      <div className="mt-0.5 font-bold text-slate-900">
+                        {inr(scheme.financial.maxLoanAmount)}
+                      </div>
+                    </div>
+                    <div className="rounded-lg bg-slate-50 p-2.5">
+                      <div className="text-slate-500">Interest</div>
+                      <div className="mt-0.5 font-bold text-slate-900">
+                        {percent(scheme.financial.interestRate)}
+                      </div>
+                    </div>
+                    {scheme.financial.subsidyPercentage > 0 && (
+                      <div className="rounded-lg bg-emerald-50 p-2.5">
+                        <div className="text-emerald-600">Subsidy</div>
+                        <div className="mt-0.5 font-bold text-emerald-800">
+                          {percent(scheme.financial.subsidyPercentage)}
+                        </div>
+                      </div>
+                    )}
+                    <div className="rounded-lg bg-slate-50 p-2.5">
+                      <div className="text-slate-500">Tenure</div>
+                      <div className="mt-0.5 font-bold text-slate-900">
+                        {scheme.financial.tenureMonths} months
+                      </div>
                     </div>
                   </div>
-                )}
-                <div className="rounded-lg bg-slate-50 p-2.5">
-                  <div className="text-slate-500">Tenure</div>
-                  <div className="mt-0.5 font-bold text-slate-900">
-                    {scheme.financial.tenureMonths} months
-                  </div>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                  <span className="text-[11px] text-slate-400 truncate max-w-[140px]">
+                    {scheme.nodalAgency}
+                  </span>
+                  <a
+                    href={portalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#E65C00] text-xs font-bold text-white hover:bg-[#cc5200] transition-colors shrink-0 shadow-xs"
+                  >
+                    Apply Online <ExternalLink className="h-3 w-3" />
+                  </a>
                 </div>
               </div>
-              <div className="mt-3 text-[11px] text-slate-400">
-                {scheme.nodalAgency}
-              </div>
-            </Link>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

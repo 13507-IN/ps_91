@@ -196,6 +196,7 @@ export interface BackendFeasibilityResult {
     loanRequired: number;
     marginPercentage: number;
     matchedSchemeName: string;
+    matchedSchemeUrl?: string;
     interestRate: number;
     tenureMonths: number;
     subsidyAmount: number;
@@ -218,6 +219,7 @@ export interface BackendFeasibilityResult {
     netLoanAmount: number;
     eligible: boolean;
     reason: string;
+    applyUrl?: string;
   }>;
   riskAssessment: BackendRiskAssessment;
   feasibilityScore: {
@@ -369,6 +371,17 @@ function mapBreakEven(raw: BackendBreakEvenOutput): BreakEvenOutput {
   };
 }
 
+export function getSchemePortalUrl(schemeName: string): string {
+  if (!schemeName) return 'https://www.jansamarth.in/';
+  const name = schemeName.toLowerCase();
+  if (name.includes('pmegp')) return 'https://www.kviconline.gov.in/pmegpeportal/pmegphome/index.jsp';
+  if (name.includes('mudra')) return 'https://www.jansamarth.in/';
+  if (name.includes('bhabishyat') || name.includes('bccs') || name.includes('wb')) return 'https://bccs.wb.gov.in/';
+  if (name.includes('stand') || name.includes('up')) return 'https://www.standupmitra.in/';
+  if (name.includes('svanidhi') || name.includes('vendor')) return 'https://pmsvanidhi.mohua.gov.in/';
+  return 'https://www.jansamarth.in/';
+}
+
 function mapFinancialPlan(
   raw: BackendFeasibilityResult['financialPlan'],
 ): FinancialPlan {
@@ -378,6 +391,9 @@ function mapFinancialPlan(
     loanRequired: raw.loanRequired,
     marginPercentage: raw.marginPercentage,
     matchedSchemeName: raw.matchedSchemeName,
+    matchedSchemeUrl:
+      raw.matchedSchemeUrl ??
+      getSchemePortalUrl(raw.matchedSchemeName),
     interestRate: raw.interestRate,
     tenureMonths: raw.tenureMonths,
     subsidyAmount: raw.subsidyAmount,
@@ -437,6 +453,11 @@ function mapAiRecommendation(raw: BackendAiRecommendation): AiRecommendation {
 }
 
 export function toFeasibilityReport(raw: BackendFeasibilityResult): FeasibilityReport {
+  const mappedSchemes = (raw.schemeMatches ?? []).map((s) => ({
+    ...s,
+    applyUrl: s.applyUrl ?? (s as unknown as { url?: string }).url ?? getSchemePortalUrl(s.name),
+  }));
+
   return {
     id: raw.id,
     businessCategory: raw.businessCategory,
@@ -446,7 +467,7 @@ export function toFeasibilityReport(raw: BackendFeasibilityResult): FeasibilityR
     competitorAnalysis: mapCompetitorAnalysis(raw.competitorAnalysis),
     opportunityAnalysis: mapOpportunityAnalysis(raw.opportunityAnalysis),
     financialPlan: mapFinancialPlan(raw.financialPlan),
-    schemeMatches: raw.schemeMatches ?? [],
+    schemeMatches: mappedSchemes,
     riskAssessment: mapRiskAssessment(raw.riskAssessment),
     feasibilityScore: raw.feasibilityScore,
     actionPlan: raw.actionPlan,

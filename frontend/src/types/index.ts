@@ -320,6 +320,7 @@ export interface SchemeConfig {
   description: string;
   nodalAgency: string;
   targetAudience?: string;
+  applyUrl?: string;
   eligibility: SchemeEligibility;
   financial: SchemeFinancial;
   requiredDocuments: string[];
