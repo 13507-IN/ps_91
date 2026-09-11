@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI Service — Configuration.
+﻿"""
+ArthSetu Service — Configuration.
 
 Loads environment variables with sensible defaults.
 """

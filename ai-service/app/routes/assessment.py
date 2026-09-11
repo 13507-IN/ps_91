@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Unified Assessment Route.
+﻿"""
+ArthSetu — Unified Assessment Route.
 
 POST /ai/assessment — runs the complete business intelligence pipeline.
 """

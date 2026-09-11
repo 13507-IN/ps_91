@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — LLM Client.
+﻿"""
+ArthSetu — LLM Client.
 
 Manages primary (Gemini) and fallback (Groq) providers with:
   • Automatic failover

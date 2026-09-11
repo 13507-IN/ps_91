@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Viability Scorer (Deterministic).
+﻿"""
+ArthSetu — Viability Scorer (Deterministic).
 
 Computes an overall viability_score (0-100) using:
 

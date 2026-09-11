@@ -244,6 +244,7 @@
   .source-observed { background-color: rgba(19,136,8,0.10); color: var(--flag-green); }
   .source-reported { background-color: rgba(230,92,0,0.10); color: #B54600; }
   .source-inferred { background-color: rgba(26,58,107,0.10); color: var(--brand-navy); }
+  .source-estimated { background-color: rgba(107,70,193,0.10); color: #553C9A; }
 
   /* ── Government portal utility classes ── */
   .gov-utility-bar {

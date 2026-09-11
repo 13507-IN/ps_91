@@ -1,4 +1,4 @@
-import { getEnv } from '../../config/env.js';
+﻿import { getEnv } from '../../config/env.js';
 import { httpRequest, HttpClientError } from '../../lib/httpClient.js';
 import type {
   ClassifyBusinessInput,
@@ -436,7 +436,7 @@ export class AiClient {
         'PAN card',
         'Bank passbook / 6 months bank statement',
         'Caste/Category certificate (if SC/ST/OBC/Minority concession claimed)',
-        'Detailed Project Report (DPR) summary from UdyamSetu',
+        'Detailed Project Report (DPR) summary from ArthSetu',
         'Equipment vendor quotations',
         'Udyam registration certificate',
       ],

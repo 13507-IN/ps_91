@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import React from 'react';
 import Link from 'next/link';
 import { useTranslation } from '@/lib/i18n/useTranslation';
@@ -42,7 +42,7 @@ export default function GovFooter() {
               </div>
               <div>
                 <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest">
-                  उद्यमसेतु AI
+                  ArthSetu
                 </div>
                 <div className="text-white font-bold text-lg leading-tight">{t.common.appName}</div>
               </div>
@@ -181,7 +181,7 @@ export default function GovFooter() {
             qualified advisors before making investment decisions.
           </p>
           <p className="text-xs text-white/35 whitespace-nowrap">
-            © 2026 UdyamSetu AI · v2.0
+            © 2026 ArthSetu · v2.0
           </p>
         </div>
       </div>

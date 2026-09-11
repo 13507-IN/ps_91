@@ -1,1 +1,1 @@
-"""UdyamSetu AI — Deterministic engines package."""
+﻿"""ArthSetu — Deterministic engines package."""

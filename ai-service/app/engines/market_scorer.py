@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Market Scorer (Deterministic).
+﻿"""
+ArthSetu — Market Scorer (Deterministic).
 
 Computes a market_score (0-100) from structured inputs using a
 weighted formula.  The LLM never decides this number.

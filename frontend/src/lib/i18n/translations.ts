@@ -1,7 +1,7 @@
-'use client';
+﻿'use client';
 
 /**
- * UdyamSetu AI — Centralized Translation Dictionary
+ * ArthSetu — Centralized Translation Dictionary
  *
  * All user-facing UI strings in English (EN) and Bengali (BN).
  * Organized by component/page section.
@@ -9,12 +9,12 @@
 
 export type Lang = 'EN' | 'BN';
 
-export const LANG_KEY = 'udyamsetu_lang';
+export const LANG_KEY = 'ArthSetu_lang';
 
 const translations = {
   // ─── Common / Shared ───
   common: {
-    appName:      { EN: 'UdyamSetu AI',             BN: 'উদ্যমসেতু AI' },
+    appName:      { EN: 'ArthSetu',             BN: 'ArthSetu' },
     tagline:      { EN: 'Rural Business Intelligence Platform', BN: 'গ্রামীণ ব্যবসায়িক তথ্য প্ল্যাটফর্ম' },
     loading:      { EN: 'Loading...',                BN: 'লোড হচ্ছে...' },
     save:         { EN: 'Save',                      BN: 'সংরক্ষণ করুন' },
@@ -101,8 +101,8 @@ const translations = {
     contact:        { EN: 'Contact Us',             BN: 'যোগাযোগ করুন' },
     description:    { EN: 'Evidence-backed business intelligence for rural and semi-urban entrepreneurs across India.',
                       BN: 'ভারতজুড়ে গ্রামীণ ও আধা-শহুরে উদ্যোক্তাদের জন্য প্রমাণ-ভিত্তিক ব্যবসায়িক তথ্য।' },
-    govLine:        { EN: 'UdyamSetu AI — for aspiring rural entrepreneurs',
-                      BN: 'উদ্যমসেতু AI — আশীয়ান উদ্যোক্তাদের জন্য' },
+    govLine:        { EN: 'ArthSetu — for aspiring rural entrepreneurs',
+                      BN: 'ArthSetu — আশীয়ান উদ্যোক্তাদের জন্য' },
     startAssessment:{ EN: 'Start Assessment',       BN: 'মূল্যায়ন শুরু করুন' },
     sampleReport:   { EN: 'Sample Report',          BN: 'নমুনা রিপোর্ট' },
     profileSettings:{ EN: 'Profile & Settings',     BN: 'প্রোফাইল ও সেটিংস' },
@@ -406,7 +406,7 @@ const translations = {
 
   // ─── Login / Register Pages ───
   auth: {
-    loginTitle:      { EN: 'Login to UdyamSetu AI',        BN: 'উদ্যমসেতু AI-তে লগইন করুন' },
+    loginTitle:      { EN: 'Login to ArthSetu',        BN: 'ArthSetu-তে লগইন করুন' },
     registerTitle:   { EN: 'Create Account',               BN: 'অ্যাকাউন্ট তৈরি করুন' },
     phone:           { EN: 'Phone Number',                 BN: 'ফোন নম্বর' },
     password:        { EN: 'Password',                     BN: 'পাসওয়ার্ড' },

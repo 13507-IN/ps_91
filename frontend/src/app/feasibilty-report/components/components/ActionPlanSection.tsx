@@ -1,11 +1,11 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useMemo, useState } from 'react';
 import { ClipboardCheck, CalendarRange } from 'lucide-react';
 import type { ActionPlan } from '@/types';
 
 export function ActionPlanSection({ plan }: { plan: ActionPlan }) {
-  const storageKey = useMemo(() => 'udyamsetu-checklist', []);
+  const storageKey = useMemo(() => 'ArthSetu-checklist', []);
   // Always start with an empty set so SSR and client produce identical markup.
   // Hydrate from sessionStorage after mount to avoid React hydration warning.
   const [done, setDone] = useState<Set<number>>(new Set());

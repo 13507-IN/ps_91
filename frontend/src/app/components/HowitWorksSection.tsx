@@ -1,4 +1,4 @@
-import { Map, Compass, Wallet, LineChart, ShieldAlert, ClipboardCheck } from 'lucide-react';
+﻿import { Map, Compass, Wallet, LineChart, ShieldAlert, ClipboardCheck } from 'lucide-react';
 
 const steps = [
   {
@@ -56,7 +56,7 @@ export function HowitWorksSection() {
           </div>
           <h2 className="text-3xl font-bold text-[#1A3A6B]">From idea to funding readiness</h2>
           <p className="mt-3 text-[#4A5568]">
-            UdyamSetu is a decision-support dashboard, not a chatbot. AI analyses behind the scenes;
+            ArthSetu is a decision-support dashboard, not a chatbot. AI analyses behind the scenes;
             you get structured, explainable intelligence.
           </p>
         </div>

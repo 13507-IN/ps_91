@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -97,7 +97,7 @@ export default function RegisterPage() {
               </svg>
             </div>
             <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest mb-1">
-              उद्यमसेतु AI
+              ArthSetu
             </div>
             <h1 className="text-white text-2xl font-bold">Create Account</h1>
             <p className="text-white/60 text-sm mt-1">Free · takes under a minute</p>

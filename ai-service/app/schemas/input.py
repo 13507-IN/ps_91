@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Input Schemas.
+﻿"""
+ArthSetu — Input Schemas.
 
 Pydantic models describing the data the AI service receives from the
 Node.js backend.  Designed to accept the output of MarketService,

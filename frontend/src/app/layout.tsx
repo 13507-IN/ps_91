@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Providers } from '@/lib/api/Providers';
 import GovHeaderBar from '@/components/GovHeaderBar';
 import GovFooter from '@/components/govFooter';
@@ -7,8 +7,8 @@ import '../styles/index.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'UdyamSetu AI — Enterprise Intelligence for Rural Entrepreneurs',
-    template: '%s | UdyamSetu AI',
+    default: 'ArthSetu — Enterprise Intelligence for Rural Entrepreneurs',
+    template: '%s | ArthSetu',
   },
   description:
     'Hyper-local market intelligence, financial planning, risk analysis and funding readiness for rural entrepreneurs.',

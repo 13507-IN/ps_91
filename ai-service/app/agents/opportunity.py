@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Opportunity Detection Agent.
+﻿"""
+ArthSetu — Opportunity Detection Agent.
 """
 
 from __future__ import annotations

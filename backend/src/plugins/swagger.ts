@@ -1,4 +1,4 @@
-import type { FastifyInstance } from 'fastify';
+﻿import type { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
@@ -11,14 +11,14 @@ async function swaggerPlugin(fastify: FastifyInstance): Promise<void> {
   await fastify.register(swagger, {
     openapi: {
       info: {
-        title: 'UdyamSetu AI — Backend API',
+        title: 'ArthSetu — Backend API',
         description:
           'Hyper-Local Enterprise Intelligence & Credit Readiness Platform API. ' +
           'Provides market intelligence, financial calculations, scheme matching, ' +
           'and feasibility analysis for rural entrepreneurs.',
         version: '0.1.0',
         contact: {
-          name: 'UdyamSetu Team',
+          name: 'ArthSetu Team',
         },
       },
       servers: [

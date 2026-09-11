@@ -1,4 +1,4 @@
-# UdyamSetu AI
+﻿# ArthSetu
 
 ### Hyper-Local Enterprise Intelligence & Credit Readiness Platform for Rural Entrepreneurs
 
@@ -8,7 +8,7 @@
 
 ## 📌 Overview
 
-**UdyamSetu AI** is an AI-powered decision-support platform designed to help rural and semi-urban entrepreneurs evaluate business opportunities, understand their local market, calculate financing requirements, assess risks, and prepare for institutional funding.
+**ArthSetu** is an AI-powered decision-support platform designed to help rural and semi-urban entrepreneurs evaluate business opportunities, understand their local market, calculate financing requirements, assess risks, and prepare for institutional funding.
 
 The platform combines:
 
@@ -22,7 +22,7 @@ The platform combines:
 * ⚠️ Risk and stress analysis
 * 🌐 Multilingual and voice-enabled interaction
 
-UdyamSetu is **not designed as a chatbot**.
+ArthSetu is **not designed as a chatbot**.
 
 Instead, users interact with a structured **Business Intelligence & Decision-Support Dashboard**, while AI operates behind the scenes to analyze data and generate recommendations.
 
@@ -77,7 +77,7 @@ This can result in entrepreneurs choosing financially unsuitable business models
 
 # 💡 Our Solution
 
-UdyamSetu AI converts three basic inputs:
+ArthSetu converts three basic inputs:
 
 ```text
 Location
@@ -143,7 +143,7 @@ It analyzes:
 
 ## 2. Local Business & Competitor Mapping
 
-UdyamSetu combines formal business data with community intelligence.
+ArthSetu combines formal business data with community intelligence.
 
 ### Formal sources
 
@@ -184,7 +184,7 @@ That business may not appear in:
 * MSME databases
 * Business directories
 
-Therefore, UdyamSetu uses a multi-source approach:
+Therefore, ArthSetu uses a multi-source approach:
 
 ```text
 Government Data
@@ -208,7 +208,7 @@ This allows the system to estimate the structure of the local informal economy w
 
 # 🔍 3. Opportunity Discovery
 
-UdyamSetu does more than count competitors.
+ArthSetu does more than count competitors.
 
 It attempts to identify:
 
@@ -414,7 +414,7 @@ The actual repayment structure must follow the applicable scheme's official rule
 
 A business should not be evaluated only under ideal assumptions.
 
-UdyamSetu allows users to simulate scenarios such as:
+ArthSetu allows users to simulate scenarios such as:
 
 ```text
 Raw Material Cost +15%
@@ -545,7 +545,7 @@ WHY THIS BUSINESS?
 
 # 🎯 13. Confidence-Aware Intelligence
 
-Because rural data is incomplete, UdyamSetu explicitly distinguishes:
+Because rural data is incomplete, ArthSetu explicitly distinguishes:
 
 ### Observed
 
@@ -599,7 +599,7 @@ Confidence                 MEDIUM
 
 # 🗺️ 14. Market Digital Twin
 
-The long-term core of UdyamSetu is a **Local Market Digital Twin**.
+The long-term core of ArthSetu is a **Local Market Digital Twin**.
 
 It combines:
 
@@ -656,7 +656,7 @@ This creates a transition from:
 
 # 📚 Data Strategy
 
-UdyamSetu uses three major data categories.
+ArthSetu uses three major data categories.
 
 ## 1. Official Data
 
@@ -729,7 +729,7 @@ Generated through analytical models:
 
 # 🏗️ Proprietary Data We Need to Build
 
-The biggest long-term advantage of UdyamSetu will be its own hyper-local data layer.
+The biggest long-term advantage of ArthSetu will be its own hyper-local data layer.
 
 ## Local Enterprise Dataset
 
@@ -882,7 +882,7 @@ This dataset can eventually be used to evaluate and improve the feasibility mode
 
 # 🤖 AI Architecture
 
-UdyamSetu uses a hybrid AI architecture.
+ArthSetu uses a hybrid AI architecture.
 
 ```text
                        USER INPUT
@@ -1012,7 +1012,7 @@ Travel-time catchments
 # 📁 Suggested Repository Structure
 
 ```text
-udyamsetu/
+ArthSetu/
 │
 ├── frontend/
 │   ├── components/
@@ -1385,7 +1385,7 @@ This can help government agencies and channelizing agencies understand local ent
 
 # 🎯 Impact Goals
 
-UdyamSetu aims to:
+ArthSetums to:
 
 ### Reduce enterprise failure
 
@@ -1429,7 +1429,7 @@ The central technical challenge is:
 
 > **How can we build useful business intelligence when the rural economy is only partially observable?**
 
-UdyamSetu addresses this by combining:
+ArthSetu addresses this by combining:
 
 ```text
 Official Data
@@ -1457,7 +1457,7 @@ The system knows the difference between:
 
 # 🏁 Final Product Definition
 
-> **UdyamSetu AI is an AI-powered hyper-local enterprise decision-support platform that converts a rural entrepreneur's location, available capital, and business idea into a market feasibility assessment, financial plan, risk analysis, and funding-readiness roadmap.**
+> **ArthSetu is an AI-powered hyper-local enterprise decision-support platform that converts a rural entrepreneur's location, available capital, and business idea into a market feasibility assessment, financial plan, risk analysis, and funding-readiness roadmap.**
 
 ---
 
@@ -1488,6 +1488,6 @@ Current priorities:
 
 ---
 
-## UdyamSetu AI
+## ArthSetu
 
 **From local opportunity → to validated enterprise → to funding readiness.**

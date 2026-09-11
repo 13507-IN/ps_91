@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Pipeline Evaluator.
+﻿"""
+ArthSetu — Pipeline Evaluator.
 
 Runs the AI pipeline against scenarios defined in dataset.json.
 Validates schema compliance, score ranges, and overall quality.

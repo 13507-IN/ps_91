@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+﻿import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { AnalyzeFeasibilityBody } from '@/types';
 
@@ -30,7 +30,7 @@ export const useWizardStore = create<WizardState>()(
       reset: () => set({ step: 0, draft: { catchmentRadiusKm: 10 } }),
     }),
     {
-      name: 'udyamsetu-wizard-draft',
+      name: 'ArthSetu-wizard-draft',
     },
   ),
 );

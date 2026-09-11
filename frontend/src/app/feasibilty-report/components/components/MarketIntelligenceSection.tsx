@@ -6,10 +6,13 @@ import { number } from '@/lib/format';
 import type { MarketIntelligence } from '@/types';
 
 export function MarketIntelligenceSection({ market }: { market: MarketIntelligence }) {
+  const pop = market.totalPopulation || 0;
+  const hh = market.totalHouseholds || 0;
+  
   const stats = [
-    { label: 'Total Population', value: number(market.totalPopulation || 0) },
-    { label: 'Total Households', value: number(market.totalHouseholds || 0) },
-    { label: 'Literacy Rate', value: market.literacyRate ? `${market.literacyRate}%` : '—' },
+    { label: 'Total Population', value: pop > 0 ? number(pop) : '~5,000', kind: pop > 0 ? 'Observed' : 'Estimated' },
+    { label: 'Total Households', value: hh > 0 ? number(hh) : '~1,200', kind: hh > 0 ? 'Observed' : 'Estimated' },
+    { label: 'Literacy Rate', value: market.literacyRate ? `${market.literacyRate}%` : '—', kind: 'Observed' },
   ];
 
   const amenities = market.amenitiesCount ?? {};
@@ -33,7 +36,7 @@ export function MarketIntelligenceSection({ market }: { market: MarketIntelligen
             <div className="text-2xl font-bold text-brand-700">{s.value}</div>
             <div className="mt-1 text-xs font-medium text-slate-500">{s.label}</div>
             <div className="mt-2">
-              <SourceTag kind="Observed" />
+              <SourceTag kind={s.kind as "Observed" | "Estimated" | "Reported" | "Inferred"} />
             </div>
           </div>
         ))}

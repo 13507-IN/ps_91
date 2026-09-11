@@ -1,1 +1,1 @@
-"""UdyamSetu AI — Schemas package."""
+﻿"""ArthSetu — Schemas package."""

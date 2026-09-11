@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -83,7 +83,7 @@ export default function LoginPage() {
               </svg>
             </div>
             <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest mb-1">
-              उद्यमसेतु AI
+              ArthSetu
             </div>
             <h1 className="text-white text-2xl font-bold">Welcome Back</h1>
             <p className="text-white/60 text-sm mt-1">Sign in to access your assessments</p>

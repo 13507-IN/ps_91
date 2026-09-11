@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import React, { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { Search, MapPin, CheckCircle, Loader2, AlertTriangle } from 'lucide-react';
@@ -69,7 +69,7 @@ async function geocodeVillage(
     try {
       const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1&countrycodes=in`;
       const res = await fetch(url, {
-        headers: { 'User-Agent': 'UdyamSetu/1.0' },
+        headers: { 'User-Agent': 'ArthSetu/1.0' },
       });
       if (!res.ok) continue;
       const data = await res.json();

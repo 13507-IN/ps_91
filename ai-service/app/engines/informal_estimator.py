@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Informal Business Estimator (Deterministic).
+﻿"""
+ArthSetu — Informal Business Estimator (Deterministic).
 
 Multi-signal weighted model that estimates the number of informal
 (unregistered) businesses in a catchment area.  The LLM never

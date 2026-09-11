@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Pricing Analysis Agent.
+﻿"""
+ArthSetu — Pricing Analysis Agent.
 """
 
 from __future__ import annotations

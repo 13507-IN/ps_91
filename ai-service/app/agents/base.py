@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Base Agent.
+﻿"""
+ArthSetu — Base Agent.
 
 Provides the common pattern for all LLM-powered agents:
   1. Load Jinja2 prompt template

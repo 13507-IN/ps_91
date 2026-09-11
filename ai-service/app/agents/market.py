@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Market Analysis Agent.
+﻿"""
+ArthSetu — Market Analysis Agent.
 """
 
 from __future__ import annotations
