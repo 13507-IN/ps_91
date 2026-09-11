@@ -57,7 +57,7 @@ GET /health
 
 | Provider | Model | Role |
 |----------|-------|------|
-| Google Gemini | gemini-2.5-flash | Primary |
+| Google Gemini | gemini-3.6-flash | Primary |
 | Groq | llama-3.3-70b-versatile | Fallback |
 | Deterministic | Rule-based | Final fallback |
 

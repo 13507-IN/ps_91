@@ -7,13 +7,25 @@ import { randomUUID } from 'crypto';
 // ============================================================
 
 export async function chatRoutes(fastify: FastifyInstance) {
-  // All chat routes require authentication
-  fastify.addHook('onRequest', fastify.authenticate);
 
   /**
    * POST /message — Send a message and receive a streamed response
    */
-  fastify.post(
+  fastify.post<{
+    Body: {
+      message: string;
+      sessionId?: string;
+      reportContext?: {
+        businessCategory?: string;
+        viabilityScore?: number;
+        grade?: string;
+        strengths?: string[];
+        weaknesses?: string[];
+        decision?: string;
+        summary?: string;
+      };
+    };
+  }>(
     '/message',
     {
       schema: {
@@ -40,25 +52,9 @@ export async function chatRoutes(fastify: FastifyInstance) {
           },
         },
       },
+      onRequest: [fastify.authenticate],
     },
-    async (
-      request: FastifyRequest<{
-        Body: {
-          message: string;
-          sessionId?: string;
-          reportContext?: {
-            businessCategory?: string;
-            viabilityScore?: number;
-            grade?: string;
-            strengths?: string[];
-            weaknesses?: string[];
-            decision?: string;
-            summary?: string;
-          };
-        };
-      }>,
-      reply: FastifyReply,
-    ) => {
+    async (request, reply) => {
       const { message, sessionId: clientSessionId, reportContext } = request.body;
       const sessionId = clientSessionId || randomUUID();
       const userId = (request.user as { sub?: string })?.sub;
@@ -180,6 +176,7 @@ export async function chatRoutes(fastify: FastifyInstance) {
           },
         },
       },
+      onRequest: [fastify.authenticate],
     },
     async (_request, reply) => {
       return reply.send({
@@ -192,7 +189,7 @@ export async function chatRoutes(fastify: FastifyInstance) {
   /**
    * DELETE /session/:id — Clear a chat session
    */
-  fastify.delete(
+  fastify.delete<{ Params: { id: string } }>(
     '/session/:id',
     {
       schema: {
@@ -206,11 +203,9 @@ export async function chatRoutes(fastify: FastifyInstance) {
           required: ['id'],
         },
       },
+      onRequest: [fastify.authenticate],
     },
-    async (
-      request: FastifyRequest<{ Params: { id: string } }>,
-      reply: FastifyReply,
-    ) => {
+    async (request, reply) => {
       clearSession(request.params.id);
       return reply.status(204).send();
     },
