@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useEffect, useState } from 'react';
 
@@ -49,7 +49,7 @@ export default function LanguagePickerModal() {
             <img src="/logo.png" alt="UdyamSetu AI Logo" className="w-12 h-12 rounded-full object-contain" />
           </div>
 
-          <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest mb-1">ArthSetu</div>
+          <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest mb-1">अर्थसेतु</div>
           <h2 id="lang-modal-title" className="text-xl font-bold text-[#1A3A6B] mb-1">
             ArthSetu
           </h2>

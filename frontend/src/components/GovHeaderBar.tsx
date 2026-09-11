@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
@@ -82,7 +82,7 @@ export default function GovHeaderBar() {
               <img src="/logo.png" alt="UdyamSetu AI Logo" className="w-12 h-12 rounded-full object-contain" />
             </div>
             <div>
-              <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest leading-none mb-0.5">ArthSetu</div>
+              <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest leading-none mb-0.5">अर्थसेतु</div>
               <div className="text-[#1A3A6B] font-extrabold text-2xl leading-tight tracking-tight">ArthSetu</div>
               <div className="text-[#555555] text-xs font-normal leading-none mt-0.5">{t.common.tagline}</div>
             </div>
