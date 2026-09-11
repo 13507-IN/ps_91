@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import { getTranslations, LANG_KEY, type Lang } from './translations';
@@ -36,11 +36,11 @@ export function useTranslation() {
       const detail = (e as CustomEvent<Lang>).detail;
       if (detail === 'EN' || detail === 'BN') setLangState(detail);
     }
-    window.addEventListener('udyamsetu-lang-change', onLangChange);
+    window.addEventListener('ArthSetu-lang-change', onLangChange);
 
     return () => {
       window.removeEventListener('storage', onStorage);
-      window.removeEventListener('udyamsetu-lang-change', onLangChange);
+      window.removeEventListener('ArthSetu-lang-change', onLangChange);
     };
   }, []);
 
@@ -52,7 +52,7 @@ export function useTranslation() {
       // ignore
     }
     // Dispatch custom event so all hooks in the same tab update
-    window.dispatchEvent(new CustomEvent('udyamsetu-lang-change', { detail: newLang }));
+    window.dispatchEvent(new CustomEvent('ArthSetu-lang-change', { detail: newLang }));
   }, []);
 
   const t = getTranslations(lang);

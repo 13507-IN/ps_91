@@ -1,4 +1,4 @@
-import { getEnv } from '../config/env.js';
+﻿import { getEnv } from '../config/env.js';
 
 // ============================================================
 // Redis Cache Helpers
@@ -65,5 +65,5 @@ export async function cacheDel(...keys: string[]): Promise<void> {
  * Build a namespaced cache key.
  */
 export function cacheKey(namespace: string, ...parts: (string | number)[]): string {
-  return `udyamsetu:${namespace}:${parts.join(':')}`;
+  return `ArthSetu:${namespace}:${parts.join(':')}`;
 }

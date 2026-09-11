@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — SWOT Analysis Agent.
+﻿"""
+ArthSetu — SWOT Analysis Agent.
 """
 
 from __future__ import annotations

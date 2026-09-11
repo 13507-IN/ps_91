@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Granular Endpoint Routes.
+﻿"""
+ArthSetu — Granular Endpoint Routes.
 
 Individual endpoints matching the existing Node.js AiClient contract:
   POST /ai/classify-business
@@ -307,7 +307,7 @@ async def action_plan(body: ActionPlanInput) -> ActionPlanOutput:
             "PAN card",
             "Bank passbook / 6 months bank statement",
             "Caste/Category certificate (if SC/ST/OBC/Minority concession claimed)",
-            "Detailed Project Report (DPR) summary from UdyamSetu",
+            "Detailed Project Report (DPR) summary from ArthSetu",
             "Equipment vendor quotations",
             "Udyam registration certificate",
         ],

@@ -1,6 +1,6 @@
 import React from 'react';
 
-type Source = 'Observed' | 'Reported' | 'Inferred';
+type Source = 'Observed' | 'Reported' | 'Inferred' | 'Estimated';
 
 interface SourceTagProps {
   source?: Source;
@@ -13,6 +13,7 @@ export default function SourceTag({ source, kind }: SourceTagProps) {
     Observed: 'source-observed',
     Reported: 'source-reported',
     Inferred: 'source-inferred',
+    Estimated: 'source-estimated',
   };
   return (
     <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium ${classMap[activeSource]}`}>

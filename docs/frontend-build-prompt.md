@@ -1,4 +1,4 @@
-# UdyamSetu AI — Next.js Frontend Build Prompt
+﻿# ArthSetu — Next.js Frontend Build Prompt
 
 > Paste the entire contents of this file into your AI coding agent as the build specification.
 > It is a self-contained contract between the frontend and the existing Node.js/Fastify backend.
@@ -7,7 +7,7 @@
 
 ## 0. Your Role
 
-You are a senior frontend engineer building the complete web frontend for **UdyamSetu AI** — an AI-powered hyper-local enterprise decision-support platform for rural entrepreneurs in India. The backend already exists (Node.js + Fastify + Prisma/Postgres). **Do not touch or modify the backend.** Build only the frontend.
+You are a senior frontend engineer building the complete web frontend for **ArthSetu** — an AI-powered hyper-local enterprise decision-support platform for rural entrepreneurs in India. The backend already exists (Node.js + Fastify + Prisma/Postgres). **Do not touch or modify the backend.** Build only the frontend.
 
 Work through the sections below in order. Deliver a runnable Next.js app that talks to the backend endpoints described in **Section 3**.
 
@@ -20,7 +20,7 @@ Rural and semi-urban entrepreneurs get cheap government credit, but most still f
 1. **No localized business intelligence.** They pick businesses based on anecdotes and assumptions, not on their actual local market (population, purchasing power, competitors, supply, infrastructure).
 2. **No financial literacy.** They don't understand margin, project cost, loan, interest, EMI, working capital, or repayment — so they pick financially unsuitable models.
 
-UdyamSetu AI converts **three inputs** — `Location + Available Capital + Business Category/Idea` — into a full decision report:
+ArthSetu converts **three inputs** — `Location + Available Capital + Business Category/Idea` — into a full decision report:
 
 ```
 Market Intelligence → Opportunity Analysis → Business Model → Financial Feasibility

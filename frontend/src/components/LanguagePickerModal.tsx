@@ -1,8 +1,8 @@
-'use client';
+﻿'use client';
 
 import React, { useEffect, useState } from 'react';
 
-const LANG_KEY = 'udyamsetu_lang';
+const LANG_KEY = 'ArthSetu_lang';
 
 type Lang = 'EN' | 'BN';
 
@@ -49,9 +49,9 @@ export default function LanguagePickerModal() {
             <img src="/logo.png" alt="UdyamSetu AI Logo" className="w-12 h-12 rounded-full object-contain" />
           </div>
 
-          <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest mb-1">उद्यमसेतु AI</div>
+          <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest mb-1">ArthSetu</div>
           <h2 id="lang-modal-title" className="text-xl font-bold text-[#1A3A6B] mb-1">
-            UdyamSetu AI
+            ArthSetu
           </h2>
 
           <p className="text-[#1A3A6B] font-semibold mt-4 mb-1">Choose Language / ভাষা বেছে নিন</p>

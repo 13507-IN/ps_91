@@ -1,7 +1,7 @@
-{
-  "name": "udyamsetu-backend",
+﻿{
+  "name": "ArthSetu-backend",
   "version": "0.1.0",
-  "description": "UdyamSetu AI — Hyper-Local Enterprise Intelligence Backend",
+  "description": "ArthSetu — Hyper-Local Enterprise Intelligence Backend",
   "type": "module",
   "engines": {
     "node": ">=20.0.0"

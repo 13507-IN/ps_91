@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Business Recommendation Agent.
+﻿"""
+ArthSetu — Business Recommendation Agent.
 """
 
 from __future__ import annotations

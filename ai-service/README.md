@@ -1,4 +1,4 @@
-# UdyamSetu AI Service
+﻿# ArthSetu Service
 
 > Python/FastAPI microservice that transforms structured rural market data into explainable, confidence-aware business intelligence.
 

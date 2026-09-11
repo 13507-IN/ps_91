@@ -1,4 +1,4 @@
-# AI Microservice Interface Contract
+﻿# AI Microservice Interface Contract
 
 > **Target Audience**: Python AI Engineering Team  
 > **Backend Consumer**: Fastify Node.js Backend (`backend/src/modules/ai/ai.client.ts`)  
@@ -10,7 +10,7 @@
 
 ## 1. Overview
 
-The UdyamSetu backend uses a **hybrid architecture**:
+The ArthSetu backend uses a **hybrid architecture**:
 - **Deterministic calculations** (loan amounts, EMI, scheme rules, PostGIS geospatial queries) are executed natively by the Node.js backend.
 - **Cognitive & analytical tasks** (unstructured text classification, local informal demand/supply estimation, opportunity niche discovery, SWOT & explainable recommendations) are delegated to the Python AI service.
 - If the Python microservice is offline or times out, the backend falls back gracefully to built-in rule-based heuristics.

@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Gemini LLM Provider.
+﻿"""
+ArthSetu — Gemini LLM Provider.
 
 Wraps the Google GenAI SDK for Gemini 2.5 Flash.
 """

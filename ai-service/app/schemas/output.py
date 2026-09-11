@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Output Schemas.
+﻿"""
+ArthSetu — Output Schemas.
 
 Pydantic models describing the structured JSON the AI service returns.
 Every field is strictly typed so the Node.js backend can rely on the shape.

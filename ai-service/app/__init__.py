@@ -1,1 +1,1 @@
-"""UdyamSetu AI Service — Business Intelligence Engine for Rural Entrepreneurs."""
+﻿"""ArthSetu Service — Business Intelligence Engine for Rural Entrepreneurs."""

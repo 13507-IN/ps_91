@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Competition Analysis Agent.
+﻿"""
+ArthSetu — Competition Analysis Agent.
 """
 
 from __future__ import annotations

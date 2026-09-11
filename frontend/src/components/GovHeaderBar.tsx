@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
@@ -76,14 +76,14 @@ export default function GovHeaderBar() {
         <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-4">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-4 group" aria-label="UdyamSetu AI — Home">
+          <Link href="/" className="flex items-center gap-4 group" aria-label="ArthSetu — Home">
             <div className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-[#1A3A6B] flex items-center justify-center bg-white shadow-sm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo.png" alt="UdyamSetu AI Logo" className="w-12 h-12 rounded-full object-contain" />
             </div>
             <div>
-              <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest leading-none mb-0.5">उद्यमसेतु AI</div>
-              <div className="text-[#1A3A6B] font-extrabold text-2xl leading-tight tracking-tight">UdyamSetu AI</div>
+              <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest leading-none mb-0.5">ArthSetu</div>
+              <div className="text-[#1A3A6B] font-extrabold text-2xl leading-tight tracking-tight">ArthSetu</div>
               <div className="text-[#555555] text-xs font-normal leading-none mt-0.5">{t.common.tagline}</div>
             </div>
           </Link>

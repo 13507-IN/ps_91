@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Groq LLM Provider.
+﻿"""
+ArthSetu — Groq LLM Provider.
 
 Wraps the Groq SDK for Llama 3.3 70B Versatile (fallback provider).
 """

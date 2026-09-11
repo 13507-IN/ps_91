@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Orchestrator.
+﻿"""
+ArthSetu — Orchestrator.
 
 Central pipeline that coordinates deterministic engines and LLM agents
 into a sequential business assessment flow.

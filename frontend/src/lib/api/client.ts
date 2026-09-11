@@ -4,8 +4,8 @@ import toast from 'react-hot-toast';
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://ps-91.onrender.com';
 
-const ACCESS_TOKEN_KEY = 'udyamsetu_access_token';
-const REFRESH_TOKEN_KEY = 'udyamsetu_refresh_token';
+const ACCESS_TOKEN_KEY = 'ArthSetu_access_token';
+const REFRESH_TOKEN_KEY = 'ArthSetu_refresh_token';
 
 export const apiBaseUrl = API_BASE_URL;
 

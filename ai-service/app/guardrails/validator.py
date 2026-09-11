@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Output Validator (Guardrails).
+﻿"""
+ArthSetu — Output Validator (Guardrails).
 
 Post-processing validation layer that checks AI outputs for:
 1. Score bounds (0-100, no NaN)

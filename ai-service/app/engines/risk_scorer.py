@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — Risk Scorer (Deterministic).
+﻿"""
+ArthSetu — Risk Scorer (Deterministic).
 
 Computes a risk_score (0-100) from structured financial and market
 inputs.  Higher score = higher risk.

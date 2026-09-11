@@ -1,32 +1,83 @@
-# UdyamSetu AI
+﻿# ArthSetu
 
-**Hyper-local enterprise intelligence and credit-readiness support for rural entrepreneurs.**
+### Hyper-Local Enterprise Intelligence & Credit Readiness Platform for Rural Entrepreneurs
 
-UdyamSetu helps a first-time entrepreneur figure out one simple thing: *is this business going to work where I live, can I actually afford it, and what do I do next?*
-
-It takes three inputs — a location, how much capital the person can put in, and a business idea (or just a broad category) — and turns that into a local market assessment, a financial plan, a risk check, and a step-by-step path toward getting a loan.
-
-One thing worth saying up front: **this is not a chatbot.** It's a dashboard. Users answer structured questions and the AI does its work in the background — analyzing data, estimating markets, and writing up recommendations. The interface stays predictable.
+> **From a business idea to a data-backed, financially feasible enterprise plan.**
 
 ---
 
-## Why this exists
+## 📌 Overview
 
-Government schemes offer cheap credit so that people from marginalized and rural communities can start income-generating businesses. That part works. But having access to a loan and running a successful business are two very different things, and most first-time entrepreneurs don't have good information to fall back on.
+**UdyamSetu AI** is an AI-powered decision-support platform designed to help rural and semi-urban entrepreneurs evaluate business opportunities, understand their local market, calculate financing requirements, assess risks, and prepare for institutional funding.
 
-Two problems dominate:
+The platform combines:
 
-**1. No real local business intelligence.** People usually pick a business because a relative did it, a friend suggested it, or it works in the nearest town. None of that tells you whether it will work in *your* village. Population, purchasing power, competition, supply chains, roads, raw material availability, seasonality — all of this changes the answer. A dairy that thrives in one village can flop 20 km away.
+* 🗺️ Hyper-local geospatial intelligence
+* 📊 Market and demographic data
+* 🏪 Formal and informal business discovery
+* 📈 Demand and supply estimation
+* 💰 Financial modelling
+* 🏦 Government scheme routing
+* 🤖 AI-powered recommendations
+* ⚠️ Risk and stress analysis
+* 🌐 Multilingual and voice-enabled interaction
 
-**2. Low financial literacy.** Most beneficiaries struggle with basic concepts like project cost, margin contribution, interest, EMI, moratorium, working capital, and operating expenses. When you don't understand the money side, it's easy to pick a business model that was never financially viable to begin with.
+UdyamSetu is **not designed as a chatbot**.
 
-That's the gap UdyamSetu is trying to fill.
+Instead, users interact with a structured **Business Intelligence & Decision-Support Dashboard**, while AI operates behind the scenes to analyze data and generate recommendations.
 
 ---
 
-## What it does
+# 🎯 Problem
 
-Inputs:
+Government schemes provide concessional credit to help marginalized communities establish income-generating enterprises.
+
+However, access to capital does not guarantee business success.
+
+Many first-time rural entrepreneurs face two fundamental problems:
+
+### 1. Lack of localized business intelligence
+
+Entrepreneurs often select businesses based on:
+
+* Anecdotal success
+* Advice from relatives/friends
+* Businesses that work in nearby towns
+* Personal assumptions
+* Limited understanding of local demand
+
+A business that succeeds in one village may fail in another because of differences in:
+
+* Population
+* Purchasing power
+* Competition
+* Supply chain
+* Infrastructure
+* Raw-material availability
+* Transportation
+* Seasonality
+
+### 2. Lack of financial literacy
+
+Many beneficiaries struggle to understand:
+
+* Margin contribution
+* Project cost
+* Loan amount
+* Interest
+* EMI
+* Moratorium
+* Repayment period
+* Working capital
+* Operating expenses
+
+This can result in entrepreneurs choosing financially unsuitable business models.
+
+---
+
+# 💡 Our Solution
+
+UdyamSetu AI converts three basic inputs:
 
 ```
 Location
@@ -56,21 +107,138 @@ The end goal is to answer: **"Is this business viable in this locality, can I fi
 
 ### 1. Hyper-local market intelligence
 
-The platform analyzes the market around the entrepreneur's location using a configurable catchment area — 5 km, 10 km, or travel-time-based zones. It looks at population, households, demographics, nearby villages, roads, markets, institutions, existing businesses, agriculture, livestock, and infrastructure.
+The platform analyzes the entrepreneur's geographical market using a configurable catchment area such as:
 
-### 2. Formal + informal business mapping
+* 5 km
+* 10 km
+* Travel-time based zones
 
-Formal sources (UDYAM/MSME registrations, cooperatives, government institutions, public datasets) are combined with informal data — local milk sellers, home-based businesses, small vendors, mechanics, seasonal food processors. These rarely appear in any database, but they're the real competition in a rural market.
+It analyzes:
 
-A core assumption here: **absence from a database does not mean the business doesn't exist.**
+* Population
+* Households
+* Demographics
+* Nearby villages
+* Roads
+* Markets
+* Institutions
+* Existing businesses
+* Agricultural activity
+* Livestock
+* Infrastructure
 
-### 3. Opportunity discovery
+---
 
-Beyond counting competitors, the platform asks *what's missing from this market?* If the dairy market is well served on plain milk but nothing does doorstep delivery or paneer, the recommendation becomes **"dairy + paneer + doorstep delivery"** instead of just "start a dairy."
+## 2. Local Business & Competitor Mapping
 
-### 4. Market gap analysis
+UdyamSetu combines formal business data with community intelligence.
 
-Demand is estimated and compared against existing supply (formal + informal + community-reported):
+### Formal sources
+
+Examples:
+
+* UDYAM/MSME registrations
+* Cooperatives
+* Government institutions
+* Public business datasets
+
+### Informal sources
+
+Examples:
+
+* Local milk sellers
+* Home-based businesses
+* Small vendors
+* Local mechanics
+* Informal food processors
+* Seasonal businesses
+
+The system does **not** assume that the absence of a business from a database means that the business does not exist.
+
+---
+
+# 🏘️ The Invisible Rural Economy
+
+One of the biggest challenges in rural market analysis is that many businesses are not formally registered.
+
+For example:
+
+> A farmer owns six cows and sells milk to twenty nearby households.
+
+That business may not appear in:
+
+* Google Maps
+* UDYAM
+* MSME databases
+* Business directories
+
+Therefore, UdyamSetu uses a multi-source approach:
+
+```text
+Government Data
+      +
+Geospatial Data
+      +
+Community Reports
+      +
+Household Surveys
+      +
+Demand Signals
+      +
+AI Inference
+      ↓
+Local Market Model
+```
+
+This allows the system to estimate the structure of the local informal economy without pretending that every business is directly observable.
+
+---
+
+# 🔍 3. Opportunity Discovery
+
+UdyamSetu does more than count competitors.
+
+It attempts to identify:
+
+> **What is missing from this market?**
+
+Example:
+
+```text
+Existing Dairy Market
+
+Milk Retail                 ✓
+Basic Dairy Products        ✓
+
+Potential Market Gaps
+
+Doorstep Delivery           HIGH
+Paneer Production           HIGH
+Institutional Supply        MEDIUM
+Packaged Curd               MEDIUM
+Premium Products            LOW
+```
+
+The platform could therefore recommend:
+
+> **Dairy + Paneer + Doorstep Delivery**
+
+instead of simply saying:
+
+> "Start a dairy business."
+
+---
+
+# 📊 4. Market Gap Analysis
+
+The platform estimates the difference between local demand and existing supply.
+
+```text
+Market Gap =
+Estimated Demand - Estimated Existing Supply
+```
+
+Example:
 
 ```
 Estimated demand            1,800 L/day
@@ -108,7 +276,31 @@ Standard EMI math, plus total interest, principal repayment, quarterly views, mo
 
 ### 9. Stress testing
 
-A business shouldn't be judged only on ideal assumptions. Users can simulate scenarios like raw material +15%, demand −20%, selling price −10%, transport +25%, or seasonal slumps, and see whether the business still survives the EMI.
+A business should not be evaluated only under ideal assumptions.
+
+UdyamSetu allows users to simulate scenarios such as:
+
+```text
+Raw Material Cost +15%
+Demand -20%
+Selling Price -10%
+Transport Cost +25%
+Seasonal Demand Decline
+```
+
+Example:
+
+```text
+                     BASE CASE
+
+Revenue              ₹1,20,000
+Operating Cost          ₹83,000
+Operating Surplus       ₹37,000
+EMI                     ₹14,000
+Post-EMI Cash           ₹23,000
+```
+
+The system evaluates whether the business remains financially sustainable under different scenarios.
 
 ### 10. Risk analysis
 
@@ -126,74 +318,689 @@ The AI pulls together demographics, business data, agriculture, livestock, prici
 ⚠ Local price data has medium confidence
 ```
 
-### 12. Confidence-aware output
+---
 
-Every important figure is tagged with source and confidence, and labeled as one of:
+# 🎯 13. Confidence-Aware Intelligence
 
-- **Observed** — from a reliable source
-- **Reported** — submitted by a local contributor
-- **Inferred** — estimated from multiple signals
+Because rural data is incomplete, UdyamSetu explicitly distinguishes:
 
-So an estimate might look like: `7 verified businesses + 3 community reports + 8–17 AI estimate = 18–27 competitors, confidence: MEDIUM`.
+### Observed
 
-### 13. Action plan
+Directly obtained from a reliable source.
 
-The output ends with concrete next steps, not just a score — e.g., a 30-day plan: validate local demand, identify suppliers, collect equipment quotes, estimate working capital, reserve margin capital, prepare documents.
+```text
+7 registered MSMEs
+```
+
+### Reported
+
+Submitted by a local/community contributor.
+
+```text
+3 local milk sellers reported
+```
+
+### Inferred
+
+Estimated from multiple signals.
+
+```text
+Estimated additional sellers:
+8–17
+```
+
+Every important output should contain:
+
+```text
+Value
+Source
+Timestamp
+Confidence
+```
+
+Example:
+
+```text
+Estimated Dairy Competitors
+
+Verified Businesses        7
+Community Reports          3
+AI Estimate                8–17
+
+Overall Estimate           18–27
+
+Confidence                 MEDIUM
+```
 
 ---
 
-## Data
+# 🗺️ 14. Market Digital Twin
 
-**Official datasets** — Census, LGD, UDYAM/MSME, Livestock Census, crop production, AGMARKNET prices, HCES, PLFS, PMGSY roads, food processing stats, cold storage, UDISE+, rural health, NDDB.
+The long-term core of UdyamSetu is a **Local Market Digital Twin**.
 
-**Local data** — gathered via community reporting, household surveys, field workers, SHGs, NGOs, and CSC operators.
+It combines:
 
-**Derived data** — demand estimation, supply estimation, market gap, informal business estimation, competition density, opportunity score, viability score, and risk score.
+```text
+Demographics
+      +
+Supply
+      +
+Demand
+      +
+Competition
+      +
+Prices
+      +
+Infrastructure
+      +
+Seasonality
+      +
+Financial Data
+      ↓
+LOCAL MARKET DIGITAL TWIN
+```
 
-Over time we want to build our own proprietary datasets: a local enterprise dataset (with verification status and confidence per record), a household demand dataset, a retail price dataset, and input-cost datasets. Eventually, a business-outcome dataset — what businesses actually made, who survived, why they closed — so the feasibility model can be measured against reality and improved.
+This represents the best available approximation of the local economic environment.
 
-This last one is the whole long-term edge: nobody else is tracking actual outcomes at this level.
+---
+
+# 🧾 15. Action Plan
+
+The system should not stop at a feasibility score.
+
+It should provide concrete next steps.
+
+Example:
+
+```text
+30-DAY ACTION PLAN
+
+[ ] Validate local demand
+[ ] Identify suppliers
+[ ] Collect equipment quotations
+[ ] Validate selling price
+[ ] Estimate working capital
+[ ] Reserve margin capital
+[ ] Prepare documents
+[ ] Prepare financing application
+```
+
+This creates a transition from:
+
+**Business Idea → Business Validation → Funding Readiness**
+
+---
+
+# 📚 Data Strategy
+
+UdyamSetu uses three major data categories.
+
+## 1. Official Data
+
+Examples:
+
+* Census
+* LGD
+* UDYAM
+* Livestock Census
+* Crop Production
+* AGMARKNET
+* HCES
+* PLFS
+* PMGSY/Rural Roads
+* Food Processing data
+
+---
+
+## 2. Local Data
+
+Collected through:
+
+* Community reporting
+* Household surveys
+* Local entrepreneurs
+* Field workers
+* SHGs
+* NGOs
+* CSC operators
+* Other authorized contributors
+
+---
+
+## 3. Derived Data
+
+Generated through analytical models:
+
+* Demand estimation
+* Supply estimation
+* Market gap
+* Informal business estimation
+* Competition density
+* Opportunity score
+* Viability score
+* Risk score
+
+---
+
+# 🗃️ Primary Public Data Sources
+
+| Dataset                                                                                                            | Purpose                              |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------ |
+| [Local Government Directory](https://www.data.gov.in/catalog/local-government-directory-lgd)                       | Administrative geography             |
+| [Census Population Finder](https://censusindia.gov.in/census.website/data/population-finder)                       | Population and households            |
+| [Census Village Amenities](https://www.data.gov.in/catalog/village-amenities-census-2011)                          | Village infrastructure               |
+| [UDYAM / MSME](https://www.data.gov.in/catalog/udyam-registration-msme-registration)                               | Formal businesses                    |
+| [Livestock Census](https://www.dahd.gov.in/schemes/programmes/animal-husbandry-statistics)                         | Livestock and dairy potential        |
+| [Crop Production](https://www.data.gov.in/catalog/district-wise-season-wise-crop-production-statistics-0)          | Agricultural supply                  |
+| [AGMARKNET](https://www.data.gov.in/catalog/current-daily-price-various-commodities-various-markets-mandi)         | Commodity prices                     |
+| [PLFS](https://microdata.gov.in/nada/index.php/catalog/PLFS)                                                       | Employment and occupations           |
+| [HCES](https://microdata.gov.in/nada/index.php/catalog/CEXP)                                                       | Household consumption                |
+| [PMGSY / Rural Roads](https://pmgsy.nic.in/database-and-masterplan-rural-roads)                                    | Rural connectivity                   |
+| [MoFPI Statistics](https://www.mofpi.gov.in/documents/statistics)                                                  | Food processing                      |
+| [Cold Storage Data](https://www.data.gov.in/resource/stateut-wise-distribution-cold-storages-country-31-03-2024-1) | Storage infrastructure               |
+| [UDISE+](https://udiseplus.gov.in/)                                                                                | Schools and education infrastructure |
+| [Rural Health Statistics](https://www.data.gov.in/catalog/rural-health-statistics-india)                           | Health infrastructure                |
+| [NDDB National Database](https://www.nddb.coop/services/sectoral/national-database)                                | Dairy-sector intelligence            |
+
+---
+
+# 🏗️ Proprietary Data We Need to Build
+
+The biggest long-term advantage of UdyamSetu will be its own hyper-local data layer.
+
+## Local Enterprise Dataset
+
+```text
+Enterprise ID
+Location
+Village
+Gram Panchayat
+Block
+District
+Category
+Subcategory
+Products
+Operating Status
+Approximate Scale
+Price Range
+Seasonality
+Source
+Verification Status
+Last Verified
+Confidence
+```
+
+---
+
+## Household Demand Dataset
+
+```text
+Location
+Household Segment
+Product
+Quantity
+Purchase Frequency
+Preferred Supplier
+Price Paid
+Self Produced?
+Seasonality
+```
+
+---
+
+## Local Retail Price Dataset
+
+```text
+Product
+Location
+Seller
+Price
+Unit
+Date
+Source
+Confidence
+```
+
+---
+
+## Business Input Cost Dataset
+
+```text
+Location
+Business Category
+Equipment
+Raw Material
+Packaging
+Rent
+Electricity
+Labour
+Transport
+Storage
+Maintenance
+Date
+Typical Cost
+Source
+```
+
+---
+
+## Business Outcome Dataset
+
+Eventually:
+
+```text
+Business Type
+Location
+Initial Investment
+Loan
+Revenue
+Operating Cost
+Profit
+Employees
+Months Active
+Business Status
+Closure Reason
+Repayment Status
+```
+
+This dataset can eventually be used to evaluate and improve the feasibility model.
 
 ---
 
 ## Architecture
 
+```text
+                         USER
+                           |
+                           v
+                ┌───────────────────┐
+                │ Frontend / PWA     │
+                └─────────┬─────────┘
+                          |
+                          v
+                ┌───────────────────┐
+                │    API Gateway    │
+                └─────────┬─────────┘
+                          |
+          ┌───────────────┼────────────────┐
+          |               |                |
+          v               v                v
+   ┌────────────┐  ┌────────────┐  ┌────────────┐
+   │   Market   │  │ Financial  │  │     AI     │
+   │   Engine   │  │   Engine   │  │   Engine   │
+   └─────┬──────┘  └─────┬──────┘  └─────┬──────┘
+         |               |                |
+         v               v                v
+   ┌────────────┐  ┌────────────┐  ┌────────────┐
+   │  PostGIS   │  │ Rule Engine│  │ RAG / LLM  │
+   └─────┬──────┘  └────────────┘  └─────┬──────┘
+         |                               |
+         └──────────────┬────────────────┘
+                        |
+                        v
+              ┌─────────────────────┐
+              │     DATA LAYER      │
+              │                     │
+              │ Census              │
+              │ LGD                 │
+              │ UDYAM               │
+              │ Livestock           │
+              │ Crops               │
+              │ AGMARKNET            │
+              │ HCES                │
+              │ PLFS                │
+              │ Roads               │
+              │ Community Data      │
+              │ Surveys             │
+              └─────────────────────┘
 ```
-User → Frontend/PWA → API Gateway
-                         ├── Market Engine ── PostGIS
-                         ├── Financial Engine ── Rule Engine
-                         └── AI Engine ── RAG / LLM
-                                     ↓
-                              Data layer (Census, LGD, UDYAM,
-                              livestock, crops, roads, community
-                              data, surveys…)
-```
-
-On the AI side, there's a deliberate split:
-
-- **AI handles:** natural language, multilingual processing, business classification, opportunity discovery, SWOT, risk and recommendation explanations, report generation, data interpretation.
-- **Deterministic code handles:** loan math, EMI, eligibility, scheme routing, limits, interest, tenure, moratorium, cash flow, break-even, and financial ratios.
 
 ---
 
-## Tech stack
+# 🤖 AI Architecture
 
-- **Frontend:** React / Next.js, TypeScript, Tailwind, charting + maps, PWA
-- **Backend:** Python + FastAPI, PostgreSQL + PostGIS, Redis, background workers
-- **AI:** LLM, RAG, embeddings, vector DB, speech-to-text/text-to-speech, classification and demand-estimation models
-- **Geospatial:** PostGIS + OpenStreetMap + government GIS, eventually travel-time catchments
+UdyamSetu uses a hybrid AI architecture.
 
-Repository is split into `frontend/`, `backend/`, `ai-service/`, `data/`, `geospatial/`, `financial/`, and `docs/`.
+```text
+                       USER INPUT
+                           |
+                           v
+                    NLP / Extraction
+                           |
+                ┌──────────┴──────────┐
+                |                     |
+                v                     v
+         Structured Data           RAG
+                |                     |
+                └──────────┬──────────┘
+                           v
+                    Decision Engine
+                     /           \
+                    /             \
+                   v               v
+             Market Engine    Financial Engine
+                    \             /
+                     \           /
+                      v         v
+                  Feasibility Model
+                           |
+                           v
+                   LLM Report Layer
+```
+
+### AI is responsible for:
+
+* Natural-language understanding
+* Multilingual processing
+* Business classification
+* Opportunity discovery
+* SWOT generation
+* Risk explanation
+* Recommendation explanation
+* Report generation
+* Data interpretation
+
+### Deterministic systems are responsible for:
+
+* Loan calculation
+* EMI
+* Eligibility
+* Scheme routing
+* Scheme limits
+* Interest
+* Tenure
+* Moratorium
+* Cash flow
+* Break-even
+* Financial ratios
 
 ---
 
-## MVP scope
+# 🛠️ Technology Stack
 
-Start with a handful of business categories: **dairy, food processing, retail, textiles/tailoring, poultry.**
+## Frontend
 
-Minimum inputs: location, available capital, business category. Optional: experience, available land, equipment, expected working hours.
+Recommended:
 
-Outputs across market (population, households, catchment, accessibility), competition (known businesses, density, reports), opportunity (gap, niches, recommended model), financial (project cost, contribution, loan, scheme, interest, tenure, EMI), risk (major risks, stress test, score), decision (proceed / modify / insufficient data), and action (next steps, funding readiness).
+* React
+* Next.js
+* TypeScript
+* Tailwind CSS
+* Charting library
+* Map visualization
+* PWA support
+
+---
+
+## Backend
+
+Recommended:
+
+* Python
+* FastAPI
+* PostgreSQL
+* PostGIS
+* Redis
+* Background workers
+
+---
+
+## AI
+
+Potential components:
+
+* LLM
+* RAG
+* Embedding model
+* Vector database
+* Multilingual NLP
+* Speech-to-text
+* Text-to-speech
+* Classification models
+* Recommendation models
+* Demand estimation models
+
+---
+
+## Geospatial
+
+Recommended:
+
+```text
+PostGIS
++
+OpenStreetMap / permitted sources
++
+Government GIS data
+```
+
+The platform should eventually support:
+
+```text
+Radius-based analysis
++
+Road-network analysis
++
+Travel-time catchments
+```
+
+---
+
+# 📁 Suggested Repository Structure
+
+```text
+udyamsetu/
+│
+├── frontend/
+│   ├── components/
+│   ├── pages/
+│   ├── features/
+│   ├── maps/
+│   ├── financial/
+│   └── dashboard/
+│
+├── backend/
+│   ├── api/
+│   ├── models/
+│   ├── schemas/
+│   ├── services/
+│   ├── repositories/
+│   └── workers/
+│
+├── ai/
+│   ├── prompts/
+│   ├── rag/
+│   ├── inference/
+│   ├── classification/
+│   ├── recommendations/
+│   └── multilingual/
+│
+├── financial/
+│   ├── emi/
+│   ├── schemes/
+│   ├── eligibility/
+│   ├── cashflow/
+│   └── simulation/
+│
+├── data/
+│   ├── ingestion/
+│   ├── cleaning/
+│   ├── pipelines/
+│   ├── validation/
+│   └── schemas/
+│
+├── geospatial/
+│   ├── boundaries/
+│   ├── roads/
+│   ├── catchments/
+│   └── competitor_mapping/
+│
+├── docs/
+│   ├── architecture/
+│   ├── datasets/
+│   ├── api/
+│   └── decisions/
+│
+└── README.md
+```
+
+---
+
+# 👥 Team Responsibilities
+
+## Frontend Engineer
+
+Responsible for:
+
+* User onboarding
+* Location selection
+* Business selection
+* Dashboard
+* Market visualization
+* Maps
+* Opportunity analysis
+* Financial simulator
+* Risk dashboard
+* Action plan
+* Responsive/mobile UI
+
+---
+
+## Backend Engineer
+
+Responsible for:
+
+* API architecture
+* Database
+* PostGIS
+* Authentication
+* Data ingestion
+* Data pipelines
+* Market APIs
+* Financial APIs
+* Scheme engine
+* Business storage
+* Competitor storage
+* Report generation
+* Caching
+
+---
+
+## AI Engineer
+
+Responsible for:
+
+* NLP
+* Multilingual processing
+* Business classification
+* RAG
+* Opportunity detection
+* Demand estimation
+* Supply estimation
+* Competitor inference
+* SWOT
+* Risk reasoning
+* Recommendation engine
+* Confidence scoring
+
+---
+
+# 🧪 MVP Scope
+
+The first version should focus on a limited number of business categories.
+
+Recommended:
+
+```text
+Dairy
+Food Processing
+Retail
+Textiles / Tailoring
+Poultry
+```
+
+---
+
+## MVP Inputs
+
+```text
+Location
+Available Capital
+Business Category
+```
+
+Optional:
+
+```text
+Business Experience
+Available Land
+Available Equipment
+Expected Working Hours
+```
+
+---
+
+## MVP Outputs
+
+### Market
+
+```text
+Population
+Households
+Catchment
+Accessibility
+```
+
+### Competition
+
+```text
+Known Businesses
+Business Density
+Community Reports
+```
+
+### Opportunity
+
+```text
+Market Gap
+Potential Niches
+Recommended Model
+```
+
+### Financial
+
+```text
+Project Cost
+Own Contribution
+Loan
+Scheme
+Interest
+Tenure
+EMI
+```
+
+### Risk
+
+```text
+Major Risks
+Stress Test
+Risk Score
+```
+
+### Decision
+
+```text
+PROCEED
+MODIFY
+INSUFFICIENT DATA
+```
+
+### Action
+
+```text
+Next Steps
+Funding Readiness
+```
 
 ---
 
@@ -217,10 +1024,111 @@ Outputs across market (population, households, catchment, accessibility), compet
 
 ---
 
-## Status
+# 🎯 Impact Goals
 
-**Under development.** Current focus is data architecture, the geography/location engine, the market intelligence engine, the informal business data model, the financial and scheme rule engines, the AI recommendation engine, confidence scoring, dashboard UI, and MVP validation.
+UdyamSetu aims to:
+
+### Reduce enterprise failure
+
+Help beneficiaries choose businesses based on local evidence instead of assumptions.
+
+### Improve financial understanding
+
+Clearly explain:
+
+```text
+Own Contribution
++
+Project Cost
++
+Loan
++
+Interest
++
+Repayment
++
+Working Capital
+```
+
+### Improve funding readiness
+
+Help entrepreneurs understand what they need before applying for financing.
+
+### Empower rural youth
+
+Give first-time entrepreneurs access to structured business intelligence that would otherwise require professional consulting.
+
+### Build grassroots economic intelligence
+
+Gradually create a better representation of informal and hyper-local economic activity.
 
 ---
 
-*The one-sentence version: UdyamSetu turns a rural entrepreneur's location, capital, and business idea into a market assessment, financial plan, risk analysis, and funding-readiness roadmap — and never confuses what it knows with what it estimates.*
+# 💡 Core Innovation
+
+The central technical challenge is:
+
+> **How can we build useful business intelligence when the rural economy is only partially observable?**
+
+UdyamSetu addresses this by combining:
+
+```text
+Official Data
+      +
+Geospatial Data
+      +
+Community Intelligence
+      +
+Demand Signals
+      +
+AI Inference
+      +
+Financial Modelling
+```
+
+The result is a:
+
+> **Probabilistic digital representation of a rural micro-market.**
+
+The system knows the difference between:
+
+**what it knows, what people report, and what it estimates.**
+
+---
+
+# 🏁 Final Product Definition
+
+> **UdyamSetu AI is an AI-powered hyper-local enterprise decision-support platform that converts a rural entrepreneur's location, available capital, and business idea into a market feasibility assessment, financial plan, risk analysis, and funding-readiness roadmap.**
+
+---
+
+# 📌 Project Status
+
+🚧 **Under Development**
+
+Current priorities:
+
+* [ ] Data architecture
+* [ ] Geography and location engine
+* [ ] Market intelligence engine
+* [ ] Informal business data model
+* [ ] Financial engine
+* [ ] Scheme rule engine
+* [ ] AI recommendation engine
+* [ ] Confidence scoring
+* [ ] Dashboard UI
+* [ ] MVP validation
+
+---
+
+# 🧭 Development Philosophy
+
+> **Don't tell an entrepreneur what business is popular.**
+>
+> **Show them what opportunity exists in their market, whether their capital is sufficient, what risks they face, and what they need to do next.**
+
+---
+
+## UdyamSetu AI
+
+**From local opportunity → to validated enterprise → to funding readiness.**

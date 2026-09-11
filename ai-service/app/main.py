@@ -1,5 +1,5 @@
-"""
-UdyamSetu AI — FastAPI Application Entry Point.
+﻿"""
+ArthSetu — FastAPI Application Entry Point.
 
 Starts the AI microservice on port 8000 with:
   - CORS enabled for the Node.js backend
@@ -61,7 +61,7 @@ logger = structlog.get_logger(__name__)
 # ── FastAPI app ───────────────────────────────────────────────────────
 
 app = FastAPI(
-    title="UdyamSetu AI Service",
+    title="ArthSetu Service",
     description=(
         "Business intelligence engine for rural entrepreneurs. "
         "Transforms structured market data into explainable, "
@@ -99,7 +99,7 @@ async def health_check():
     """Health check endpoint."""
     return {
         "status": "healthy",
-        "service": "udyamsetu-ai",
+        "service": "ArthSetu-ai",
         "version": "0.1.0",
         "llm": {
             "gemini": settings.has_gemini,
