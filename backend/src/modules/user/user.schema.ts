@@ -34,6 +34,7 @@ export interface UserProfile {
   dateOfBirth: string | null;
   category: string | null;
   isMinority: boolean;
+  role?: string | null;
   location: unknown;
   createdAt: string;
 }

@@ -24,6 +24,7 @@ export class UserService {
         dateOfBirth: true,
         category: true,
         isMinority: true,
+        role: true,
         location: true,
         createdAt: true,
       },
@@ -42,6 +43,7 @@ export class UserService {
       dateOfBirth: user.dateOfBirth?.toISOString() ?? null,
       category: user.category,
       isMinority: user.isMinority,
+      role: user.role ?? 'USER',
       location: user.location,
       createdAt: user.createdAt.toISOString(),
     };
@@ -85,6 +87,7 @@ export class UserService {
         dateOfBirth: true,
         category: true,
         isMinority: true,
+        role: true,
         location: true,
         createdAt: true,
       },
@@ -99,6 +102,7 @@ export class UserService {
       dateOfBirth: user.dateOfBirth?.toISOString() ?? null,
       category: user.category,
       isMinority: user.isMinority,
+      role: user.role ?? 'USER',
       location: user.location,
       createdAt: user.createdAt.toISOString(),
     };

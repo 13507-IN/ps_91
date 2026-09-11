@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // ArthSetu — Prisma Schema
 // Database: PostgreSQL + PostGIS (Neon)
 // ============================================================
@@ -123,6 +123,7 @@ model User {
   dateOfBirth   DateTime?
   category      SocialCategory?
   isMinority    Boolean         @default(false)
+  role          String          @default("USER")
   location      Json?
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt

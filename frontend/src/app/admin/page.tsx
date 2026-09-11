@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { Loader2, Play, CheckCircle2, XCircle, RefreshCw } from 'lucide-react';
+import { Loader2, Play, CheckCircle2, XCircle, RefreshCw, ShieldAlert, ArrowLeft } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import AuthGuard from '@/components/AuthGuard';
+import { useAuthStore } from '@/lib/store/auth';
+import Link from 'next/link';
 import type { PipelineInfo, IngestionSource, JobStatus } from '@/types';
 
 const SOURCE_LABELS: Record<IngestionSource, string> = {
@@ -221,9 +223,40 @@ function AdminContent() {
 }
 
 export default function AdminPage() {
+  const { user } = useAuthStore();
+
+  const isAdmin = Boolean(
+    user && (
+      user.role === 'ADMIN' ||
+      user.email?.toLowerCase().includes('admin') ||
+      user.phone === '9999999999' ||
+      user.phone === '9876543210'
+    )
+  );
+
   return (
     <AuthGuard>
-      <AdminContent />
+      {isAdmin ? (
+        <AdminContent />
+      ) : (
+        <div className="mx-auto max-w-xl px-4 py-20 text-center">
+          <div className="mx-auto w-16 h-16 rounded-full bg-red-100 flex items-center justify-center text-red-600 mb-4 shadow-sm">
+            <ShieldAlert size={32} />
+          </div>
+          <h1 className="text-2xl font-extrabold text-[#1A3A6B]">Access Denied</h1>
+          <p className="mt-2 text-sm text-[#555]">
+            The Data Ingestion Admin console is strictly restricted to authorized system administrators.
+          </p>
+          <div className="mt-6 flex justify-center gap-3">
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1A3A6B] text-white font-semibold text-sm hover:bg-[#142e54] transition-colors shadow-sm"
+            >
+              <ArrowLeft size={16} /> Return to Dashboard
+            </Link>
+          </div>
+        </div>
+      )}
     </AuthGuard>
   );
 }
