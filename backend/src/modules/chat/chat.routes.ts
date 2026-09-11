@@ -134,13 +134,15 @@ export async function chatRoutes(fastify: FastifyInstance) {
         }
       }
 
-      // Set SSE headers
+      // Set SSE headers (manually include CORS since raw writeHead bypasses fastify-cors)
       reply.raw.writeHead(200, {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
         Connection: 'keep-alive',
         'X-Session-Id': sessionId,
         'Access-Control-Expose-Headers': 'X-Session-Id',
+        'Access-Control-Allow-Origin': request.headers.origin || '*',
+        'Access-Control-Allow-Credentials': 'true',
       });
 
       try {
