@@ -100,6 +100,20 @@ export const actionPlanOutputSchema = z.object({
   fundingReadinessChecklist: z.array(z.string()),
 });
 
+export const refineVoiceInputSchema = z.object({
+  raw_text: z.string().optional(),
+  audio_base64: z.string().optional(),
+  mime_type: z.string().optional(),
+  language: z.string().optional(),
+});
+
+export const refineVoiceOutputSchema = z.object({
+  refined_text: z.string(),
+  original_text: z.string(),
+  detected_language: z.string(),
+  suggested_category: z.string().nullable().optional(),
+});
+
 export type ClassifyBusinessInput = z.infer<typeof classifyBusinessInputSchema>;
 export type ClassifyBusinessOutput = z.infer<typeof classifyBusinessOutputSchema>;
 export type DemandEstimateInput = z.infer<typeof demandEstimateInputSchema>;
@@ -112,6 +126,8 @@ export type RecommendationInput = z.infer<typeof recommendationInputSchema>;
 export type RecommendationOutput = z.infer<typeof recommendationOutputSchema>;
 export type ActionPlanInput = z.infer<typeof actionPlanInputSchema>;
 export type ActionPlanOutput = z.infer<typeof actionPlanOutputSchema>;
+export type RefineVoiceInput = z.infer<typeof refineVoiceInputSchema>;
+export type RefineVoiceOutput = z.infer<typeof refineVoiceOutputSchema>;
 
 // ============================================================================
 // Unified Assessment Endpoint Schemas

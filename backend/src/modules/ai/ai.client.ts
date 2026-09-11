@@ -1,4 +1,4 @@
-﻿import { getEnv } from '../../config/env.js';
+import { getEnv } from '../../config/env.js';
 import { httpRequest, HttpClientError } from '../../lib/httpClient.js';
 import type {
   ClassifyBusinessInput,
@@ -15,6 +15,8 @@ import type {
   ActionPlanOutput,
   AssessmentInput,
   AssessmentOutput,
+  RefineVoiceInput,
+  RefineVoiceOutput,
 } from './ai.schema.js';
 import { BusinessCategory } from '@prisma/client';
 
@@ -144,7 +146,28 @@ export class AiClient {
     } catch (err) {
       return this.fallbackUnifiedAssessment(input);
     }
-  };
+  }
+
+  /**
+   * Refine Bengali / English / regional local accent voice input using AI.
+   */
+  async refineVoice(input: RefineVoiceInput): Promise<RefineVoiceOutput> {
+    try {
+      return await httpRequest<RefineVoiceOutput>(`${this.baseUrl}/ai/refine-voice`, {
+        method: 'POST',
+        body: input,
+        timeoutMs: this.timeoutMs,
+      });
+    } catch {
+      return {
+        refined_text: input.raw_text || '',
+        original_text: input.raw_text || '',
+        detected_language: 'Bengali / English',
+        suggested_category: null,
+      };
+    }
+  }
+
 
   // ============================================================
   // Deterministic Fallback Implementations

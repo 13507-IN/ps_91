@@ -7,6 +7,7 @@ import {
   riskAssessmentInputSchema,
   recommendationInputSchema,
   actionPlanInputSchema,
+  refineVoiceInputSchema,
 } from './ai.schema.js';
 
 export const aiRoutes: FastifyPluginAsync = async (fastify) => {
@@ -162,4 +163,30 @@ export const aiRoutes: FastifyPluginAsync = async (fastify) => {
       return reply.send(result);
     },
   });
+
+  /**
+   * POST /api/ai/refine-voice
+   * Clean up local regional accents, Bengali/English dialects and speech hesitations into standard text
+   */
+  fastify.post('/refine-voice', {
+    schema: {
+      tags: ['AI Intelligence Layer'],
+      summary: 'Refine spoken text with local accents and regional dialects into standard text',
+      body: {
+        type: 'object',
+        properties: {
+          raw_text: { type: 'string' },
+          audio_base64: { type: 'string' },
+          mime_type: { type: 'string' },
+          language: { type: 'string' },
+        },
+      },
+    },
+    handler: async (request, reply) => {
+      const body = refineVoiceInputSchema.parse(request.body);
+      const result = await client.refineVoice(body);
+      return reply.send(result);
+    },
+  });
 };
+

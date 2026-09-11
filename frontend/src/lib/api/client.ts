@@ -193,6 +193,7 @@ export const apiEndpoints = {
     riskAssess: '/api/ai/risk-assess',
     recommend: '/api/ai/recommend',
     actionPlan: '/api/ai/action-plan',
+    refineVoice: '/api/ai/refine-voice',
   },
   feasibility: {
     analyze: '/api/feasibility/analyze',

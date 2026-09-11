@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { MessageCircle, X, Send, Trash2 } from 'lucide-react';
 import { useAuthStore } from '@/lib/store/auth';
-import { apiBaseUrl, getAccessToken, hasSession, refreshAccessToken } from '@/lib/api/client';
+import { apiBaseUrl, getAccessToken, refreshAccessToken } from '@/lib/api/client';
 import toast from 'react-hot-toast';
 import ChatBubble, { TypingIndicator } from './ChatBubble';
 import QuickActions from './QuickActions';
@@ -25,7 +25,7 @@ const WELCOME_MESSAGE: Message = {
 
 export default function ChatWidget() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
-  const [isAllowed, setIsAllowed] = useState(false);
+  const [isAllowed, setIsAllowed] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [inputText, setInputText] = useState('');
@@ -42,7 +42,7 @@ export default function ChatWidget() {
 
   // Check session on mount to avoid SSR hydration mismatch
   useEffect(() => {
-    setIsAllowed(isAuthenticated || hasSession());
+    setIsAllowed(true);
   }, [isAuthenticated]);
 
   // Focus input when chat opens
@@ -93,19 +93,20 @@ export default function ChatWidget() {
       if (response.status === 401) {
         // Try refreshing token once
         const newToken = await refreshAccessToken();
+        const retryHeaders: Record<string, string> = {
+          'Content-Type': 'application/json',
+        };
         if (newToken) {
-          response = await fetch(`${apiBaseUrl}/api/chat/message`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${newToken}`,
-            },
-            body: JSON.stringify({
-              message: text.trim(),
-              sessionId: sessionId || undefined,
-            }),
-          });
+          retryHeaders['Authorization'] = `Bearer ${newToken}`;
         }
+        response = await fetch(`${apiBaseUrl}/api/chat/message`, {
+          method: 'POST',
+          headers: retryHeaders,
+          body: JSON.stringify({
+            message: text.trim(),
+            sessionId: sessionId || undefined,
+          }),
+        });
       }
 
       // Get session ID from header

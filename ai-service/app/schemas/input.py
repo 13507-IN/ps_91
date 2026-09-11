@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Input Schemas.
 
 Pydantic models describing the data the AI service receives from the
@@ -189,3 +189,11 @@ class ActionPlanInput(BaseModel):
     businessCategory: BusinessCategory
     loanAmount: float
     schemeName: Optional[str] = None
+
+
+class RefineVoiceInput(BaseModel):
+    raw_text: Optional[str] = Field(None, description="Spoken text from voice recognition")
+    audio_base64: Optional[str] = Field(None, description="Base64 encoded audio recording")
+    mime_type: Optional[str] = Field("audio/webm", description="MIME type of audio")
+    language: Optional[str] = Field("bn", description="Spoken language code (e.g. bn, en)")
+

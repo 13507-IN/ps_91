@@ -170,6 +170,13 @@ const translations = {
     ideaHint:        { EN: 'The more detail you provide, the better our analysis will be.',
                        BN: 'আপনি যত বেশি বিস্তারিত দেবেন, আমাদের বিশ্লেষণ তত ভালো হবে।' },
     continueToCapital: { EN: 'Continue to Capital',        BN: 'মূলধনে এগিয়ে যান' },
+    voiceBtn:        { EN: 'Voice Input',                  BN: 'ভয়েস ইনপুট' },
+    voiceListening:  { EN: 'Listening... Speak in Bengali or English', BN: 'শুনছি... বাংলা বা ইংরেজিতে বলুন' },
+    voiceStop:       { EN: 'Stop Recording',               BN: 'থামুন' },
+    voiceProcessing: { EN: 'AI Refining voice & local accent...', BN: 'AI দিয়ে আঞ্চলিক ভাষা ও ভয়েস রূপান্তর হচ্ছে...' },
+    voiceRefined:    { EN: '✓ Auto-refined into standard text', BN: '✓ স্বয়ংক্রিয়ভাবে প্রমিত বাংলায় রূপান্তরিত' },
+    voiceError:      { EN: 'Could not access microphone',   BN: 'মাইক্রোফোন সংযোগ করা যায়নি' },
+
     categories: {
       DAIRY:               { EN: 'Dairy',                  BN: 'দুগ্ধ' },
       FOOD_PROCESSING:     { EN: 'Food Processing',        BN: 'খাদ্য প্রক্রিয়াকরণ' },

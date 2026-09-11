@@ -52,12 +52,18 @@ export async function chatRoutes(fastify: FastifyInstance) {
           },
         },
       },
-      onRequest: [fastify.authenticate],
+      onRequest: async (request, reply) => {
+        try {
+          await fastify.authenticate(request, reply);
+        } catch {
+          // Unauthenticated/guest mode chat supported
+        }
+      },
     },
     async (request, reply) => {
       const { message, sessionId: clientSessionId, reportContext } = request.body;
       const sessionId = clientSessionId || randomUUID();
-      const userId = (request.user as { sub?: string })?.sub;
+      const userId = request.userId || (request.user as { sub?: string })?.sub;
 
       // Build user context from profile
       let userContext: Parameters<typeof chat>[2] = undefined;
@@ -178,7 +184,6 @@ export async function chatRoutes(fastify: FastifyInstance) {
           },
         },
       },
-      onRequest: [fastify.authenticate],
     },
     async (_request, reply) => {
       return reply.send({
@@ -205,7 +210,13 @@ export async function chatRoutes(fastify: FastifyInstance) {
           required: ['id'],
         },
       },
-      onRequest: [fastify.authenticate],
+      onRequest: async (request, reply) => {
+        try {
+          await fastify.authenticate(request, reply);
+        } catch {
+          // Optional
+        }
+      },
     },
     async (request, reply) => {
       clearSession(request.params.id);

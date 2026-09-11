@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import AppImage from '@/components/ui/AppImage';
+import VoiceInput from '@/components/ui/VoiceInput';
 import { CATEGORY_PHOTOS } from '@/lib/constants/landing-media';
 import { Check, Sparkles, Loader2 } from 'lucide-react';
 import { inr } from '@/lib/format';
@@ -56,9 +57,19 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
     <div className="space-y-6">
       {/* Free-text idea */}
       <div>
-        <label className="label-gov">{t.business.describeIdea} (optional)</label>
+        <label className="label-gov">{t.business.describeIdea}</label>
         <p className="text-xs text-ink-muted mb-2">{t.business.ideaHint}</p>
-        <div className="relative">
+
+        {/* Voice Input Toolbar */}
+        <VoiceInput
+          currentValue={idea}
+          onTranscript={(newText) => {
+            setIdea(newText);
+            updateDraft({ businessIdea: newText });
+          }}
+        />
+
+        <div className="relative mt-2">
           <textarea
             value={idea}
             onChange={(e) => { setIdea(e.target.value); updateDraft({ businessIdea: e.target.value }); }}

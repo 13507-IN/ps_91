@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Output Schemas.
 
 Pydantic models describing the structured JSON the AI service returns.
@@ -237,3 +237,11 @@ class ActionPlanOutput(BaseModel):
     planDurationDays: int = 30
     milestones: list[ActionMilestone]
     fundingReadinessChecklist: list[str]
+
+
+class RefineVoiceOutput(BaseModel):
+    refined_text: str = Field(..., description="Cleaned, standardized business idea text")
+    original_text: str = Field(..., description="Original raw transcript or spoken text")
+    detected_language: str = Field("Bengali", description="Language processed (e.g., Bengali, English)")
+    suggested_category: Optional[str] = Field(None, description="Suggested business category code")
+

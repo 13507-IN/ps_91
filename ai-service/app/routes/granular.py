@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Granular Endpoint Routes.
 
 Individual endpoints matching the existing Node.js AiClient contract:
@@ -23,6 +23,7 @@ from app.schemas.input import (
     RiskAssessmentInput,
     RecommendationInput,
     ActionPlanInput,
+    RefineVoiceInput,
 )
 from app.schemas.output import (
     ClassifyBusinessOutput,
@@ -33,6 +34,7 @@ from app.schemas.output import (
     RecommendationOutput,
     ActionPlanOutput,
     ActionMilestone,
+    RefineVoiceOutput,
 )
 
 logger = structlog.get_logger(__name__)
@@ -312,3 +314,80 @@ async def action_plan(body: ActionPlanInput) -> ActionPlanOutput:
             "Udyam registration certificate",
         ],
     )
+
+
+@router.post("/refine-voice", response_model=RefineVoiceOutput)
+async def refine_voice(body: RefineVoiceInput) -> RefineVoiceOutput:
+    """
+    Refine raw voice transcript or spoken text in Bengali / English / local dialects.
+    Uses AI to clean up local accents, regional slang, and hesitations into clear standard text.
+    """
+    raw = (body.raw_text or "").strip()
+    if not raw:
+        return RefineVoiceOutput(
+            refined_text="",
+            original_text="",
+            detected_language="Unknown",
+            suggested_category=None,
+        )
+
+    # Classify category fallback
+    import re
+    text_lower = raw.lower()
+    cat_match = None
+    for cat, pattern in _KEYWORD_MAP.items():
+        if re.search(pattern, text_lower):
+            cat_match = cat
+            break
+
+    # Try LLM refinement
+    try:
+        from app.llm.provider import LLMClient
+        import json
+
+        client = LLMClient()
+        if client.is_available:
+            system_prompt = (
+                "You are an expert multilingual business idea speech refiner specializing in Bengali, "
+                "English, and regional South Asian dialects/accents. "
+                "The user spoke a business idea that was transcribed from voice. "
+                "Your task is to convert local accents, regional dialects, colloquial phrasing, or stammers "
+                "into clean, clear, standard business description text while keeping all numbers, "
+                "quantities, locations, and intent 100% exact.\n\n"
+                "Return ONLY a raw JSON object with keys:\n"
+                "- refined_text: (string in standard Bengali or English matching original language)\n"
+                "- detected_language: (e.g. 'Bengali', 'English', 'Bengali (Local Accent)')\n"
+                "- suggested_category: (one of DAIRY, FOOD_PROCESSING, RETAIL, TEXTILES_TAILORING, "
+                "POULTRY, AGRICULTURE, LIVESTOCK, TRANSPORT, HANDICRAFT, SERVICES, OTHER)"
+            )
+            user_prompt = f"Raw spoken text: '{raw}'"
+            response_str = await client.generate(user_prompt, system=system_prompt, temperature=0.2)
+
+            # Clean JSON code blocks if present
+            clean_json = response_str.strip()
+            if clean_json.startswith("```json"):
+                clean_json = clean_json[7:]
+            if clean_json.startswith("```"):
+                clean_json = clean_json[3:]
+            if clean_json.endswith("```"):
+                clean_json = clean_json[:-3]
+            clean_json = clean_json.strip()
+
+            parsed = json.loads(clean_json)
+            return RefineVoiceOutput(
+                refined_text=parsed.get("refined_text", raw),
+                original_text=raw,
+                detected_language=parsed.get("detected_language", "Bengali/English"),
+                suggested_category=parsed.get("suggested_category", cat_match),
+            )
+    except Exception as err:
+        logger.warning("refine_voice_llm_failed", error=str(err))
+
+    # Deterministic fallback
+    return RefineVoiceOutput(
+        refined_text=raw,
+        original_text=raw,
+        detected_language="Bengali / English",
+        suggested_category=cat_match,
+    )
+
