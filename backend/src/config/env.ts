@@ -21,7 +21,7 @@ const envSchema = z.object({
 
   // Gemini (Chat)
   GEMINI_API_KEY: z.string().optional(),
-  GEMINI_MODEL: z.string().default('gemini-3.6-flash'),
+  GEMINI_MODEL: z.string().default('gemini-3.5-flash'),
 
   // Server
   PORT: z.coerce.number().positive().default(3000),

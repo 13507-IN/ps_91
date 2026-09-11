@@ -262,8 +262,10 @@ export class LocationService {
     limit = 50,
   ): Promise<VillageSummary[]> {
     try {
-      // PostGIS ST_DWithin query (using meters)
-      const radiusMeters = radiusKm * 1000;
+      const latDelta = radiusKm / 111.0;
+      const lngDelta = radiusKm / (111.0 * Math.cos((lat * Math.PI) / 180));
+
+      // Pure SQL Haversine query using latitude/longitude columns (works on ALL Postgres DBs without requiring PostGIS 'geom' column)
       const rawResults = await this.prisma.$queryRaw<
         Array<{
           id: number;
@@ -288,7 +290,12 @@ export class LocationService {
           s.name AS "stateName",
           v.latitude,
           v.longitude,
-          ROUND((ST_Distance(v.geom, ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography) / 1000.0)::numeric, 2)::float AS "distanceKm",
+          ROUND((6371.0 * acos(
+            LEAST(1.0, GREATEST(-1.0,
+              cos(radians(${lat})) * cos(radians(v.latitude)) * cos(radians(v.longitude) - radians(${lng})) +
+              sin(radians(${lat})) * sin(radians(v.latitude))
+            ))
+          ))::numeric, 2)::float AS "distanceKm",
           c."totalPopulation",
           c."totalHouseholds"
         FROM "Village" v
@@ -296,15 +303,13 @@ export class LocationService {
         JOIN "District" d ON b."districtId" = d.id
         JOIN "State" s ON d."stateId" = s.id
         LEFT JOIN "CensusData" c ON v.id = c."villageId"
-        WHERE v.geom IS NOT NULL
-          AND ST_DWithin(v.geom::geography, ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography, ${radiusMeters})
+        WHERE v.latitude IS NOT NULL 
+          AND v.longitude IS NOT NULL
+          AND v.latitude BETWEEN (${lat - latDelta}) AND (${lat + latDelta})
+          AND v.longitude BETWEEN (${lng - lngDelta}) AND (${lng + lngDelta})
         ORDER BY "distanceKm" ASC
         LIMIT ${limit};
       `;
-
-      if (rawResults.length === 0) {
-        throw new Error('PostGIS returned 0 results, attempting Haversine fallback');
-      }
 
       return rawResults;
     } catch {

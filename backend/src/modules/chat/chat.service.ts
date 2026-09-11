@@ -188,8 +188,12 @@ async function* callGeminiStream(
 
   if (!response.ok) {
     const errText = await response.text();
-    console.error('Gemini API error:', response.status, errText);
-    yield 'Sorry, I encountered an error connecting to the AI service. Please try again in a moment.';
+    console.warn('Gemini API notice:', response.status, errText);
+    if (response.status === 429) {
+      yield 'SaathiBot is currently experiencing high demand. Please try again in 30 seconds!';
+    } else {
+      yield 'Sorry, I encountered an error connecting to the AI service. Please try again in a moment.';
+    }
     return;
   }
 

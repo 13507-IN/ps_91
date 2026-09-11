@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — LLM Client.
 
 Manages primary (Gemini) and fallback (Groq) providers with:
@@ -81,12 +81,16 @@ class LLMClient:
                 return await self._primary.generate(prompt, system=system, temperature=temperature)
             except Exception as exc:
                 last_error = exc
+                err_str = str(exc)
                 logger.warning(
                     "llm_primary_retry",
                     attempt=attempt + 1,
                     max_retries=retries,
-                    error=str(exc),
+                    error=err_str,
                 )
+                if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str or "quota" in err_str.lower():
+                    logger.info("llm_primary_quota_exceeded", note="Bypassing retries and switching to fallback provider")
+                    break
 
         # Try fallback provider
         if self._fallback:
