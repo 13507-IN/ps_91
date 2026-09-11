@@ -418,7 +418,7 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
       )}
 
       {/* Map */}
-      <div className="bg-paper-dark border border-border rounded-xl overflow-hidden">
+      <div className="bg-paper-dark border border-border rounded-xl overflow-hidden isolate z-0">
         <div className="px-4 py-3 border-b border-border bg-white flex items-center gap-2">
           <MapPin size={14} className="text-teal-600" />
           {hasAutoPin ? (
