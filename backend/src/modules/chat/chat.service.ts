@@ -169,7 +169,7 @@ async function* callGeminiStream(
     contents,
     generationConfig: {
       temperature: 0.7,
-      maxOutputTokens: 1024,
+      maxOutputTokens: 2048,
       topP: 0.9,
     },
     safetySettings: [
@@ -289,8 +289,8 @@ export async function* chat(
 
   const systemPrompt = buildSystemPrompt(userContext);
 
-  // Keep only last 10 exchanges (20 messages) to stay within context limits
-  const trimmedHistory = session.history.slice(-20);
+  // Retain up to 40 messages (20 conversation turns) for deep context recall
+  const trimmedHistory = session.history.slice(-40);
 
   let fullResponse = '';
   for await (const chunk of callGeminiStream(systemPrompt, trimmedHistory, userMessage)) {
