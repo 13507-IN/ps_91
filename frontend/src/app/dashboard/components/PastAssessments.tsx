@@ -74,7 +74,7 @@ export function PastAssessments() {
           <p className="text-sm font-medium text-gray-900 mb-1">{t.dashboard.noAssessments}</p>
           <p className="text-xs text-gray-500 mb-4">{t.dashboard.pastAssDesc}</p>
           <Link href="/assessment-wizard" className="inline-block px-4 py-2 bg-[#1A3A6B] text-white rounded text-xs font-semibold hover:bg-[#152e55] transition-colors">
-            {t.nav.startAssessment}
+            {t.nav.assess}
           </Link>
         </div>
       ) : (
