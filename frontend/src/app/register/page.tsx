@@ -1,10 +1,11 @@
-﻿'use client';
+'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Phone, Lock, User, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { api, apiEndpoints, setTokens, handleApiError } from '@/lib/api/client';
 import { useAuthStore } from '@/lib/store/auth';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { AuthTokens, UserProfile } from '@/types';
 
 interface RegisterResponse {
@@ -21,6 +22,7 @@ const PASSWORD_RULES = [
 export default function RegisterPage() {
   const router = useRouter();
   const setSession = useAuthStore((s) => s.setSession);
+  const { t } = useTranslation();
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -98,8 +100,8 @@ export default function RegisterPage() {
             <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest mb-1">
               ArthSetu
             </div>
-            <h1 className="text-white text-2xl font-bold">Create Account</h1>
-            <p className="text-white/60 text-sm mt-1">Free · takes under a minute</p>
+            <h1 className="text-white text-2xl font-bold">{t.auth.registerTitle}</h1>
+            <p className="text-white/60 text-sm mt-1">Join the rural enterprise network</p>
           </div>
 
           {/* Form */}
@@ -133,18 +135,18 @@ export default function RegisterPage() {
             {/* Phone */}
             <div>
               <label htmlFor="reg-phone" className="block text-sm font-semibold text-[#333] mb-1.5">
-                Mobile Number <span className="text-red-500">*</span>
+                {t.auth.phone} *
               </label>
               <div className="relative">
-                <Phone size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#999]" />
+                <Phone size={16} className={`absolute left-3.5 top-1/2 -translate-y-1/2 ${phoneValid ? 'text-flag-green' : 'text-[#999]'}`} />
                 <input
                   id="reg-phone"
                   type="tel"
                   inputMode="numeric"
                   autoComplete="tel"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-                  placeholder="10-digit mobile number"
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder={t.auth.phonePlaceholder}
                   maxLength={10}
                   className={`w-full pl-10 pr-10 py-3 border-2 rounded-lg text-sm outline-none transition-all ${
                     phone.length > 0
@@ -172,10 +174,10 @@ export default function RegisterPage() {
             {/* Password */}
             <div>
               <label htmlFor="reg-password" className="block text-sm font-semibold text-[#333] mb-1.5">
-                Password <span className="text-red-500">*</span>
+                {t.auth.password} *
               </label>
               <div className="relative">
-                <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#999]" />
+                <Lock size={16} className={`absolute left-3.5 top-1/2 -translate-y-1/2 ${pwStrong ? 'text-flag-green' : 'text-[#999]'}`} />
                 <input
                   id="reg-password"
                   type={showPw ? 'text' : 'password'}
@@ -183,7 +185,8 @@ export default function RegisterPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onFocus={() => setPwFocused(true)}
-                  placeholder="Create a password"
+                  onBlur={() => setPwFocused(false)}
+                  placeholder={t.auth.passPlaceholder}
                   className="w-full pl-10 pr-11 py-3 border-2 border-[#DDDDDD] rounded-lg text-sm outline-none focus:border-[#E65C00] focus:shadow-[0_0_0_3px_rgba(230,92,0,0.12)] transition-all"
                   required
                 />
@@ -216,17 +219,17 @@ export default function RegisterPage() {
             {/* Confirm password */}
             <div>
               <label htmlFor="reg-confirm" className="block text-sm font-semibold text-[#333] mb-1.5">
-                Confirm Password <span className="text-red-500">*</span>
+                {t.auth.confirmPassword} *
               </label>
               <div className="relative">
-                <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#999]" />
+                <Lock size={16} className={`absolute left-3.5 top-1/2 -translate-y-1/2 ${pwMatch ? 'text-flag-green' : 'text-[#999]'}`} />
                 <input
                   id="reg-confirm"
                   type={showConfirm ? 'text' : 'password'}
                   autoComplete="new-password"
                   value={confirm}
                   onChange={(e) => setConfirm(e.target.value)}
-                  placeholder="Re-enter password"
+                  placeholder={t.auth.confirmPassword}
                   className={`w-full pl-10 pr-11 py-3 border-2 rounded-lg text-sm outline-none transition-all ${
                     confirm.length > 0
                       ? pwMatch
@@ -270,21 +273,21 @@ export default function RegisterPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                   </svg>
-                  Creating account…
+                  Creating account...
                 </span>
               ) : (
                 <>
-                  Create Account
-                  <ArrowRight size={17} />
+                  {t.auth.createAccount}
+                  <ArrowRight size={18} />
                 </>
               )}
             </button>
 
             {/* Login link */}
             <p className="text-center text-sm text-[#666]">
-              Already have an account?{' '}
+              {t.auth.hasAccount}{' '}
               <Link href="/login" className="text-[#1A3A6B] font-semibold hover:text-[#E65C00] transition-colors">
-                Sign in
+                {t.auth.signIn}
               </Link>
             </p>
           </form>
@@ -293,7 +296,7 @@ export default function RegisterPage() {
         </div>
 
         <p className="text-center text-xs text-[#888] mt-5">
-          <Link href="/" className="hover:text-[#E65C00] transition-colors">← Back to Home</Link>
+          <Link href="/" className="hover:text-[#E65C00] transition-colors">← {t.auth.backToHome}</Link>
         </p>
       </div>
     </div>

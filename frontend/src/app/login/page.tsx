@@ -1,10 +1,11 @@
-﻿'use client';
+'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Phone, Lock, ArrowRight, AlertCircle } from 'lucide-react';
 import { api, apiEndpoints, setTokens, handleApiError } from '@/lib/api/client';
 import { useAuthStore } from '@/lib/store/auth';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { AuthTokens, UserProfile } from '@/types';
 
 interface LoginResponse {
@@ -15,6 +16,7 @@ interface LoginResponse {
 export default function LoginPage() {
   const router = useRouter();
   const setSession = useAuthStore((s) => s.setSession);
+  const { t } = useTranslation();
 
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -84,8 +86,8 @@ export default function LoginPage() {
             <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest mb-1">
               ArthSetu
             </div>
-            <h1 className="text-white text-2xl font-bold">Welcome Back</h1>
-            <p className="text-white/60 text-sm mt-1">Sign in to access your assessments</p>
+            <h1 className="text-white text-2xl font-bold">{t.auth.welcomeBack}</h1>
+            <p className="text-white/60 text-sm mt-1">{t.auth.signInToAccess}</p>
           </div>
 
           {/* Form */}
@@ -101,7 +103,7 @@ export default function LoginPage() {
             {/* Phone */}
             <div>
               <label htmlFor="login-phone" className="block text-sm font-semibold text-[#333] mb-1.5">
-                Mobile Number
+                {t.auth.phone}
               </label>
               <div className="relative">
                 <Phone size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#999]" />
@@ -112,7 +114,7 @@ export default function LoginPage() {
                   autoComplete="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="10-digit mobile number"
+                  placeholder={t.auth.phonePlaceholder}
                   maxLength={13}
                   className="w-full pl-10 pr-4 py-3 border-2 border-[#DDDDDD] rounded-lg text-sm outline-none focus:border-[#E65C00] focus:shadow-[0_0_0_3px_rgba(230,92,0,0.12)] transition-all"
                   required
@@ -124,9 +126,9 @@ export default function LoginPage() {
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label htmlFor="login-password" className="block text-sm font-semibold text-[#333]">
-                  Password
+                  {t.auth.password}
                 </label>
-                <a href="#" className="text-xs text-[#E65C00] hover:underline">Forgot password?</a>
+                <a href="#" className="text-xs text-[#E65C00] hover:underline">{t.auth.forgotPassword}</a>
               </div>
               <div className="relative">
                 <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#999]" />
@@ -136,7 +138,7 @@ export default function LoginPage() {
                   autoComplete="current-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Your password"
+                  placeholder={t.auth.passPlaceholder}
                   className="w-full pl-10 pr-11 py-3 border-2 border-[#DDDDDD] rounded-lg text-sm outline-none focus:border-[#E65C00] focus:shadow-[0_0_0_3px_rgba(230,92,0,0.12)] transition-all"
                   required
                 />
@@ -163,21 +165,20 @@ export default function LoginPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                   </svg>
-                  Signing in…
+                  Signing in...
                 </span>
               ) : (
                 <>
-                  Sign In
-                  <ArrowRight size={17} />
+                  {t.auth.signIn} <ArrowRight size={18} />
                 </>
               )}
             </button>
 
             {/* Register link */}
             <p className="text-center text-sm text-[#666]">
-              Don&apos;t have an account?{' '}
+              {t.auth.noAccount}{' '}
               <Link href="/register" className="text-[#1A3A6B] font-semibold hover:text-[#E65C00] transition-colors">
-                Create account
+                {t.auth.createAccount}
               </Link>
             </p>
           </form>
@@ -188,7 +189,7 @@ export default function LoginPage() {
 
         {/* Back to home */}
         <p className="text-center text-xs text-[#888] mt-5">
-          <Link href="/" className="hover:text-[#E65C00] transition-colors">← Back to Home</Link>
+          <Link href="/" className="hover:text-[#E65C00] transition-colors">← {t.auth.backToHome}</Link>
         </p>
       </div>
     </div>

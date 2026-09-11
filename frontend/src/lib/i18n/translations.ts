@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 /**
  * ArthSetu — Centralized Translation Dictionary
@@ -413,11 +413,19 @@ const translations = {
   auth: {
     loginTitle:      { EN: 'Login to ArthSetu',        BN: 'ArthSetu-তে লগইন করুন' },
     registerTitle:   { EN: 'Create Account',               BN: 'অ্যাকাউন্ট তৈরি করুন' },
-    phone:           { EN: 'Phone Number',                 BN: 'ফোন নম্বর' },
+    welcomeBack:     { EN: 'Welcome Back',                 BN: 'পুনরায় স্বাগতম' },
+    signInToAccess:  { EN: 'Sign in to access your assessments', BN: 'আপনার মূল্যায়নগুলি দেখতে সাইন ইন করুন' },
+    phone:           { EN: 'Mobile Number',                 BN: 'মোবাইল নম্বর' },
     password:        { EN: 'Password',                     BN: 'পাসওয়ার্ড' },
     confirmPassword: { EN: 'Confirm Password',             BN: 'পাসওয়ার্ড নিশ্চিত করুন' },
+    phonePlaceholder:{ EN: '10-digit mobile number',       BN: '১০-অঙ্কের মোবাইল নম্বর' },
+    passPlaceholder: { EN: 'Your password',                BN: 'আপনার পাসওয়ার্ড' },
+    forgotPassword:  { EN: 'Forgot password?',             BN: 'পাসওয়ার্ড ভুলে গেছেন?' },
+    signIn:          { EN: 'Sign In',                      BN: 'সাইন ইন' },
+    createAccount:   { EN: 'Create account',               BN: 'অ্যাকাউন্ট তৈরি করুন' },
     noAccount:       { EN: "Don't have an account?",       BN: 'অ্যাকাউন্ট নেই?' },
     hasAccount:      { EN: 'Already have an account?',     BN: 'ইতিমধ্যে অ্যাকাউন্ট আছে?' },
+    backToHome:      { EN: 'Back to Home',                 BN: 'হোম পেজে ফিরে যান' },
   },
 } as const;
 
