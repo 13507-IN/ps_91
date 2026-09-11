@@ -72,7 +72,7 @@ async function doRefresh(): Promise<string | null> {
   }
 }
 
-async function tryRefresh(): Promise<string | null> {
+export async function refreshAccessToken(): Promise<string | null> {
   if (!refreshPromise) {
     refreshPromise = doRefresh().finally(() => {
       refreshPromise = null;
@@ -95,7 +95,7 @@ export async function api<T>(
 
   // Silent refresh + retry on 401
   if (res.status === 401 && retryOnAuth && getRefreshToken()) {
-    const newToken = await tryRefresh();
+    const newToken = await refreshAccessToken();
     if (newToken) {
       const retryHeaders = new Headers(headers);
       retryHeaders.set('Authorization', `Bearer ${newToken}`);

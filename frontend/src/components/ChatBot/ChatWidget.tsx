@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { MessageCircle, X, Send, Trash2 } from 'lucide-react';
 import { useAuthStore } from '@/lib/store/auth';
-import { apiBaseUrl, getAccessToken, hasSession } from '@/lib/api/client';
+import { apiBaseUrl, getAccessToken, hasSession, refreshAccessToken } from '@/lib/api/client';
 import toast from 'react-hot-toast';
 import ChatBubble, { TypingIndicator } from './ChatBubble';
 import QuickActions from './QuickActions';
@@ -77,8 +77,8 @@ export default function ChatWidget() {
     setIsLoading(true);
 
     try {
-      const token = getAccessToken();
-      const response = await fetch(`${apiBaseUrl}/api/chat/message`, {
+      let token = getAccessToken();
+      let response = await fetch(`${apiBaseUrl}/api/chat/message`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -89,6 +89,24 @@ export default function ChatWidget() {
           sessionId: sessionId || undefined,
         }),
       });
+
+      if (response.status === 401) {
+        // Try refreshing token once
+        const newToken = await refreshAccessToken();
+        if (newToken) {
+          response = await fetch(`${apiBaseUrl}/api/chat/message`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${newToken}`,
+            },
+            body: JSON.stringify({
+              message: text.trim(),
+              sessionId: sessionId || undefined,
+            }),
+          });
+        }
+      }
 
       // Get session ID from header
       const newSessionId = response.headers.get('X-Session-Id');
