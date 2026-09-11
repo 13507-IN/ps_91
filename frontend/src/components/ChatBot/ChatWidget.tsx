@@ -77,7 +77,7 @@ export default function ChatWidget() {
     setIsLoading(true);
 
     try {
-      let token = getAccessToken();
+      const token = getAccessToken();
       let response = await fetch(`${apiBaseUrl}/api/chat/message`, {
         method: 'POST',
         headers: {
