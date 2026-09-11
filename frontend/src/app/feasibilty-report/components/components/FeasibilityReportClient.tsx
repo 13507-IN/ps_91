@@ -108,9 +108,7 @@ export function FeasibilityReportClient({
               competitors={report.competitorAnalysis}
               opportunity={report.opportunityAnalysis}
             />
-            {report.localSuppliers && report.localSuppliers.length > 0 && (
-              <LocalSuppliersSection suppliers={report.localSuppliers} />
-            )}
+            <LocalSuppliersSection suppliers={report.localSuppliers || []} category={report.businessCategory} />
           </div>
         </div>
 

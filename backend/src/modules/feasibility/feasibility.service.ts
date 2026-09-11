@@ -474,6 +474,21 @@ export class FeasibilityService {
     if (!analysis) {
       throw new NotFoundError(`Analysis with ID ${id} not found`);
     }
-    return analysis;
+
+    const oppBlob = analysis.opportunityAnalysis as Record<string, unknown> | null;
+    let suppliers = (analysis as any).localSuppliers ?? oppBlob?.['localSuppliers'] ?? [];
+    if (!Array.isArray(suppliers) || suppliers.length === 0) {
+      suppliers = await this.marketService.getLocalSuppliers(
+        analysis.latitude,
+        analysis.longitude,
+        analysis.catchmentRadiusKm,
+        analysis.businessCategory,
+      );
+    }
+
+    return {
+      ...analysis,
+      localSuppliers: suppliers,
+    };
   }
 }

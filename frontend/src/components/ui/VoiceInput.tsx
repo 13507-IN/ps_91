@@ -1,7 +1,8 @@
 'use client';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useRef } from 'react';
-import { Mic, MicOff, Sparkles, Loader2, Volume2, Globe, AlertCircle, Check } from 'lucide-react';
+import { Mic, MicOff, Sparkles, Loader2, Volume2, Globe } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { apiBaseUrl, apiEndpoints } from '@/lib/api/client';
 
@@ -20,7 +21,6 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
   const [voiceLang, setVoiceLang] = useState<VoiceLang>(lang === 'BN' ? 'bn-BD' : 'en-IN');
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [refinedBadge, setRefinedBadge] = useState(false);
-  const [hasSpeechApi, setHasSpeechApi] = useState(true);
 
   // References
   const recognitionRef = useRef<any>(null);
@@ -29,15 +29,6 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
   const silenceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const rawTranscriptRef = useRef<string>('');
 
-  useEffect(() => {
-    // Check if SpeechRecognition is available in browser
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      setHasSpeechApi(false);
-    }
-  }, []);
-
   // Update voice language default if global language changes
   useEffect(() => {
     if (lang === 'BN' && !voiceLang.startsWith('bn')) {
@@ -45,7 +36,7 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
     } else if (lang === 'EN' && voiceLang !== 'en-IN') {
       setVoiceLang('en-IN');
     }
-  }, [lang]);
+  }, [lang, voiceLang]);
 
   // Handle automatic AI accent & dialect refinement
   async function triggerAiRefinement(textToRefine: string) {
@@ -229,7 +220,9 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
     if (recognitionRef.current) {
       try {
         recognitionRef.current.stop();
-      } catch (e) {}
+      } catch {
+        // ignore
+      }
     }
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
       mediaRecorderRef.current.stop();
