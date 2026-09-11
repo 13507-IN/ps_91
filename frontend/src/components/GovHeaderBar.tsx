@@ -182,18 +182,26 @@ export default function GovHeaderBar() {
             )}
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger & language switcher */}
           <div className="lg:hidden flex items-center justify-between w-full py-1">
             <span className="text-white text-sm font-medium opacity-80">Menu</span>
-            <button
-              className="text-white p-2 rounded hover:bg-white/10 transition-colors"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-nav"
-            >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setLang(lang === 'EN' ? 'BN' : 'EN')}
+                className="px-2.5 py-1 rounded border border-white/30 text-xs font-semibold text-white hover:bg-white/10 transition-colors"
+              >
+                {t.nav.language}
+              </button>
+              <button
+                className="text-white p-2 rounded hover:bg-white/10 transition-colors"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-nav"
+              >
+                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
           </div>
         </div>
       </nav>

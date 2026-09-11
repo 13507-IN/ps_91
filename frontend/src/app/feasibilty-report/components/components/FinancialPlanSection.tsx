@@ -18,7 +18,7 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
       </p>
 
       {/* Capital bridge */}
-      <div className="mt-5 grid grid-cols-3 items-center gap-2 text-center">
+      <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 items-center gap-3 text-center">
         <div className="rounded-xl border border-slate-200 p-4">
           <div className="flex items-center justify-center gap-1.5 text-xs text-slate-500">
             <Wallet className="h-3.5 w-3.5" /> Your margin
@@ -26,7 +26,7 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
           <div className="mt-1 text-xl font-bold text-brand-700">{inrCompact(plan.availableCapital)}</div>
           <div className="text-[11px] text-slate-400">{percent(plan.marginPercentage)} of project</div>
         </div>
-        <ArrowDown className="mx-auto h-5 w-5 text-slate-400" />
+        <ArrowDown className="mx-auto h-5 w-5 text-slate-400 rotate-0 sm:-rotate-90 my-1 sm:my-0" />
         <div className="rounded-xl border border-slate-200 p-4">
           <div className="flex items-center justify-center gap-1.5 text-xs text-slate-500">
             <Landmark className="h-3.5 w-3.5" /> Loan required

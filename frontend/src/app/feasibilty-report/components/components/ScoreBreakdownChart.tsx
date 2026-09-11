@@ -72,7 +72,7 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
       <div className="h-[180px] w-full">
         <Bar data={chartData} options={options} />
       </div>
-      <div className="flex items-center justify-between rounded-xl bg-slate-900 px-4 py-3 text-white">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 rounded-xl bg-slate-900 px-4 py-3 text-white">
         <div className="w-full space-y-2">
           {dimensions.map(({ key, label }) => {
             const value = score[key];
@@ -93,9 +93,9 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
             );
           })}
         </div>
-        <div className="ml-6 shrink-0 text-right">
-          <span className="text-sm font-medium">Total Score</span>
-          <div className="text-lg font-bold">
+        <div className="sm:ml-6 shrink-0 text-left sm:text-right border-t sm:border-t-0 border-slate-800 pt-2 sm:pt-0">
+          <span className="text-xs sm:text-sm font-medium text-slate-300">Total Score</span>
+          <div className="text-base sm:text-lg font-bold">
             {score.totalScore}
             <span className="ml-1 text-xs font-normal text-slate-400">/ 100 · {score.grade}</span>
           </div>
