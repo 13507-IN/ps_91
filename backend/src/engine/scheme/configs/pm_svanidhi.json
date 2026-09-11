@@ -6,17 +6,31 @@
   "nodalAgency": "Ministry of Housing and Urban Affairs (MoHUA)",
   "targetAudience": "Street vendors, hawkers, small retail traders",
   "eligibility": {
-    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
-    "gender": ["MALE", "FEMALE", "OTHER"],
+    "categories": [
+      "GENERAL",
+      "SC",
+      "ST",
+      "OBC",
+      "MINORITY"
+    ],
+    "gender": [
+      "MALE",
+      "FEMALE",
+      "OTHER"
+    ],
     "ageMin": 18,
     "ageMax": 65,
-    "businessCategories": ["RETAIL", "SERVICES", "FOOD_PROCESSING"],
+    "businessCategories": [
+      "RETAIL",
+      "SERVICES",
+      "FOOD_PROCESSING"
+    ],
     "minProjectCost": 0,
     "maxProjectCost": 50000
   },
   "financial": {
     "maxLoanAmount": 50000,
-    "interestRate": 7.0,
+    "interestRate": 7,
     "subsidyPercentage": 0,
     "maxSubsidy": 0,
     "marginPercentage": 0,
@@ -32,5 +46,6 @@
   "priority": 1,
   "active": true,
   "version": "1.0.0",
-  "lastUpdated": "2026-01-01"
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://pmsvanidhi.mohua.gov.in/"
 }

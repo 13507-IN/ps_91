@@ -53,6 +53,7 @@ export interface FeasibilityAnalysisResult {
     loanRequired: number;
     marginPercentage: number;
     matchedSchemeName: string;
+    matchedSchemeUrl?: string;
     interestRate: number;
     tenureMonths: number;
     subsidyAmount: number;
@@ -314,6 +315,7 @@ export class FeasibilityService {
       loanRequired: baseProjectCost.loanAmount,
       marginPercentage: baseProjectCost.marginPercentage,
       matchedSchemeName: topScheme?.name ?? 'PMMY MUDRA Kishore',
+      matchedSchemeUrl: topScheme?.applyUrl,
       interestRate,
       tenureMonths,
       subsidyAmount,

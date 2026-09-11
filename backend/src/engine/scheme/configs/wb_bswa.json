@@ -6,18 +6,38 @@
   "nodalAgency": "Department of Micro, Small & Medium Enterprises and Textiles, Govt of West Bengal",
   "targetAudience": "Youth residing in West Bengal aged 18 to 45 years",
   "eligibility": {
-    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
-    "gender": ["MALE", "FEMALE", "OTHER"],
+    "categories": [
+      "GENERAL",
+      "SC",
+      "ST",
+      "OBC",
+      "MINORITY"
+    ],
+    "gender": [
+      "MALE",
+      "FEMALE",
+      "OTHER"
+    ],
     "ageMin": 18,
     "ageMax": 45,
-    "businessCategories": ["DAIRY", "FOOD_PROCESSING", "RETAIL", "TEXTILES_TAILORING", "POULTRY", "HANDICRAFT", "SERVICES"],
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "HANDICRAFT",
+      "SERVICES"
+    ],
     "minProjectCost": 50000,
     "maxProjectCost": 500000,
-    "states": ["West Bengal"]
+    "states": [
+      "West Bengal"
+    ]
   },
   "financial": {
     "maxLoanAmount": 500000,
-    "interestRate": 4.0,
+    "interestRate": 4,
     "subsidyPercentage": 10,
     "maxSubsidy": 25000,
     "marginPercentage": 0,
@@ -35,5 +55,6 @@
   "priority": 1,
   "active": true,
   "version": "1.0.0",
-  "lastUpdated": "2026-01-01"
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://bccs.wb.gov.in/"
 }

@@ -94,6 +94,7 @@ export class SchemeEvaluator {
         totalInterest,
         requiredDocuments: scheme.requiredDocuments,
         eligibilityNotes: notes,
+        applyUrl: scheme.applyUrl,
       });
     }
 

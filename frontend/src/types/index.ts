@@ -86,6 +86,7 @@ export interface MatchedSchemeResult {
   netLoanAmount: number;
   eligible: boolean;
   reason: string;
+  applyUrl?: string;
 }
 
 export interface CropSummary {
@@ -180,6 +181,7 @@ export interface FinancialPlan {
   loanRequired: number;
   marginPercentage: number;
   matchedSchemeName: string;
+  matchedSchemeUrl?: string;
   interestRate: number;
   tenureMonths: number;
   subsidyAmount: number;

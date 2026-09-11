@@ -7,17 +7,28 @@
   "targetAudience": "SC/ST entrepreneurs and Women entrepreneurs",
   "eligibility": {
     "eligibilityMode": "OR",
-    "categories": ["SC", "ST"],
-    "gender": ["FEMALE"],
+    "categories": [
+      "SC",
+      "ST"
+    ],
+    "gender": [
+      "FEMALE"
+    ],
     "ageMin": 18,
     "ageMax": 65,
-    "businessCategories": ["FOOD_PROCESSING", "TEXTILES_TAILORING", "RETAIL", "DAIRY", "SERVICES"],
+    "businessCategories": [
+      "FOOD_PROCESSING",
+      "TEXTILES_TAILORING",
+      "RETAIL",
+      "DAIRY",
+      "SERVICES"
+    ],
     "minProjectCost": 1000000,
     "maxProjectCost": 10000000
   },
   "financial": {
     "maxLoanAmount": 10000000,
-    "interestRate": 8.0,
+    "interestRate": 8,
     "subsidyPercentage": 0,
     "maxSubsidy": 0,
     "marginPercentage": 15,
@@ -35,5 +46,6 @@
   "priority": 3,
   "active": true,
   "version": "1.0.0",
-  "lastUpdated": "2026-01-01"
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://www.standupmitra.in/"
 }

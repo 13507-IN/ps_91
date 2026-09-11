@@ -1,6 +1,6 @@
 'use client';
 
-import { Landmark, Wallet, ArrowDown } from 'lucide-react';
+import { Landmark, Wallet, ArrowDown, ExternalLink } from 'lucide-react';
 import { FinancialPlan } from '@/types';
 import { inr, inrCompact, percent } from '@/lib/format';
 import { EmiSimulator } from './EmiSimulator';
@@ -46,7 +46,19 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
             </div>
           )}
         </div>
-        <div className="mt-1 text-base font-semibold text-slate-900">{plan.matchedSchemeName}</div>
+        <div className="mt-1 flex items-start justify-between gap-4">
+          <div className="text-base font-semibold text-slate-900">{plan.matchedSchemeName}</div>
+          {plan.matchedSchemeUrl && (
+            <a
+              href={plan.matchedSchemeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-brand-700"
+            >
+              Apply Now <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
+        </div>
         <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div>
             <div className="text-xs text-slate-500">Interest</div>

@@ -6,11 +6,30 @@
   "nodalAgency": "KVIC / Ministry of MSME",
   "targetAudience": "Rural entrepreneurs, SC/ST, OBC, Women, Minorities",
   "eligibility": {
-    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
-    "gender": ["MALE", "FEMALE", "OTHER"],
+    "categories": [
+      "GENERAL",
+      "SC",
+      "ST",
+      "OBC",
+      "MINORITY"
+    ],
+    "gender": [
+      "MALE",
+      "FEMALE",
+      "OTHER"
+    ],
     "ageMin": 18,
     "ageMax": 60,
-    "businessCategories": ["FOOD_PROCESSING", "TEXTILES_TAILORING", "POULTRY", "DAIRY", "HANDICRAFT", "SERVICES", "RETAIL", "AGRICULTURE"],
+    "businessCategories": [
+      "FOOD_PROCESSING",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "DAIRY",
+      "HANDICRAFT",
+      "SERVICES",
+      "RETAIL",
+      "AGRICULTURE"
+    ],
     "minProjectCost": 100000,
     "maxProjectCost": 5000000
   },
@@ -34,5 +53,6 @@
   "priority": 2,
   "active": true,
   "version": "1.0.0",
-  "lastUpdated": "2026-01-01"
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://www.kviconline.gov.in/pmegpeportal/pmegphome/index.jsp"
 }

@@ -39,6 +39,7 @@ export const SchemeConfigSchema = z.object({
   active: z.boolean().default(true),
   version: z.string().default('1.0.0'),
   lastUpdated: z.string().optional(),
+  applyUrl: z.string().url().optional(),
 });
 
 export type SchemeEligibility = z.infer<typeof SchemeEligibilitySchema>;
@@ -79,4 +80,5 @@ export interface MatchedSchemeResult {
   totalInterest: number;
   requiredDocuments: string[];
   eligibilityNotes: string[];
+  applyUrl?: string;
 }
