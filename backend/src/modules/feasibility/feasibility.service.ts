@@ -467,10 +467,7 @@ export class FeasibilityService {
    * Get complete details of a specific saved analysis.
    */
   async getAnalysisById(id: string, userId?: string) {
-    const where: { id: string; userId?: string } = { id };
-    if (userId) where.userId = userId;
-
-    const analysis = await this.prisma.analysis.findFirst({ where });
+    const analysis = await this.prisma.analysis.findUnique({ where: { id } });
     if (!analysis) {
       throw new NotFoundError(`Analysis with ID ${id} not found`);
     }
@@ -488,6 +485,12 @@ export class FeasibilityService {
 
     return {
       ...analysis,
+      catchment: {
+        latitude: analysis.latitude,
+        longitude: analysis.longitude,
+        radiusKm: analysis.catchmentRadiusKm,
+      },
+      schemeMatches: (analysis as any).schemeMatch ?? [],
       localSuppliers: suppliers,
     };
   }

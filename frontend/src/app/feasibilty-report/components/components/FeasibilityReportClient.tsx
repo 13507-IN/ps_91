@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api, apiEndpoints, hasSession } from '@/lib/api/client';
+import { toFeasibilityReport, type BackendFeasibilityResult } from '@/lib/api/feasibility';
 import { LAST_REPORT_KEY } from '@/lib/constants';
 import { mockReport } from './mockReportData';
 import type { FeasibilityReport } from '@/types';
@@ -45,14 +46,21 @@ export function FeasibilityReportClient({
 
   const { data: fetched, isError } = useQuery({
     queryKey: ['feasibility', reportId],
-    queryFn: () => api<FeasibilityReport>(`${apiEndpoints.feasibility.analyses}/${reportId}`),
-    enabled: Boolean(reportId) && !localReport,
+    queryFn: async () => {
+      const raw = await api<BackendFeasibilityResult>(`${apiEndpoints.feasibility.analyses}/${reportId}`);
+      // If the backend returned a report formatted as FeasibilityReport or BackendFeasibilityResult
+      if ((raw as unknown as FeasibilityReport).marketIntelligence?.catchmentRadiusKm !== undefined) {
+        return raw as unknown as FeasibilityReport;
+      }
+      return toFeasibilityReport(raw);
+    },
+    enabled: Boolean(reportId),
   });
 
-  // Only fall back to mockReport when there is no real reportId to fetch.
-  // When reportId is present and the fetch fails, we want the error UI to show.
+  // When reportId is provided, prioritize fetched report from backend.
+  // When no reportId is provided, fall back to localReport (sessionStorage) or mockReport.
   const report: FeasibilityReport | null =
-    localReport ?? fetched ?? (!reportId && mounted ? mockReport : null);
+    reportId ? (fetched ?? null) : (localReport ?? (mounted ? mockReport : null));
 
   if (!mounted && !reportId) {
     return <LoadingSkeleton />;

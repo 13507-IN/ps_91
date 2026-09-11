@@ -82,7 +82,7 @@ export function PastAssessments() {
           {analyses.map((analysis) => (
             <Link
               key={analysis.id}
-              href={`/feasibility-report/${analysis.id}`}
+              href={`/feasibility-report?id=${analysis.id}`}
               className="block p-4 rounded-xl border border-gray-200 hover:border-[#1A3A6B] hover:shadow-md transition-all group bg-white"
             >
               <div className="flex justify-between items-start mb-2">
