@@ -84,7 +84,7 @@ export default function LoginPage() {
               </svg>
             </div>
             <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest mb-1">
-              ArthSetu
+              अर्थसेतु
             </div>
             <h1 className="text-white text-2xl font-bold">{t.auth.welcomeBack}</h1>
             <p className="text-white/60 text-sm mt-1">{t.auth.signInToAccess}</p>

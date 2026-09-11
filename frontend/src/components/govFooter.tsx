@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import React from 'react';
 import Link from 'next/link';
 import { useTranslation } from '@/lib/i18n/useTranslation';
@@ -24,7 +24,7 @@ export default function GovFooter() {
               </div>
               <div>
                 <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest">
-                  ArthSetu
+                  अर्थसेतु
                 </div>
                 <div className="text-white font-bold text-lg leading-tight">{t.common.appName}</div>
               </div>
