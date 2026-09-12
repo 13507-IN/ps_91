@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Save, Loader2, User, MapPin, Plus } from 'lucide-react';
+import { Save, Loader2, User, MapPin, Plus, Check } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import toast from 'react-hot-toast';
 import AuthGuard from '@/components/AuthGuard';
@@ -91,7 +91,11 @@ function DashboardContent() {
       queryClient.invalidateQueries({ queryKey: ['feasibility-analyses'] });
       setForm({});
       setSaved(true);
+      toast.success(t.dashboard.changesSavedSuccess || 'Your changes saved successfully!');
       setTimeout(() => setSaved(false), 3000);
+    },
+    onError: () => {
+      toast.error(t.dashboard.villageSaveError || 'Failed to save changes');
     },
   });
 
@@ -138,8 +142,8 @@ function DashboardContent() {
     };
 
     const clean = cleanLocation(current.location);
-    const saved = cleanLocation(user.location);
-    if (clean && JSON.stringify(clean) !== JSON.stringify(saved)) {
+    const savedLoc = cleanLocation(user.location);
+    if (clean && JSON.stringify(clean) !== JSON.stringify(savedLoc)) {
       body.location = clean;
     }
 
@@ -149,7 +153,13 @@ function DashboardContent() {
     if (current.dateOfBirth && current.dateOfBirth !== user.dateOfBirth) body.dateOfBirth = current.dateOfBirth;
     if (current.category !== user.category) body.category = current.category;
     if (current.isMinority !== user.isMinority) body.isMinority = current.isMinority;
-    if (Object.keys(body).length > 0) updateProfile.mutate(body);
+    if (Object.keys(body).length > 0) {
+      updateProfile.mutate(body);
+    } else {
+      setSaved(true);
+      toast.success(t.dashboard.changesSavedSuccess || 'Your changes saved successfully!');
+      setTimeout(() => setSaved(false), 3000);
+    }
   };
 
   function selectVillage(v: VillageSearchResult) {
@@ -410,10 +420,28 @@ function DashboardContent() {
           <button
             onClick={handleSave}
             disabled={updateProfile.isPending}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#1A3A6B] hover:bg-[#1E4A8A] disabled:opacity-60 text-white font-semibold text-sm transition-colors"
+            className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-white font-semibold text-sm transition-all duration-200 shadow-sm ${
+              saved
+                ? 'bg-emerald-600 hover:bg-emerald-700'
+                : 'bg-[#1A3A6B] hover:bg-[#1E4A8A] disabled:opacity-60'
+            }`}
           >
-            {updateProfile.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
-            {t.dashboard.saveChanges}
+            {updateProfile.isPending ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>{t.dashboard.saving || 'Saving...'}</span>
+              </>
+            ) : saved ? (
+              <>
+                <Check className="h-4 w-4" />
+                <span>{t.dashboard.saved || 'Saved'}</span>
+              </>
+            ) : (
+              <>
+                <Save className="h-4 w-4" />
+                <span>{t.dashboard.saveChanges}</span>
+              </>
+            )}
           </button>
         </div>
 
