@@ -261,9 +261,14 @@ export function HyperlocalBusinessExplorer({
       const url = `${endpoint}?lat=${latitude}&lng=${longitude}&radiusKm=${radiusKm}${
         category !== 'ALL' ? `&category=${category}` : ''
       }`;
-      return api<{ center: { lat: number; lng: number }; totalFound: number; businesses: HyperlocalBusinessPin[] }>(url);
+      try {
+        return await api<{ center: { lat: number; lng: number }; totalFound: number; businesses: HyperlocalBusinessPin[] }>(url);
+      } catch {
+        // If remote backend returns 404 (endpoint not deployed yet on Render) or network fails, return empty to trigger seed fallback
+        return { center: { lat: latitude, lng: longitude, radiusKm }, totalFound: 0, businesses: [] };
+      }
     },
-    retry: 1,
+    retry: false,
   });
 
   // Assemble list with seed fallback projection if backend returns empty
