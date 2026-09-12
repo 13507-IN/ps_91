@@ -20,7 +20,7 @@ export default function GovFooter() {
               {/* Mini emblem */}
               <div className="w-12 h-12 rounded-full border-2 border-[#FF9933] flex items-center justify-center bg-white flex-shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo.png" alt="UdyamSetu AI Logo" className="w-9 h-9 rounded-full object-contain" />
+                <img src="/logo.png" alt="ArthSetu Logo" className="w-9 h-9 rounded-full object-contain" />
               </div>
               <div>
                 <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest">

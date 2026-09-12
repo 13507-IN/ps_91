@@ -18,6 +18,7 @@ import { AIRecommendationSection } from './AIRecommendationSection';
 import { ActionPlanSection } from './ActionPlanSection';
 import { ScoreBreakdownChart } from './ScoreBreakdownChart';
 import { LocalSuppliersSection } from '../LocalSuppliersSection';
+import { HyperlocalBusinessExplorer } from '@/components/HyperlocalBusinessExplorer/HyperlocalBusinessExplorer';
 
 export function FeasibilityReportClient({
   reportId,
@@ -119,6 +120,15 @@ export function FeasibilityReportClient({
             <LocalSuppliersSection suppliers={report.localSuppliers || []} category={report.businessCategory} />
           </div>
         </div>
+
+        <HyperlocalBusinessExplorer
+          latitude={report.catchment?.latitude ?? 23.4015}
+          longitude={report.catchment?.longitude ?? 88.5012}
+          locationName={`${report.businessCategory.replace('_', ' ')} Catchment Area`}
+          initialRadiusKm={report.catchment?.radiusKm ?? 10}
+          initialCategory={report.businessCategory}
+          title="Hyperlocal UDYAM & MSME Registered Business Explorer"
+        />
 
         <FinancialPlanSection
           plan={report.financialPlan}

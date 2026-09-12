@@ -185,6 +185,7 @@ export const apiEndpoints = {
     list: '/api/businesses',
     create: '/api/businesses',
     density: '/api/businesses/density',
+    hyperlocal: '/api/businesses/hyperlocal',
   },
   ai: {
     classify: '/api/ai/classify',

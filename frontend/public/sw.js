@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'udyamsetu-pwa-v1';
+const CACHE_VERSION = 'arthsetu-pwa-v2';
 const PRECACHE_URLS = ['/', '/logo.png', '/manifest.json'];
 
 self.addEventListener('install', (event) => {
@@ -52,7 +52,7 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('push', (event) => {
-  let data = { title: 'UdyamSetu AI', body: 'You have a new notification.' };
+  let data = { title: 'ArthSetu AI', body: 'You have a new notification.' };
   try {
     data = JSON.parse(event.data.text());
   } catch {}

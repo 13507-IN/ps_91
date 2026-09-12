@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import AuthGuard from '@/components/AuthGuard';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { PastAssessments } from './components/PastAssessments';
+import { HyperlocalBusinessExplorer } from '@/components/HyperlocalBusinessExplorer/HyperlocalBusinessExplorer';
 import type { UserProfile, UpdateUserProfileBody } from '@/types';
 
 
@@ -221,8 +222,15 @@ function DashboardContent() {
     }
   }
 
+  const userLat = typeof current.location?.latitude === 'number' ? current.location.latitude : 23.4015;
+  const userLng = typeof current.location?.longitude === 'number' ? current.location.longitude : 88.5012;
+  const userLocationName =
+    typeof current.location?.village === 'string' && current.location.village
+      ? `${current.location.village}, ${current.location.district ?? 'Nadia'}`
+      : 'Nadia Catchment';
+
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8">
+    <div className="mx-auto max-w-5xl px-4 py-8">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-[#1A3A6B]">{t.dashboard.yourProfile}</h1>
@@ -444,6 +452,13 @@ function DashboardContent() {
             )}
           </button>
         </div>
+
+        <HyperlocalBusinessExplorer
+          latitude={userLat}
+          longitude={userLng}
+          locationName={userLocationName}
+          title="Hyperlocal UDYAM & MSME Enterprise Ecosystem"
+        />
 
         <PastAssessments />
       </div>

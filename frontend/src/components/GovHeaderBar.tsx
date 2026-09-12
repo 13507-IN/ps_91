@@ -90,7 +90,7 @@ export default function GovHeaderBar() {
           <Link href="/" className="flex items-center gap-4 group" aria-label="ArthSetu — Home">
             <div className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-[#1A3A6B] flex items-center justify-center bg-white shadow-sm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt="UdyamSetu AI Logo" className="w-12 h-12 rounded-full object-contain" />
+              <img src="/logo.png" alt="ArthSetu Logo" className="w-12 h-12 rounded-full object-contain" />
             </div>
             <div>
               <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest leading-none mb-0.5">अर्थसेतु</div>

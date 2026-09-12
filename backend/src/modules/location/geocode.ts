@@ -13,7 +13,7 @@ export interface GeocodeResult {
 }
 
 const BASE_URL = 'https://nominatim.openstreetmap.org/search';
-const USER_AGENT = 'UdyamSetu/1.0';
+const USER_AGENT = 'ArthSetu/1.0';
 
 const join = (...parts: Array<string | undefined>): string =>
   parts.filter((p) => p && p.trim()).join(', ');

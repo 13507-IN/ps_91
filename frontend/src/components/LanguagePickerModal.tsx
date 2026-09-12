@@ -46,7 +46,7 @@ export default function LanguagePickerModal() {
           {/* Logo mark */}
           <div className="mx-auto w-16 h-16 rounded-full border-2 border-[#1A3A6B] flex items-center justify-center mb-5 bg-white shadow-sm">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="UdyamSetu AI Logo" className="w-12 h-12 rounded-full object-contain" />
+            <img src="/logo.png" alt="ArthSetu Logo" className="w-12 h-12 rounded-full object-contain" />
           </div>
 
           <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest mb-1">अर्थसेतु</div>

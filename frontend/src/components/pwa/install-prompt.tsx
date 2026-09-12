@@ -54,15 +54,15 @@ export default function InstallPrompt() {
           </button>
 
           <div className="flex items-center gap-3 mb-3">
-            <Image src="/logo.png" alt="UdyamSetu AI" width={48} height={48} className="h-12 w-12 rounded-full border border-gray-200 object-contain dark:border-neutral-600" />
+            <Image src="/logo.png" alt="ArthSetu AI" width={48} height={48} className="h-12 w-12 rounded-full border border-gray-200 object-contain dark:border-neutral-600" />
             <div>
-              <h3 className="font-bold text-[#1A3A6B] dark:text-white">UdyamSetu AI</h3>
+              <h3 className="font-bold text-[#1A3A6B] dark:text-white">ArthSetu AI</h3>
               <p className="text-xs text-gray-500 dark:text-neutral-400">Business intelligence for entrepreneurs</p>
             </div>
           </div>
 
           <p className="mb-4 text-sm text-gray-600 dark:text-neutral-300">
-            Install UdyamSetu AI for quick access and offline support.
+            Install ArthSetu AI for quick access and offline support.
           </p>
 
           <div className="flex gap-2">

@@ -110,4 +110,35 @@ export const businessRoutes: FastifyPluginAsync = async (fastify) => {
       return reply.send(result);
     },
   });
+
+  /**
+   * GET /api/businesses/hyperlocal
+   * Fetch geotagged UDYAM & MSME registered enterprises near lat/lng
+   */
+  fastify.get('/hyperlocal', {
+    schema: {
+      tags: ['Enterprise & Business Registry'],
+      summary: 'Fetch geotagged registered enterprises hyperlocally for interactive map display',
+      querystring: {
+        type: 'object',
+        properties: {
+          lat: { type: 'number' },
+          lng: { type: 'number' },
+          radiusKm: { type: 'number', default: 10 },
+          category: { type: 'string' },
+        },
+        required: ['lat', 'lng'],
+      },
+    },
+    handler: async (request, reply) => {
+      const query = businessDensityQuerySchema.parse(request.query);
+      const result = await service.getHyperlocalBusinesses(
+        query.lat,
+        query.lng,
+        query.radiusKm,
+        query.category,
+      );
+      return reply.send(result);
+    },
+  });
 };

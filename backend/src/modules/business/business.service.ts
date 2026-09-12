@@ -206,6 +206,130 @@ export class BusinessService {
   }
 
   /**
+   * Get registered UDYAM & MSME businesses hyperlocally around selected lat/lng.
+   */
+  async getHyperlocalBusinesses(
+    lat: number,
+    lng: number,
+    radiusKm = 10,
+    category?: BusinessCategory,
+  ) {
+    const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+      const R = 6371;
+      const dLat = ((lat2 - lat1) * Math.PI) / 180;
+      const dLon = ((lon2 - lon1) * Math.PI) / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos((lat1 * Math.PI) / 180) *
+          Math.cos((lat2 * Math.PI) / 180) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return Math.round(R * c * 100) / 100;
+    };
+
+    try {
+      const latDelta = radiusKm / 111.0;
+      const lngDelta = radiusKm / (111.0 * Math.cos((lat * Math.PI) / 180));
+
+      let nearbyVillages: Array<{ id: number }> = [];
+      try {
+        nearbyVillages = await this.locationService.getNearbyVillages(lat, lng, radiusKm, 300);
+      } catch {
+        // location lookup fallback
+      }
+      const villageIds = nearbyVillages.map((v) => v.id);
+
+      const ORConditions: Array<Record<string, unknown>> = [
+        {
+          latitude: { gte: lat - latDelta, lte: lat + latDelta },
+          longitude: { gte: lng - lngDelta, lte: lng + lngDelta },
+        },
+      ];
+      if (villageIds.length > 0) {
+        ORConditions.push({ villageId: { in: villageIds } });
+      }
+
+      const where: Record<string, unknown> = { OR: ORConditions };
+      if (category) where.category = category;
+
+      const dbBusinesses = await this.prisma.business.findMany({
+        where,
+        take: 100,
+        include: {
+          village: {
+            select: {
+              id: true,
+              name: true,
+              latitude: true,
+              longitude: true,
+              block: {
+                select: {
+                  name: true,
+                  district: { select: { name: true } },
+                },
+              },
+            },
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+      });
+
+      const results = dbBusinesses
+        .map((b) => {
+          const bLat = b.latitude ?? b.village?.latitude;
+          const bLng = b.longitude ?? b.village?.longitude;
+          if (bLat == null || bLng == null) return null;
+
+          const distanceKm = calculateDistance(lat, lng, bLat, bLng);
+
+          return {
+            id: b.id,
+            name: b.name ?? 'Micro Enterprise',
+            category: b.category,
+            subcategory: b.subcategory ?? 'Local Enterprise',
+            products: b.products,
+            latitude: bLat,
+            longitude: bLng,
+            operatingStatus: b.operatingStatus,
+            scale: b.scale ?? 'MICRO',
+            source: b.source,
+            registrationId: b.registrationId ?? `UDYAM-REG-${b.id.slice(-6)}`,
+            villageName: b.village?.name ?? 'Local Village',
+            blockName: b.village?.block?.name ?? 'Local Block',
+            districtName: b.village?.block?.district?.name ?? 'District',
+            distanceKm,
+          };
+        })
+        .filter((b): b is NonNullable<typeof b> => b !== null && b.distanceKm <= radiusKm);
+
+      if (category) {
+        const catFiltered = results.filter((b) => b.category === category);
+        catFiltered.sort((a, b) => a.distanceKm - b.distanceKm);
+        return {
+          center: { lat, lng, radiusKm },
+          totalFound: catFiltered.length,
+          businesses: catFiltered.slice(0, 50),
+        };
+      }
+
+      results.sort((a, b) => a.distanceKm - b.distanceKm);
+      return {
+        center: { lat, lng, radiusKm },
+        totalFound: results.length,
+        businesses: results.slice(0, 50),
+      };
+    } catch (err) {
+      console.error('Hyperlocal business query error:', err);
+      return {
+        center: { lat, lng, radiusKm },
+        totalFound: 0,
+        businesses: [],
+      };
+    }
+  }
+
+  /**
    * List all supported business categories with domain metadata and typical capital requirements.
    */
   getCategories(): CategoryInfo[] {

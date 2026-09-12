@@ -36,6 +36,14 @@ export const businessDensityQuerySchema = z.object({
   category: z.nativeEnum(BusinessCategory).optional(),
 });
 
+export const hyperlocalBusinessQuerySchema = z.object({
+  lat: z.coerce.number().min(-90).max(90),
+  lng: z.coerce.number().min(-180).max(180),
+  radiusKm: z.coerce.number().positive().max(50).default(10),
+  category: z.nativeEnum(BusinessCategory).optional(),
+});
+
 export type ListBusinessesQuery = z.infer<typeof listBusinessesQuerySchema>;
 export type CreateBusinessBody = z.input<typeof createBusinessBodySchema>;
 export type BusinessDensityQuery = z.infer<typeof businessDensityQuerySchema>;
+export type HyperlocalBusinessQuery = z.infer<typeof hyperlocalBusinessQuerySchema>;

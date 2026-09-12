@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import React, { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { Search, MapPin, CheckCircle, Loader2, AlertTriangle, Navigation } from 'lucide-react';
@@ -219,7 +219,7 @@ export default function StepLocation({ draft, updateDraft, onNext }: StepLocatio
     setGeocoding(true);
     try {
       const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(exactAddress)}&format=json&limit=1&countrycodes=in`;
-      const res = await fetch(url, { headers: { 'User-Agent': 'UdyamSetu/1.0' } });
+      const res = await fetch(url, { headers: { 'User-Agent': 'ArthSetu/1.0' } });
       if (res.ok) {
         const data = await res.json();
         if (data.length > 0 && data[0].lat && data[0].lon) {
