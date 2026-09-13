@@ -1,0 +1,50 @@
+commodity,variety,market,district,state,min_price,max_price,modal_price,unit,date
+Paddy,Common,Bankura Mandi,Bankura,West Bengal,2109.3,2366.4,2230.5,Quintal,2026-09-01
+Paddy,Common,Barjora Mandi,Bankura,West Bengal,2112.5,2364.9,2242.8,Quintal,2026-09-01
+Paddy,Common,Jamtora Agricultural Market,Bankura,West Bengal,2097.6,2334.3,2270.5,Quintal,2026-09-01
+Rice,Parboiled,Bankura Mandi,Bankura,West Bengal,2816.6,3187.9,3067.6,Quintal,2026-09-01
+Rice,Parboiled,Bishnupur Mandi,Bankura,West Bengal,2818.4,3224.3,3049.3,Quintal,2026-09-01
+Rice,Parboiled,Sonamukhi Mandi,Bankura,West Bengal,2808.4,3179.4,3070.9,Quintal,2026-09-01
+Rice,Parboiled,Barjora Mandi,Bankura,West Bengal,2825,3231.3,3047.2,Quintal,2026-09-01
+Milk,Cow,Bankura Mandi,Bankura,West Bengal,39.8,46.8,44,Litre,2026-09-01
+Milk,Cow,Raipur Mandi,Bankura,West Bengal,40.3,47,44.2,Litre,2026-09-01
+Milk,Cow,Onda Mandi,Bankura,West Bengal,39.6,47,43.8,Litre,2026-09-01
+Milk,Buffalo,Bankura Mandi,Bankura,West Bengal,51.7,60.6,56.5,Litre,2026-09-01
+Milk,Buffalo,Khatra Mandi,Bankura,West Bengal,51.5,59.7,57.4,Litre,2026-09-01
+Mustard,Sarson,Bankura Mandi,Bankura,West Bengal,5234.1,5747,5420.3,Quintal,2026-09-01
+Mustard,Sarson,Onda Mandi,Bankura,West Bengal,5198.5,5656.9,5429.8,Quintal,2026-09-01
+Mustard Oil,Filtered,Bankura Mandi,Bankura,West Bengal,150.7,166.3,160.4,Litre,2026-09-01
+Mustard Oil,Filtered,Bishnupur Mandi,Bankura,West Bengal,151.5,168,161.1,Litre,2026-09-01
+Mustard Oil,Filtered,Sonamukhi Mandi,Bankura,West Bengal,148.7,169.1,159.4,Litre,2026-09-01
+Potato,Jyoti,Bankura Mandi,Bankura,West Bengal,1339.6,1649.6,1513.1,Quintal,2026-09-01
+Potato,Jyoti,Bishnupur Mandi,Bankura,West Bengal,1360.2,1658.1,1520.6,Quintal,2026-09-01
+Potato,Jyoti,Simlapal Mandi,Bankura,West Bengal,1337.3,1654.3,1527.2,Quintal,2026-09-01
+Wheat,Common,Barjora Mandi,Bankura,West Bengal,2641.6,2976.3,2790.5,Quintal,2026-09-01
+Wheat,Common,Jamtora Agricultural Market,Bankura,West Bengal,2631.4,2939.1,2806.5,Quintal,2026-09-01
+Tomato,Local,Bankura Mandi,Bankura,West Bengal,1209.1,2001.4,1635.4,Quintal,2026-09-01
+Tomato,Local,Onda Mandi,Bankura,West Bengal,1198.1,2016.9,1640.5,Quintal,2026-09-01
+Tomato,Local,Simlapal Mandi,Bankura,West Bengal,1199.9,1994.8,1660.3,Quintal,2026-09-01
+Brinjal,Local,Bankura Mandi,Bankura,West Bengal,750.5,1141.1,956.6,Quintal,2026-09-01
+Brinjal,Local,Khatra Mandi,Bankura,West Bengal,754.5,1151.7,958.9,Quintal,2026-09-01
+Brinjal,Local,Patrasayer Mandi,Bankura,West Bengal,745.5,1139.5,943.6,Quintal,2026-09-01
+Cauliflower,Local,Bishnupur Mandi,Bankura,West Bengal,1311.2,1894.5,1596.7,Quintal,2026-09-01
+Cauliflower,Local,Raipur Mandi,Bankura,West Bengal,1297.9,1882,1589.3,Quintal,2026-09-01
+Onion,Nasik,Bankura Mandi,Bankura,West Bengal,1841.6,2496,2198.8,Quintal,2026-09-01
+Onion,Nasik,Sonamukhi Mandi,Bankura,West Bengal,1868.5,2499,2219.3,Quintal,2026-09-01
+Green Chilli,Local,Khatra Mandi,Bankura,West Bengal,2413.5,3183.9,2777.1,Quintal,2026-09-01
+Green Chilli,Local,Simlapal Mandi,Bankura,West Bengal,2394.7,3171.4,2788.7,Quintal,2026-09-01
+Bottle Gourd,Local,Raipur Mandi,Bankura,West Bengal,902,1359.3,1112.3,Quintal,2026-09-01
+Bottle Gourd,Local,Patrasayer Mandi,Bankura,West Bengal,898.2,1358.2,1116.5,Quintal,2026-09-01
+Khesari (Pulse),Local,Barjora Mandi,Bankura,West Bengal,3817.9,4326.1,4040.8,Quintal,2026-09-01
+Khesari (Pulse),Local,Jamtora Agricultural Market,Bankura,West Bengal,3801.1,4308.7,4088.5,Quintal,2026-09-01
+Mango,Langra,Bishnupur Mandi,Bankura,West Bengal,1492.2,2209.2,1857.5,Quintal,2026-09-01
+Mango,Langra,Sonamukhi Mandi,Bankura,West Bengal,1498.6,2189.5,1867.1,Quintal,2026-09-01
+Egg,Poultry,Bankura Mandi,Bankura,West Bengal,5.5,7,6.4,Piece,2026-09-01
+Egg,Poultry,Khatra Mandi,Bankura,West Bengal,5.5,7,6.4,Piece,2026-09-01
+Egg,Poultry,Patrasayer Mandi,Bankura,West Bengal,5.5,7,6.4,Piece,2026-09-01
+Broiler Chicken,Live,Bishnupur Mandi,Bankura,West Bengal,116,134.4,125.4,Kg,2026-09-01
+Broiler Chicken,Live,Onda Mandi,Bankura,West Bengal,115.6,134.3,125.6,Kg,2026-09-01
+Fish (Rohu),Fresh,Barjora Mandi,Bankura,West Bengal,240.7,308.3,272.7,Kg,2026-09-01
+Fish (Rohu),Fresh,Simlapal Mandi,Bankura,West Bengal,240.9,307.3,274.1,Kg,2026-09-01
+Fish (Katla),Fresh,Bankura Mandi,Bankura,West Bengal,229.3,298.1,261.1,Kg,2026-09-01
+Fish (Katla),Fresh,Jamtora Agricultural Market,Bankura,West Bengal,231.3,298.6,260.4,Kg,2026-09-01

@@ -1,0 +1,55 @@
+udyam_id,enterprise_name,category,subcategory,products,village_code,latitude,longitude,scale,price_range,seasonality
+UDYAM-WB-10-024001,Kankradhara Milk Chilling Unit,DAIRY,Chilled Milk,"Chilled Milk, Cream",3130101,23.2523,87.0846,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024002,Purandarpur Rice Mill,FOOD_PROCESSING,Paddy Milling,"Polished Rice, Parboiled Rice, Rice Bran",3130102,23.2628,87.0543,MICRO,LOW,Year-round
+UDYAM-WB-10-024003,Beliatore Sal Leaf Plate Unit,HANDICRAFT,Leaf Craft,"Sal Leaf Plates, Bowls",3130201,23.1811,87.1971,SMALL,MEDIUM,Year-round
+UDYAM-WB-10-024004,Bikna Layer Poultry Farm,POULTRY,Egg Production,"Eggs, Spent Hens",3130202,23.2363,87.1404,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024005,Barjora Rural Rice Mill,FOOD_PROCESSING,Paddy Milling,"Polished Rice, Parboiled Rice, Rice Bran",3130301,23.3996,87.3006,MICRO,LOW,Year-round
+UDYAM-WB-10-024006,Ankura Kirana Store,RETAIL,General Store,"Grocery, Toiletries, FMCG",3130302,23.4467,87.2592,MICRO,LOW,Year-round
+UDYAM-WB-10-024007,Dhadka Goods Transport,TRANSPORT,Trucking,"Paddy, Vegetable Haulage",3130303,23.4623,87.3182,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024008,Chhatna Vegetable Growers Group,AGRICULTURE,Vegetable Farming,"Tomato, Brinjal, Cauliflower",3130401,23.3279,87.0013,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024009,Magura Rice Mill,FOOD_PROCESSING,Paddy Milling,"Polished Rice, Parboiled Rice, Rice Bran",3130402,23.2827,86.9518,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024010,Gangajalghati Milk Chilling Unit,DAIRY,Chilled Milk,"Chilled Milk, Cream",3130501,23.4397,87.1406,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024011,Lalbazar Mustard Oil Ghani,FOOD_PROCESSING,Oil Pressing,"Mustard Oil, Oil Cake",3130502,23.4542,87.0968,MICRO,MEDIUM,RABI
+UDYAM-WB-10-024012,Kapista Vegetable Growers Group,AGRICULTURE,Vegetable Farming,"Tomato, Brinjal, Cauliflower",3130503,23.3974,87.1581,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024013,Indpur Mango Orchard Farm,AGRICULTURE,Fruit Cultivation,"Mango, Ber",3130601,23.1676,86.9494,MICRO,LOW,ZAID
+UDYAM-WB-10-024014,Baharamuri Bamboo Craft Workshop,HANDICRAFT,Bamboo Craft,"Baskets, Mats, Murah",3130602,23.1186,86.9061,SMALL,HIGH,Year-round
+UDYAM-WB-10-024015,Nekrisole Dairy Co-op,DAIRY,Milk Collection,"Raw Milk, Curd, Paneer",3130603,23.1849,86.9637,SMALL,LOW,Year-round
+UDYAM-WB-10-024016,Mejhia Kirana Store,RETAIL,General Store,"Grocery, Toiletries, FMCG",3130701,23.5553,87.1194,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024017,Kotalpur Goods Transport,TRANSPORT,Trucking,"Paddy, Vegetable Haulage",3130702,23.6065,87.0783,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024018,Bakulia Milk Chilling Unit,DAIRY,Chilled Milk,"Chilled Milk, Cream",3130703,23.6092,87.1417,MICRO,LOW,Year-round
+UDYAM-WB-10-024019,Onda Rice Mill,FOOD_PROCESSING,Paddy Milling,"Polished Rice, Parboiled Rice, Rice Bran",3130801,23.2684,87.2169,MICRO,LOW,Year-round
+UDYAM-WB-10-024020,Ranpur Ghee Manufacturing,DAIRY,Ghee & Butter,"Ghee, Butter",3130802,23.2207,87.1698,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024021,Saltora Vegetable Growers Group,AGRICULTURE,Vegetable Farming,"Tomato, Brinjal, Cauliflower",3130901,23.5411,86.9478,SMALL,LOW,Year-round
+UDYAM-WB-10-024022,Gharga Terracotta Craft Workshop,HANDICRAFT,Clay Modelling,"Bankura Horse, Terracotta Idols, Pots",3130902,23.5538,86.9058,MICRO,HIGH,Year-round
+UDYAM-WB-10-024023,Sonamukhi Sweet & Snack Shop,FOOD_PROCESSING,Sweets Manufacturing,"Sandesh, Rasgulla, Namkeen",3131001,23.2859,87.4303,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024024,Chanda Petty Shop,RETAIL,Provisions,"Grocery, Stationery",3131002,23.3381,87.3955,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024025,Radhamohanpur Baluchari Silk Weaving,TEXTILES_TAILORING,Handloom Silk,"Baluchari Saree, Silk Dupatta",3131003,23.3412,87.4512,SMALL,MEDIUM,Year-round
+UDYAM-WB-10-024026,Radhanagar Handloom Weaving Co-op,TEXTILES_TAILORING,Cotton Handloom,"Cotton Saree, Gamchha",3131101,23.0988,87.3401,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024027,Panchmura Sal Leaf Plate Unit,HANDICRAFT,Leaf Craft,"Sal Leaf Plates, Bowls",3131102,23.0553,87.2977,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024028,Indas Vegetable Growers Group,AGRICULTURE,Vegetable Farming,"Tomato, Brinjal, Cauliflower",3131201,23.2125,87.6365,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024029,Khiruli Terracotta Craft Workshop,HANDICRAFT,Clay Modelling,"Bankura Horse, Terracotta Idols, Pots",3131202,23.2197,87.5946,MICRO,HIGH,Year-round
+UDYAM-WB-10-024030,Bahadurpur Kirana Store,RETAIL,General Store,"Grocery, Toiletries, FMCG",3131203,23.1651,87.6579,SMALL,LOW,Year-round
+UDYAM-WB-10-024031,Joypur Pickle & Sauce Unit,FOOD_PROCESSING,Fruit Processing,"Mango Pickle, Tomato Sauce",3131301,23.1716,87.4186,MICRO,LOW,ZAID
+UDYAM-WB-10-024032,Baidyapur Vegetable Growers Group,AGRICULTURE,Vegetable Farming,"Tomato, Brinjal, Cauliflower",3131302,23.1236,87.3769,MICRO,LOW,Year-round
+UDYAM-WB-10-024033,Kotulpur Petty Shop,RETAIL,Provisions,"Grocery, Stationery",3131401,22.9991,87.6047,SMALL,LOW,Year-round
+UDYAM-WB-10-024034,Jagannathpur Pickle & Sauce Unit,FOOD_PROCESSING,Fruit Processing,"Mango Pickle, Tomato Sauce",3131402,22.9548,87.5626,MICRO,MEDIUM,ZAID
+UDYAM-WB-10-024035,Langulpara Baluchari Silk Weaving,TEXTILES_TAILORING,Handloom Silk,"Baluchari Saree, Silk Dupatta",3131403,23.0063,87.6222,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024036,Patrasayer Kirana Store,RETAIL,General Store,"Grocery, Toiletries, FMCG",3131501,23.1965,87.5471,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024037,Kushdanga Ghee Manufacturing,DAIRY,Ghee & Butter,"Ghee, Butter",3131502,23.2502,87.5058,SMALL,LOW,Year-round
+UDYAM-WB-10-024038,Hirbandh Dokra Metal Craft Unit,HANDICRAFT,Lost-wax Casting,"Dokra Idols, Jewellery, Figurines",3131601,23.0825,86.7857,MICRO,HIGH,Year-round
+UDYAM-WB-10-024039,Saradamoni Mustard Growers Co-op,AGRICULTURE,Oilseed Farming,Mustard Seed,3131602,23.0356,86.7459,MICRO,LOW,RABI
+UDYAM-WB-10-024040,Khatra Ghee Manufacturing,DAIRY,Ghee & Butter,"Ghee, Butter",3131701,22.9998,86.8638,MICRO,LOW,Year-round
+UDYAM-WB-10-024041,Sundaripur Agri Input Shop,RETAIL,Farm Inputs,"Seeds, Fertiliser, Pesticides",3131702,22.9486,86.826,MICRO,LOW,Year-round
+UDYAM-WB-10-024042,Raipur Sal Leaf Plate Unit,HANDICRAFT,Leaf Craft,"Sal Leaf Plates, Bowls",3131801,22.8091,86.6331,SMALL,HIGH,Year-round
+UDYAM-WB-10-024043,Dulmeyachati Mustard Growers Co-op,AGRICULTURE,Oilseed Farming,Mustard Seed,3131802,22.7664,86.5917,MICRO,MEDIUM,RABI
+UDYAM-WB-10-024044,Sina Goat Rearing Farm,LIVESTOCK,Goat Rearing,"Goat Kids, Meat",3131803,22.8231,86.6519,MICRO,LOW,Year-round
+UDYAM-WB-10-024045,Ranibandh Mustard Growers Co-op,AGRICULTURE,Oilseed Farming,Mustard Seed,3131901,22.879,86.7964,MICRO,MEDIUM,RABI
+UDYAM-WB-10-024046,Mauhata Bamboo Craft Workshop,HANDICRAFT,Bamboo Craft,"Baskets, Mats, Murah",3131902,22.83,86.7571,SMALL,MEDIUM,Year-round
+UDYAM-WB-10-024047,Sarenga Mango Orchard Farm,AGRICULTURE,Fruit Cultivation,"Mango, Ber",3132001,22.9204,86.7645,MICRO,MEDIUM,ZAID
+UDYAM-WB-10-024048,Baragari Sal Leaf Plate Unit,HANDICRAFT,Leaf Craft,"Sal Leaf Plates, Bowls",3132002,22.8717,86.7151,MICRO,MEDIUM,Year-round
+UDYAM-WB-10-024049,Simlapal Broiler Farm,POULTRY,Broiler Farming,Broiler Chicken,3132101,22.9437,86.8903,SMALL,MEDIUM,Year-round
+UDYAM-WB-10-024050,Sonardihi Milk Chilling Unit,DAIRY,Chilled Milk,"Chilled Milk, Cream",3132102,22.8952,86.8497,MICRO,LOW,Year-round
+UDYAM-WB-10-024051,Bishpur Petty Shop,RETAIL,Provisions,"Grocery, Stationery",3132103,22.8842,86.9075,SMALL,LOW,Year-round
+UDYAM-WB-10-024052,Taldangra Mango Orchard Farm,AGRICULTURE,Fruit Cultivation,"Mango, Ber",3132201,22.9124,86.9602,MICRO,MEDIUM,ZAID
+UDYAM-WB-10-024053,Mangalpur Terracotta Craft Workshop,HANDICRAFT,Clay Modelling,"Bankura Horse, Terracotta Idols, Pots",3132202,22.9657,86.9177,SMALL,MEDIUM,Year-round
+UDYAM-WB-10-024054,Harmasra Layer Poultry Farm,POULTRY,Egg Production,"Eggs, Spent Hens",3132203,22.9604,86.9785,MICRO,LOW,Year-round
