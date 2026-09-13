@@ -683,7 +683,34 @@ const translations = {
       shortName: { EN: 'WB Bhabishyat', BN: 'পশ্চিমবঙ্গ ভবিষ্যৎ', HI: 'पश्चिम बंगाल भविष्यत' },
       description: { EN: 'West Bengal State Scheme providing collateral-free loans up to ₹5 Lakh with 10% government subsidy for youth starting micro enterprises.', BN: 'পশ্চিমবঙ্গ রাজ্য প্রকল্প যুবকদের মাইক্রো এন্টারপ্রাইজ শুরু করার জন্য ১০% সরকারি ভর্তুকি সহ ₹৫ লক্ষ পর্যন্ত জামানত-মুক্ত ঋণ প্রদান করে।', HI: 'पश्चिम बंगाल राज्य योजना युवाओं को सूक्ष्म उद्यम शुरू करने के लिए 10% सरकारी सब्सिडी के साथ ₹5 लाख तक का संपार्श्विक-मुक्त ऋण प्रदान करती है।' },
       nodalAgency: { EN: 'Department of Micro, Small & Medium Enterprises and Textiles, Govt of West Bengal', BN: 'মাইক্রো, ক্ষুদ্র ও মাঝারি উদ্যোগ এবং বস্ত্র বিভাগ, পশ্চিমবঙ্গ সরকার', HI: 'सूक्ष्म, लघु और मध्यम उद्यम और वस्त्र विभाग, पश्चिम बंगाल सरकार' }
+    },
+    cgtmse: {
+      name: { EN: 'Credit Guarantee Fund Trust for Micro and Small Enterprises (CGTMSE)', BN: 'মাইক্রো এবং ক্ষুদ্র উদ্যোগের জন্য ক্রেডিট গ্যারান্টি ফান্ড ট্রাস্ট (CGTMSE)', HI: 'सूक्ष्म और लघु उद्यमों के लिए क्रेडिट गारंटी फंड ट्रस्ट (CGTMSE)' },
+      shortName: { EN: 'CGTMSE', BN: 'CGTMSE', HI: 'CGTMSE' },
+      description: { EN: 'Provides collateral-free loan guarantees up to ₹5 Crore for MSMEs to access institutional credit without third-party guarantees.', BN: 'তৃতীয় পক্ষের গ্যারান্টি ছাড়াই প্রাতিষ্ঠানিক ঋণ পেতে এমএসএমই-কে ₹৫ কোটি পর্যন্ত জামানত-মুক্ত ঋণের গ্যারান্টি প্রদান করে।', HI: 'बिना किसी तीसरे पक्ष की गारंटी के संस्थागत ऋण प्राप्त करने के लिए एमएसएमई को ₹5 करोड़ तक की संपार्श्विक-मुक्त ऋण गारंटी प्रदान करता है।' },
+      nodalAgency: { EN: 'Ministry of Micro, Small and Medium Enterprises (MSME) & SIDBI', BN: 'অণু, ক্ষুদ্র ও মাঝারি উদ্যোগ মন্ত্রণালয় (MSME) এবং সিডবি', HI: 'सूक्ष्म, लघु और मध्यम उद्यम मंत्रालय (MSME) और सिडबी' }
+    },
+    clcss: {
+      name: { EN: 'Credit Linked Capital Subsidy Scheme (CLCSS)', BN: 'ক্রেডিট লিঙ্কড ক্যাপিটাল সাবসিডি স্কিম (CLCSS)', HI: 'क्रेडिट लिंक्ड कैपिटल सब्सिडी योजना (CLCSS)' },
+      shortName: { EN: 'CLCSS', BN: 'CLCSS', HI: 'CLCSS' },
+      description: { EN: 'Provides a 15% upfront capital subsidy (maximum up to ₹15 Lakh) for institutional credit availed by MSMEs for technology upgradation.', BN: 'প্রযুক্তিগত উন্নয়নের জন্য এমএসএমই-র নেওয়া প্রাতিষ্ঠানিক ঋণের ওপর ১৫% (সর্বোচ্চ ₹১৫ লক্ষ) মূলধন ভর্তুকি প্রদান করে।', HI: 'प्रौद्योगिकी उन्नयन के लिए एमएसएमई द्वारा लिए गए संस्थागत ऋण पर 15% अग्रिम पूंजीगत सब्सिडी (अधिकतम ₹15 लाख तक) प्रदान करता है।' },
+      nodalAgency: { EN: 'Ministry of Micro, Small and Medium Enterprises (MSME)', BN: 'অণু, ক্ষুদ্র ও মাঝারি উদ্যোগ মন্ত্রণালয় (MSME)', HI: 'सूक्ष्म, लघु और मध्यम उद्यम मंत्रालय (MSME)' }
     }
+  },
+
+  // ─── Udyam Registration Guide ───
+  udyamGuide: {
+    title: { EN: 'How to Get Your Udyam Registration', BN: 'কিভাবে আপনার উদ্যোগ নিবন্ধন (Udyam Registration) পাবেন', HI: 'अपना उद्यम पंजीकरण कैसे प्राप्त करें' },
+    subtitle: { EN: 'Unlock special MSME schemes like CGTMSE and CLCSS by registering your business for free on the official Udyam portal.', BN: 'সরকারি পোর্টালে বিনামূল্যে আপনার ব্যবসা নিবন্ধন করে CGTMSE এবং CLCSS-এর মতো বিশেষ MSME প্রকল্পগুলি আনলক করুন।', HI: 'आधिकारिक पोर्टल पर अपने व्यवसाय को मुफ्त में पंजीकृत करके CGTMSE और CLCSS जैसी विशेष MSME योजनाओं को अनलॉक करें।' },
+    step1Title: { EN: 'Visit Official Portal', BN: 'অফিসিয়াল পোর্টালে যান', HI: 'आधिकारिक पोर्टल पर जाएं' },
+    step1Desc: { EN: 'Go to udyamregistration.gov.in. Registration is completely free and online.', BN: 'udyamregistration.gov.in-এ যান। নিবন্ধন সম্পূর্ণ বিনামূল্যে এবং অনলাইনে।', HI: 'udyamregistration.gov.in पर जाएं। पंजीकरण पूरी तरह से मुफ्त और ऑनलाइन है।' },
+    step2Title: { EN: 'Aadhaar Verification', BN: 'আধার যাচাইকরণ', HI: 'आधार सत्यापन' },
+    step2Desc: { EN: 'Enter your Aadhaar number and OTP to verify your identity as an entrepreneur.', BN: 'উদ্যোক্তা হিসাবে আপনার পরিচয় যাচাই করতে আপনার আধার নম্বর এবং OTP লিখুন।', HI: 'उद्यमी के रूप में अपनी पहचान सत्यापित करने के लिए अपना आधार नंबर और ओटीपी दर्ज करें।' },
+    step3Title: { EN: 'Business Details', BN: 'ব্যবসার বিবরণ', HI: 'व्यवसाय विवरण' },
+    step3Desc: { EN: 'Provide PAN, GST (if applicable), and basic details about your manufacturing or service business.', BN: 'প্যান, জিএসটি (যদি থাকে) এবং আপনার উৎপাদন বা পরিষেবা ব্যবসা সম্পর্কে প্রাথমিক বিবরণ দিন।', HI: 'पैन, जीएसटी (यदि लागू हो), और अपने विनिर्माण या सेवा व्यवसाय के बारे में बुनियादी विवरण प्रदान करें।' },
+    step4Title: { EN: 'Download Certificate', BN: 'সার্টিফিকেট ডাউনলোড করুন', HI: 'प्रमाणपत्र डाउनलोड करें' },
+    step4Desc: { EN: 'After submission, your Udyam Registration Certificate will be sent to your email with a lifetime validity.', BN: 'জমা দেওয়ার পর, আজীবন মেয়াদ সহ আপনার উদ্যোগ নিবন্ধন সার্টিফিকেট ইমেলে পাঠানো হবে।', HI: 'जमा करने के बाद, आजीवन वैधता के साथ आपका उद्यम पंजीकरण प्रमाणपत्र आपके ईमेल पर भेजा जाएगा।' },
+    cta: { EN: 'Register on Udyam Portal', BN: 'উদ্যোগ পোর্টালে নিবন্ধন করুন', HI: 'उद्यम पोर्टल पर पंजीकरण करें' }
   },
 
   // ─── Login / Register Pages ───

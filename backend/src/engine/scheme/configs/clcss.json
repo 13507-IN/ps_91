@@ -1,0 +1,44 @@
+{
+  "schemeId": "clcss",
+  "name": "Credit Linked Capital Subsidy Scheme (CLCSS)",
+  "shortName": "CLCSS",
+  "description": "Provides a 15% upfront capital subsidy (maximum up to ₹15 Lakh) for institutional credit availed by MSMEs for technology upgradation.",
+  "nodalAgency": "Ministry of Micro, Small and Medium Enterprises (MSME)",
+  "targetAudience": "MSEs looking for technology upgradation",
+  "eligibility": {
+    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
+    "gender": ["MALE", "FEMALE", "OTHER"],
+    "ageMin": 18,
+    "ageMax": 65,
+    "businessCategories": [
+      "MANUFACTURING",
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "TEXTILES_TAILORING"
+    ],
+    "minProjectCost": 100000,
+    "maxProjectCost": 10000000
+  },
+  "financial": {
+    "maxLoanAmount": 10000000,
+    "interestRate": 8.5,
+    "subsidyPercentage": 15,
+    "maxSubsidy": 1500000,
+    "marginPercentage": 10,
+    "tenureMonths": 60,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Udyam Registration Certificate",
+    "Aadhaar Card",
+    "PAN Card",
+    "Quotations of Machinery/Equipment",
+    "Project Report"
+  ],
+  "priority": 2,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://clcss.dcmsme.gov.in/"
+}

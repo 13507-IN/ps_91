@@ -23,6 +23,54 @@ export default function SchemesPage() {
         {t.schemes.subtitle}
       </p>
 
+      {/* ── Udyam Registration Guide Banner ── */}
+      <div className="mt-8 relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1A3A6B] to-[#2a4d8c] p-6 sm:p-8 shadow-md border border-[#1A3A6B]/20">
+        <div className="relative z-10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-1.5 flex items-center gap-2">
+                <span className="bg-[#E65C00] text-white text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Guide</span>
+                {t.udyamGuide.title}
+              </h2>
+              <p className="text-blue-100 text-sm max-w-2xl leading-relaxed">
+                {t.udyamGuide.subtitle}
+              </p>
+            </div>
+            <a 
+              href="https://udyamregistration.gov.in/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#E65C00] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#cc5200] transition-colors shadow-sm shrink-0"
+            >
+              {t.udyamGuide.cta} <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { num: 1, title: t.udyamGuide.step1Title, desc: t.udyamGuide.step1Desc },
+              { num: 2, title: t.udyamGuide.step2Title, desc: t.udyamGuide.step2Desc },
+              { num: 3, title: t.udyamGuide.step3Title, desc: t.udyamGuide.step3Desc },
+              { num: 4, title: t.udyamGuide.step4Title, desc: t.udyamGuide.step4Desc }
+            ].map((step, idx) => (
+              <div key={idx} className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl p-4 flex flex-col hover:bg-white/15 transition-colors">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center justify-center h-6 w-6 rounded-full bg-[#E65C00]/20 text-[#FF9933] text-xs font-black">
+                    {step.num}
+                  </div>
+                  <h3 className="text-white text-sm font-bold">{step.title}</h3>
+                </div>
+                <p className="text-blue-100/80 text-xs leading-relaxed">
+                  {step.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Background accent */}
+        <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white/5 blur-3xl pointer-events-none" aria-hidden="true" />
+      </div>
+
       {isLoading && (
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => (

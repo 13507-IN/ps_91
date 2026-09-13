@@ -1,0 +1,47 @@
+{
+  "schemeId": "cgtmse",
+  "name": "Credit Guarantee Fund Trust for Micro and Small Enterprises (CGTMSE)",
+  "shortName": "CGTMSE",
+  "description": "Provides collateral-free loan guarantees up to ₹5 Crore for MSMEs to access institutional credit without third-party guarantees.",
+  "nodalAgency": "Ministry of Micro, Small and Medium Enterprises (MSME) & SIDBI",
+  "targetAudience": "Micro and Small Enterprises (MSEs)",
+  "eligibility": {
+    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
+    "gender": ["MALE", "FEMALE", "OTHER"],
+    "ageMin": 18,
+    "ageMax": 65,
+    "businessCategories": [
+      "MANUFACTURING",
+      "SERVICES",
+      "RETAIL",
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "TEXTILES_TAILORING",
+      "POULTRY"
+    ],
+    "minProjectCost": 100000,
+    "maxProjectCost": 50000000
+  },
+  "financial": {
+    "maxLoanAmount": 50000000,
+    "interestRate": 9.5,
+    "subsidyPercentage": 0,
+    "maxSubsidy": 0,
+    "marginPercentage": 10,
+    "tenureMonths": 84,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Udyam Registration Certificate",
+    "Aadhaar Card",
+    "PAN Card",
+    "Project Report",
+    "Bank Account Statement (6 months)"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://www.cgtmse.in/"
+}
