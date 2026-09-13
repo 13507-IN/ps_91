@@ -7,6 +7,20 @@ import { BadRequestError } from '../../lib/errors.js';
 // User Routes — all routes require authentication
 // ============================================================
 
+const locationSchema = {
+  type: 'object',
+  nullable: true,
+  properties: {
+    latitude: { type: 'number', nullable: true },
+    longitude: { type: 'number', nullable: true },
+    village: { type: 'string', nullable: true },
+    block: { type: 'string', nullable: true },
+    district: { type: 'string', nullable: true },
+    state: { type: 'string', nullable: true },
+  },
+  additionalProperties: true,
+};
+
 export async function userRoutes(fastify: FastifyInstance): Promise<void> {
   const userService = new UserService(fastify);
 
@@ -33,7 +47,7 @@ export async function userRoutes(fastify: FastifyInstance): Promise<void> {
               dateOfBirth: { type: 'string', nullable: true },
               category: { type: 'string', nullable: true },
               isMinority: { type: 'boolean' },
-              location: { type: 'object', nullable: true },
+              location: locationSchema,
               createdAt: { type: 'string' },
             },
           },
@@ -90,7 +104,7 @@ export async function userRoutes(fastify: FastifyInstance): Promise<void> {
               dateOfBirth: { type: 'string', nullable: true },
               category: { type: 'string', nullable: true },
               isMinority: { type: 'boolean' },
-              location: { type: 'object', nullable: true },
+              location: locationSchema,
               createdAt: { type: 'string' },
             },
           },

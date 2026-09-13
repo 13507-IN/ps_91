@@ -88,13 +88,23 @@ export class CropPipeline implements DataPipeline {
       'crop',
       records,
       async (data, tx) => {
-        // Check for existing record
+        // Resolve optional village link so per-village/block rows stay distinct
+        let villageId: number | null | undefined;
+        if (data.villageCode) {
+          const village = await tx.village.findUnique({
+            where: { id: data.villageCode },
+          });
+          if (village) villageId = village.id;
+        }
+
+        // Check for existing record (same district + crop + season + year + village)
         const existing = await tx.cropData.findFirst({
           where: {
             districtName: data.districtName,
             cropName: data.cropName,
             season: data.season,
             year: data.year ?? undefined,
+            ...(villageId ? { villageId } : {}),
           },
         });
 
@@ -114,7 +124,7 @@ export class CropPipeline implements DataPipeline {
 
         await tx.cropData.create({
           data: {
-            villageId: data.villageCode ?? null,
+            villageId: villageId ?? null,
             districtName: data.districtName,
             cropName: data.cropName,
             season: data.season,

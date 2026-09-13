@@ -1,7 +1,7 @@
 import type { PrismaClient } from '@prisma/client';
 import type { DataPipeline, IngestionResult } from '../types.js';
 import { parseCsvFile } from '../parsers/index.js';
-import { processRecords, safeInt, safeFloat, cleanString } from '../utils.js';
+import { processRecords, safeInt, safeFloat } from '../utils.js';
 
 // ============================================================
 // Census Data Pipeline
@@ -46,19 +46,27 @@ function transformRow(row: Record<string, string>, _index: number): CensusRow {
   return {
     villageCode,
     totalPopulation: safeInt(
-      row['Total Population'] ?? row['TOT_P'] ?? row['total_population'] ?? row['Population'],
+      row['Total Population'] ??
+        row['TOT_P'] ??
+        row['total_population'] ??
+        row['Population'] ??
+        row['total_pop'],
     ),
     malePopulation: safeInt(
-      row['Male Population'] ?? row['TOT_M'] ?? row['male_population'] ?? row['Male'],
+      row['Male Population'] ?? row['TOT_M'] ?? row['male_population'] ?? row['Male'] ?? row['male_pop'],
     ),
     femalePopulation: safeInt(
-      row['Female Population'] ?? row['TOT_F'] ?? row['female_population'] ?? row['Female'],
+      row['Female Population'] ?? row['TOT_F'] ?? row['female_population'] ?? row['Female'] ?? row['female_pop'],
     ),
     totalHouseholds: safeInt(
-      row['Total Households'] ?? row['No_HH'] ?? row['total_households'] ?? row['Households'],
+      row['Total Households'] ?? row['No_HH'] ?? row['total_households'] ?? row['Households'] ?? row['total_hh'],
     ),
-    scPopulation: safeInt(row['SC Population'] ?? row['P_SC'] ?? row['sc_population']),
-    stPopulation: safeInt(row['ST Population'] ?? row['P_ST'] ?? row['st_population']),
+    scPopulation: safeInt(
+      row['SC Population'] ?? row['P_SC'] ?? row['sc_population'] ?? row['sc_pop'],
+    ),
+    stPopulation: safeInt(
+      row['ST Population'] ?? row['P_ST'] ?? row['st_population'] ?? row['st_pop'],
+    ),
     literacyRate: safeFloat(
       row['Literacy Rate'] ?? row['literacy_rate'] ?? row['Effective Literacy Rate'],
     ),
@@ -72,7 +80,10 @@ function transformRow(row: Record<string, string>, _index: number): CensusRow {
     nonWorkers: safeInt(row['Non Workers'] ?? row['NON_WORK_P'] ?? row['non_workers']),
     cultivators: safeInt(row['Cultivators'] ?? row['MAIN_CL_P'] ?? row['cultivators']),
     agriculturalLabourers: safeInt(
-      row['Agricultural Labourers'] ?? row['MAIN_AL_P'] ?? row['agricultural_labourers'],
+      row['Agricultural Labourers'] ??
+        row['MAIN_AL_P'] ??
+        row['agricultural_labourers'] ??
+        row['agri_labourers'],
     ),
     householdWorkers: safeInt(
       row['Household Workers'] ?? row['MAIN_HH_P'] ?? row['household_workers'],

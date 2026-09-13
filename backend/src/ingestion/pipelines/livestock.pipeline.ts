@@ -51,7 +51,8 @@ function transformRow(row: Record<string, string>, _index: number): LivestockRow
         row['Milking'] ??
         row['Milk Producing'] ??
         row['in_milk'] ??
-        row['milch_animals'],
+        row['milch_animals'] ??
+        row['milk_producing'],
     ),
     censusYear: safeInt(row['Census Year'] ?? row['Year'] ?? row['census_year']),
   };

@@ -40,8 +40,12 @@ function DashboardContent() {
     queryFn: () => api<UserProfile>(apiEndpoints.users.me),
   });
 
+  const userLocationObj = typeof user?.location === 'string'
+    ? (() => { try { return JSON.parse(user.location); } catch { return null; } })()
+    : user?.location;
+
   useEffect(() => {
-    if (user?.location?.village) setVillageQuery(user.location.village);
+    if (userLocationObj?.village) setVillageQuery(userLocationObj.village);
   }, [user]);
 
   useEffect(() => {
@@ -123,7 +127,14 @@ function DashboardContent() {
     );
   }
 
-  const current = { ...user, ...form };
+  const current = { 
+    ...user, 
+    ...form,
+    location: userLocationObj || form?.location ? {
+      ...(typeof userLocationObj === 'object' && userLocationObj ? userLocationObj : {}),
+      ...(typeof form?.location === 'object' && form?.location ? form.location : {})
+    } : undefined
+  };
 
   const handleSave = () => {
     const body: UpdateUserProfileBody = {};
@@ -143,7 +154,7 @@ function DashboardContent() {
     };
 
     const clean = cleanLocation(current.location);
-    const savedLoc = cleanLocation(user.location);
+    const savedLoc = cleanLocation(userLocationObj);
     if (clean && JSON.stringify(clean) !== JSON.stringify(savedLoc)) {
       body.location = clean;
     }
