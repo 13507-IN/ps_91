@@ -1,0 +1,641 @@
+district,state,business_category,demand,demand_source,population,households,literacy_rate,workers,livestock_count,cattle_count,buffalo_count,goat_count,sheep_count,poultry_count,crop_area,paddy_area,jute_area,potato_area,road_connectivity,electricity_access,water_access,market_distance,nearest_town_distance,internet_access
+Nicobars,ANDAMAN AND NICOBAR ISLANDS,general,1964.22,census-derived proxy: 0.10*households + 0.01*population,36842,15958,68.7585,17125,,,,,,,,,,,,58.2842,,,,0.3572
+North  AND Middle Andaman,ANDAMAN AND NICOBAR ISLANDS,general,5074.47,census-derived proxy: 0.10*households + 0.01*population,105597,40185,74.5125,38579,,,,,,,,,,,,46.388,,,,0.9655
+South Andaman,ANDAMAN AND NICOBAR ISLANDS,general,10934.62,census-derived proxy: 0.10*households + 0.01*population,238142,85532,79.896,96831,,,,,,,,,,,,61.356,,,,3.2608
+Adilabad,ANDHRA PRADESH,general,109183.79,census-derived proxy: 0.10*households + 0.01*population,2741239,817714,54.1123,1323667,,,,,,,,,,,,69.2306,,,,0.6741
+Anantapur,ANDHRA PRADESH,general,165254.28,census-derived proxy: 0.10*households + 0.01*population,4081148,1244428,56.6252,2036166,,,,,,,,,,,,72.1593,,,,0.6916
+Chittoor,ANDHRA PRADESH,general,172127.64,census-derived proxy: 0.10*households + 0.01*population,4174064,1303870,63.9156,1933357,,,,,,,,,,,,72.4424,,,,1.0556
+East Godavari,ANDHRA PRADESH,general,212127.06,census-derived proxy: 0.10*households + 0.01*population,5154296,1605841,63.8026,2093681,,,,,,,,,,,,80.7846,,,,1.3956
+Guntur,ANDHRA PRADESH,general,207177.13,census-derived proxy: 0.10*households + 0.01*population,4887813,1582990,60.5678,2381624,,,,,,,,,,,,74.9233,,,,1.2245
+Hyderabad,ANDHRA PRADESH,general,146062.13,census-derived proxy: 0.10*households + 0.01*population,3943323,1066289,73.3431,1413297,,,,,,,,,,,,81.5652,,,,13.9769
+Karimnagar,ANDHRA PRADESH,general,154290.69,census-derived proxy: 0.10*households + 0.01*population,3776269,1165280,58.4394,1876768,,,,,,,,,,,,79.5318,,,,0.7578
+Khammam,ANDHRA PRADESH,general,115036.2,census-derived proxy: 0.10*households + 0.01*population,2797370,870625,58.2774,1410062,,,,,,,,,,,,76.7861,,,,0.991
+Krishna,ANDHRA PRADESH,general,192807.38,census-derived proxy: 0.10*households + 0.01*population,4517398,1476334,66.625,2048880,,,,,,,,,,,,78.8393,,,,2.0617
+Kurnool,ANDHRA PRADESH,general,149618.13,census-derived proxy: 0.10*households + 0.01*population,4053463,1090835,52.4776,2029425,,,,,,,,,,,,74.8712,,,,0.9242
+Mahbubnagar,ANDHRA PRADESH,general,141531.78,census-derived proxy: 0.10*households + 0.01*population,4053028,1010015,47.8814,2082501,,,,,,,,,,,,75.0307,,,,0.6092
+Medak,ANDHRA PRADESH,general,109246.08,census-derived proxy: 0.10*households + 0.01*population,3033288,789132,53.9724,1442203,,,,,,,,,,,,76.6309,,,,1.0942
+Nalgonda,ANDHRA PRADESH,general,137981.79,census-derived proxy: 0.10*households + 0.01*population,3488809,1030937,57.3554,1741693,,,,,,,,,,,,76.5541,,,,0.7483
+Nizamabad,ANDHRA PRADESH,general,97543.15,census-derived proxy: 0.10*households + 0.01*population,2551335,720298,54.4738,1261076,,,,,,,,,,,,75.7899,,,,0.7304
+Prakasam,ANDHRA PRADESH,general,142731.98,census-derived proxy: 0.10*households + 0.01*population,3397448,1087575,56.0549,1700567,,,,,,,,,,,,70.2247,,,,0.5656
+Rangareddy,ANDHRA PRADESH,general,209099.61,census-derived proxy: 0.10*households + 0.01*population,5296741,1561322,66.7963,2196078,,,,,,,,,,,,77.585,,,,9.1512
+Sri Potti Sriramulu Nellore,ANDHRA PRADESH,general,124986.87,census-derived proxy: 0.10*households + 0.01*population,2963557,953513,61.824,1314561,,,,,,,,,,,,72.9958,,,,1.0698
+Srikakulam,ANDHRA PRADESH,general,117274.74,census-derived proxy: 0.10*households + 0.01*population,2703114,902436,55.3207,1290288,,,,,,,,,,,,68.1967,,,,0.4419
+Visakhapatnam,ANDHRA PRADESH,general,180839.89,census-derived proxy: 0.10*households + 0.01*population,4290589,1379340,59.8577,1889879,,,,,,,,,,,,73.2416,,,,3.2981
+Vizianagaram,ANDHRA PRADESH,general,98396.14,census-derived proxy: 0.10*households + 0.01*population,2344474,749514,52.8216,1157962,,,,,,,,,,,,70.4104,,,,0.5941
+Warangal,ANDHRA PRADESH,general,139824.46,census-derived proxy: 0.10*households + 0.01*population,3512576,1046987,58.7894,1705655,,,,,,,,,,,,79.0914,,,,1.2371
+West Godavari,ANDHRA PRADESH,general,164932.46,census-derived proxy: 0.10*households + 0.01*population,3936966,1255628,67.3714,1773112,,,,,,,,,,,,81.0406,,,,0.9597
+Y.S.R.,ANDHRA PRADESH,general,117233.99,census-derived proxy: 0.10*households + 0.01*population,2882469,884093,59.5589,1320404,,,,,,,,,,,,75.9834,,,,0.7541
+Anjaw,ARUNACHAL PRADESH,general,856.97,census-derived proxy: 0.10*households + 0.01*population,21167,6453,47.1961,10501,,,,,,,,,,,,30.203,,,,0.4184
+Changlang,ARUNACHAL PRADESH,general,5474.26,census-derived proxy: 0.10*households + 0.01*population,148226,39920,49.3665,62966,,,,,,,,,,,,36.5556,,,,0.4259
+Dibang Valley,ARUNACHAL PRADESH,general,403.04,census-derived proxy: 0.10*households + 0.01*population,8004,3230,55.4223,3555,,,,,,,,,,,,33.2508,,,,0.5263
+East Kameng,ARUNACHAL PRADESH,general,2758.7,census-derived proxy: 0.10*households + 0.01*population,78690,19718,48.8614,31710,,,,,,,,,,,,26.9703,,,,0.2891
+East Siang,ARUNACHAL PRADESH,general,3894.24,census-derived proxy: 0.10*households + 0.01*population,99214,29021,63.0717,40222,,,,,,,,,,,,49.0369,,,,1.5506
+Kurung Kumey,ARUNACHAL PRADESH,general,2890.26,census-derived proxy: 0.10*households + 0.01*population,92076,19695,39.7563,38044,,,,,,,,,,,,19.8578,,,,0.4824
+Lohit,ARUNACHAL PRADESH,general,5954.36,census-derived proxy: 0.10*households + 0.01*population,145726,44971,56.9988,60945,,,,,,,,,,,,38.1513,,,,0.6938
+Lower Dibang Valley,ARUNACHAL PRADESH,general,2135.8,census-derived proxy: 0.10*households + 0.01*population,54080,15950,58.8924,22326,,,,,,,,,,,,37.1912,,,,1.2978
+Lower Subansiri,ARUNACHAL PRADESH,general,3178.0,census-derived proxy: 0.10*households + 0.01*population,83030,23477,65.1054,30202,,,,,,,,,,,,53.2138,,,,1.6229
+Papum Pare,ARUNACHAL PRADESH,general,6814.53,census-derived proxy: 0.10*households + 0.01*population,176573,50488,68.5541,65772,,,,,,,,,,,,60.4876,,,,4.9061
+Tawang,ARUNACHAL PRADESH,general,1817.97,census-derived proxy: 0.10*households + 0.01*population,49977,13182,52.17,28561,,,,,,,,,,,,65.506,,,,0.7283
+Tirap,ARUNACHAL PRADESH,general,3611.75,census-derived proxy: 0.10*households + 0.01*population,111975,24920,42.8435,50169,,,,,,,,,,,,64.3098,,,,0.3933
+Upper Siang,ARUNACHAL PRADESH,general,1428.3,census-derived proxy: 0.10*households + 0.01*population,35320,10751,51.5147,17644,,,,,,,,,,,,57.6505,,,,0.9022
+Upper Subansiri,ARUNACHAL PRADESH,general,2755.88,census-derived proxy: 0.10*households + 0.01*population,83448,19214,54.2589,33370,,,,,,,,,,,,27.964,,,,0.7234
+West Kameng,ARUNACHAL PRADESH,general,3258.97,census-derived proxy: 0.10*households + 0.01*population,83947,24195,57.765,42493,,,,,,,,,,,,58.6402,,,,0.8349
+West Siang,ARUNACHAL PRADESH,general,4200.24,census-derived proxy: 0.10*households + 0.01*population,112274,30775,57.6678,49177,,,,,,,,,,,,46.1543,,,,0.9846
+Baksa,ASSAM,general,39022.85,census-derived proxy: 0.10*households + 0.01*population,950075,295221,60.2939,406756,,,,,,,,,,,,15.048,,,,0.398
+Barpeta,ASSAM,general,66874.32,census-derived proxy: 0.10*households + 0.01*population,1693622,499381,52.9668,561824,,,,,,,,,,,,16.9818,,,,0.4161
+Bongaigaon,ASSAM,general,29427.34,census-derived proxy: 0.10*households + 0.01*population,738804,220393,58.7541,255806,,,,,,,,,,,,22.6259,,,,1.1448
+Cachar,ASSAM,general,60882.17,census-derived proxy: 0.10*households + 0.01*population,1736617,435160,67.6101,608062,,,,,,,,,,,,32.2192,,,,1.2216
+Chirang,ASSAM,general,18884.72,census-derived proxy: 0.10*households + 0.01*population,482162,140631,53.9035,193894,,,,,,,,,,,,16.0007,,,,0.5312
+Darrang,ASSAM,general,38155.6,census-derived proxy: 0.10*households + 0.01*population,928500,288706,52.4544,324843,,,,,,,,,,,,15.7406,,,,0.4039
+Dhemaji,ASSAM,general,29687.53,census-derived proxy: 0.10*households + 0.01*population,686133,228262,61.6539,316800,,,,,,,,,,,,12.352,,,,0.5222
+Dhubri,ASSAM,general,71594.48,census-derived proxy: 0.10*households + 0.01*population,1949258,521019,47.3175,669819,,,,,,,,,,,,13.8636,,,,0.3509
+Dibrugarh,ASSAM,general,50964.85,census-derived proxy: 0.10*households + 0.01*population,1326335,377015,66.6899,560557,,,,,,,,,,,,36.2545,,,,2.3386
+Dima Hasao,ASSAM,general,8032.92,census-derived proxy: 0.10*households + 0.01*population,214102,58919,65.7971,85028,,,,,,,,,,,,32.9079,,,,0.8894
+Goalpara,ASSAM,general,36893.23,census-derived proxy: 0.10*households + 0.01*population,1008183,268114,55.9003,362573,,,,,,,,,,,,29.3312,,,,0.5087
+Golaghat,ASSAM,general,43377.18,census-derived proxy: 0.10*households + 0.01*population,1066888,327083,67.6513,479928,,,,,,,,,,,,25.1756,,,,0.9395
+Hailakandi,ASSAM,general,24134.66,census-derived proxy: 0.10*households + 0.01*population,659296,175417,61.788,214240,,,,,,,,,,,,25.1646,,,,0.6904
+Jorhat,ASSAM,general,47637.96,census-derived proxy: 0.10*households + 0.01*population,1092256,367154,72.7786,498618,,,,,,,,,,,,33.2457,,,,1.5391
+Kamrup,ASSAM,general,58619.92,census-derived proxy: 0.10*households + 0.01*population,1517542,434445,65.5876,628954,,,,,,,,,,,,28.1258,,,,0.7156
+Kamrup Metropolitan,ASSAM,general,55358.58,census-derived proxy: 0.10*households + 0.01*population,1253938,428192,79.8437,490932,,,,,,,,,,,,58.5861,,,,6.8
+Karbi Anglong,ASSAM,general,34850.73,census-derived proxy: 0.10*households + 0.01*population,956313,252876,58.2669,383441,,,,,,,,,,,,21.3219,,,,0.7605
+Karimganj,ASSAM,general,41750.86,census-derived proxy: 0.10*households + 0.01*population,1228686,294640,64.7274,399171,,,,,,,,,,,,24.0806,,,,0.6561
+Kokrajhar,ASSAM,general,31072.52,census-derived proxy: 0.10*households + 0.01*population,887142,222011,55.1552,341131,,,,,,,,,,,,18.6356,,,,0.5486
+Lakhimpur,ASSAM,general,43214.67,census-derived proxy: 0.10*households + 0.01*population,1042137,327933,65.585,429995,,,,,,,,,,,,18.3867,,,,0.594
+Morigaon,ASSAM,general,35322.33,census-derived proxy: 0.10*households + 0.01*population,957423,257481,56.3912,351148,,,,,,,,,,,,20.3526,,,,0.5519
+Nagaon,ASSAM,general,108156.18,census-derived proxy: 0.10*households + 0.01*population,2823768,799185,60.5827,979998,,,,,,,,,,,,24.4788,,,,0.6408
+Nalbari,ASSAM,general,31610.79,census-derived proxy: 0.10*households + 0.01*population,771639,238944,68.9145,267623,,,,,,,,,,,,28.5895,,,,0.6826
+Sivasagar,ASSAM,general,52033.4,census-derived proxy: 0.10*households + 0.01*population,1151050,405229,70.675,485717,,,,,,,,,,,,30.4593,,,,1.2699
+Sonitpur,ASSAM,general,74026.4,census-derived proxy: 0.10*households + 0.01*population,1924110,547853,57.6148,770606,,,,,,,,,,,,24.3438,,,,0.7955
+Tinsukia,ASSAM,general,51440.69,census-derived proxy: 0.10*households + 0.01*population,1327929,381614,60.1178,557196,,,,,,,,,,,,42.3774,,,,1.3456
+Udalguri,ASSAM,general,36479.18,census-derived proxy: 0.10*households + 0.01*population,831668,281625,56.504,345030,,,,,,,,,,,,18.9994,,,,0.5142
+Araria,BIHAR,general,98443.09,census-derived proxy: 0.10*households + 0.01*population,2811569,703274,42.5303,1069893,,,,,,,,,,,,6.1555,,,,0.3642
+Arwal,BIHAR,general,21437.83,census-derived proxy: 0.10*households + 0.01*population,700843,144294,55.1266,236354,,,,,,,,,,,,1.5267,,,,0.2862
+Aurangabad,BIHAR,general,73130.43,census-derived proxy: 0.10*households + 0.01*population,2540073,477297,57.715,837770,,,,,,,,,,,,9.3141,,,,0.4949
+Banka,BIHAR,general,64757.23,census-derived proxy: 0.10*households + 0.01*population,2034763,444096,47.4414,771080,,,,,,,,,,,,14.0418,,,,0.3837
+Begusarai,BIHAR,general,103067.91,census-derived proxy: 0.10*households + 0.01*population,2970541,733625,52.1344,938182,,,,,,,,,,,,16.408,,,,0.633
+Bhagalpur,BIHAR,general,95693.76,census-derived proxy: 0.10*households + 0.01*population,3037766,653161,51.7836,983528,,,,,,,,,,,,26.7214,,,,1.0356
+Bhojpur,BIHAR,general,78476.77,census-derived proxy: 0.10*households + 0.01*population,2728407,511927,58.6112,822493,,,,,,,,,,,,12.141,,,,0.7151
+Buxar,BIHAR,general,50529.22,census-derived proxy: 0.10*households + 0.01*population,1706352,334657,58.0072,538322,,,,,,,,,,,,13.9725,,,,0.5331
+Darbhanga,BIHAR,general,139645.15,census-derived proxy: 0.10*households + 0.01*population,3937385,1002713,46.1381,1223640,,,,,,,,,,,,12.7097,,,,0.6263
+Gaya,BIHAR,general,124671.28,census-derived proxy: 0.10*households + 0.01*population,4391418,807571,52.3205,1664062,,,,,,,,,,,,13.9452,,,,0.849
+Gopalganj,BIHAR,general,81025.92,census-derived proxy: 0.10*households + 0.01*population,2562012,554058,53.9809,728201,,,,,,,,,,,,12.5213,,,,0.6691
+Jamui,BIHAR,general,53280.05,census-derived proxy: 0.10*households + 0.01*population,1760405,356760,48.7722,727571,,,,,,,,,,,,9.147,,,,0.5155
+Jehanabad,BIHAR,general,32732.33,census-derived proxy: 0.10*households + 0.01*population,1125313,214792,54.9963,365378,,,,,,,,,,,,12.8687,,,,0.5149
+Kaimur (Bhabua),BIHAR,general,50308.04,census-derived proxy: 0.10*households + 0.01*population,1626384,340442,56.5842,511163,,,,,,,,,,,,15.5383,,,,0.6168
+Katihar,BIHAR,general,104517.29,census-derived proxy: 0.10*households + 0.01*population,3071029,738070,41.686,1013566,,,,,,,,,,,,8.2512,,,,0.3985
+Khagaria,BIHAR,general,56139.16,census-derived proxy: 0.10*households + 0.01*population,1666886,394703,46.0756,560805,,,,,,,,,,,,10.2966,,,,0.4003
+Kishanganj,BIHAR,general,61419.0,census-derived proxy: 0.10*households + 0.01*population,1690400,445150,44.0757,529064,,,,,,,,,,,,13.1906,,,,0.2455
+Lakhisarai,BIHAR,general,30773.62,census-derived proxy: 0.10*households + 0.01*population,1000912,207645,50.6808,326576,,,,,,,,,,,,21.4265,,,,0.5712
+Madhepura,BIHAR,general,71045.42,census-derived proxy: 0.10*households + 0.01*population,2001762,510278,41.6921,777546,,,,,,,,,,,,4.5536,,,,0.2738
+Madhubani,BIHAR,general,153752.39,census-derived proxy: 0.10*households + 0.01*population,4487379,1088786,48.0311,1636938,,,,,,,,,,,,10.4043,,,,0.4885
+Munger,BIHAR,general,44483.95,census-derived proxy: 0.10*households + 0.01*population,1367765,308063,58.6224,426658,,,,,,,,,,,,29.3644,,,,0.8612
+Muzaffarpur,BIHAR,general,159950.02,census-derived proxy: 0.10*households + 0.01*population,4801062,1119394,52.2641,1547586,,,,,,,,,,,,16.1383,,,,0.9192
+Nalanda,BIHAR,general,90442.83,census-derived proxy: 0.10*households + 0.01*population,2877653,616663,52.8185,1045420,,,,,,,,,,,,16.4398,,,,0.6739
+Nawada,BIHAR,general,64678.86,census-derived proxy: 0.10*households + 0.01*population,2219146,424874,49.1636,817041,,,,,,,,,,,,7.3344,,,,0.4333
+Pashchim Champaran,BIHAR,general,132963.82,census-derived proxy: 0.10*households + 0.01*population,3935042,936134,44.7131,1478947,,,,,,,,,,,,6.1472,,,,0.3733
+Patna,BIHAR,general,179394.05,census-derived proxy: 0.10*households + 0.01*population,5838465,1210094,59.2567,1881886,,,,,,,,,,,,45.1914,,,,3.3627
+Purba Champaran,BIHAR,general,175376.21,census-derived proxy: 0.10*households + 0.01*population,5099371,1243825,44.6517,1737539,,,,,,,,,,,,6.0281,,,,0.6206
+Purnia,BIHAR,general,112505.79,census-derived proxy: 0.10*households + 0.01*population,3264619,798596,40.8111,1143318,,,,,,,,,,,,10.7762,,,,0.5222
+Rohtas,BIHAR,general,90405.28,census-derived proxy: 0.10*households + 0.01*population,2959918,608061,60.8068,924879,,,,,,,,,,,,18.895,,,,0.7555
+Saharsa,BIHAR,general,66076.31,census-derived proxy: 0.10*households + 0.01*population,1900661,470697,42.3535,649898,,,,,,,,,,,,8.7831,,,,0.3544
+Samastipur,BIHAR,general,148262.16,census-derived proxy: 0.10*households + 0.01*population,4261566,1056465,50.2839,1343400,,,,,,,,,,,,8.3317,,,,0.5092
+Saran,BIHAR,general,117280.82,census-derived proxy: 0.10*households + 0.01*population,3951862,777622,54.5934,1040231,,,,,,,,,,,,12.1893,,,,0.5798
+Sheikhpura,BIHAR,general,19627.22,census-derived proxy: 0.10*households + 0.01*population,636342,132638,51.6508,224655,,,,,,,,,,,,15.1276,,,,0.4757
+Sheohar,BIHAR,general,23162.46,census-derived proxy: 0.10*households + 0.01*population,656246,166000,43.2304,216372,,,,,,,,,,,,6.0265,,,,0.288
+Sitamarhi,BIHAR,general,119932.14,census-derived proxy: 0.10*households + 0.01*population,3423574,856964,41.9677,1114583,,,,,,,,,,,,7.7323,,,,0.4038
+Siwan,BIHAR,general,100741.84,census-derived proxy: 0.10*households + 0.01*population,3330464,674372,57.9551,932416,,,,,,,,,,,,7.8495,,,,0.5685
+Supaul,BIHAR,general,82300.96,census-derived proxy: 0.10*households + 0.01*population,2229076,600102,46.3548,877682,,,,,,,,,,,,8.5032,,,,0.3074
+Vaishali,BIHAR,general,110031.31,census-derived proxy: 0.10*households + 0.01*population,3495021,750811,55.1281,1060344,,,,,,,,,,,,9.3234,,,,0.6406
+Chandigarh,CHANDIGARH,general,40391.2,census-derived proxy: 0.10*households + 0.01*population,1055450,298367,76.3123,404136,,,,,,,,,,,,77.4898,,,,14.8418
+Bastar,CHHATTISGARH,general,51263.89,census-derived proxy: 0.10*households + 0.01*population,1413199,371319,46.056,726531,,,,,,,,,,,,42.4557,,,,0.4799
+Bijapur,CHHATTISGARH,general,8391.4,census-derived proxy: 0.10*households + 0.01*population,255230,58391,34.0552,134525,,,,,,,,,,,,21.4348,,,,0.2004
+Bilaspur,CHHATTISGARH,general,100416.89,census-derived proxy: 0.10*households + 0.01*population,2663629,737806,59.9393,1203197,,,,,,,,,,,,70.4391,,,,1.161
+Dakshin Bastar Dantewada,CHHATTISGARH,general,19121.28,census-derived proxy: 0.10*households + 0.01*population,533638,137849,35.8365,286595,,,,,,,,,,,,31.6346,,,,0.6928
+Dhamtari,CHHATTISGARH,general,29045.91,census-derived proxy: 0.10*households + 0.01*population,799781,210481,68.3728,402895,,,,,,,,,,,,70.7551,,,,0.4827
+Durg,CHHATTISGARH,general,121757.62,census-derived proxy: 0.10*households + 0.01*population,3343872,883189,68.8836,1496805,,,,,,,,,,,,69.5331,,,,1.8276
+Janjgir - Champa,CHHATTISGARH,general,60274.37,census-derived proxy: 0.10*households + 0.01*population,1619707,440773,62.9518,846466,,,,,,,,,,,,76.9308,,,,0.387
+Jashpur,CHHATTISGARH,general,31155.89,census-derived proxy: 0.10*households + 0.01*population,851669,226392,58.1699,487360,,,,,,,,,,,,33.916,,,,0.2505
+Kabeerdham,CHHATTISGARH,general,29343.16,census-derived proxy: 0.10*households + 0.01*population,822526,211179,50.3531,404156,,,,,,,,,,,,71.3371,,,,0.3229
+Korba,CHHATTISGARH,general,45331.7,census-derived proxy: 0.10*households + 0.01*population,1206640,332653,62.0532,521186,,,,,,,,,,,,60.8382,,,,1.366
+Koriya,CHHATTISGARH,general,24750.67,census-derived proxy: 0.10*households + 0.01*population,658917,181615,60.3753,307071,,,,,,,,,,,,44.0619,,,,0.9179
+Mahasamund,CHHATTISGARH,general,41384.24,census-derived proxy: 0.10*households + 0.01*population,1032754,310567,61.773,499260,,,,,,,,,,,,68.4191,,,,0.3094
+Narayanpur,CHHATTISGARH,general,4707.7,census-derived proxy: 0.10*households + 0.01*population,139820,33095,40.4956,71089,,,,,,,,,,,,28.1493,,,,0.2599
+Raigarh,CHHATTISGARH,general,57031.44,census-derived proxy: 0.10*households + 0.01*population,1493984,420916,63.6981,690167,,,,,,,,,,,,70.6336,,,,0.794
+Raipur,CHHATTISGARH,general,147488.72,census-derived proxy: 0.10*households + 0.01*population,4063872,1068500,64.7104,1757664,,,,,,,,,,,,68.1849,,,,1.8962
+Rajnandgaon,CHHATTISGARH,general,54384.53,census-derived proxy: 0.10*households + 0.01*population,1537133,390132,65.6013,800092,,,,,,,,,,,,70.6174,,,,0.5411
+Surguja,CHHATTISGARH,general,82675.16,census-derived proxy: 0.10*households + 0.01*population,2359886,590763,50.3389,1155807,,,,,,,,,,,,42.8481,,,,0.4633
+Uttar Bastar Kanker,CHHATTISGARH,general,26896.31,census-derived proxy: 0.10*households + 0.01*population,748941,194069,60.8916,389359,,,,,,,,,,,,56.788,,,,0.2983
+Dadra AND Nagar Haveli,DADRA AND NAGAR HAVELI,general,14315.39,census-derived proxy: 0.10*households + 0.01*population,343709,108783,64.9474,157161,,,,,,,,,,,,63.942,,,,1.8505
+Daman,DAMAN AND DIU,general,9019.63,census-derived proxy: 0.10*households + 0.01*population,191173,71079,78.645,105521,,,,,,,,,,,,69.2877,,,,1.8515
+Diu,DAMAN AND DIU,general,2405.74,census-derived proxy: 0.10*households + 0.01*population,52074,18850,73.0845,15750,,,,,,,,,,,,56.1008,,,,1.9523
+North Goa,GOA,general,40688.98,census-derived proxy: 0.10*households + 0.01*population,818008,325089,81.0579,327658,,,,,,,,,,,,53.5087,,,,7.2103
+South Goa,GOA,general,31554.67,census-derived proxy: 0.10*households + 0.01*population,640537,251493,78.4384,249590,,,,,,,,,,,,55.1944,,,,7.0077
+Ahmadabad,GUJARAT,general,291997.45,census-derived proxy: 0.10*households + 0.01*population,7214225,2198552,75.3478,2594952,,,,,,,,,,,,66.2275,,,,5.7466
+Amreli,GUJARAT,general,58203.2,census-derived proxy: 0.10*households + 0.01*population,1514190,430613,65.742,657139,,,,,,,,,,,,63.4749,,,,0.5894
+Anand,GUJARAT,general,83126.15,census-derived proxy: 0.10*households + 0.01*population,2092745,621987,74.1253,844794,,,,,,,,,,,,60.8228,,,,1.592
+Banas Kantha,GUJARAT,general,111624.76,census-derived proxy: 0.10*households + 0.01*population,3120506,804197,54.6361,1248600,,,,,,,,,,,,49.3502,,,,0.4258
+Bharuch,GUJARAT,general,63709.79,census-derived proxy: 0.10*households + 0.01*population,1551019,481996,72.0994,627124,,,,,,,,,,,,64.1273,,,,2.128
+Bhavnagar,GUJARAT,general,103211.35,census-derived proxy: 0.10*households + 0.01*population,2880365,744077,65.5214,1150632,,,,,,,,,,,,67.2991,,,,0.9807
+Dohad,GUJARAT,general,58921.26,census-derived proxy: 0.10*households + 0.01*population,2127086,376504,47.3498,999124,,,,,,,,,,,,64.041,,,,0.4603
+Gandhinagar,GUJARAT,general,57243.33,census-derived proxy: 0.10*households + 0.01*population,1391753,433258,74.0429,534976,,,,,,,,,,,,60.5965,,,,2.7944
+Jamnagar,GUJARAT,general,86233.69,census-derived proxy: 0.10*households + 0.01*population,2160119,646325,64.6508,847440,,,,,,,,,,,,59.8055,,,,1.7906
+Junagadh,GUJARAT,general,105105.12,census-derived proxy: 0.10*households + 0.01*population,2743082,776743,67.1806,1123709,,,,,,,,,,,,64.1558,,,,0.8533
+Kachchh,GUJARAT,general,94851.21,census-derived proxy: 0.10*households + 0.01*population,2092371,739275,59.8517,776228,,,,,,,,,,,,54.5526,,,,1.3028
+Kheda,GUJARAT,general,85201.45,census-derived proxy: 0.10*households + 0.01*population,2299885,622026,72.1881,933983,,,,,,,,,,,,59.8409,,,,0.918
+Mahesana,GUJARAT,general,86324.94,census-derived proxy: 0.10*households + 0.01*population,2035064,659743,73.8377,812064,,,,,,,,,,,,58.4484,,,,1.1761
+Narmada,GUJARAT,general,21939.87,census-derived proxy: 0.10*households + 0.01*population,590297,160369,62.7372,294795,,,,,,,,,,,,63.5659,,,,0.3592
+Navsari,GUJARAT,general,54212.32,census-derived proxy: 0.10*households + 0.01*population,1329672,409156,75.3501,591834,,,,,,,,,,,,65.4222,,,,1.6439
+Panch Mahals,GUJARAT,general,80667.86,census-derived proxy: 0.10*households + 0.01*population,2390776,567601,60.2652,1097507,,,,,,,,,,,,70.2848,,,,0.6089
+Patan,GUJARAT,general,53851.14,census-derived proxy: 0.10*households + 0.01*population,1343734,404138,62.3571,554830,,,,,,,,,,,,55.2841,,,,0.552
+Porbandar,GUJARAT,general,24211.69,census-derived proxy: 0.10*households + 0.01*population,585449,183572,67.2438,231169,,,,,,,,,,,,63.757,,,,0.9005
+Rajkot,GUJARAT,general,156146.18,census-derived proxy: 0.10*households + 0.01*population,3804558,1181006,71.6261,1479050,,,,,,,,,,,,63.281,,,,1.8446
+Sabar Kantha,GUJARAT,general,90839.19,census-derived proxy: 0.10*households + 0.01*population,2428589,665533,65.0062,1084878,,,,,,,,,,,,65.903,,,,0.7906
+Surat,GUJARAT,general,250797.02,census-derived proxy: 0.10*households + 0.01*population,6081322,1899838,75.1713,2553542,,,,,,,,,,,,65.9241,,,,2.9315
+Surendranagar,GUJARAT,general,67622.48,census-derived proxy: 0.10*households + 0.01*population,1756268,500598,62.2699,723500,,,,,,,,,,,,60.3414,,,,0.5943
+Tapi,GUJARAT,general,29919.12,census-derived proxy: 0.10*households + 0.01*population,807022,218489,60.7215,450902,,,,,,,,,,,,65.1612,,,,0.7328
+The Dangs,GUJARAT,general,8244.71,census-derived proxy: 0.10*households + 0.01*population,228291,59618,61.7493,118257,,,,,,,,,,,,49.9748,,,,0.2298
+Vadodara,GUJARAT,general,165698.76,census-derived proxy: 0.10*households + 0.01*population,4165626,1240425,69.4513,1693473,,,,,,,,,,,,64.3551,,,,4.3216
+Valsad,GUJARAT,general,66895.88,census-derived proxy: 0.10*households + 0.01*population,1705678,498391,68.6329,743245,,,,,,,,,,,,66.0562,,,,2.2111
+Ambala,HARYANA,general,42809.1,census-derived proxy: 0.10*households + 0.01*population,1128350,315256,72.4975,372139,,,,,,,,,,,,63.3393,,,,4.0916
+Bhiwani,HARYANA,general,61972.65,census-derived proxy: 0.10*households + 0.01*population,1634445,456282,65.4578,623006,,,,,,,,,,,,58.3508,,,,1.1598
+Faridabad,HARYANA,general,65165.43,census-derived proxy: 0.10*households + 0.01*population,1809733,470681,70.3274,579229,,,,,,,,,,,,70.7849,,,,9.2285
+Fatehabad,HARYANA,general,35258.11,census-derived proxy: 0.10*households + 0.01*population,942011,258380,59.1902,369083,,,,,,,,,,,,59.3316,,,,1.2424
+Gurgaon,HARYANA,general,67513.42,census-derived proxy: 0.10*households + 0.01*population,1514432,523691,73.3685,544716,,,,,,,,,,,,58.3839,,,,12.8104
+Hisar,HARYANA,general,63051.91,census-derived proxy: 0.10*households + 0.01*population,1743931,456126,63.8965,691621,,,,,,,,,,,,62.4836,,,,2.2213
+Jhajjar,HARYANA,general,38598.45,census-derived proxy: 0.10*households + 0.01*population,958405,290144,70.5434,326534,,,,,,,,,,,,58.0946,,,,1.735
+Jind,HARYANA,general,50141.52,census-derived proxy: 0.10*households + 0.01*population,1334152,368000,62.4185,523422,,,,,,,,,,,,60.4516,,,,1.4302
+Kaithal,HARYANA,general,41421.74,census-derived proxy: 0.10*households + 0.01*population,1074304,306787,60.1812,373899,,,,,,,,,,,,61.0681,,,,1.2139
+Karnal,HARYANA,general,57913.44,census-derived proxy: 0.10*households + 0.01*population,1505324,428602,64.9703,516062,,,,,,,,,,,,62.3476,,,,2.6045
+Kurukshetra,HARYANA,general,38828.65,census-derived proxy: 0.10*households + 0.01*population,964655,291821,67.0595,336780,,,,,,,,,,,,58.9087,,,,2.5207
+Mahendragarh,HARYANA,general,36015.08,census-derived proxy: 0.10*households + 0.01*population,922088,267942,68.3509,338584,,,,,,,,,,,,50.5539,,,,0.9793
+Mewat,HARYANA,general,33256.13,census-derived proxy: 0.10*households + 0.01*population,1089263,223635,41.7619,289964,,,,,,,,,,,,43.0653,,,,0.4181
+Palwal,HARYANA,general,35342.98,census-derived proxy: 0.10*households + 0.01*population,1042708,249159,57.5229,309563,,,,,,,,,,,,53.2214,,,,1.719
+Panchkula,HARYANA,general,22068.03,census-derived proxy: 0.10*households + 0.01*population,561293,164551,72.2115,211479,,,,,,,,,,,,62.8711,,,,11.3126
+Panipat,HARYANA,general,44784.97,census-derived proxy: 0.10*households + 0.01*population,1205437,327306,65.2543,412318,,,,,,,,,,,,64.1495,,,,3.0626
+Rewari,HARYANA,general,35878.72,census-derived proxy: 0.10*households + 0.01*population,900332,268754,70.7458,337727,,,,,,,,,,,,56.7995,,,,1.9055
+Rohtak,HARYANA,general,41306.24,census-derived proxy: 0.10*households + 0.01*population,1061204,306942,70.4466,345967,,,,,,,,,,,,62.9174,,,,2.7634
+Sirsa,HARYANA,general,46831.09,census-derived proxy: 0.10*households + 0.01*population,1295189,338792,60.4465,502003,,,,,,,,,,,,63.6163,,,,1.8557
+Sonipat,HARYANA,general,56243.41,census-derived proxy: 0.10*households + 0.01*population,1450001,417434,68.8493,523179,,,,,,,,,,,,60.6213,,,,2.163
+Yamunanagar,HARYANA,general,47914.35,census-derived proxy: 0.10*households + 0.01*population,1214205,357723,68.5598,389233,,,,,,,,,,,,60.8021,,,,2.2585
+Bilaspur,HIMACHAL PRADESH,general,20264.06,census-derived proxy: 0.10*households + 0.01*population,381956,164445,75.3019,205871,,,,,,,,,,,,48.1292,,,,0.9572
+Chamba,HIMACHAL PRADESH,general,25213.9,census-derived proxy: 0.10*households + 0.01*population,519080,200231,62.3877,294035,,,,,,,,,,,,47.9856,,,,0.8066
+Hamirpur,HIMACHAL PRADESH,general,25682.48,census-derived proxy: 0.10*households + 0.01*population,454768,211348,78.7415,241931,,,,,,,,,,,,49.2647,,,,1.1928
+Kangra,HIMACHAL PRADESH,general,77833.55,census-derived proxy: 0.10*households + 0.01*population,1510075,627328,76.33,675170,,,,,,,,,,,,52.617,,,,1.2837
+Kinnaur,HIMACHAL PRADESH,general,5292.61,census-derived proxy: 0.10*households + 0.01*population,84121,44514,72.1568,56273,,,,,,,,,,,,40.1334,,,,0.7953
+Kullu,HIMACHAL PRADESH,general,23249.43,census-derived proxy: 0.10*households + 0.01*population,437903,188704,70.2603,269084,,,,,,,,,,,,48.3943,,,,1.39
+Lahul AND Spiti,HIMACHAL PRADESH,general,2059.04,census-derived proxy: 0.10*households + 0.01*population,31564,17434,69.2086,19295,,,,,,,,,,,,32.2244,,,,0.3499
+Mandi,HIMACHAL PRADESH,general,56280.27,census-derived proxy: 0.10*households + 0.01*population,999777,462825,72.3908,572671,,,,,,,,,,,,46.3439,,,,1.1523
+Shimla,HIMACHAL PRADESH,general,45656.6,census-derived proxy: 0.10*households + 0.01*population,814010,375165,75.2622,430926,,,,,,,,,,,,46.0475,,,,2.4461
+Sirmaur,HIMACHAL PRADESH,general,24514.15,census-derived proxy: 0.10*households + 0.01*population,529855,192156,68.4423,280083,,,,,,,,,,,,47.6222,,,,1.1553
+Solan,HIMACHAL PRADESH,general,30232.8,census-derived proxy: 0.10*households + 0.01*population,580320,244296,73.852,298737,,,,,,,,,,,,49.0659,,,,2.149
+Una,HIMACHAL PRADESH,general,25733.43,census-derived proxy: 0.10*households + 0.01*population,521173,205217,76.6953,215346,,,,,,,,,,,,51.618,,,,1.1753
+Anantnag,JAMMU AND KASHMIR,general,38560.22,census-derived proxy: 0.10*households + 0.01*population,1078692,277733,50.5735,389684,,,,,,,,,,,,41.3703,,,,0.9765
+Badgam,JAMMU AND KASHMIR,general,26321.35,census-derived proxy: 0.10*households + 0.01*population,753745,187839,44.5308,214866,,,,,,,,,,,,48.0145,,,,1.0642
+Bandipore,JAMMU AND KASHMIR,general,13729.92,census-derived proxy: 0.10*households + 0.01*population,392232,98076,47.4156,149317,,,,,,,,,,,,46.361,,,,1.0043
+Baramula,JAMMU AND KASHMIR,general,36027.89,census-derived proxy: 0.10*households + 0.01*population,1008039,259475,54.0801,304200,,,,,,,,,,,,53.2537,,,,1.4252
+Doda,JAMMU AND KASHMIR,general,17461.06,census-derived proxy: 0.10*households + 0.01*population,409936,133617,53.4432,151912,,,,,,,,,,,,46.2748,,,,0.4461
+Ganderbal,JAMMU AND KASHMIR,general,10709.06,census-derived proxy: 0.10*households + 0.01*population,297446,77346,48.1687,100890,,,,,,,,,,,,49.7595,,,,1.1352
+Jammu,JAMMU AND KASHMIR,general,65560.48,census-derived proxy: 0.10*households + 0.01*population,1529958,502609,74.3246,508622,,,,,,,,,,,,58.6418,,,,3.9603
+Kargil,JAMMU AND KASHMIR,general,6222.42,census-derived proxy: 0.10*households + 0.01*population,140802,48144,61.2463,51873,,,,,,,,,,,,32.8681,,,,0.4881
+Kathua,JAMMU AND KASHMIR,general,27649.05,census-derived proxy: 0.10*households + 0.01*population,616435,214847,63.1379,200431,,,,,,,,,,,,50.9302,,,,0.6716
+Kishtwar,JAMMU AND KASHMIR,general,10144.06,census-derived proxy: 0.10*households + 0.01*population,230696,78371,46.6007,82974,,,,,,,,,,,,30.7091,,,,0.3496
+Kulgam,JAMMU AND KASHMIR,general,16357.83,census-derived proxy: 0.10*households + 0.01*population,424483,121130,49.2564,159990,,,,,,,,,,,,39.555,,,,0.6918
+Kupwara,JAMMU AND KASHMIR,general,26869.94,census-derived proxy: 0.10*households + 0.01*population,870354,181664,50.5144,229064,,,,,,,,,,,,45.7278,,,,0.4195
+Leh(Ladakh),JAMMU AND KASHMIR,general,6774.27,census-derived proxy: 0.10*households + 0.01*population,133487,54394,70.2465,75079,,,,,,,,,,,,31.7131,,,,1.0553
+Pulwama,JAMMU AND KASHMIR,general,22526.7,census-derived proxy: 0.10*households + 0.01*population,560440,169223,52.4513,188420,,,,,,,,,,,,43.51,,,,0.9083
+Punch,JAMMU AND KASHMIR,general,19509.15,census-derived proxy: 0.10*households + 0.01*population,476835,147408,54.8877,161393,,,,,,,,,,,,42.6707,,,,0.2347
+Rajouri,JAMMU AND KASHMIR,general,27781.95,census-derived proxy: 0.10*households + 0.01*population,642415,213578,56.6782,290912,,,,,,,,,,,,44.9541,,,,0.3151
+Ramban,JAMMU AND KASHMIR,general,11799.33,census-derived proxy: 0.10*households + 0.01*population,283713,89622,43.7291,87212,,,,,,,,,,,,38.2083,,,,0.4653
+Reasi,JAMMU AND KASHMIR,general,13929.97,census-derived proxy: 0.10*households + 0.01*population,314667,107833,47.8417,144767,,,,,,,,,,,,29.2934,,,,0.5583
+Samba,JAMMU AND KASHMIR,general,14612.58,census-derived proxy: 0.10*households + 0.01*population,318898,114236,71.5398,92526,,,,,,,,,,,,53.5374,,,,0.8684
+Shupiyan,JAMMU AND KASHMIR,general,10750.95,census-derived proxy: 0.10*households + 0.01*population,266215,80888,51.2743,87721,,,,,,,,,,,,43.6183,,,,1.0929
+Srinagar,JAMMU AND KASHMIR,general,38592.19,census-derived proxy: 0.10*households + 0.01*population,1236829,262239,60.5245,407188,,,,,,,,,,,,63.0734,,,,6.2588
+Udhampur,JAMMU AND KASHMIR,general,23885.85,census-derived proxy: 0.10*households + 0.01*population,554985,183360,58.0834,243672,,,,,,,,,,,,40.3572,,,,0.6621
+Bokaro,JHARKHAND,general,71499.7,census-derived proxy: 0.10*households + 0.01*population,2062330,508764,61.7515,685368,,,,,,,,,,,,53.9987,,,,1.9172
+Chatra,JHARKHAND,general,31979.06,census-derived proxy: 0.10*households + 0.01*population,1042886,215502,48.9086,397690,,,,,,,,,,,,12.5461,,,,0.2738
+Deoghar,JHARKHAND,general,47091.73,census-derived proxy: 0.10*households + 0.01*population,1492073,321710,53.1836,551467,,,,,,,,,,,,40.4691,,,,0.6043
+Dhanbad,JHARKHAND,general,93266.77,census-derived proxy: 0.10*households + 0.01*population,2684487,664219,64.1539,844504,,,,,,,,,,,,64.3121,,,,1.7416
+Dumka,JHARKHAND,general,45912.22,census-derived proxy: 0.10*households + 0.01*population,1321442,326978,50.8845,624779,,,,,,,,,,,,18.9952,,,,0.3649
+Garhwa,JHARKHAND,general,42433.04,census-derived proxy: 0.10*households + 0.01*population,1322784,292052,49.4016,571431,,,,,,,,,,,,10.0575,,,,0.1935
+Giridih,JHARKHAND,general,74399.74,census-derived proxy: 0.10*households + 0.01*population,2445474,499450,51.2569,1036277,,,,,,,,,,,,25.1138,,,,0.3892
+Godda,JHARKHAND,general,42338.51,census-derived proxy: 0.10*households + 0.01*population,1313551,292030,46.0217,552191,,,,,,,,,,,,14.8033,,,,0.2993
+Gumla,JHARKHAND,general,33559.53,census-derived proxy: 0.10*households + 0.01*population,1025213,233074,54.5955,487508,,,,,,,,,,,,13.5953,,,,0.3565
+Hazaribagh,JHARKHAND,general,55519.75,census-derived proxy: 0.10*households + 0.01*population,1734495,381748,58.4175,654636,,,,,,,,,,,,46.3363,,,,0.9252
+Jamtara,JHARKHAND,general,26477.22,census-derived proxy: 0.10*households + 0.01*population,791042,185668,53.8925,326631,,,,,,,,,,,,26.6169,,,,0.4352
+Khunti,JHARKHAND,general,18890.75,census-derived proxy: 0.10*households + 0.01*population,531885,135719,53.5031,259984,,,,,,,,,,,,21.4834,,,,0.3073
+Kodarma,JHARKHAND,general,22311.09,census-derived proxy: 0.10*households + 0.01*population,716259,151485,54.4843,257418,,,,,,,,,,,,41.1381,,,,0.5578
+Latehar,JHARKHAND,general,23321.18,census-derived proxy: 0.10*households + 0.01*population,726978,160514,48.2383,313379,,,,,,,,,,,,23.7948,,,,0.2118
+Lohardaga,JHARKHAND,general,15766.3,census-derived proxy: 0.10*households + 0.01*population,461790,111484,56.2392,221332,,,,,,,,,,,,25.8055,,,,0.3148
+Pakur,JHARKHAND,general,30721.72,census-derived proxy: 0.10*households + 0.01*population,900422,217175,39.1906,404584,,,,,,,,,,,,14.4648,,,,0.151
+Palamu,JHARKHAND,general,60189.09,census-derived proxy: 0.10*households + 0.01*population,1939869,407904,52.8161,713175,,,,,,,,,,,,16.7289,,,,0.5283
+Pashchimi Singhbhum,JHARKHAND,general,55055.78,census-derived proxy: 0.10*households + 0.01*population,1502338,400324,48.4286,694863,,,,,,,,,,,,30.4641,,,,0.4894
+Purbi Singhbhum,JHARKHAND,general,83405.49,census-derived proxy: 0.10*households + 0.01*population,2293919,604663,65.7259,837167,,,,,,,,,,,,63.2595,,,,3.6453
+Ramgarh,JHARKHAND,general,34756.93,census-derived proxy: 0.10*households + 0.01*population,949443,252625,62.826,312125,,,,,,,,,,,,59.0856,,,,1.1384
+Ranchi,JHARKHAND,general,102240.73,census-derived proxy: 0.10*households + 0.01*population,2914253,730982,65.5891,1142867,,,,,,,,,,,,48.005,,,,3.0832
+Sahibganj,JHARKHAND,general,37604.97,census-derived proxy: 0.10*households + 0.01*population,1150567,260993,42.0022,490202,,,,,,,,,,,,13.364,,,,0.2264
+Saraikela-Kharsawan,JHARKHAND,general,39219.26,census-derived proxy: 0.10*households + 0.01*population,1065056,285687,57.555,430051,,,,,,,,,,,,48.3505,,,,0.9122
+Simdega,JHARKHAND,general,21524.08,census-derived proxy: 0.10*households + 0.01*population,599578,155283,57.2875,288645,,,,,,,,,,,,10.8608,,,,0.2724
+Bagalkot,KARNATAKA,general,67963.22,census-derived proxy: 0.10*households + 0.01*population,1889752,490657,58.9184,818081,,,,,,,,,,,,61.4256,,,,0.7633
+Bangalore,KARNATAKA,general,423011.51,census-derived proxy: 0.10*households + 0.01*population,9621551,3267960,78.0776,4246927,,,,,,,,,,,,71.3176,,,,13.185
+Bangalore Rural,KARNATAKA,general,42555.43,census-derived proxy: 0.10*households + 0.01*population,990923,326462,69.5058,459891,,,,,,,,,,,,65.6288,,,,1.1422
+Belgaum,KARNATAKA,general,179694.11,census-derived proxy: 0.10*households + 0.01*population,4779661,1318975,63.8546,2105668,,,,,,,,,,,,61.3224,,,,1.3313
+Bellary,KARNATAKA,general,86873.95,census-derived proxy: 0.10*households + 0.01*population,2452595,623480,57.964,1116880,,,,,,,,,,,,70.6316,,,,1.5439
+Bidar,KARNATAKA,general,55973.3,census-derived proxy: 0.10*households + 0.01*population,1703300,389403,61.2149,702608,,,,,,,,,,,,69.7064,,,,1.0198
+Bijapur,KARNATAKA,general,74522.31,census-derived proxy: 0.10*households + 0.01*population,2177331,527490,57.3302,927722,,,,,,,,,,,,61.9147,,,,0.9454
+Chamarajanagar,KARNATAKA,general,42195.91,census-derived proxy: 0.10*households + 0.01*population,1020791,319880,55.3766,481693,,,,,,,,,,,,66.3236,,,,0.417
+Chikkaballapura,KARNATAKA,general,53521.24,census-derived proxy: 0.10*households + 0.01*population,1255104,409702,62.403,639778,,,,,,,,,,,,62.7878,,,,0.6522
+Chikmagalur,KARNATAKA,general,50622.21,census-derived proxy: 0.10*households + 0.01*population,1137961,392426,71.9133,565774,,,,,,,,,,,,60.7771,,,,1.1493
+Chitradurga,KARNATAKA,general,61329.36,census-derived proxy: 0.10*households + 0.01*population,1659456,447348,65.527,856587,,,,,,,,,,,,68.6841,,,,1.2766
+Dakshina Kannada,KARNATAKA,general,85925.69,census-derived proxy: 0.10*households + 0.01*population,2089649,650292,79.7418,997721,,,,,,,,,,,,59.4041,,,,3.5838
+Davanagere,KARNATAKA,general,72524.07,census-derived proxy: 0.10*households + 0.01*population,1945497,530691,67.2599,875207,,,,,,,,,,,,70.2237,,,,1.3793
+Dharwad,KARNATAKA,general,66780.63,census-derived proxy: 0.10*households + 0.01*population,1847023,483104,70.4736,784833,,,,,,,,,,,,72.0263,,,,3.1076
+Gadag,KARNATAKA,general,39842.9,census-derived proxy: 0.10*households + 0.01*population,1064570,291972,65.7709,495722,,,,,,,,,,,,67.8366,,,,1.1552
+Gulbarga,KARNATAKA,general,85663.96,census-derived proxy: 0.10*households + 0.01*population,2566326,600007,55.6191,1087028,,,,,,,,,,,,67.4604,,,,1.6253
+Hassan,KARNATAKA,general,80662.31,census-derived proxy: 0.10*households + 0.01*population,1776421,628981,68.9733,903580,,,,,,,,,,,,63.7065,,,,0.7712
+Haveri,KARNATAKA,general,57333.08,census-derived proxy: 0.10*households + 0.01*population,1597668,413564,67.9392,730066,,,,,,,,,,,,71.5577,,,,0.5939
+Kodagu,KARNATAKA,general,26842.59,census-derived proxy: 0.10*households + 0.01*population,554519,212974,74.4568,278938,,,,,,,,,,,,53.4953,,,,1.5532
+Kolar,KARNATAKA,general,63124.91,census-derived proxy: 0.10*households + 0.01*population,1536401,477609,66.1428,717872,,,,,,,,,,,,64.8007,,,,1.0576
+Koppal,KARNATAKA,general,47664.1,census-derived proxy: 0.10*households + 0.01*population,1389920,337649,58.2109,654766,,,,,,,,,,,,66.0941,,,,0.6323
+Mandya,KARNATAKA,general,74287.89,census-derived proxy: 0.10*households + 0.01*population,1805769,562302,63.6653,871408,,,,,,,,,,,,69.5415,,,,0.5988
+Mysore,KARNATAKA,general,122109.47,census-derived proxy: 0.10*households + 0.01*population,3001127,920982,65.3814,1314268,,,,,,,,,,,,69.5853,,,,3.0833
+Raichur,KARNATAKA,general,64872.92,census-derived proxy: 0.10*households + 0.01*population,1928812,455848,50.7965,903413,,,,,,,,,,,,69.0026,,,,1.1407
+Ramanagara,KARNATAKA,general,46004.76,census-derived proxy: 0.10*households + 0.01*population,1082636,351784,62.3255,531459,,,,,,,,,,,,67.9184,,,,0.8085
+Shimoga,KARNATAKA,general,72938.13,census-derived proxy: 0.10*households + 0.01*population,1752753,554106,72.059,780598,,,,,,,,,,,,65.6616,,,,1.5865
+Tumkur,KARNATAKA,general,115814.0,census-derived proxy: 0.10*households + 0.01*population,2678980,890242,67.6896,1354646,,,,,,,,,,,,63.2153,,,,0.8954
+Udupi,KARNATAKA,general,50312.51,census-derived proxy: 0.10*households + 0.01*population,1177361,385389,78.6869,513241,,,,,,,,,,,,58.3343,,,,2.3535
+Uttara Kannada,KARNATAKA,general,61850.89,census-derived proxy: 0.10*households + 0.01*population,1437169,474792,75.2804,608526,,,,,,,,,,,,61.246,,,,1.2909
+Yadgir,KARNATAKA,general,38042.21,census-derived proxy: 0.10*households + 0.01*population,1174271,262995,43.4315,547696,,,,,,,,,,,,59.4011,,,,0.5361
+Alappuzha,KERALA,general,93631.49,census-derived proxy: 0.10*households + 0.01*population,2127789,723536,87.0762,804471,,,,,,,,,,,,70.1987,,,,3.9863
+Ernakulam,KERALA,general,150292.98,census-derived proxy: 0.10*households + 0.01*population,3282388,1174691,87.0,1249343,,,,,,,,,,,,65.6587,,,,7.5541
+Idukki,KERALA,general,52333.04,census-derived proxy: 0.10*households + 0.01*population,1108974,412433,83.231,516363,,,,,,,,,,,,59.3658,,,,2.0003
+Kannur,KERALA,general,112477.93,census-derived proxy: 0.10*households + 0.01*population,2523003,872479,84.7575,824116,,,,,,,,,,,,58.5879,,,,3.7426
+Kasaragod,KERALA,general,54854.25,census-derived proxy: 0.10*households + 0.01*population,1307375,417805,79.3569,462998,,,,,,,,,,,,56.8854,,,,2.4839
+Kollam,KERALA,general,118866.75,census-derived proxy: 0.10*households + 0.01*population,2635375,925130,85.0078,912025,,,,,,,,,,,,68.1814,,,,3.4095
+Kottayam,KERALA,general,87561.61,census-derived proxy: 0.10*households + 0.01*population,1974551,678161,88.6175,735735,,,,,,,,,,,,68.4261,,,,5.5811
+Kozhikode,KERALA,general,129896.53,census-derived proxy: 0.10*households + 0.01*population,3086293,990336,84.7438,948981,,,,,,,,,,,,64.7922,,,,3.715
+Malappuram,KERALA,general,156842.1,census-derived proxy: 0.10*households + 0.01*population,4112920,1157129,80.5101,1062424,,,,,,,,,,,,63.0975,,,,2.4119
+Palakkad,KERALA,general,117533.44,census-derived proxy: 0.10*households + 0.01*population,2809934,894341,79.6991,1042340,,,,,,,,,,,,65.7001,,,,3.0371
+Pathanamthitta,KERALA,general,59258.12,census-derived proxy: 0.10*households + 0.01*population,1197412,472840,88.7375,392794,,,,,,,,,,,,63.932,,,,4.4444
+Thiruvananthapuram,KERALA,general,149925.97,census-derived proxy: 0.10*households + 0.01*population,3301427,1169117,84.3698,1231669,,,,,,,,,,,,67.0482,,,,6.1261
+Thrissur,KERALA,general,136398.7,census-derived proxy: 0.10*households + 0.01*population,3121200,1051867,85.8179,1095727,,,,,,,,,,,,68.6042,,,,5.3379
+Wayanad,KERALA,general,35973.0,census-derived proxy: 0.10*households + 0.01*population,817420,277988,78.9784,340077,,,,,,,,,,,,53.9102,,,,1.695
+Lakshadweep,LAKSHADWEEP,general,2768.93,census-derived proxy: 0.10*households + 0.01*population,64473,21242,81.5116,18753,,,,,,,,,,,,50.226,,,,1.5394
+Alirajpur,MADHYA PRADESH,general,22342.79,census-derived proxy: 0.10*households + 0.01*population,728999,150528,28.7729,366797,,,,,,,,,,,,53.8146,,,,0.1973
+Anuppur,MADHYA PRADESH,general,28263.67,census-derived proxy: 0.10*households + 0.01*population,749237,207713,58.2719,346471,,,,,,,,,,,,39.1588,,,,0.621
+Ashoknagar,MADHYA PRADESH,general,29124.81,census-derived proxy: 0.10*households + 0.01*population,845071,206741,55.5112,315270,,,,,,,,,,,,40.9788,,,,0.2994
+Balaghat,MADHYA PRADESH,general,64103.68,census-derived proxy: 0.10*households + 0.01*population,1701698,470867,67.4399,893014,,,,,,,,,,,,59.0245,,,,0.3636
+Barwani,MADHYA PRADESH,general,43785.81,census-derived proxy: 0.10*households + 0.01*population,1385881,299270,39.6806,653897,,,,,,,,,,,,60.5269,,,,0.3869
+Betul,MADHYA PRADESH,general,56418.52,census-derived proxy: 0.10*households + 0.01*population,1575362,406649,59.6542,786980,,,,,,,,,,,,56.7994,,,,0.5186
+Bhind,MADHYA PRADESH,general,52989.65,census-derived proxy: 0.10*households + 0.01*population,1703005,359596,64.2932,520768,,,,,,,,,,,,29.9834,,,,0.3243
+Bhopal,MADHYA PRADESH,general,93782.51,census-derived proxy: 0.10*households + 0.01*population,2371061,700719,70.04,867457,,,,,,,,,,,,64.6353,,,,5.8209
+Burhanpur,MADHYA PRADESH,general,25462.47,census-derived proxy: 0.10*households + 0.01*population,757847,178840,53.9263,328339,,,,,,,,,,,,62.8607,,,,0.5513
+Chhatarpur,MADHYA PRADESH,general,64715.45,census-derived proxy: 0.10*households + 0.01*population,1762375,470917,53.5092,751797,,,,,,,,,,,,37.3858,,,,0.3992
+Chhindwara,MADHYA PRADESH,general,76303.62,census-derived proxy: 0.10*households + 0.01*population,2090922,553944,61.896,957984,,,,,,,,,,,,62.2581,,,,0.6477
+Damoh,MADHYA PRADESH,general,49632.29,census-derived proxy: 0.10*households + 0.01*population,1264219,369901,59.1444,574595,,,,,,,,,,,,50.7517,,,,0.3871
+Datia,MADHYA PRADESH,general,28252.94,census-derived proxy: 0.10*households + 0.01*population,786754,203854,62.4649,321160,,,,,,,,,,,,47.9245,,,,0.3022
+Dewas,MADHYA PRADESH,general,53238.05,census-derived proxy: 0.10*households + 0.01*population,1563715,376009,59.1776,742676,,,,,,,,,,,,71.9283,,,,0.9356
+Dhar,MADHYA PRADESH,general,73429.13,census-derived proxy: 0.10*households + 0.01*population,2185793,515712,49.2882,1027974,,,,,,,,,,,,67.7973,,,,0.463
+Dindori,MADHYA PRADESH,general,29824.74,census-derived proxy: 0.10*households + 0.01*population,704524,227795,53.7546,389925,,,,,,,,,,,,27.3808,,,,0.2432
+Guna,MADHYA PRADESH,general,40923.69,census-derived proxy: 0.10*households + 0.01*population,1241519,285085,52.6758,514897,,,,,,,,,,,,50.5982,,,,0.8706
+Gwalior,MADHYA PRADESH,general,64809.56,census-derived proxy: 0.10*households + 0.01*population,2032036,444892,66.7906,685311,,,,,,,,,,,,68.9738,,,,3.5467
+Harda,MADHYA PRADESH,general,20160.55,census-derived proxy: 0.10*households + 0.01*population,570465,144559,61.8005,230979,,,,,,,,,,,,65.7628,,,,0.6821
+Hoshangabad,MADHYA PRADESH,general,43953.1,census-derived proxy: 0.10*households + 0.01*population,1241350,315396,65.3034,478082,,,,,,,,,,,,62.8023,,,,0.9103
+Indore,MADHYA PRADESH,general,111598.77,census-derived proxy: 0.10*households + 0.01*population,3276697,788318,70.4713,1268195,,,,,,,,,,,,75.2965,,,,6.1766
+Jabalpur,MADHYA PRADESH,general,87108.99,census-derived proxy: 0.10*households + 0.01*population,2463289,624761,71.3058,1005624,,,,,,,,,,,,72.3513,,,,3.2721
+Jhabua,MADHYA PRADESH,general,33829.78,census-derived proxy: 0.10*households + 0.01*population,1025048,235793,34.3478,515121,,,,,,,,,,,,53.1869,,,,0.3155
+Katni,MADHYA PRADESH,general,47823.52,census-derived proxy: 0.10*households + 0.01*population,1292042,349031,61.2034,543874,,,,,,,,,,,,49.3985,,,,0.6243
+Khandwa (East Nimar),MADHYA PRADESH,general,46009.41,census-derived proxy: 0.10*households + 0.01*population,1310061,329088,55.8459,612976,,,,,,,,,,,,61.5975,,,,0.5795
+Khargone (West Nimar),MADHYA PRADESH,general,64746.76,census-derived proxy: 0.10*households + 0.01*population,1873046,460163,52.654,894119,,,,,,,,,,,,66.1268,,,,0.4698
+Mandla,MADHYA PRADESH,general,42242.25,census-derived proxy: 0.10*households + 0.01*population,1054905,316932,57.3475,559649,,,,,,,,,,,,45.3735,,,,0.2878
+Mandsaur,MADHYA PRADESH,general,51816.01,census-derived proxy: 0.10*households + 0.01*population,1340411,384119,62.2638,679723,,,,,,,,,,,,62.4507,,,,0.605
+Morena,MADHYA PRADESH,general,61118.3,census-derived proxy: 0.10*households + 0.01*population,1965970,414586,60.0052,675993,,,,,,,,,,,,31.715,,,,0.4296
+Narsimhapur,MADHYA PRADESH,general,39290.34,census-derived proxy: 0.10*households + 0.01*population,1091854,283718,65.8316,477818,,,,,,,,,,,,60.6743,,,,0.565
+Neemuch,MADHYA PRADESH,general,32480.37,census-derived proxy: 0.10*households + 0.01*population,826067,242197,61.5972,418682,,,,,,,,,,,,59.9751,,,,0.8031
+Panna,MADHYA PRADESH,general,39057.5,census-derived proxy: 0.10*households + 0.01*population,1016520,288923,54.3579,431998,,,,,,,,,,,,26.3382,,,,0.226
+Raisen,MADHYA PRADESH,general,45887.27,census-derived proxy: 0.10*households + 0.01*population,1331597,325713,61.5967,517838,,,,,,,,,,,,59.6762,,,,0.3503
+Rajgarh,MADHYA PRADESH,general,55629.84,census-derived proxy: 0.10*households + 0.01*population,1545814,401717,52.0273,745603,,,,,,,,,,,,57.5355,,,,0.401
+Ratlam,MADHYA PRADESH,general,51937.39,census-derived proxy: 0.10*households + 0.01*population,1455069,373867,56.7588,690980,,,,,,,,,,,,57.1928,,,,0.9747
+Rewa,MADHYA PRADESH,general,85490.96,census-derived proxy: 0.10*households + 0.01*population,2365106,618399,60.9595,991946,,,,,,,,,,,,40.61,,,,0.5508
+Sagar,MADHYA PRADESH,general,85176.08,census-derived proxy: 0.10*households + 0.01*population,2378458,613915,64.9883,1006035,,,,,,,,,,,,59.6978,,,,0.7405
+Satna,MADHYA PRADESH,general,79889.75,census-derived proxy: 0.10*households + 0.01*population,2228935,576004,61.5442,911349,,,,,,,,,,,,51.1632,,,,0.6517
+Sehore,MADHYA PRADESH,general,46078.02,census-derived proxy: 0.10*households + 0.01*population,1311332,329647,59.5091,586087,,,,,,,,,,,,64.3531,,,,0.4751
+Seoni,MADHYA PRADESH,general,52050.01,census-derived proxy: 0.10*households + 0.01*population,1379131,382587,62.6622,684434,,,,,,,,,,,,59.7759,,,,0.3089
+Shahdol,MADHYA PRADESH,general,39804.63,census-derived proxy: 0.10*households + 0.01*population,1066063,291440,56.6753,493057,,,,,,,,,,,,38.8361,,,,0.5946
+Shajapur,MADHYA PRADESH,general,53787.61,census-derived proxy: 0.10*households + 0.01*population,1512681,386608,59.1408,717871,,,,,,,,,,,,60.1992,,,,0.3575
+Sheopur,MADHYA PRADESH,general,24530.81,census-derived proxy: 0.10*households + 0.01*population,687861,176522,47.6877,277455,,,,,,,,,,,,42.3573,,,,0.1547
+Shivpuri,MADHYA PRADESH,general,60722.3,census-derived proxy: 0.10*households + 0.01*population,1726050,434618,52.1912,759281,,,,,,,,,,,,34.0823,,,,0.4261
+Sidhi,MADHYA PRADESH,general,38957.23,census-derived proxy: 0.10*households + 0.01*population,1127033,276869,53.3068,461760,,,,,,,,,,,,36.9229,,,,0.3023
+Singrauli,MADHYA PRADESH,general,40515.23,census-derived proxy: 0.10*households + 0.01*population,1178273,287325,49.6535,499439,,,,,,,,,,,,25.4384,,,,0.9143
+Tikamgarh,MADHYA PRADESH,general,52750.86,census-derived proxy: 0.10*households + 0.01*population,1445166,382992,51.7546,655318,,,,,,,,,,,,34.6548,,,,0.2846
+Ujjain,MADHYA PRADESH,general,68813.54,census-derived proxy: 0.10*households + 0.01*population,1986864,489449,62.4597,897442,,,,,,,,,,,,66.07,,,,1.5325
+Umaria,MADHYA PRADESH,general,23254.18,census-derived proxy: 0.10*households + 0.01*population,644758,168066,55.3187,289691,,,,,,,,,,,,40.4454,,,,0.4992
+Vidisha,MADHYA PRADESH,general,52229.65,census-derived proxy: 0.10*households + 0.01*population,1458875,376409,59.1496,550402,,,,,,,,,,,,48.2215,,,,0.5117
+Ahmadnagar,MAHARASHTRA,general,177771.99,census-derived proxy: 0.10*households + 0.01*population,4543159,1323404,69.3766,2204590,,,,,,,,,,,,51.2007,,,,1.3881
+Akola,MAHARASHTRA,general,68562.56,census-derived proxy: 0.10*households + 0.01*population,1813906,504235,77.8034,768154,,,,,,,,,,,,62.3697,,,,1.2222
+Amravati,MAHARASHTRA,general,107065.95,census-derived proxy: 0.10*households + 0.01*population,2888445,781815,77.9615,1236322,,,,,,,,,,,,65.5516,,,,1.2072
+Aurangabad,MAHARASHTRA,general,134926.02,census-derived proxy: 0.10*households + 0.01*population,3701282,979132,67.6478,1575079,,,,,,,,,,,,60.204,,,,2.3754
+Bhandara,MAHARASHTRA,general,47645.14,census-derived proxy: 0.10*households + 0.01*population,1200334,356418,74.9675,597305,,,,,,,,,,,,63.6963,,,,0.8226
+Bid,MAHARASHTRA,general,95707.59,census-derived proxy: 0.10*households + 0.01*population,2585049,698571,66.4787,1255548,,,,,,,,,,,,57.5535,,,,0.8036
+Buldana,MAHARASHTRA,general,98681.78,census-derived proxy: 0.10*households + 0.01*population,2586258,728192,72.687,1219641,,,,,,,,,,,,58.094,,,,0.6546
+Chandrapur,MAHARASHTRA,general,90508.57,census-derived proxy: 0.10*households + 0.01*population,2204307,684655,71.615,1058172,,,,,,,,,,,,61.1499,,,,1.2034
+Dhule,MAHARASHTRA,general,73387.62,census-derived proxy: 0.10*households + 0.01*population,2050862,528790,63.0913,936370,,,,,,,,,,,,59.6327,,,,1.147
+Gadchiroli,MAHARASHTRA,general,43813.42,census-derived proxy: 0.10*households + 0.01*population,1072942,330840,66.0208,584237,,,,,,,,,,,,43.9666,,,,0.5027
+Gondiya,MAHARASHTRA,general,51876.57,census-derived proxy: 0.10*households + 0.01*population,1322507,386515,75.9348,665419,,,,,,,,,,,,62.0884,,,,0.7415
+Hingoli,MAHARASHTRA,general,40210.35,census-derived proxy: 0.10*households + 0.01*population,1177345,284369,67.1632,569182,,,,,,,,,,,,55.9534,,,,0.4294
+Jalgaon,MAHARASHTRA,general,159277.97,census-derived proxy: 0.10*households + 0.01*population,4229917,1169788,68.3673,1863571,,,,,,,,,,,,61.6172,,,,1.2222
+Jalna,MAHARASHTRA,general,69873.46,census-derived proxy: 0.10*households + 0.01*population,1959046,502830,61.0258,930886,,,,,,,,,,,,57.4538,,,,0.7539
+Kolhapur,MAHARASHTRA,general,156691.41,census-derived proxy: 0.10*households + 0.01*population,3876001,1179314,72.9062,1704054,,,,,,,,,,,,65.2926,,,,1.8883
+Latur,MAHARASHTRA,general,83105.16,census-derived proxy: 0.10*households + 0.01*population,2454196,585632,67.2592,1046857,,,,,,,,,,,,65.1812,,,,1.0616
+Mumbai,MAHARASHTRA,general,141586.21,census-derived proxy: 0.10*households + 0.01*population,3085411,1107321,81.3189,1284396,,,,,,,,,,,,56.5262,,,,10.9583
+Mumbai Suburban,MAHARASHTRA,general,401452.52,census-derived proxy: 0.10*households + 0.01*population,9356962,3078829,80.9609,3735021,,,,,,,,,,,,63.8118,,,,13.1465
+Nagpur,MAHARASHTRA,general,177372.3,census-derived proxy: 0.10*households + 0.01*population,4653570,1308366,78.946,1868560,,,,,,,,,,,,70.1353,,,,4.4303
+Nanded,MAHARASHTRA,general,115781.12,census-derived proxy: 0.10*households + 0.01*population,3361292,821682,65.1364,1493953,,,,,,,,,,,,59.4814,,,,0.9186
+Nandurbar,MAHARASHTRA,general,56984.15,census-derived proxy: 0.10*households + 0.01*population,1648295,405012,54.9968,792065,,,,,,,,,,,,45.9744,,,,0.6368
+Nashik,MAHARASHTRA,general,227965.07,census-derived proxy: 0.10*households + 0.01*population,6107187,1668932,71.1517,2763328,,,,,,,,,,,,54.2089,,,,2.6987
+Osmanabad,MAHARASHTRA,general,61074.76,census-derived proxy: 0.10*households + 0.01*population,1657576,444990,68.643,773916,,,,,,,,,,,,53.9432,,,,0.7211
+Parbhani,MAHARASHTRA,general,61084.76,census-derived proxy: 0.10*households + 0.01*population,1836086,427239,63.0588,822797,,,,,,,,,,,,63.7784,,,,0.932
+Pune,MAHARASHTRA,general,416539.78,census-derived proxy: 0.10*households + 0.01*population,9429408,3222457,76.057,4048993,,,,,,,,,,,,59.7376,,,,7.2931
+Raigarh,MAHARASHTRA,general,122244.8,census-derived proxy: 0.10*households + 0.01*population,2634200,959028,73.6464,1072969,,,,,,,,,,,,57.0584,,,,4.0218
+Ratnagiri,MAHARASHTRA,general,80086.89,census-derived proxy: 0.10*households + 0.01*population,1615069,639362,74.2626,714076,,,,,,,,,,,,57.456,,,,1.2125
+Sangli,MAHARASHTRA,general,113588.73,census-derived proxy: 0.10*households + 0.01*population,2822143,853673,72.6209,1215104,,,,,,,,,,,,56.8281,,,,1.5477
+Satara,MAHARASHTRA,general,127584.51,census-derived proxy: 0.10*households + 0.01*population,3003741,975471,74.0974,1354947,,,,,,,,,,,,57.6801,,,,1.4447
+Sindhudurg,MAHARASHTRA,general,42580.11,census-derived proxy: 0.10*households + 0.01*population,849651,340836,78.393,347178,,,,,,,,,,,,56.9858,,,,1.0319
+Solapur,MAHARASHTRA,general,158800.66,census-derived proxy: 0.10*households + 0.01*population,4317756,1156231,67.4118,1898395,,,,,,,,,,,,51.5087,,,,1.3099
+Thane,MAHARASHTRA,general,472416.58,census-derived proxy: 0.10*households + 0.01*population,11060148,3618151,74.3856,4492767,,,,,,,,,,,,61.6834,,,,7.0801
+Wardha,MAHARASHTRA,general,51878.14,census-derived proxy: 0.10*households + 0.01*population,1300774,388704,78.3732,608235,,,,,,,,,,,,68.4724,,,,1.1096
+Washim,MAHARASHTRA,general,45056.2,census-derived proxy: 0.10*households + 0.01*population,1197160,330846,72.6651,569792,,,,,,,,,,,,59.2487,,,,0.5667
+Yavatmal,MAHARASHTRA,general,107536.68,census-derived proxy: 0.10*households + 0.01*population,2772348,798132,72.9553,1355999,,,,,,,,,,,,55.9451,,,,0.7635
+Bishnupur,MANIPUR,general,7988.89,census-derived proxy: 0.10*households + 0.01*population,237399,56149,65.8524,109937,,,,,,,,,,,,61.2014,,,,1.2039
+Chandel,MANIPUR,general,4857.82,census-derived proxy: 0.10*households + 0.01*population,144182,34160,62.6306,76238,,,,,,,,,,,,54.9297,,,,0.5386
+Churachandpur,MANIPUR,general,8523.93,census-derived proxy: 0.10*households + 0.01*population,274143,57825,71.4718,122655,,,,,,,,,,,,51.6974,,,,1.4475
+Imphal East,MANIPUR,general,15655.23,census-derived proxy: 0.10*households + 0.01*population,456113,110941,71.1806,194848,,,,,,,,,,,,70.9053,,,,2.4689
+Imphal West,MANIPUR,general,18860.02,census-derived proxy: 0.10*households + 0.01*population,517992,136801,75.7977,213387,,,,,,,,,,,,63.653,,,,3.5913
+Senapati,MANIPUR,general,8774.88,census-derived proxy: 0.10*households + 0.01*population,479148,39834,55.1974,233622,,,,,,,,,,,,57.2325,,,,0.6427
+Tamenglong,MANIPUR,general,4216.61,census-derived proxy: 0.10*households + 0.01*population,140651,28101,60.4375,70675,,,,,,,,,,,,41.0697,,,,0.4448
+Thoubal,MANIPUR,general,14647.98,census-derived proxy: 0.10*households + 0.01*population,422168,104263,63.7907,195319,,,,,,,,,,,,47.4828,,,,0.844
+Ukhrul,MANIPUR,general,6028.98,census-derived proxy: 0.10*households + 0.01*population,183998,41890,70.56,87929,,,,,,,,,,,,33.4829,,,,0.6589
+East Garo Hills,MEGHALAYA,general,10600.77,census-derived proxy: 0.10*households + 0.01*population,317917,74216,60.4394,126073,,,,,,,,,,,,33.0791,,,,0.3881
+East Khasi Hills,MEGHALAYA,general,29768.32,census-derived proxy: 0.10*households + 0.01*population,825922,215091,69.986,326786,,,,,,,,,,,,63.2016,,,,2.3395
+Jaintia Hills,MEGHALAYA,general,12322.94,census-derived proxy: 0.10*households + 0.01*population,395124,83717,47.4603,154180,,,,,,,,,,,,49.7832,,,,0.6092
+Ribhoi,MEGHALAYA,general,8960.8,census-derived proxy: 0.10*households + 0.01*population,258840,63724,60.2144,106473,,,,,,,,,,,,48.1388,,,,0.4567
+South Garo Hills,MEGHALAYA,general,5387.64,census-derived proxy: 0.10*households + 0.01*population,142334,39643,57.6545,53069,,,,,,,,,,,,27.5963,,,,0.4515
+West Garo Hills,MEGHALAYA,general,22227.41,census-derived proxy: 0.10*households + 0.01*population,643291,157945,55.7605,255693,,,,,,,,,,,,32.4803,,,,1.032
+West Khasi Hills,MEGHALAYA,general,12547.71,census-derived proxy: 0.10*households + 0.01*population,383461,87131,60.1568,163345,,,,,,,,,,,,37.7282,,,,0.171
+Aizawl,MIZORAM,general,14094.19,census-derived proxy: 0.10*households + 0.01*population,400309,100911,85.083,174636,,,,,,,,,,,,79.0835,,,,3.9827
+Champhai,MIZORAM,general,4368.65,census-derived proxy: 0.10*households + 0.01*population,125745,31112,80.1638,60342,,,,,,,,,,,,76.9735,,,,0.5978
+Kolasib,MIZORAM,general,3057.15,census-derived proxy: 0.10*households + 0.01*population,83955,22176,78.4885,36672,,,,,,,,,,,,66.9778,,,,1.6549
+Lawngtlai,MIZORAM,general,3905.54,census-derived proxy: 0.10*households + 0.01*population,117894,27266,53.3199,45566,,,,,,,,,,,,34.0461,,,,0.5941
+Lunglei,MIZORAM,general,5493.68,census-derived proxy: 0.10*households + 0.01*population,161428,38794,75.0316,78292,,,,,,,,,,,,68.0363,,,,1.2425
+Mamit,MIZORAM,general,2949.14,census-derived proxy: 0.10*households + 0.01*population,86364,20855,69.6945,39339,,,,,,,,,,,,58.2978,,,,0.4316
+Saiha,MIZORAM,general,1848.44,census-derived proxy: 0.10*households + 0.01*population,56574,12827,74.6509,19461,,,,,,,,,,,,57.6908,,,,1.3097
+Serchhip,MIZORAM,general,2198.37,census-derived proxy: 0.10*households + 0.01*population,64937,15490,83.8905,32397,,,,,,,,,,,,79.5029,,,,0.8457
+Dimapur,NAGALAND,general,14985.01,census-derived proxy: 0.10*households + 0.01*population,378811,111969,73.3973,151350,,,,,,,,,,,,63.7793,,,,2.9499
+Kiphire,NAGALAND,general,2772.24,census-derived proxy: 0.10*households + 0.01*population,74004,20322,55.7159,31959,,,,,,,,,,,,69.6142,,,,0.2313
+Kohima,NAGALAND,general,10289.88,census-derived proxy: 0.10*households + 0.01*population,267988,76100,73.6932,114825,,,,,,,,,,,,66.6544,,,,2.5335
+Longleng,NAGALAND,general,2018.54,census-derived proxy: 0.10*households + 0.01*population,50484,15137,59.1455,30568,,,,,,,,,,,,42.3862,,,,0.2444
+Mokokchung,NAGALAND,general,7474.02,census-derived proxy: 0.10*households + 0.01*population,194622,55278,81.9507,100067,,,,,,,,,,,,72.6401,,,,0.9715
+Mon,NAGALAND,general,7604.8,census-derived proxy: 0.10*households + 0.01*population,250260,51022,47.8007,147654,,,,,,,,,,,,28.2192,,,,0.3489
+Peren,NAGALAND,general,3379.89,census-derived proxy: 0.10*households + 0.01*population,95219,24277,65.3273,61390,,,,,,,,,,,,57.087,,,,0.4984
+Phek,NAGALAND,general,6253.98,census-derived proxy: 0.10*households + 0.01*population,163418,46198,64.7989,80277,,,,,,,,,,,,78.3194,,,,0.368
+Tuensang,NAGALAND,general,6980.06,census-derived proxy: 0.10*households + 0.01*population,196596,50141,59.7728,98154,,,,,,,,,,,,49.8554,,,,0.3091
+Wokha,NAGALAND,general,6330.33,census-derived proxy: 0.10*households + 0.01*population,166343,46669,77.0745,78412,,,,,,,,,,,,54.143,,,,0.4243
+Zunheboto,NAGALAND,general,5138.67,census-derived proxy: 0.10*households + 0.01*population,140757,37311,73.0912,79466,,,,,,,,,,,,77.3123,,,,0.6995
+Central,NCT OF DELHI,general,25312.9,census-derived proxy: 0.10*households + 0.01*population,582320,194897,75.9651,207374,,,,,,,,,,,,58.1841,,,,10.1202
+East,NCT OF DELHI,general,63315.26,census-derived proxy: 0.10*households + 0.01*population,1709346,462218,79.153,579692,,,,,,,,,,,,76.3185,,,,17.3159
+New Delhi,NCT OF DELHI,general,6686.44,census-derived proxy: 0.10*households + 0.01*population,142004,52664,80.4055,59541,,,,,,,,,,,,57.0086,,,,13.9868
+North,NCT OF DELHI,general,38986.88,census-derived proxy: 0.10*households + 0.01*population,887978,301071,76.7493,296446,,,,,,,,,,,,57.8966,,,,7.1139
+North East,NCT OF DELHI,general,71174.34,census-derived proxy: 0.10*households + 0.01*population,2241624,487581,71.8938,661386,,,,,,,,,,,,80.3868,,,,6.2328
+North West,NCT OF DELHI,general,139252.09,census-derived proxy: 0.10*households + 0.01*population,3656539,1026867,74.0551,1188545,,,,,,,,,,,,70.2038,,,,11.106
+South,NCT OF DELHI,general,100425.59,census-derived proxy: 0.10*households + 0.01*population,2731929,731063,76.0782,924393,,,,,,,,,,,,75.1511,,,,15.2453
+South West,NCT OF DELHI,general,87697.78,census-derived proxy: 0.10*households + 0.01*population,2292958,647682,77.9643,795352,,,,,,,,,,,,70.6804,,,,14.645
+West,NCT OF DELHI,general,95583.63,census-derived proxy: 0.10*households + 0.01*population,2543243,701512,77.1133,874320,,,,,,,,,,,,74.1658,,,,15.6328
+Anugul,ORISSA,general,54196.91,census-derived proxy: 0.10*households + 0.01*population,1273821,414587,68.2557,526520,,,,,,,,,,,,31.8187,,,,1.3421
+Balangir,ORISSA,general,70386.17,census-derived proxy: 0.10*households + 0.01*population,1648997,538962,56.2318,720601,,,,,,,,,,,,22.9044,,,,0.6097
+Baleshwar,ORISSA,general,91564.69,census-derived proxy: 0.10*households + 0.01*population,2320529,683594,69.8648,932707,,,,,,,,,,,,43.4226,,,,1.0781
+Bargarh,ORISSA,general,60708.65,census-derived proxy: 0.10*households + 0.01*population,1481255,458961,66.4155,762092,,,,,,,,,,,,36.3667,,,,0.5231
+Baudh,ORISSA,general,18207.02,census-derived proxy: 0.10*households + 0.01*population,441162,137954,61.5674,219457,,,,,,,,,,,,13.9112,,,,0.1776
+Bhadrak,ORISSA,general,57873.97,census-derived proxy: 0.10*households + 0.01*population,1506337,428106,72.6358,468599,,,,,,,,,,,,38.4568,,,,0.616
+Cuttack,ORISSA,general,105274.4,census-derived proxy: 0.10*households + 0.01*population,2624470,790297,76.6429,936365,,,,,,,,,,,,44.2349,,,,1.9038
+Debagarh,ORISSA,general,13001.0,census-derived proxy: 0.10*households + 0.01*population,312520,98758,63.298,165435,,,,,,,,,,,,22.7354,,,,0.8354
+Dhenkanal,ORISSA,general,47165.01,census-derived proxy: 0.10*households + 0.01*population,1192811,352369,69.576,435533,,,,,,,,,,,,33.2526,,,,0.5137
+Gajapati,ORISSA,general,23292.67,census-derived proxy: 0.10*households + 0.01*population,577817,175145,45.436,293933,,,,,,,,,,,,36.0341,,,,0.3626
+Ganjam,ORISSA,general,136829.71,census-derived proxy: 0.10*households + 0.01*population,3529031,1015394,62.6248,1501772,,,,,,,,,,,,39.9153,,,,0.8912
+Jagatsinghapur,ORISSA,general,46642.91,census-derived proxy: 0.10*households + 0.01*population,1136971,352732,78.1926,403649,,,,,,,,,,,,39.5898,,,,0.9069
+Jajapur,ORISSA,general,72385.82,census-derived proxy: 0.10*households + 0.01*population,1827192,541139,70.625,552234,,,,,,,,,,,,35.5267,,,,0.708
+Jharsuguda,ORISSA,general,23513.65,census-derived proxy: 0.10*households + 0.01*population,579505,177186,70.0389,247707,,,,,,,,,,,,45.959,,,,1.4098
+Kalahandi,ORISSA,general,65243.49,census-derived proxy: 0.10*households + 0.01*population,1576869,494748,50.8626,751930,,,,,,,,,,,,18.4278,,,,0.3947
+Kandhamal,ORISSA,general,31624.6,census-derived proxy: 0.10*households + 0.01*population,733110,242935,54.5329,355349,,,,,,,,,,,,11.8287,,,,0.3161
+Kendrapara,ORISSA,general,58227.91,census-derived proxy: 0.10*households + 0.01*population,1440361,438243,75.6244,466890,,,,,,,,,,,,39.5002,,,,0.3715
+Kendujhar,ORISSA,general,75447.13,census-derived proxy: 0.10*households + 0.01*population,1801733,574298,58.417,766514,,,,,,,,,,,,21.2137,,,,0.4566
+Khordha,ORISSA,general,91389.63,census-derived proxy: 0.10*households + 0.01*population,2251673,688729,77.7171,792193,,,,,,,,,,,,50.7979,,,,5.1836
+Koraput,ORISSA,general,59809.27,census-derived proxy: 0.10*households + 0.01*population,1379647,460128,41.1765,693406,,,,,,,,,,,,18.6396,,,,0.8667
+Malkangiri,ORISSA,general,24504.22,census-derived proxy: 0.10*households + 0.01*population,613192,183723,39.9069,310666,,,,,,,,,,,,13.3919,,,,0.2438
+Mayurbhanj,ORISSA,general,100556.28,census-derived proxy: 0.10*households + 0.01*population,2519738,753589,54.3468,1223534,,,,,,,,,,,,18.6028,,,,0.3915
+Nabarangapur,ORISSA,general,49435.86,census-derived proxy: 0.10*households + 0.01*population,1220946,372264,38.5258,610906,,,,,,,,,,,,9.2864,,,,0.3557
+Nayagarh,ORISSA,general,38461.29,census-derived proxy: 0.10*households + 0.01*population,962789,288334,71.4967,343633,,,,,,,,,,,,43.347,,,,0.4034
+Nuapada,ORISSA,general,27016.52,census-derived proxy: 0.10*households + 0.01*population,610382,209127,49.0485,305438,,,,,,,,,,,,21.0284,,,,0.362
+Puri,ORISSA,general,64409.7,census-derived proxy: 0.10*households + 0.01*population,1698730,474224,76.0532,621676,,,,,,,,,,,,42.5126,,,,0.7203
+Rayagada,ORISSA,general,38333.91,census-derived proxy: 0.10*households + 0.01*population,967911,286548,42.1253,467122,,,,,,,,,,,,21.4774,,,,0.542
+Sambalpur,ORISSA,general,41960.49,census-derived proxy: 0.10*households + 0.01*population,1041099,315495,67.5912,505840,,,,,,,,,,,,40.0951,,,,1.658
+Subarnapur,ORISSA,general,25452.03,census-derived proxy: 0.10*households + 0.01*population,610183,193502,65.2953,286661,,,,,,,,,,,,25.854,,,,0.3659
+Sundargarh,ORISSA,general,82740.57,census-derived proxy: 0.10*households + 0.01*population,2093437,618062,64.1205,873227,,,,,,,,,,,,36.1674,,,,2.0689
+Karaikal,PONDICHERRY,general,8935.52,census-derived proxy: 0.10*households + 0.01*population,200222,69333,77.3721,68301,,,,,,,,,,,,69.058,,,,2.6942
+Mahe,PONDICHERRY,general,1629.16,census-derived proxy: 0.10*households + 0.01*population,41816,12110,87.2154,11802,,,,,,,,,,,,59.0421,,,,4.7399
+PONDICHERRY,PONDICHERRY,general,38606.59,census-derived proxy: 0.10*households + 0.01*population,950289,291037,76.4661,348105,,,,,,,,,,,,77.7619,,,,5.3041
+Yanam,PONDICHERRY,general,2108.16,census-derived proxy: 0.10*households + 0.01*population,55626,15519,70.6037,16760,,,,,,,,,,,,82.8597,,,,1.3338
+Amritsar,PUNJAB,general,91001.86,census-derived proxy: 0.10*households + 0.01*population,2490656,660953,67.6436,917856,,,,,,,,,,,,69.7827,,,,4.533
+Barnala,PUNJAB,general,21635.17,census-derived proxy: 0.10*households + 0.01*population,595527,156799,60.4223,209331,,,,,,,,,,,,69.4571,,,,2.2328
+Bathinda,PUNJAB,general,49457.45,census-derived proxy: 0.10*households + 0.01*population,1388525,355722,60.8464,549986,,,,,,,,,,,,71.8679,,,,3.1721
+Faridkot,PUNJAB,general,22061.38,census-derived proxy: 0.10*households + 0.01*population,617508,158863,61.7458,221555,,,,,,,,,,,,71.4761,,,,2.7369
+Fatehgarh Sahib,PUNJAB,general,23491.23,census-derived proxy: 0.10*households + 0.01*population,600163,174896,70.9862,214783,,,,,,,,,,,,65.0003,,,,2.9377
+Firozpur,PUNJAB,general,70529.74,census-derived proxy: 0.10*households + 0.01*population,2029074,502390,60.4961,756695,,,,,,,,,,,,69.5997,,,,1.9988
+Gurdaspur,PUNJAB,general,83618.03,census-derived proxy: 0.10*households + 0.01*population,2298323,606348,71.1266,757138,,,,,,,,,,,,67.8185,,,,2.3795
+Hoshiarpur,PUNJAB,general,70992.75,census-derived proxy: 0.10*households + 0.01*population,1586625,551265,75.6133,499822,,,,,,,,,,,,58.0356,,,,2.4937
+Jalandhar,PUNJAB,general,92748.9,census-derived proxy: 0.10*households + 0.01*population,2193590,708130,73.9672,774472,,,,,,,,,,,,63.011,,,,5.519
+Kapurthala,PUNJAB,general,34271.98,census-derived proxy: 0.10*households + 0.01*population,815168,261203,70.7298,284165,,,,,,,,,,,,61.7167,,,,3.7258
+Ludhiana,PUNJAB,general,138669.49,census-derived proxy: 0.10*households + 0.01*population,3498739,1036821,73.1756,1284822,,,,,,,,,,,,67.8636,,,,5.6508
+Mansa,PUNJAB,general,27336.41,census-derived proxy: 0.10*households + 0.01*population,769751,196389,55.0256,328512,,,,,,,,,,,,71.3375,,,,1.3611
+Moga,PUNJAB,general,38801.36,census-derived proxy: 0.10*households + 0.01*population,995746,288439,63.0571,359172,,,,,,,,,,,,63.5822,,,,2.7378
+Muktsar,PUNJAB,general,31434.66,census-derived proxy: 0.10*households + 0.01*population,901896,224157,58.1938,335326,,,,,,,,,,,,74.3162,,,,2.0392
+Patiala,PUNJAB,general,70693.76,census-derived proxy: 0.10*households + 0.01*population,1895686,517369,66.8249,660267,,,,,,,,,,,,68.2161,,,,4.6918
+Rupnagar,PUNJAB,general,27716.17,census-derived proxy: 0.10*households + 0.01*population,684627,208699,73.4314,233676,,,,,,,,,,,,61.8704,,,,3.1624
+Sahibzada Ajit Singh Nagar,PUNJAB,general,39079.78,census-derived proxy: 0.10*households + 0.01*population,994628,291335,74.0553,355995,,,,,,,,,,,,65.7587,,,,8.9052
+Sangrur,PUNJAB,general,61446.09,census-derived proxy: 0.10*households + 0.01*population,1655169,448944,60.5423,568758,,,,,,,,,,,,68.0613,,,,2.3914
+Shahid Bhagat Singh Nagar,PUNJAB,general,29278.2,census-derived proxy: 0.10*households + 0.01*population,612310,231551,71.6074,204329,,,,,,,,,,,,54.0132,,,,2.2734
+Tarn Taran,PUNJAB,general,37913.67,census-derived proxy: 0.10*households + 0.01*population,1119627,267174,59.4986,380702,,,,,,,,,,,,69.8418,,,,1.6094
+Ajmer,RAJASTHAN,general,94255.92,census-derived proxy: 0.10*households + 0.01*population,2583052,684254,59.1035,1053722,,,,,,,,,,,,57.5076,,,,1.9728
+Alwar,RAJASTHAN,general,136267.89,census-derived proxy: 0.10*households + 0.01*population,3674179,995261,59.4004,1708542,,,,,,,,,,,,48.8036,,,,0.9796
+Banswara,RAJASTHAN,general,60959.25,census-derived proxy: 0.10*households + 0.01*population,1797485,429844,46.1391,916574,,,,,,,,,,,,28.0574,,,,0.5407
+Baran,RAJASTHAN,general,44126.35,census-derived proxy: 0.10*households + 0.01*population,1222755,318988,56.7004,552583,,,,,,,,,,,,50.5693,,,,0.4273
+Barmer,RAJASTHAN,general,85918.01,census-derived proxy: 0.10*households + 0.01*population,2603751,598805,45.6388,1202482,,,,,,,,,,,,21.1244,,,,0.4619
+Bharatpur,RAJASTHAN,general,86398.02,census-derived proxy: 0.10*households + 0.01*population,2548462,609134,58.1083,1071154,,,,,,,,,,,,47.3989,,,,0.6861
+Bhilwara,RAJASTHAN,general,91673.23,census-derived proxy: 0.10*households + 0.01*population,2408523,675880,52.1534,1148165,,,,,,,,,,,,55.2826,,,,0.9184
+Bikaner,RAJASTHAN,general,76832.67,census-derived proxy: 0.10*households + 0.01*population,2363937,531933,54.0962,986208,,,,,,,,,,,,41.5077,,,,1.4301
+Bundi,RAJASTHAN,general,41437.86,census-derived proxy: 0.10*households + 0.01*population,1110906,303288,52.6637,526091,,,,,,,,,,,,45.1614,,,,0.459
+Chittaurgarh,RAJASTHAN,general,61008.68,census-derived proxy: 0.10*households + 0.01*population,1544338,455653,53.2154,802755,,,,,,,,,,,,58.8544,,,,1.0844
+Churu,RAJASTHAN,general,69784.77,census-derived proxy: 0.10*households + 0.01*population,2039547,493893,56.3492,902829,,,,,,,,,,,,46.9122,,,,0.5218
+Dausa,RAJASTHAN,general,58413.49,census-derived proxy: 0.10*households + 0.01*population,1634409,420694,57.3939,684495,,,,,,,,,,,,46.4178,,,,0.4086
+Dhaulpur,RAJASTHAN,general,39394.76,census-derived proxy: 0.10*households + 0.01*population,1206516,273296,56.6174,523212,,,,,,,,,,,,35.1582,,,,0.4867
+Dungarpur,RAJASTHAN,general,49321.82,census-derived proxy: 0.10*households + 0.01*population,1388552,354363,49.0865,641515,,,,,,,,,,,,39.8673,,,,0.4168
+Ganganagar,RAJASTHAN,general,75951.08,census-derived proxy: 0.10*households + 0.01*population,1969168,562594,60.6014,912672,,,,,,,,,,,,50.3279,,,,1.1189
+Hanumangarh,RAJASTHAN,general,67522.22,census-derived proxy: 0.10*households + 0.01*population,1774692,497753,58.2713,835260,,,,,,,,,,,,48.8521,,,,0.675
+Jaipur,RAJASTHAN,general,239529.68,census-derived proxy: 0.10*households + 0.01*population,6626178,1732679,64.9087,2464893,,,,,,,,,,,,57.1419,,,,4.4189
+Jaisalmer,RAJASTHAN,general,25693.89,census-derived proxy: 0.10*households + 0.01*population,669919,189947,46.0732,288903,,,,,,,,,,,,22.7121,,,,0.397
+Jalor,RAJASTHAN,general,65029.1,census-derived proxy: 0.10*households + 0.01*population,1828730,467418,45.3638,896644,,,,,,,,,,,,34.6253,,,,0.3391
+Jhalawar,RAJASTHAN,general,50349.99,census-derived proxy: 0.10*households + 0.01*population,1411129,362387,52.4255,685950,,,,,,,,,,,,60.8267,,,,0.4829
+Jhunjhunun,RAJASTHAN,general,86451.35,census-derived proxy: 0.10*households + 0.01*population,2137045,650809,64.1241,894649,,,,,,,,,,,,45.7214,,,,0.7418
+Jodhpur,RAJASTHAN,general,126037.35,census-derived proxy: 0.10*households + 0.01*population,3687165,891657,55.0974,1489741,,,,,,,,,,,,45.8481,,,,2.1684
+Karauli,RAJASTHAN,general,51017.98,census-derived proxy: 0.10*households + 0.01*population,1458248,364355,55.2615,628726,,,,,,,,,,,,36.2501,,,,0.2907
+Kota,RAJASTHAN,general,71029.04,census-derived proxy: 0.10*households + 0.01*population,1951014,515189,66.5472,748811,,,,,,,,,,,,65.9756,,,,2.4929
+Nagaur,RAJASTHAN,general,117297.53,census-derived proxy: 0.10*households + 0.01*population,3307743,842201,53.1669,1425882,,,,,,,,,,,,41.2424,,,,0.5283
+Pali,RAJASTHAN,general,85647.43,census-derived proxy: 0.10*households + 0.01*population,2037573,652717,53.2836,842327,,,,,,,,,,,,50.0666,,,,0.6194
+Pratapgarh,RAJASTHAN,general,32086.68,census-derived proxy: 0.10*households + 0.01*population,867848,234082,46.2656,481294,,,,,,,,,,,,30.5927,,,,0.3059
+Rajsamand,RAJASTHAN,general,48133.57,census-derived proxy: 0.10*households + 0.01*population,1156597,365676,53.5311,550831,,,,,,,,,,,,52.8544,,,,0.5439
+Sawai Madhopur,RAJASTHAN,general,48687.61,census-derived proxy: 0.10*households + 0.01*population,1335551,353321,55.5387,578068,,,,,,,,,,,,39.8921,,,,0.5341
+Sikar,RAJASTHAN,general,97356.73,census-derived proxy: 0.10*households + 0.01*population,2677333,705834,61.7076,1006504,,,,,,,,,,,,48.093,,,,0.8
+Sirohi,RAJASTHAN,general,41180.86,census-derived proxy: 0.10*households + 0.01*population,1036346,308174,46.0084,419829,,,,,,,,,,,,43.5108,,,,0.6964
+Tonk,RAJASTHAN,general,52279.86,census-derived proxy: 0.10*households + 0.01*population,1421326,380666,52.7436,649161,,,,,,,,,,,,41.5756,,,,0.5012
+Udaipur,RAJASTHAN,general,115506.0,census-derived proxy: 0.10*households + 0.01*population,3068420,848218,51.578,1365783,,,,,,,,,,,,42.188,,,,1.6754
+East District,SIKKIM,general,11049.63,census-derived proxy: 0.10*households + 0.01*population,283583,82138,75.5789,139678,,,,,,,,,,,,70.4826,,,,4.0067
+North  District,SIKKIM,general,1797.99,census-derived proxy: 0.10*households + 0.01*population,43709,13609,69.6653,23359,,,,,,,,,,,,57.5061,,,,0.8524
+South District,SIKKIM,general,5398.3,census-derived proxy: 0.10*households + 0.01*population,146850,39298,72.6871,74753,,,,,,,,,,,,70.1995,,,,1.5039
+West District,SIKKIM,general,4762.05,census-derived proxy: 0.10*households + 0.01*population,136435,33977,68.481,70348,,,,,,,,,,,,74.3797,,,,0.8417
+Ariyalur,TAMIL NADU,general,32976.64,census-derived proxy: 0.10*households + 0.01*population,754894,254277,63.6651,359851,,,,,,,,,,,,69.8065,,,,0.6878
+Chennai,TAMIL NADU,general,177879.82,census-derived proxy: 0.10*households + 0.01*population,4646732,1314125,81.2674,1817297,,,,,,,,,,,,83.4269,,,,16.5409
+Coimbatore,TAMIL NADU,general,151555.65,census-derived proxy: 0.10*households + 0.01*population,3458045,1169752,76.2254,1567950,,,,,,,,,,,,76.6252,,,,5.4091
+Cuddalore,TAMIL NADU,general,101880.04,census-derived proxy: 0.10*households + 0.01*population,2605914,758209,69.6601,1169880,,,,,,,,,,,,78.9244,,,,2.0306
+Dharmapuri,TAMIL NADU,general,63861.03,census-derived proxy: 0.10*households + 0.01*population,1506843,487926,60.9028,751170,,,,,,,,,,,,69.2671,,,,0.7483
+Dindigul,TAMIL NADU,general,92951.95,census-derived proxy: 0.10*households + 0.01*population,2159775,713542,68.6106,1105155,,,,,,,,,,,,70.0809,,,,1.283
+Erode,TAMIL NADU,general,106885.84,census-derived proxy: 0.10*households + 0.01*population,2251744,843684,66.2892,1195773,,,,,,,,,,,,70.549,,,,2.2051
+Kancheepuram,TAMIL NADU,general,161332.92,census-derived proxy: 0.10*households + 0.01*population,3998252,1213504,75.3675,1673814,,,,,,,,,,,,79.2054,,,,8.2671
+Kanniyakumari,TAMIL NADU,general,78507.84,census-derived proxy: 0.10*households + 0.01*population,1870374,598041,82.8037,679620,,,,,,,,,,,,77.8696,,,,2.6207
+Karur,TAMIL NADU,general,47111.03,census-derived proxy: 0.10*households + 0.01*population,1064493,364661,68.2996,543298,,,,,,,,,,,,72.6562,,,,1.3478
+Krishnagiri,TAMIL NADU,general,76852.09,census-derived proxy: 0.10*households + 0.01*population,1879809,580540,63.1957,877779,,,,,,,,,,,,70.4925,,,,1.6569
+Madurai,TAMIL NADU,general,131426.62,census-derived proxy: 0.10*households + 0.01*population,3038252,1010441,74.8269,1354632,,,,,,,,,,,,74.6348,,,,3.3745
+Nagapattinam,TAMIL NADU,general,67938.5,census-derived proxy: 0.10*households + 0.01*population,1616450,517740,75.0415,671994,,,,,,,,,,,,73.7706,,,,1.0787
+Namakkal,TAMIL NADU,general,80014.41,census-derived proxy: 0.10*households + 0.01*population,1726601,627484,68.1183,898245,,,,,,,,,,,,70.2877,,,,1.4279
+Perambalur,TAMIL NADU,general,24511.43,census-derived proxy: 0.10*households + 0.01*population,565223,188592,66.4911,299726,,,,,,,,,,,,71.9813,,,,0.7991
+Pudukkottai,TAMIL NADU,general,66577.55,census-derived proxy: 0.10*households + 0.01*population,1618345,503941,68.6223,761693,,,,,,,,,,,,70.3441,,,,0.8918
+Ramanathapuram,TAMIL NADU,general,55258.35,census-derived proxy: 0.10*households + 0.01*population,1353445,417239,72.3299,602977,,,,,,,,,,,,69.8401,,,,1.2396
+Salem,TAMIL NADU,general,151855.76,census-derived proxy: 0.10*households + 0.01*population,3482056,1170352,65.6383,1694160,,,,,,,,,,,,71.3783,,,,1.7653
+Sivaganga,TAMIL NADU,general,58632.71,census-derived proxy: 0.10*households + 0.01*population,1339101,452417,71.6708,620171,,,,,,,,,,,,69.4647,,,,1.276
+Thanjavur,TAMIL NADU,general,99396.1,census-derived proxy: 0.10*households + 0.01*population,2405890,753372,74.4422,974079,,,,,,,,,,,,73.746,,,,1.7913
+The Nilgiris,TAMIL NADU,general,33764.44,census-derived proxy: 0.10*households + 0.01*population,735394,264105,77.4615,349974,,,,,,,,,,,,68.2535,,,,1.727
+Theni,TAMIL NADU,general,53521.29,census-derived proxy: 0.10*households + 0.01*population,1245899,410623,69.8355,591642,,,,,,,,,,,,76.0576,,,,1.1366
+Thiruvallur,TAMIL NADU,general,149224.34,census-derived proxy: 0.10*households + 0.01*population,3728104,1119433,74.8831,1538054,,,,,,,,,,,,81.2376,,,,6.7565
+Thiruvarur,TAMIL NADU,general,53460.67,census-derived proxy: 0.10*households + 0.01*population,1264277,408179,74.8626,540168,,,,,,,,,,,,74.2601,,,,1.0819
+Thoothukkudi,TAMIL NADU,general,81175.66,census-derived proxy: 0.10*households + 0.01*population,1750176,636739,77.1178,748095,,,,,,,,,,,,68.7748,,,,1.799
+Tiruchirappalli,TAMIL NADU,general,114795.6,census-derived proxy: 0.10*households + 0.01*population,2722290,875727,74.8995,1213979,,,,,,,,,,,,74.4091,,,,3.431
+Tirunelveli,TAMIL NADU,general,137239.03,census-derived proxy: 0.10*households + 0.01*population,3077233,1064667,73.8799,1436454,,,,,,,,,,,,73.1806,,,,1.7912
+Tiruppur,TAMIL NADU,general,114281.32,census-derived proxy: 0.10*households + 0.01*population,2479052,894908,71.0177,1266137,,,,,,,,,,,,73.2,,,,1.9199
+Tiruvannamalai,TAMIL NADU,general,95665.05,census-derived proxy: 0.10*households + 0.01*population,2464875,710163,65.9998,1238177,,,,,,,,,,,,77.317,,,,0.9075
+Vellore,TAMIL NADU,general,153393.31,census-derived proxy: 0.10*households + 0.01*population,3936331,1140300,70.4699,1689330,,,,,,,,,,,,75.9373,,,,1.8086
+Viluppuram,TAMIL NADU,general,131320.13,census-derived proxy: 0.10*households + 0.01*population,3458873,967314,63.4824,1703249,,,,,,,,,,,,77.3734,,,,0.8758
+Virudhunagar,TAMIL NADU,general,92895.28,census-derived proxy: 0.10*households + 0.01*population,1942288,734724,72.0175,950158,,,,,,,,,,,,68.8626,,,,1.3909
+Dhalai,TRIPURA,general,14135.1,census-derived proxy: 0.10*households + 0.01*population,378230,103528,73.0288,155831,,,,,,,,,,,,45.2776,,,,0.2637
+North Tripura,TRIPURA,general,26201.57,census-derived proxy: 0.10*households + 0.01*population,693947,192621,74.9916,248667,,,,,,,,,,,,42.3635,,,,0.5176
+South Tripura,TRIPURA,general,35167.71,census-derived proxy: 0.10*households + 0.01*population,876001,264077,73.8367,366845,,,,,,,,,,,,50.6458,,,,0.359
+West Tripura,TRIPURA,general,67921.09,census-derived proxy: 0.10*households + 0.01*population,1725739,506637,78.8853,698178,,,,,,,,,,,,62.0892,,,,1.262
+Agra,UTTAR PRADESH,general,134570.27,census-derived proxy: 0.10*households + 0.01*population,4418797,903823,60.6615,1389844,,,,,,,,,,,,59.3481,,,,3.0076
+Aligarh,UTTAR PRADESH,general,122544.79,census-derived proxy: 0.10*households + 0.01*population,3673889,858059,56.9578,1174361,,,,,,,,,,,,31.2473,,,,1.5889
+Allahabad,UTTAR PRADESH,general,184400.91,census-derived proxy: 0.10*households + 0.01*population,5954391,1248570,61.5634,2111907,,,,,,,,,,,,31.3592,,,,1.932
+Ambedkar Nagar,UTTAR PRADESH,general,80637.88,census-derived proxy: 0.10*households + 0.01*population,2397888,566590,62.0104,787398,,,,,,,,,,,,17.5755,,,,0.4428
+Auraiya,UTTAR PRADESH,general,45222.85,census-derived proxy: 0.10*households + 0.01*population,1379545,314274,67.4741,442023,,,,,,,,,,,,20.835,,,,0.7649
+Azamgarh,UTTAR PRADESH,general,143284.93,census-derived proxy: 0.10*households + 0.01*population,4613913,971458,60.0774,1372032,,,,,,,,,,,,18.8769,,,,0.6847
+Baghpat,UTTAR PRADESH,general,44635.08,census-derived proxy: 0.10*households + 0.01*population,1303048,316046,61.2387,416695,,,,,,,,,,,,37.691,,,,0.9457
+Bahraich,UTTAR PRADESH,general,110903.51,census-derived proxy: 0.10*households + 0.01*population,3487731,760262,40.0939,1152160,,,,,,,,,,,,11.2874,,,,0.3526
+Ballia,UTTAR PRADESH,general,95335.84,census-derived proxy: 0.10*households + 0.01*population,3239774,629381,60.6089,1019483,,,,,,,,,,,,19.0619,,,,0.7423
+Balrampur,UTTAR PRADESH,general,66070.45,census-derived proxy: 0.10*households + 0.01*population,2148665,445838,40.4138,760253,,,,,,,,,,,,12.8746,,,,0.3479
+Banda,UTTAR PRADESH,general,62556.6,census-derived proxy: 0.10*households + 0.01*population,1799410,445625,55.737,701689,,,,,,,,,,,,16.4986,,,,0.3714
+Bara Banki,UTTAR PRADESH,general,104097.79,census-derived proxy: 0.10*households + 0.01*population,3260699,714908,51.9048,1192850,,,,,,,,,,,,15.1231,,,,0.4419
+Bareilly,UTTAR PRADESH,general,143924.69,census-derived proxy: 0.10*households + 0.01*population,4448359,994411,49.2712,1401971,,,,,,,,,,,,27.4363,,,,1.5249
+Basti,UTTAR PRADESH,general,79147.14,census-derived proxy: 0.10*households + 0.01*population,2464464,545025,56.5552,783688,,,,,,,,,,,,19.8341,,,,0.628
+Bijnor,UTTAR PRADESH,general,127679.43,census-derived proxy: 0.10*households + 0.01*population,3682713,908523,57.9842,1088036,,,,,,,,,,,,29.5373,,,,0.8038
+Budaun,UTTAR PRADESH,general,123581.36,census-derived proxy: 0.10*households + 0.01*population,3681896,867624,42.0294,1107343,,,,,,,,,,,,12.6987,,,,0.4188
+Bulandshahr,UTTAR PRADESH,general,122999.41,census-derived proxy: 0.10*households + 0.01*population,3499171,880077,58.0611,1173260,,,,,,,,,,,,25.4435,,,,0.8937
+Chandauli,UTTAR PRADESH,general,59103.46,census-derived proxy: 0.10*households + 0.01*population,1952756,395759,60.1512,652543,,,,,,,,,,,,25.1673,,,,0.8824
+Chitrakoot,UTTAR PRADESH,general,32996.8,census-derived proxy: 0.10*households + 0.01*population,991730,230795,53.5501,394197,,,,,,,,,,,,17.7846,,,,0.3583
+Deoria,UTTAR PRADESH,general,97580.06,census-derived proxy: 0.10*households + 0.01*population,3100946,665706,60.4731,876246,,,,,,,,,,,,22.5326,,,,0.6713
+Etah,UTTAR PRADESH,general,57944.6,census-derived proxy: 0.10*households + 0.01*population,1774480,401998,59.4654,545984,,,,,,,,,,,,17.3113,,,,0.6555
+Etawah,UTTAR PRADESH,general,50930.7,census-derived proxy: 0.10*households + 0.01*population,1581810,351126,67.1385,506072,,,,,,,,,,,,32.2101,,,,0.8441
+Faizabad,UTTAR PRADESH,general,83676.56,census-derived proxy: 0.10*households + 0.01*population,2470996,589666,58.7173,831209,,,,,,,,,,,,21.6655,,,,0.8049
+Farrukhabad,UTTAR PRADESH,general,60001.04,census-derived proxy: 0.10*households + 0.01*population,1885204,411490,57.9607,592267,,,,,,,,,,,,21.4054,,,,0.6377
+Fatehpur,UTTAR PRADESH,general,89981.33,census-derived proxy: 0.10*households + 0.01*population,2632733,636540,57.4371,1063929,,,,,,,,,,,,11.8238,,,,0.5318
+Firozabad,UTTAR PRADESH,general,78518.36,census-derived proxy: 0.10*households + 0.01*population,2498156,535368,60.9172,761521,,,,,,,,,,,,36.6253,,,,1.0897
+Gautam Buddha Nagar,UTTAR PRADESH,general,67458.15,census-derived proxy: 0.10*households + 0.01*population,1648115,509770,68.1352,569109,,,,,,,,,,,,50.5298,,,,10.4324
+Ghaziabad,UTTAR PRADESH,general,165988.75,census-derived proxy: 0.10*households + 0.01*population,4681645,1191723,66.713,1520538,,,,,,,,,,,,58.3298,,,,6.5549
+Ghazipur,UTTAR PRADESH,general,112366.68,census-derived proxy: 0.10*households + 0.01*population,3620268,761640,60.7013,1204602,,,,,,,,,,,,13.8867,,,,0.697
+Gonda,UTTAR PRADESH,general,106976.39,census-derived proxy: 0.10*households + 0.01*population,3433919,726372,48.9235,1170552,,,,,,,,,,,,14.3293,,,,0.5938
+Gorakhpur,UTTAR PRADESH,general,139521.75,census-derived proxy: 0.10*households + 0.01*population,4440895,951128,60.8059,1351629,,,,,,,,,,,,31.186,,,,1.5347
+Hamirpur,UTTAR PRADESH,general,42180.95,census-derived proxy: 0.10*households + 0.01*population,1104285,311381,59.1604,443655,,,,,,,,,,,,17.9616,,,,0.3841
+Hardoi,UTTAR PRADESH,general,131696.15,census-derived proxy: 0.10*households + 0.01*population,4092845,907677,54.2801,1318946,,,,,,,,,,,,10.5222,,,,0.4236
+Jalaun,UTTAR PRADESH,general,56541.84,census-derived proxy: 0.10*households + 0.01*population,1689974,396421,63.622,620764,,,,,,,,,,,,26.2791,,,,0.5593
+Jaunpur,UTTAR PRADESH,general,145609.04,census-derived proxy: 0.10*households + 0.01*population,4494204,1006670,60.7822,1437375,,,,,,,,,,,,18.0265,,,,0.7949
+Jhansi,UTTAR PRADESH,general,70477.33,census-derived proxy: 0.10*households + 0.01*population,1998603,504913,65.2712,814914,,,,,,,,,,,,36.3112,,,,1.6868
+Jyotiba Phule Nagar,UTTAR PRADESH,general,63539.61,census-derived proxy: 0.10*households + 0.01*population,1840221,451374,53.4235,599089,,,,,,,,,,,,19.7905,,,,0.6259
+Kannauj,UTTAR PRADESH,general,53143.16,census-derived proxy: 0.10*households + 0.01*population,1656616,365770,61.3955,524676,,,,,,,,,,,,16.8114,,,,0.6802
+Kanpur Dehat,UTTAR PRADESH,general,58487.44,census-derived proxy: 0.10*households + 0.01*population,1796184,405256,65.1516,628864,,,,,,,,,,,,12.2769,,,,0.6618
+Kanpur Nagar,UTTAR PRADESH,general,150790.18,census-derived proxy: 0.10*households + 0.01*population,4581268,1049775,70.7887,1572232,,,,,,,,,,,,49.2745,,,,3.2356
+Kanshiram Nagar,UTTAR PRADESH,general,48739.59,census-derived proxy: 0.10*households + 0.01*population,1436719,343724,50.4518,472765,,,,,,,,,,,,14.6644,,,,0.4722
+Kaushambi,UTTAR PRADESH,general,54057.96,census-derived proxy: 0.10*households + 0.01*population,1599596,380620,50.8518,639086,,,,,,,,,,,,11.4952,,,,0.3949
+Kheri,UTTAR PRADESH,general,126473.43,census-derived proxy: 0.10*households + 0.01*population,4021243,862610,50.5825,1264718,,,,,,,,,,,,14.2313,,,,0.3944
+Kushinagar,UTTAR PRADESH,general,114155.34,census-derived proxy: 0.10*households + 0.01*population,3564544,785099,54.8407,1116973,,,,,,,,,,,,16.2185,,,,0.444
+Lalitpur,UTTAR PRADESH,general,42399.12,census-derived proxy: 0.10*households + 0.01*population,1221592,301832,52.4881,503351,,,,,,,,,,,,25.538,,,,0.3575
+Lucknow,UTTAR PRADESH,general,152070.48,census-derived proxy: 0.10*households + 0.01*population,4589838,1061721,68.1344,1542806,,,,,,,,,,,,54.8891,,,,6.4524
+Mahamaya Nagar,UTTAR PRADESH,general,52950.38,census-derived proxy: 0.10*households + 0.01*population,1564708,373033,60.2395,484115,,,,,,,,,,,,36.077,,,,0.8275
+Mahoba,UTTAR PRADESH,general,33441.88,census-derived proxy: 0.10*households + 0.01*population,875958,246823,55.7225,349676,,,,,,,,,,,,17.3955,,,,0.5332
+Mahrajganj,UTTAR PRADESH,general,87554.93,census-derived proxy: 0.10*households + 0.01*population,2684703,607079,52.8604,994253,,,,,,,,,,,,15.1288,,,,0.4438
+Mainpuri,UTTAR PRADESH,general,59811.09,census-derived proxy: 0.10*households + 0.01*population,1868529,411258,64.4296,560840,,,,,,,,,,,,19.2147,,,,0.6424
+Mathura,UTTAR PRADESH,general,84000.84,census-derived proxy: 0.10*households + 0.01*population,2547184,585290,59.1927,840939,,,,,,,,,,,,48.0512,,,,1.4909
+Mau,UTTAR PRADESH,general,67212.48,census-derived proxy: 0.10*households + 0.01*population,2205968,451528,61.7889,696747,,,,,,,,,,,,33.2002,,,,0.5882
+Meerut,UTTAR PRADESH,general,114819.19,census-derived proxy: 0.10*households + 0.01*population,3443689,803823,62.1859,1090539,,,,,,,,,,,,52.95,,,,2.9505
+Mirzapur,UTTAR PRADESH,general,79281.2,census-derived proxy: 0.10*households + 0.01*population,2496970,543115,57.2167,881996,,,,,,,,,,,,26.8814,,,,0.8188
+Moradabad,UTTAR PRADESH,general,152511.66,census-derived proxy: 0.10*households + 0.01*population,4772006,1047916,47.4402,1417811,,,,,,,,,,,,26.8875,,,,1.1155
+Muzaffarnagar,UTTAR PRADESH,general,138420.12,census-derived proxy: 0.10*households + 0.01*population,4143512,969850,58.3403,1291644,,,,,,,,,,,,37.9598,,,,1.039
+Pilibhit,UTTAR PRADESH,general,66449.07,census-derived proxy: 0.10*households + 0.01*population,2031007,461390,52.2448,618605,,,,,,,,,,,,17.9904,,,,0.622
+Pratapgarh,UTTAR PRADESH,general,107370.01,census-derived proxy: 0.10*households + 0.01*population,3209141,752786,60.1893,1066601,,,,,,,,,,,,18.6691,,,,0.684
+Rae Bareli,UTTAR PRADESH,general,111897.39,census-derived proxy: 0.10*households + 0.01*population,3405559,778418,57.7245,1204710,,,,,,,,,,,,31.841,,,,0.666
+Rampur,UTTAR PRADESH,general,77357.39,census-derived proxy: 0.10*households + 0.01*population,2335819,539992,44.6809,737261,,,,,,,,,,,,24.2804,,,,0.7124
+Saharanpur,UTTAR PRADESH,general,123587.62,census-derived proxy: 0.10*households + 0.01*population,3466382,889238,59.9215,1037344,,,,,,,,,,,,45.4883,,,,1.0907
+Sant Kabir Nagar,UTTAR PRADESH,general,52366.93,census-derived proxy: 0.10*households + 0.01*population,1715183,352151,55.6762,539469,,,,,,,,,,,,22.5826,,,,0.5767
+Sant Ravidas Nagar (Bhadohi),UTTAR PRADESH,general,49732.83,census-derived proxy: 0.10*households + 0.01*population,1578213,339507,57.6694,470608,,,,,,,,,,,,24.512,,,,0.853
+Shahjahanpur,UTTAR PRADESH,general,95565.68,census-derived proxy: 0.10*households + 0.01*population,3006538,655003,49.5896,892214,,,,,,,,,,,,17.5821,,,,0.5937
+Shrawasti,UTTAR PRADESH,general,36901.01,census-derived proxy: 0.10*households + 0.01*population,1117361,257274,37.8851,403755,,,,,,,,,,,,7.9367,,,,0.2425
+Siddharthnagar,UTTAR PRADESH,general,76944.27,census-derived proxy: 0.10*households + 0.01*population,2559297,513513,48.0181,878898,,,,,,,,,,,,18.1277,,,,0.474
+Sitapur,UTTAR PRADESH,general,138730.12,census-derived proxy: 0.10*households + 0.01*population,4483992,938902,50.9308,1422602,,,,,,,,,,,,10.868,,,,0.4126
+Sonbhadra,UTTAR PRADESH,general,61434.39,census-derived proxy: 0.10*households + 0.01*population,1862559,428088,52.9222,730399,,,,,,,,,,,,22.3277,,,,1.2028
+Sultanpur,UTTAR PRADESH,general,126933.97,census-derived proxy: 0.10*households + 0.01*population,3797117,889628,58.9895,1242632,,,,,,,,,,,,26.2695,,,,0.6695
+Unnao,UTTAR PRADESH,general,102819.27,census-derived proxy: 0.10*households + 0.01*population,3108367,717356,57.0584,1124744,,,,,,,,,,,,13.8656,,,,0.4846
+Varanasi,UTTAR PRADESH,general,112274.81,census-derived proxy: 0.10*households + 0.01*population,3676841,755064,65.3796,1220708,,,,,,,,,,,,44.507,,,,2.5447
+Almora,UTTARAKHAND,general,34338.86,census-derived proxy: 0.10*households + 0.01*population,622506,281138,70.1193,298211,,,,,,,,,,,,39.0826,,,,0.6509
+Bageshwar,UTTARAKHAND,general,12590.08,census-derived proxy: 0.10*households + 0.01*population,259898,99911,69.059,123638,,,,,,,,,,,,47.1249,,,,0.4354
+Chamoli,UTTARAKHAND,general,22550.05,census-derived proxy: 0.10*households + 0.01*population,391605,186340,71.6426,180940,,,,,,,,,,,,38.3836,,,,0.4825
+Champawat,UTTARAKHAND,general,12400.58,census-derived proxy: 0.10*households + 0.01*population,259648,98041,68.4488,99566,,,,,,,,,,,,38.4788,,,,0.5589
+Dehradun,UTTARAKHAND,general,66730.74,census-derived proxy: 0.10*households + 0.01*population,1696694,497638,74.2329,582768,,,,,,,,,,,,62.4402,,,,5.197
+Garhwal,UTTARAKHAND,general,38518.91,census-derived proxy: 0.10*households + 0.01*population,687271,316462,72.0078,274152,,,,,,,,,,,,45.4914,,,,0.832
+Hardwar,UTTARAKHAND,general,67705.32,census-derived proxy: 0.10*households + 0.01*population,1890422,488011,62.3329,578121,,,,,,,,,,,,57.1733,,,,2.4481
+Nainital,UTTARAKHAND,general,39412.35,census-derived proxy: 0.10*households + 0.01*population,954605,298663,72.9621,376181,,,,,,,,,,,,56.5859,,,,2.4325
+Pithoragarh,UTTARAKHAND,general,25828.69,census-derived proxy: 0.10*households + 0.01*population,483439,209943,71.4775,216490,,,,,,,,,,,,45.4509,,,,0.6402
+Rudraprayag,UTTARAKHAND,general,14138.75,census-derived proxy: 0.10*households + 0.01*population,242285,117159,70.5504,113032,,,,,,,,,,,,41.9788,,,,0.3568
+Tehri Garhwal,UTTARAKHAND,general,31612.91,census-derived proxy: 0.10*households + 0.01*population,618931,254236,65.9191,280442,,,,,,,,,,,,46.1142,,,,0.5373
+Udham Singh Nagar,UTTARAKHAND,general,57954.92,census-derived proxy: 0.10*households + 0.01*population,1648902,414659,62.9412,591458,,,,,,,,,,,,61.4486,,,,1.9011
+Uttarkashi,UTTARAKHAND,general,15421.76,census-derived proxy: 0.10*households + 0.01*population,330086,121209,65.1727,157276,,,,,,,,,,,,43.4134,,,,0.4967
+Bankura,WEST BENGAL,general,135106.74,census-derived proxy: 0.10*households + 0.01*population,3596674,991400,62.0849,1466220,,,,,,,,,,,,33.7573,,,,0.431
+Barddhaman,WEST BENGAL,general,299899.23,census-derived proxy: 0.10*households + 0.01*population,7717563,2227236,67.9905,2911251,,,,,,,,,,,,47.1411,,,,1.4513
+Birbhum,WEST BENGAL,general,131584.94,census-derived proxy: 0.10*households + 0.01*population,3502404,965609,61.6276,1331603,,,,,,,,,,,,34.5639,,,,0.5396
+Dakshin Dinajpur,WEST BENGAL,general,62865.36,census-derived proxy: 0.10*households + 0.01*population,1676276,461026,64.6484,702987,,,,,,,,,,,,36.4554,,,,0.5462
+Darjiling,WEST BENGAL,general,70364.13,census-derived proxy: 0.10*households + 0.01*population,1846823,518959,71.235,683726,,,,,,,,,,,,57.2639,,,,2.1086
+Haora,WEST BENGAL,general,183769.99,census-derived proxy: 0.10*households + 0.01*population,4850029,1352697,74.3337,1819845,,,,,,,,,,,,58.9159,,,,2.2733
+Hugli,WEST BENGAL,general,219195.25,census-derived proxy: 0.10*households + 0.01*population,5519145,1640038,73.8953,2152870,,,,,,,,,,,,58.8558,,,,1.9344
+Jalpaiguri,WEST BENGAL,general,150508.86,census-derived proxy: 0.10*households + 0.01*population,3872846,1117804,64.5205,1512910,,,,,,,,,,,,34.2189,,,,0.834
+Koch Bihar,WEST BENGAL,general,118264.66,census-derived proxy: 0.10*households + 0.01*population,2819086,900738,65.642,1127977,,,,,,,,,,,,20.6714,,,,0.3923
+Kolkata,WEST BENGAL,general,175777.54,census-derived proxy: 0.10*households + 0.01*population,4496694,1308106,79.795,1795740,,,,,,,,,,,,70.9118,,,,10.444
+Maldah,WEST BENGAL,general,135788.05,census-derived proxy: 0.10*households + 0.01*population,3988845,958996,52.3067,1537847,,,,,,,,,,,,31.0446,,,,0.5586
+Murshidabad,WEST BENGAL,general,256234.57,census-derived proxy: 0.10*households + 0.01*population,7103807,1851965,57.0938,2589907,,,,,,,,,,,,29.2213,,,,0.4293
+Nadia,WEST BENGAL,general,206653.1,census-derived proxy: 0.10*households + 0.01*population,5167600,1549771,67.3534,1842607,,,,,,,,,,,,40.2465,,,,0.8251
+North Twenty Four Parganas,WEST BENGAL,general,386011.81,census-derived proxy: 0.10*households + 0.01*population,10009781,2859140,76.0126,3571624,,,,,,,,,,,,56.2669,,,,3.6789
+Paschim Medinipur,WEST BENGAL,general,215672.87,census-derived proxy: 0.10*households + 0.01*population,5913457,1565383,68.9683,2509159,,,,,,,,,,,,42.4057,,,,0.573
+Purba Medinipur,WEST BENGAL,general,187330.05,census-derived proxy: 0.10*households + 0.01*population,5095875,1363713,76.9876,1910320,,,,,,,,,,,,38.9203,,,,0.6655
+Puruliya,WEST BENGAL,general,104566.35,census-derived proxy: 0.10*households + 0.01*population,2930115,752652,55.4553,1249642,,,,,,,,,,,,25.2293,,,,0.4718
+South Twenty Four Parganas,WEST BENGAL,general,299642.81,census-derived proxy: 0.10*households + 0.01*population,8161961,2180232,67.7736,2964494,,,,,,,,,,,,38.4305,,,,0.9478
+Uttar Dinajpur,WEST BENGAL,general,107896.34,census-derived proxy: 0.10*households + 0.01*population,3007134,778250,49.5378,1075626,,,,,,,,,,,,25.6096,,,,0.3704
