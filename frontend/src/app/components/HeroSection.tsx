@@ -86,8 +86,38 @@ export default function HeroSection() {
         aria-hidden="true"
       />
 
-      {/* ── Empty content area; headlines moved to ticker in the header ── */}
-      <div className="relative z-20 max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 2xl:px-16 w-full py-20 lg:py-28" aria-hidden="true" />
+      {/* ── Slide Content ── */}
+      <div className="relative z-20 max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 2xl:px-16 w-full py-20 lg:py-28 h-full flex items-center">
+        <div className="relative w-full max-w-2xl min-h-[320px] lg:min-h-[360px]">
+          {SLIDES.map((s, i) => (
+            <div
+              key={`slide-content-${i}`}
+              className={`absolute inset-0 flex flex-col justify-center transition-all duration-700 ease-out ${
+                active === i
+                  ? 'opacity-100 translate-y-0 pointer-events-auto z-10'
+                  : 'opacity-0 translate-y-8 pointer-events-none z-0'
+              }`}
+              aria-hidden={active !== i}
+            >
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-md">
+                {s.heading}{' '}
+                <span className="text-[#FF9933] drop-shadow-sm">{s.highlight}</span>
+              </h1>
+              <p className="text-lg sm:text-xl text-gray-200 mb-10 max-w-xl leading-relaxed drop-shadow">
+                {s.sub}
+              </p>
+              <div className="flex flex-wrap items-center gap-4">
+                <button className="rounded-full bg-[#E65C00] hover:bg-[#c54d00] text-white px-8 py-3.5 font-semibold transition-all shadow-lg hover:shadow-xl">
+                  {s.cta}
+                </button>
+                <button className="rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-md border border-white/30 text-white px-8 py-3.5 font-semibold transition-all">
+                  {s.secondaryCta}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* ── Slide counter — bottom-right (MHA-style) ── */}
       <div className="absolute bottom-10 right-6 z-20 hidden sm:flex items-center gap-1.5 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1.5 select-none">

@@ -1,14 +1,14 @@
 'use client';
 
 import { Chart } from 'react-chartjs-2';
-import { chartDefaults, formatINR } from '@/lib/chart-setup';
+import { chartDefaults } from '@/lib/chart-setup';
 import type { ChartData, ChartOptions, TooltipItem } from 'chart.js';
 import type { CashflowOutput } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
-  const { t, lang } = useTranslation();
+  const { lang } = useTranslation();
   const rawCashflow = cashflow as unknown as Record<string, unknown>;
   const rows = Array.isArray(cashflow.projections)
     ? cashflow.projections
