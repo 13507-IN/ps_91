@@ -2,93 +2,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-const SLIDES = [
-  {
-    img: '/1.jpg',
-    heading: 'Is Your Business Idea',
-    highlight: 'Viable in Your Village?',
-    sub: 'Enter your location, capital, and business idea. Get a full evidence-backed feasibility report — market intelligence, EMI, scheme matching, and a 30-day action plan.',
-    cta: 'Start Free Assessment',
-    ctaHref: '/assessment-wizard',
-    secondaryCta: 'View Sample Report',
-    secondaryHref: '/feasibility-report',
-  },
-  {
-    img: '/2.jpg',
-    heading: 'Scheme-Matched Financial Plans',
-    highlight: 'Built on Real Data',
-    sub: 'PMEGP, MUDRA, Stand-Up India — we match your profile to government schemes and calculate your exact EMI, subsidy, and funding gap in minutes.',
-    cta: 'Check Scheme Eligibility',
-    ctaHref: '/schemes',
-    secondaryCta: 'How It Works',
-    secondaryHref: '/#how-it-works',
-  },
-  {
-    img: '/3.jpg',
-    heading: 'Local Market Intelligence',
-    highlight: 'for 6,40,000+ Villages',
-    sub: 'Population, competitors, mandi prices, road connectivity, livestock data — all official government sources, tagged with confidence levels.',
-    cta: 'Explore Your Market',
-    ctaHref: '/assessment-wizard',
-    secondaryCta: 'Data Sources',
-    secondaryHref: '/#data-sources',
-  },
-  {
-    img: '/4.jpg',
-    heading: 'Stress-Tested Business Plans',
-    highlight: 'Built for Rural Reality',
-    sub: 'Simulate price hikes, demand drops and cost shocks. Know before you invest whether your business can survive adverse conditions.',
-    cta: 'Run a Stress Test',
-    ctaHref: '/assessment-wizard',
-    secondaryCta: 'Learn More',
-    secondaryHref: '/#how-it-works',
-  },
-  {
-    img: '/5.jpg',
-    heading: 'Financial Literacy',
-    highlight: 'for Every Entrepreneur',
-    sub: 'Project cost, margin, loan, EMI, working capital, break-even — all calculated with real government scheme interest rates.',
-    cta: 'Calculate My EMI',
-    ctaHref: '/assessment-wizard',
-    secondaryCta: 'Sample Report',
-    secondaryHref: '/feasibility-report',
-  },
-  {
-    img: '/6.jpg',
-    heading: 'Risk Assessment',
-    highlight: 'Honest & Explainable',
-    sub: 'A probability × impact risk matrix with practical mitigations — never a black-box score.',
-    cta: 'Start Assessment',
-    ctaHref: '/assessment-wizard',
-    secondaryCta: 'View Sample',
-    secondaryHref: '/feasibility-report',
-  },
-  {
-    img: '/7.jpg',
-    heading: '30-Day Action Plan',
-    highlight: 'From Idea to Funding',
-    sub: 'Quotations, registrations, scheme applications and launch tasks — a milestone-by-milestone roadmap to funding readiness.',
-    cta: 'Get My Action Plan',
-    ctaHref: '/assessment-wizard',
-    secondaryCta: 'How It Works',
-    secondaryHref: '/#how-it-works',
-  },
-  {
-    img: '/8.jpg',
-    heading: 'Government Scheme Matching',
-    highlight: 'Done Automatically',
-    sub: 'We check 48+ central and state schemes against your age, category, location and project cost — and rank them by eligibility.',
-    cta: 'Match My Schemes',
-    ctaHref: '/schemes',
-    secondaryCta: 'View All Schemes',
-    secondaryHref: '/schemes',
-  },
-];
-
-const TOTAL = SLIDES.length;
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export default function HeroSection() {
+  const { t } = useTranslation();
+  const SLIDES = t.hero.slides;
+  const TOTAL = SLIDES.length;
+
   const [active, setActive] = useState(0);
   const animatingRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -127,13 +47,13 @@ export default function HeroSection() {
       {/* ── All slide background images ── */}
       {SLIDES.map((s, i) => (
         <div
-          key={s.img}
+          key={`slide-bg-${i}`}
           className="absolute inset-0 transition-opacity duration-700"
           style={{ opacity: active === i ? 1 : 0 }}
           aria-hidden={active !== i}
         >
           <Image
-            src={s.img}
+            src={`/${i + 1}.jpg`}
             alt=""
             fill
             priority={i === 0}
@@ -196,7 +116,7 @@ export default function HeroSection() {
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 hidden lg:flex gap-1.5">
         {SLIDES.map((s, i) => (
           <button
-            key={s.img}
+            key={`thumb-${i}`}
             onClick={() => handleNav(i)}
             aria-label={`Go to slide ${i + 1}`}
             aria-current={active === i}
@@ -210,7 +130,7 @@ export default function HeroSection() {
             }}
           >
             <Image
-              src={s.img}
+              src={`/${i + 1}.jpg`}
               alt={`Slide ${i + 1}`}
               fill
               sizes="72px"

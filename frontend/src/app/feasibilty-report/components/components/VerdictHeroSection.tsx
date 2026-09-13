@@ -5,6 +5,7 @@ import { VerdictGauge } from './VerdictGauge';
 import { ConfidenceBadge } from '@/components/ConfidenceBadge';
 import { decisionColor, gradeBadge, dateTime } from '@/lib/format';
 import type { FeasibilityReport } from '@/types';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 const bgGradient: Record<string, string> = {
   EXCELLENT: 'bg-gradient-to-br from-emerald-50 to-teal-50/50 border-emerald-200',
@@ -16,6 +17,21 @@ const bgGradient: Record<string, string> = {
 export function VerdictHeroSection({ report }: { report: FeasibilityReport }) {
   const { feasibilityScore, aiRecommendation, confidence, catchment, createdAt, businessIdea } =
     report;
+  const { t } = useTranslation();
+
+  const getDecisionText = (decision: string) => {
+    if (decision === 'PROCEED') return t.report.proceed;
+    if (decision === 'CAUTION') return t.report.caution;
+    if (decision === 'NOT_VIABLE') return t.report.notViable;
+    return decision.replaceAll('_', ' ');
+  };
+
+  const getGradeText = (grade: string) => {
+    if (grade === 'EXCELLENT' || grade === 'GOOD') return t.report.good;
+    if (grade === 'MODERATE') return t.report.fair;
+    if (grade === 'POOR') return t.report.poor;
+    return grade;
+  };
 
   return (
     <section className={`rounded-2xl border p-6 ${bgGradient[feasibilityScore.grade] || 'bg-white border-slate-200'}`}>
@@ -28,12 +44,12 @@ export function VerdictHeroSection({ report }: { report: FeasibilityReport }) {
             <span
               className={`rounded-full px-3 py-1 text-xs font-semibold ${decisionColor[aiRecommendation.decision]}`}
             >
-              {aiRecommendation.decision.replaceAll('_', ' ')}
+              {getDecisionText(aiRecommendation.decision)}
             </span>
             <span
               className={`rounded-full border px-3 py-1 text-xs font-semibold ${gradeBadge[feasibilityScore.grade]}`}
             >
-              {feasibilityScore.grade}
+              {getGradeText(feasibilityScore.grade)}
             </span>
             <ConfidenceBadge level={confidence} />
           </div>

@@ -1,12 +1,15 @@
 'use client';
 
 import { Bar } from 'react-chartjs-2';
-import { chartDefaults, formatINR } from '@/lib/chart-setup';
+import { chartDefaults } from '@/lib/chart-setup';
 import { riskColor } from '@/lib/format';
 import type { ChartOptions, TooltipItem } from 'chart.js';
 import type { StressTestOutput } from '@/types';
+import { useTranslation } from '@/lib/i18n/useTranslation';
+import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 export function StressTestChart({ stressTest }: { stressTest: StressTestOutput }) {
+  const { lang } = useTranslation();
   const scenarios = Array.isArray(stressTest.scenarios) ? stressTest.scenarios : [];
 
   const data = scenarios.map((s) => ({
@@ -53,7 +56,7 @@ export function StressTestChart({ stressTest }: { stressTest: StressTestOutput }
         callbacks: {
           label: (ctx: TooltipItem<'bar'>) => {
             const val = ctx.parsed.y ?? 0;
-            return `Cashflow: ${formatINR(val)}${val < 0 ? ' (cannot service EMI)' : ''}`;
+            return `Cashflow: ${formatIndianNumber(val, lang, true)}${val < 0 ? ' (cannot service EMI)' : ''}`;
           },
         },
       },
@@ -73,7 +76,7 @@ export function StressTestChart({ stressTest }: { stressTest: StressTestOutput }
         ...chartDefaults.scales.y,
         ticks: {
           ...chartDefaults.scales.y.ticks,
-          callback: (v: string | number) => formatINR(Number(v)),
+          callback: (v: string | number) => formatIndianNumber(Number(v), lang, true, true),
         },
       },
     },

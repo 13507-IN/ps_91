@@ -3,14 +3,8 @@
 import { Bar } from 'react-chartjs-2';
 import type { ChartOptions, TooltipItem } from 'chart.js';
 import type { FeasibilityScore } from '@/types';
-
-const dimensions = [
-  { key: 'marketDemandScore' as const, label: 'Market Demand', color: 'rgba(16, 185, 129, 0.85)', hover: 'rgba(16, 185, 129, 1)' },
-  { key: 'competitionScore' as const, label: 'Competition', color: 'rgba(14, 165, 233, 0.85)', hover: 'rgba(14, 165, 233, 1)' },
-  { key: 'financialViabilityScore' as const, label: 'Financial Viability', color: 'rgba(245, 158, 11, 0.85)', hover: 'rgba(245, 158, 11, 1)' },
-  { key: 'capitalAdequacyScore' as const, label: 'Capital Adequacy', color: 'rgba(139, 92, 246, 0.85)', hover: 'rgba(139, 92, 246, 1)' },
-  { key: 'riskResilienceScore' as const, label: 'Risk Resilience', color: 'rgba(244, 63, 94, 0.85)', hover: 'rgba(244, 63, 94, 1)' },
-];
+import { useTranslation } from '@/lib/i18n/useTranslation';
+import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 function getScoreColor(value: number): string {
   if (value >= 14) return 'bg-emerald-500';
@@ -19,6 +13,16 @@ function getScoreColor(value: number): string {
 }
 
 export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
+  const { t, lang } = useTranslation();
+
+  const dimensions = [
+    { key: 'marketDemandScore' as const, label: t.scores.marketDemand, color: 'rgba(16, 185, 129, 0.85)', hover: 'rgba(16, 185, 129, 1)' },
+    { key: 'competitionScore' as const, label: t.scores.competition, color: 'rgba(14, 165, 233, 0.85)', hover: 'rgba(14, 165, 233, 1)' },
+    { key: 'financialViabilityScore' as const, label: t.scores.financialViability, color: 'rgba(245, 158, 11, 0.85)', hover: 'rgba(245, 158, 11, 1)' },
+    { key: 'capitalAdequacyScore' as const, label: t.scores.capitalAdequacy, color: 'rgba(139, 92, 246, 0.85)', hover: 'rgba(139, 92, 246, 1)' },
+    { key: 'riskResilienceScore' as const, label: t.scores.riskResilience, color: 'rgba(244, 63, 94, 0.85)', hover: 'rgba(244, 63, 94, 1)' },
+  ];
+
   const chartData = {
     labels: dimensions.map((d) => d.label),
     datasets: [
@@ -67,6 +71,13 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
     },
   };
 
+  const getGradeText = (grade: string) => {
+    if (grade === 'EXCELLENT' || grade === 'GOOD') return t.report.good;
+    if (grade === 'MODERATE') return t.report.fair;
+    if (grade === 'POOR') return t.report.poor;
+    return grade;
+  };
+
   return (
     <div className="space-y-3">
       <div className="h-[180px] w-full">
@@ -81,7 +92,7 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
               <div key={key}>
                 <div className="mb-1 flex items-center justify-between text-sm">
                   <span className="text-slate-300">{label}</span>
-                  <span className="font-semibold text-white">{value}/20</span>
+                  <span className="font-semibold text-white">{formatIndianNumber(value, lang)}/20</span>
                 </div>
                 <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-700">
                   <div
@@ -96,8 +107,8 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
         <div className="sm:ml-6 shrink-0 text-left sm:text-right border-t sm:border-t-0 border-slate-800 pt-2 sm:pt-0">
           <span className="text-xs sm:text-sm font-medium text-slate-300">Total Score</span>
           <div className="text-base sm:text-lg font-bold">
-            {score.totalScore}
-            <span className="ml-1 text-xs font-normal text-slate-400">/ 100 · {score.grade}</span>
+            {formatIndianNumber(score.totalScore, lang)}
+            <span className="ml-1 text-xs font-normal text-slate-400">/ 100 · {getGradeText(score.grade)}</span>
           </div>
         </div>
       </div>

@@ -1,10 +1,13 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useMemo, useState } from 'react';
 import { ClipboardCheck, CalendarRange } from 'lucide-react';
 import type { ActionPlan } from '@/types';
+import { useTranslation } from '@/lib/i18n/useTranslation';
+import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 export function ActionPlanSection({ plan }: { plan: ActionPlan }) {
+  const { t, lang } = useTranslation();
   const storageKey = useMemo(() => 'ArthSetu-checklist', []);
   // Always start with an empty set so SSR and client produce identical markup.
   // Hydrate from sessionStorage after mount to avoid React hydration warning.
@@ -44,10 +47,10 @@ export function ActionPlanSection({ plan }: { plan: ActionPlan }) {
     <section className="rounded-2xl border border-slate-200 bg-white p-6">
       <div className="flex items-center justify-between">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-          <CalendarRange className="h-5 w-5 text-brand-600" /> 30-Day Action Plan
+          <CalendarRange className="h-5 w-5 text-brand-600" /> {t.actionPlan.title}
         </h2>
         <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800">
-          {plan.planDurationDays} days
+          {formatIndianNumber(plan.planDurationDays, lang)} days
         </span>
       </div>
 

@@ -1,7 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export function LandingCTA() {
+  const { t } = useTranslation();
+
   return (
     <section className="py-16 bg-white">
       <div className="max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 2xl:px-16">
@@ -38,12 +43,11 @@ export function LandingCTA() {
 
           <div className="relative z-10">
             <div className="inline-block text-xs font-bold uppercase tracking-widest text-[#FF9933] mb-4 border-b-2 border-[#FF9933] pb-1">
-              Get Started Free
+              {t.cta.sectionLabel}
             </div>
-            <h2 className="text-3xl font-bold text-white">Your market has an answer.</h2>
+            <h2 className="text-3xl font-bold text-white">{t.cta.headline}</h2>
             <p className="mx-auto mt-3 max-w-xl text-white/75 text-base">
-              Answer three simple questions and get a feasibility verdict, scheme-matched financial
-              plan and a 30-day funding roadmap — in minutes, on your phone.
+              {t.cta.subheadline}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
@@ -51,19 +55,19 @@ export function LandingCTA() {
                 href="/assessment-wizard"
                 className="inline-flex items-center gap-2 font-bold px-8 py-3.5 rounded text-white bg-[#E65C00] hover:bg-[#CC5200] transition-colors"
               >
-                Begin My Assessment
+                {t.cta.primaryBtn}
                 <ArrowRight size={18} />
               </Link>
               <Link
                 href="/feasibility-report"
                 className="inline-flex items-center gap-2 font-semibold px-8 py-3.5 rounded border-2 border-white/30 text-white hover:bg-white/10 transition-colors"
               >
-                View Sample Report
+                {t.cta.secondaryBtn}
               </Link>
             </div>
 
             <p className="mt-6 text-xs text-white/45">
-              No registration required to start. Login only to save your report.
+              {t.cta.disclaimer}
             </p>
           </div>
         </div>

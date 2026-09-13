@@ -4,21 +4,25 @@ import { ShieldAlert } from 'lucide-react';
 import { riskColor } from '@/lib/format';
 import { RiskAssessment } from '@/types';
 import { RiskMatrixChart } from './RiskMatrixChart';
+import { useTranslation } from '@/lib/i18n/useTranslation';
+import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 const probabilityValue: Record<string, number> = { LOW: 1, MEDIUM: 2, HIGH: 3 };
 const impactValue: Record<string, number> = { LOW: 1, MEDIUM: 2, HIGH: 3 };
 
 export function RiskAssessmentSection({ risk }: { risk: RiskAssessment }) {
+  const { t, lang } = useTranslation();
+
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6">
       <div className="flex items-center justify-between">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900">
-          <ShieldAlert className="h-5 w-5 text-rose-500" /> Risk Assessment
+          <ShieldAlert className="h-5 w-5 text-rose-500" /> {t.risk.title}
         </h2>
         <span
           className={`rounded-full border px-3 py-1 text-xs font-semibold ${riskColor[risk.riskRating]}`}
         >
-          Risk {risk.riskRating} · {risk.overallRiskScore}/100
+          {risk.riskRating} · {formatIndianNumber(risk.overallRiskScore, lang)}/100
         </span>
       </div>
       <p className="mt-1 text-xs text-slate-500">
@@ -46,7 +50,7 @@ export function RiskAssessmentSection({ risk }: { risk: RiskAssessment }) {
             </div>
             {factor.mitigation && (
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                <span className="font-medium text-brand-700">Mitigation: </span>
+                <span className="font-medium text-brand-700">{t.risk.mitigations}: </span>
                 {factor.mitigation}
               </p>
             )}

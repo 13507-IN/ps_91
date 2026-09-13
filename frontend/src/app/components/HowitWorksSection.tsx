@@ -1,63 +1,67 @@
-﻿import { Map, Compass, Wallet, LineChart, ShieldAlert, ClipboardCheck } from 'lucide-react';
+'use client';
 
-const steps = [
-  {
-    icon: Map,
-    step: '01',
-    title: 'Understand Your Market',
-    desc: 'Population, households, amenities, crops, livestock and infrastructure within your catchment — each value tagged with its source and confidence level.',
-    color: '#1A3A6B',
-  },
-  {
-    icon: Compass,
-    step: '02',
-    title: 'Find the Opportunity',
-    desc: 'We estimate local demand vs. existing supply and surface market gaps, low-competition niches, and a recommended business model.',
-    color: '#E65C00',
-  },
-  {
-    icon: Wallet,
-    step: '03',
-    title: 'Build the Financial Plan',
-    desc: 'Project cost, own contribution, loan, matched government scheme, interest, tenure and EMI — plus cashflow, working capital and break-even.',
-    color: '#138808',
-  },
-  {
-    icon: LineChart,
-    step: '04',
-    title: 'Stress Test the Business',
-    desc: 'Simulate raw-material price hikes, demand drops and cost shocks to see if the business stays sustainable under adverse conditions.',
-    color: '#1A3A6B',
-  },
-  {
-    icon: ShieldAlert,
-    step: '05',
-    title: 'Understand the Risks',
-    desc: 'A probability × impact risk matrix with honest mitigations — never presented as certainty.',
-    color: '#E65C00',
-  },
-  {
-    icon: ClipboardCheck,
-    step: '06',
-    title: 'Get Your Action Plan',
-    desc: 'A 30-day funding-readiness roadmap: quotations, registrations, scheme applications, and launch tasks.',
-    color: '#138808',
-  },
-];
+import { Map, Compass, Wallet, LineChart, ShieldAlert, ClipboardCheck } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export function HowitWorksSection() {
+  const { t } = useTranslation();
+
+  const steps = [
+    {
+      icon: Map,
+      step: '01',
+      title: t.howItWorks.steps.step1Title,
+      desc: t.howItWorks.steps.step1Desc,
+      color: '#1A3A6B',
+    },
+    {
+      icon: Compass,
+      step: '02',
+      title: t.howItWorks.steps.step2Title,
+      desc: t.howItWorks.steps.step2Desc,
+      color: '#E65C00',
+    },
+    {
+      icon: Wallet,
+      step: '03',
+      title: t.howItWorks.steps.step3Title,
+      desc: t.howItWorks.steps.step3Desc,
+      color: '#138808',
+    },
+    {
+      icon: LineChart,
+      step: '04',
+      title: t.howItWorks.steps.step4Title,
+      desc: t.howItWorks.steps.step4Desc,
+      color: '#1A3A6B',
+    },
+    {
+      icon: ShieldAlert,
+      step: '05',
+      title: t.howItWorks.steps.step5Title,
+      desc: t.howItWorks.steps.step5Desc,
+      color: '#E65C00',
+    },
+    {
+      icon: ClipboardCheck,
+      step: '06',
+      title: t.howItWorks.steps.step6Title,
+      desc: t.howItWorks.steps.step6Desc,
+      color: '#138808',
+    },
+  ];
+
   return (
     <section id="how-it-works" className="py-16 md:py-20 bg-white">
       <div className="max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 2xl:px-16">
         {/* Section header */}
         <div className="max-w-2xl mb-12">
           <div className="inline-block text-xs font-bold uppercase tracking-widest text-[#E65C00] mb-3 border-b-2 border-[#E65C00] pb-1">
-            How It Works
+            {t.howItWorks.sectionLabel}
           </div>
-          <h2 className="text-3xl font-bold text-[#1A3A6B]">From idea to funding readiness</h2>
+          <h2 className="text-3xl font-bold text-[#1A3A6B]">{t.howItWorks.headline}</h2>
           <p className="mt-3 text-[#4A5568]">
-            ArthSetu is a decision-support dashboard, not a chatbot. AI analyses behind the scenes;
-            you get structured, explainable intelligence.
+            {t.howItWorks.subheadline}
           </p>
         </div>
 

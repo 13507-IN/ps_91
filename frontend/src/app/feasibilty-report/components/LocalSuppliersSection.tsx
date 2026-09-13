@@ -1,6 +1,8 @@
 import React from 'react';
 import type { SupplierItem } from '@/types';
 import { Package, MapPin, Truck, Store, ShieldCheck } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n/useTranslation';
+import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 interface LocalSuppliersSectionProps {
   suppliers?: SupplierItem[];
@@ -8,6 +10,7 @@ interface LocalSuppliersSectionProps {
 }
 
 export function LocalSuppliersSection({ suppliers = [], category }: LocalSuppliersSectionProps) {
+  const { t, lang } = useTranslation();
   const hasSuppliers = suppliers && suppliers.length > 0;
 
   return (
@@ -16,7 +19,7 @@ export function LocalSuppliersSection({ suppliers = [], category }: LocalSupplie
         <div>
           <h2 className="text-lg font-bold text-teal-900 flex items-center gap-2">
             <Truck className="w-5 h-5 text-teal-600" />
-            Local Raw Material Suppliers & Sourcing
+            {t.report.localSuppliers}
           </h2>
           <p className="text-ink-muted text-sm mt-1">
             Verified local suppliers and raw material Mandi hubs near your location.
@@ -24,7 +27,7 @@ export function LocalSuppliersSection({ suppliers = [], category }: LocalSupplie
         </div>
         <div className="bg-teal-50 border border-teal-200 text-teal-800 px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap flex items-center gap-1.5">
           <ShieldCheck className="w-3.5 h-3.5 text-teal-600" />
-          {hasSuppliers ? `${suppliers.length} Sourcing Options` : 'Recommended Sourcing Hubs'}
+          {hasSuppliers ? `${formatIndianNumber(suppliers.length, lang)} Sourcing Options` : 'Recommended Sourcing Hubs'}
         </div>
       </div>
 
@@ -58,7 +61,7 @@ export function LocalSuppliersSection({ suppliers = [], category }: LocalSupplie
                 <div className="flex items-center justify-between pt-2 border-t border-border/50 text-xs">
                   <div className="flex items-center text-teal-800 font-semibold bg-teal-50 px-2 py-1 rounded border border-teal-200/50">
                     <MapPin className="w-3.5 h-3.5 mr-1 text-teal-600" />
-                    {supplier.distance > 0 ? `~${Math.round(supplier.distance * 10) / 10} km away` : 'In your village'}
+                    {supplier.distance > 0 ? `~${formatIndianNumber(Math.round(supplier.distance * 10) / 10, lang)} km away` : 'In your village'}
                   </div>
                   <span className="text-[11px] text-ink-subtle font-medium flex items-center gap-0.5">
                     <Store className="w-3 h-3 text-saffron" /> Direct Trade

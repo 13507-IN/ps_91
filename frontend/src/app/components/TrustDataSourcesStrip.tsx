@@ -1,24 +1,29 @@
-const sources = [
-  { name: 'Census & LGD', desc: 'Population, households, villages', icon: '🏘️', color: '#1A3A6B' },
-  { name: 'UDYAM / MSME', desc: 'Formal enterprise registrations', icon: '🏭', color: '#E65C00' },
-  { name: 'Livestock & Crop Data', desc: 'Dairy, poultry and farm supply', icon: '🌾', color: '#138808' },
-  { name: 'AGMARKNET', desc: 'Daily mandi commodity prices', icon: '📊', color: '#E65C00' },
-  { name: 'Community Reports', desc: 'Local informal businesses', icon: '🤝', color: '#1A3A6B' },
-  { name: 'AI Inference', desc: 'Best-effort estimates, clearly labelled', icon: '🧠', color: '#138808' },
-];
+'use client';
+
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export function TrustDataSourcesStrip() {
+  const { t } = useTranslation();
+
+  const sources = [
+    { name: t.dataSources.sources.census.name, desc: t.dataSources.sources.census.desc, icon: '🏘️', color: '#1A3A6B' },
+    { name: t.dataSources.sources.udyam.name, desc: t.dataSources.sources.udyam.desc, icon: '🏭', color: '#E65C00' },
+    { name: t.dataSources.sources.livestock.name, desc: t.dataSources.sources.livestock.desc, icon: '🌾', color: '#138808' },
+    { name: t.dataSources.sources.agmarknet.name, desc: t.dataSources.sources.agmarknet.desc, icon: '📊', color: '#E65C00' },
+    { name: t.dataSources.sources.community.name, desc: t.dataSources.sources.community.desc, icon: '🤝', color: '#1A3A6B' },
+    { name: t.dataSources.sources.ai.name, desc: t.dataSources.sources.ai.desc, icon: '🧠', color: '#138808' },
+  ];
+
   return (
     <section id="data-sources" className="py-16 bg-[#F5F5F5]">
       <div className="max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 2xl:px-16">
         <div className="text-center mb-10">
           <div className="inline-block text-xs font-bold uppercase tracking-widest text-[#E65C00] mb-3 border-b-2 border-[#E65C00] pb-1">
-            Data Sources
+            {t.dataSources.sectionLabel}
           </div>
-          <h2 className="text-2xl font-bold text-[#1A3A6B]">Built on layered local evidence</h2>
+          <h2 className="text-2xl font-bold text-[#1A3A6B]">{t.dataSources.headline}</h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm text-[#4A5568]">
-            Rural markets are partially observable. We combine official government data, community
-            reports and AI estimates — and we always tell you which is which.
+            {t.dataSources.subheadline}
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3">

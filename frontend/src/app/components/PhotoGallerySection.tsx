@@ -1,44 +1,46 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-
-// MHA-style "What's New" / photo feature section
-// Uses portrait and square images from /public
-
-const FEATURED_CARDS = [
-  {
-    img: '/3.jpg',
-    imgW: 736, imgH: 959,
-    tag: 'Market Intelligence',
-    title: 'Hyper-Local Business Data for Every Village',
-    desc: 'Census population, amenities, crop patterns, livestock counts and road access — all within your 10 km catchment.',
-    href: '/assessment-wizard',
-  },
-  {
-    img: '/7.jpg',
-    imgW: 538, imgH: 800,
-    tag: 'Action Plan',
-    title: '30-Day Funding Readiness Roadmap',
-    desc: 'Step-by-step milestones: quotations, UDYAM registration, scheme application, and bank submission — all in one checklist.',
-    href: '/assessment-wizard',
-  },
-  {
-    img: '/8.jpg',
-    imgW: 364, imgH: 484,
-    tag: 'Scheme Matching',
-    title: 'Automatic Government Scheme Eligibility',
-    desc: 'PMEGP, MUDRA, Stand-Up India, PMFME and 44 more — matched to your age, category, location and project cost.',
-    href: '/schemes',
-  },
-];
-
-const PHOTO_STRIP = [
-  { img: '/4.jpg', label: 'Rural Entrepreneurs' },
-  { img: '/5.jpg', label: 'Field Assessment' },
-  { img: '/6.jpg', label: 'Market Survey' },
-];
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export function PhotoGallerySection() {
+  const { t } = useTranslation();
+
+  const FEATURED_CARDS = [
+    {
+      img: '/3.jpg',
+      imgW: 736, imgH: 959,
+      tag: t.photoGallery.cards.card1.tag,
+      title: t.photoGallery.cards.card1.title,
+      desc: t.photoGallery.cards.card1.desc,
+      href: '/assessment-wizard',
+    },
+    {
+      img: '/7.jpg',
+      imgW: 538, imgH: 800,
+      tag: t.photoGallery.cards.card2.tag,
+      title: t.photoGallery.cards.card2.title,
+      desc: t.photoGallery.cards.card2.desc,
+      href: '/assessment-wizard',
+    },
+    {
+      img: '/8.jpg',
+      imgW: 364, imgH: 484,
+      tag: t.photoGallery.cards.card3.tag,
+      title: t.photoGallery.cards.card3.title,
+      desc: t.photoGallery.cards.card3.desc,
+      href: '/schemes',
+    },
+  ];
+
+  const PHOTO_STRIP = [
+    { img: '/4.jpg', label: t.photoGallery.strip.img1Label },
+    { img: '/5.jpg', label: t.photoGallery.strip.img2Label },
+    { img: '/6.jpg', label: t.photoGallery.strip.img3Label },
+  ];
+
   return (
     <>
       {/* ── What's New section (MHA-style) ── */}
@@ -49,7 +51,7 @@ export function PhotoGallerySection() {
           <div className="flex items-center gap-4 mb-8">
             <div className="w-1 h-8 bg-[#E65C00] rounded-full flex-shrink-0" aria-hidden="true" />
             <h2 className="text-2xl font-bold text-[#1A3A6B] uppercase tracking-wide">
-              What We Offer
+              {t.photoGallery.sectionLabel}
             </h2>
             <div className="flex-1 h-px bg-[#EEEEEE]" aria-hidden="true" />
           </div>
@@ -58,7 +60,7 @@ export function PhotoGallerySection() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {FEATURED_CARDS.map((card) => (
               <Link
-                key={card.title}
+                key={card.img}
                 href={card.href}
                 className="group bg-white border border-[#DDDDDD] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#E65C00]/40 transition-all duration-200"
               >
@@ -86,7 +88,7 @@ export function PhotoGallerySection() {
                     {card.desc}
                   </p>
                   <div className="flex items-center gap-1 text-xs font-semibold text-[#E65C00]">
-                    Know More <ArrowRight size={12} />
+                    {t.photoGallery.knowMore} <ArrowRight size={12} />
                   </div>
                 </div>
               </Link>

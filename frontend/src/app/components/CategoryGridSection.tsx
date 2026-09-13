@@ -1,116 +1,120 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { inr } from '@/lib/format';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 import {
   Milk, UtensilsCrossed, ShoppingBag, Scissors, Bird,
   Wheat, Beef, Truck, Paintbrush, Briefcase, Lightbulb,
 } from 'lucide-react';
 
-const categories = [
-  {
-    code: 'DAIRY', name: 'Dairy',
-    description: 'Milk production, processing & sales',
-    range: [25000, 200000],
-    icon: Milk,
-    bg: 'from-sky-100 to-sky-200',
-    iconColor: 'text-sky-700',
-  },
-  {
-    code: 'FOOD_PROCESSING', name: 'Food Processing',
-    description: 'Pickles, snacks, grain milling',
-    range: [30000, 300000],
-    icon: UtensilsCrossed,
-    bg: 'from-amber-100 to-orange-200',
-    iconColor: 'text-orange-700',
-  },
-  {
-    code: 'RETAIL', name: 'Retail Shop',
-    description: 'General store, grocery, FMCG',
-    range: [20000, 150000],
-    icon: ShoppingBag,
-    bg: 'from-emerald-100 to-teal-200',
-    iconColor: 'text-teal-700',
-  },
-  {
-    code: 'TEXTILES_TAILORING', name: 'Textiles & Tailoring',
-    description: 'Stitching, embroidery, readymade',
-    range: [15000, 100000],
-    icon: Scissors,
-    bg: 'from-pink-100 to-rose-200',
-    iconColor: 'text-rose-700',
-  },
-  {
-    code: 'POULTRY', name: 'Poultry',
-    description: 'Broiler, layer, backyard poultry',
-    range: [40000, 250000],
-    icon: Bird,
-    bg: 'from-yellow-100 to-amber-200',
-    iconColor: 'text-amber-700',
-  },
-  {
-    code: 'AGRICULTURE', name: 'Agriculture',
-    description: 'Crop cultivation, horticulture',
-    range: [20000, 500000],
-    icon: Wheat,
-    bg: 'from-lime-100 to-green-200',
-    iconColor: 'text-green-700',
-  },
-  {
-    code: 'LIVESTOCK', name: 'Livestock',
-    description: 'Goat, sheep, pig rearing',
-    range: [25000, 200000],
-    icon: Beef,
-    bg: 'from-stone-100 to-stone-200',
-    iconColor: 'text-stone-700',
-  },
-  {
-    code: 'TRANSPORT', name: 'Transport',
-    description: 'E-rickshaw, mini-truck, taxi',
-    range: [50000, 800000],
-    icon: Truck,
-    bg: 'from-blue-100 to-indigo-200',
-    iconColor: 'text-indigo-700',
-  },
-  {
-    code: 'HANDICRAFT', name: 'Handicraft',
-    description: 'Pottery, weaving, bamboo craft',
-    range: [10000, 80000],
-    icon: Paintbrush,
-    bg: 'from-purple-100 to-violet-200',
-    iconColor: 'text-violet-700',
-  },
-  {
-    code: 'SERVICES', name: 'Services',
-    description: 'Salon, repair, mobile recharge',
-    range: [15000, 100000],
-    icon: Briefcase,
-    bg: 'from-cyan-100 to-cyan-200',
-    iconColor: 'text-cyan-700',
-  },
-  {
-    code: 'OTHER', name: 'Other',
-    description: 'Describe your unique idea',
-    range: [10000, 500000],
-    icon: Lightbulb,
-    bg: 'from-slate-100 to-slate-200',
-    iconColor: 'text-slate-600',
-  },
-];
-
 export default function CategoryGridSection() {
+  const { t } = useTranslation();
+
+  const categories = [
+    {
+      code: 'DAIRY', name: t.categories.items.DAIRY.name,
+      description: t.categories.items.DAIRY.desc,
+      range: [25000, 200000],
+      icon: Milk,
+      bg: 'from-sky-100 to-sky-200',
+      iconColor: 'text-sky-700',
+    },
+    {
+      code: 'FOOD_PROCESSING', name: t.categories.items.FOOD_PROCESSING.name,
+      description: t.categories.items.FOOD_PROCESSING.desc,
+      range: [30000, 300000],
+      icon: UtensilsCrossed,
+      bg: 'from-amber-100 to-orange-200',
+      iconColor: 'text-orange-700',
+    },
+    {
+      code: 'RETAIL', name: t.categories.items.RETAIL.name,
+      description: t.categories.items.RETAIL.desc,
+      range: [20000, 150000],
+      icon: ShoppingBag,
+      bg: 'from-emerald-100 to-teal-200',
+      iconColor: 'text-teal-700',
+    },
+    {
+      code: 'TEXTILES_TAILORING', name: t.categories.items.TEXTILES_TAILORING.name,
+      description: t.categories.items.TEXTILES_TAILORING.desc,
+      range: [15000, 100000],
+      icon: Scissors,
+      bg: 'from-pink-100 to-rose-200',
+      iconColor: 'text-rose-700',
+    },
+    {
+      code: 'POULTRY', name: t.categories.items.POULTRY.name,
+      description: t.categories.items.POULTRY.desc,
+      range: [40000, 250000],
+      icon: Bird,
+      bg: 'from-yellow-100 to-amber-200',
+      iconColor: 'text-amber-700',
+    },
+    {
+      code: 'AGRICULTURE', name: t.categories.items.AGRICULTURE.name,
+      description: t.categories.items.AGRICULTURE.desc,
+      range: [20000, 500000],
+      icon: Wheat,
+      bg: 'from-lime-100 to-green-200',
+      iconColor: 'text-green-700',
+    },
+    {
+      code: 'LIVESTOCK', name: t.categories.items.LIVESTOCK.name,
+      description: t.categories.items.LIVESTOCK.desc,
+      range: [25000, 200000],
+      icon: Beef,
+      bg: 'from-stone-100 to-stone-200',
+      iconColor: 'text-stone-700',
+    },
+    {
+      code: 'TRANSPORT', name: t.categories.items.TRANSPORT.name,
+      description: t.categories.items.TRANSPORT.desc,
+      range: [50000, 800000],
+      icon: Truck,
+      bg: 'from-blue-100 to-indigo-200',
+      iconColor: 'text-indigo-700',
+    },
+    {
+      code: 'HANDICRAFT', name: t.categories.items.HANDICRAFT.name,
+      description: t.categories.items.HANDICRAFT.desc,
+      range: [10000, 80000],
+      icon: Paintbrush,
+      bg: 'from-purple-100 to-violet-200',
+      iconColor: 'text-violet-700',
+    },
+    {
+      code: 'SERVICES', name: t.categories.items.SERVICES.name,
+      description: t.categories.items.SERVICES.desc,
+      range: [15000, 100000],
+      icon: Briefcase,
+      bg: 'from-cyan-100 to-cyan-200',
+      iconColor: 'text-cyan-700',
+    },
+    {
+      code: 'OTHER', name: t.categories.items.OTHER.name,
+      description: t.categories.items.OTHER.desc,
+      range: [10000, 500000],
+      icon: Lightbulb,
+      bg: 'from-slate-100 to-slate-200',
+      iconColor: 'text-slate-600',
+    },
+  ];
+
   return (
     <section className="py-20 bg-[#F5F5F5]">
       <div className="max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 2xl:px-16">
         <div className="mb-12">
           <div className="inline-block text-xs font-bold uppercase tracking-widest text-[#E65C00] mb-3 border-b-2 border-[#E65C00] pb-1">
-            Business Categories
+            {t.categories.sectionLabel}
           </div>
           <h2 className="text-3xl lg:text-4xl font-bold text-[#1A3A6B] mb-4">
-            11 Business Categories Covered
+            {t.categories.headline}
           </h2>
           <p className="text-[#4A5568] text-lg max-w-xl">
-            From dairy farming to transport services — each category loaded with local investment
-            benchmarks, scheme eligibility, and demand estimates.
+            {t.categories.subheadline}
           </p>
         </div>
 

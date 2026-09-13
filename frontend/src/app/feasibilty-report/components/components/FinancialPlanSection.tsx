@@ -2,17 +2,21 @@
 
 import { Landmark, Wallet, ArrowDown, ExternalLink } from 'lucide-react';
 import { FinancialPlan } from '@/types';
-import { inr, inrCompact, percent } from '@/lib/format';
+import { percent } from '@/lib/format';
 import { getSchemePortalUrl } from '@/lib/api/feasibility';
 import { EmiSimulator } from './EmiSimulator';
 import { CashflowChart } from './CashflowChart';
 import { BreakEvenChart } from './BreakEvenChart';
 import { StressTestChart } from './StressTestChart';
+import { useTranslation } from '@/lib/i18n/useTranslation';
+import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPlan; schemeNames: string[] }) {
+  const { t, lang } = useTranslation();
+
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6">
-      <h2 className="text-lg font-semibold text-slate-900">Financial Plan</h2>
+      <h2 className="text-lg font-semibold text-slate-900">{t.financial.title}</h2>
       <p className="mt-1 text-xs text-slate-500">
         Deterministic calculations from the scheme rule engine — shown as a bridge from your margin to
         the loan.
@@ -24,7 +28,7 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
           <div className="flex items-center justify-center gap-1.5 text-xs text-slate-500">
             <Wallet className="h-3.5 w-3.5" /> Your margin
           </div>
-          <div className="mt-1 text-xl font-bold text-brand-700">{inrCompact(plan.availableCapital)}</div>
+          <div className="mt-1 text-xl font-bold text-brand-700">{formatIndianNumber(plan.availableCapital, lang, true, true)}</div>
           <div className="text-[11px] text-slate-400">{percent(plan.marginPercentage)} of project</div>
         </div>
         <ArrowDown className="mx-auto h-5 w-5 text-slate-400 rotate-0 sm:-rotate-90 my-1 sm:my-0" />
@@ -32,8 +36,8 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
           <div className="flex items-center justify-center gap-1.5 text-xs text-slate-500">
             <Landmark className="h-3.5 w-3.5" /> Loan required
           </div>
-          <div className="mt-1 text-xl font-bold text-slate-900">{inrCompact(plan.loanRequired)}</div>
-          <div className="text-[11px] text-slate-400">net {inrCompact(plan.netLoanAmount)}</div>
+          <div className="mt-1 text-xl font-bold text-slate-900">{formatIndianNumber(plan.loanRequired, lang, true, true)}</div>
+          <div className="text-[11px] text-slate-400">net {formatIndianNumber(plan.netLoanAmount, lang, true, true)}</div>
         </div>
       </div>
 
@@ -46,7 +50,7 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
               <div className="text-xs font-semibold uppercase tracking-wide text-brand-800">Top Recommended Scheme</div>
               {schemeNames.length > 0 && (
                 <div className="rounded-full bg-brand-200 px-2.5 py-0.5 text-[10px] font-bold text-brand-800">
-                  {schemeNames.length} Match{schemeNames.length > 1 ? 'es' : ''}
+                  {formatIndianNumber(schemeNames.length, lang)} Match{schemeNames.length > 1 ? 'es' : ''}
                 </div>
               )}
             </div>
@@ -71,15 +75,15 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
               </div>
               <div className="rounded-lg bg-white/70 p-2.5 border border-brand-100">
                 <div className="text-xs text-slate-500">Tenure</div>
-                <div className="text-sm font-bold text-slate-900">{plan.tenureMonths} months</div>
+                <div className="text-sm font-bold text-slate-900">{formatIndianNumber(plan.tenureMonths, lang)} {t.financial.months}</div>
               </div>
               <div className="rounded-lg bg-white/70 p-2.5 border border-brand-100">
                 <div className="text-xs text-slate-500">Subsidy</div>
-                <div className="text-sm font-bold text-emerald-700">{inr(plan.subsidyAmount)}</div>
+                <div className="text-sm font-bold text-emerald-700">{formatIndianNumber(plan.subsidyAmount, lang, true)}</div>
               </div>
               <div className="rounded-lg bg-white/70 p-2.5 border border-brand-100">
                 <div className="text-xs text-slate-500">Monthly EMI</div>
-                <div className="text-sm font-bold text-brand-700">{inr(plan.emi.emi)}</div>
+                <div className="text-sm font-bold text-brand-700">{formatIndianNumber(plan.emi.emi, lang, true)}</div>
               </div>
             </div>
             {schemeNames.length > 1 && (

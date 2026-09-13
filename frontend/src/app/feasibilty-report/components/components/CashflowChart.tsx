@@ -4,8 +4,11 @@ import { Chart } from 'react-chartjs-2';
 import { chartDefaults, formatINR } from '@/lib/chart-setup';
 import type { ChartData, ChartOptions, TooltipItem } from 'chart.js';
 import type { CashflowOutput } from '@/types';
+import { useTranslation } from '@/lib/i18n/useTranslation';
+import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
+  const { t, lang } = useTranslation();
   const rawCashflow = cashflow as unknown as Record<string, unknown>;
   const rows = Array.isArray(cashflow.projections)
     ? cashflow.projections
@@ -68,7 +71,7 @@ export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
       tooltip: {
         ...chartDefaults.plugins.tooltip,
         callbacks: {
-          label: (ctx: TooltipItem<'bar' | 'line'>) => `${ctx.dataset.label}: ${formatINR(ctx.parsed.y ?? 0)}`,
+          label: (ctx: TooltipItem<'bar' | 'line'>) => `${ctx.dataset.label}: ${formatIndianNumber(ctx.parsed.y ?? 0, lang, true)}`,
         },
       },
     },
@@ -82,7 +85,7 @@ export function CashflowChart({ cashflow }: { cashflow: CashflowOutput }) {
         ...chartDefaults.scales.y,
         ticks: {
           ...chartDefaults.scales.y.ticks,
-          callback: (v: string | number) => formatINR(Number(v)),
+          callback: (v: string | number) => formatIndianNumber(Number(v), lang, true, true),
         },
       },
     },

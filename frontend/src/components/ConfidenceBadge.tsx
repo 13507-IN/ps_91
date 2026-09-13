@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Confidence } from '@/types';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 interface ConfidenceBadgeProps {
   confidence?: Confidence;
@@ -9,15 +10,17 @@ interface ConfidenceBadgeProps {
 
 export default function ConfidenceBadge({ confidence, level }: ConfidenceBadgeProps) {
   const activeLevel = confidence ?? level ?? 'HIGH';
+  const { t } = useTranslation();
+
   const classMap: Record<Confidence, string> = {
     HIGH: 'badge-confidence-high',
     MEDIUM: 'badge-confidence-medium',
     LOW: 'badge-confidence-low',
   };
   const label: Record<Confidence, string> = {
-    HIGH: 'High Confidence',
-    MEDIUM: 'Medium Confidence',
-    LOW: 'Low Confidence',
+    HIGH: t.report.highConf,
+    MEDIUM: t.report.medConf,
+    LOW: t.report.lowConf,
   };
   const dot: Record<Confidence, string> = {
     HIGH: 'bg-confidence-high',

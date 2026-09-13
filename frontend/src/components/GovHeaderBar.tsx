@@ -114,10 +114,11 @@ export default function GovHeaderBar() {
             {/* Language Toggle + Auth buttons */}
             <div className="flex items-center gap-2 border-l border-[#EEEEEE] pl-4">
               <button
-                onClick={() => setLang(lang === 'EN' ? 'BN' : 'EN')}
+                onClick={() => setLang(lang === 'EN' ? 'BN' : lang === 'BN' ? 'HI' : 'EN')}
                 className="flex items-center gap-1.5 px-3 py-1.5 mr-2 rounded border border-[#1A3A6B] text-xs font-semibold text-[#1A3A6B] hover:bg-[#1A3A6B] hover:text-white transition-colors"
+                title="Switch Language"
               >
-                {t.nav.language}
+                {lang === 'EN' ? 'বাংলা' : lang === 'BN' ? 'हिंदी' : 'English'}
               </button>
               {loggedIn ? (
                 <>
@@ -198,10 +199,11 @@ export default function GovHeaderBar() {
             <span className="text-white text-sm font-medium opacity-80">Menu</span>
             <div className="flex items-center gap-2">
               <button
-                onClick={() => setLang(lang === 'EN' ? 'BN' : 'EN')}
+                onClick={() => setLang(lang === 'EN' ? 'BN' : lang === 'BN' ? 'HI' : 'EN')}
                 className="px-2.5 py-1 rounded border border-white/30 text-xs font-semibold text-white hover:bg-white/10 transition-colors"
+                title="Switch Language"
               >
-                {t.nav.language}
+                {lang === 'EN' ? 'বাংলা' : lang === 'BN' ? 'हिंदी' : 'English'}
               </button>
               <button
                 className="text-white p-2 rounded hover:bg-white/10 transition-colors"

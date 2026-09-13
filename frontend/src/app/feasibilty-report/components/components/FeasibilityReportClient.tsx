@@ -74,13 +74,12 @@ export function FeasibilityReportClient({
   if (!report && reportId && isError) {
     return (
       <div className="mx-auto max-w-xl px-4 py-20 text-center">
-        <h1 className="text-xl font-bold text-slate-900">Report not found</h1>
+        <h1 className="text-xl font-bold text-slate-900">{t.report.notFound}</h1>
         <p className="mt-2 text-sm text-slate-500">
-          This report is linked to a logged-in user account, or it has been cleaned up. Start a new
-          assessment to generate a fresh report.
+          {t.report.notFoundDesc}
         </p>
         <a href="/assessment-wizard" className="btn-primary mt-6">
-          Start New Assessment
+          {t.common.startNew}
         </a>
       </div>
     );
@@ -104,8 +103,8 @@ export function FeasibilityReportClient({
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-1">
             <div className="rounded-2xl border border-slate-200 bg-white p-6 lg:sticky lg:top-20">
-              <h2 className="text-lg font-semibold text-slate-900">Viability Score Breakdown</h2>
-              <p className="mt-1 text-xs text-slate-500">Five dimensions, each scored /20.</p>
+              <h2 className="text-lg font-semibold text-slate-900">{t.scores.title}</h2>
+              <p className="mt-1 text-xs text-slate-500">{t.scores.subtitle}</p>
               <div className="mt-4">
                 <ScoreBreakdownChart score={report.feasibilityScore} />
               </div>
@@ -127,7 +126,7 @@ export function FeasibilityReportClient({
           locationName={`${report.businessCategory.replace('_', ' ')} Catchment Area`}
           initialRadiusKm={report.catchment?.radiusKm ?? 10}
           initialCategory={report.businessCategory}
-          title="Hyperlocal UDYAM & MSME Registered Business Explorer"
+          title={t.report.hyperlocalTitle}
         />
 
         <FinancialPlanSection

@@ -1,12 +1,14 @@
 'use client';
 
 import { Line } from 'react-chartjs-2';
-import { chartDefaults, formatINR } from '@/lib/chart-setup';
-import { inrCompact } from '@/lib/format';
+import { chartDefaults } from '@/lib/chart-setup';
 import type { ChartOptions, TooltipItem } from 'chart.js';
 import type { BreakEvenOutput } from '@/types';
+import { useTranslation } from '@/lib/i18n/useTranslation';
+import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
+  const { t, lang } = useTranslation();
   const maxUnits = Math.max(breakeven.breakEvenUnits * 1.6, 10);
   const safeUnits = Math.max(breakeven.breakEvenUnits, 1);
   const price = breakeven.breakEvenRevenue / safeUnits;
@@ -17,7 +19,7 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
     const units = Math.round((i / 11) * maxUnits);
     const revenue = Math.round(units * price);
     const totalCost = Math.round(fixedCosts + units * unitCost);
-    return { name: units.toLocaleString('en-IN'), revenue, totalCost };
+    return { name: formatIndianNumber(units, lang), revenue, totalCost };
   });
 
   const chartData = {
@@ -58,7 +60,7 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
         ...chartDefaults.plugins.tooltip,
         callbacks: {
           title: (items: TooltipItem<'line'>[]) => `${items[0].label} units`,
-          label: (ctx: TooltipItem<'line'>) => `${ctx.dataset.label}: ${formatINR(ctx.parsed.y ?? 0)}`,
+          label: (ctx: TooltipItem<'line'>) => `${ctx.dataset.label}: ${formatIndianNumber(ctx.parsed.y ?? 0, lang, true)}`,
         },
       },
     },
@@ -77,7 +79,7 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
         ...chartDefaults.scales.y,
         ticks: {
           ...chartDefaults.scales.y.ticks,
-          callback: (v: string | number) => formatINR(Number(v)),
+          callback: (v: string | number) => formatIndianNumber(Number(v), lang, true, true),
         },
       },
     },
@@ -86,7 +88,7 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-center gap-2">
-        <h4 className="text-sm font-semibold text-slate-700">Break-Even Analysis</h4>
+        <h4 className="text-sm font-semibold text-slate-700">{t.financial.breakeven} Analysis</h4>
         <span
           className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
             breakeven.isViable
@@ -99,18 +101,18 @@ export function BreakEvenChart({ breakeven }: { breakeven: BreakEvenOutput }) {
       </div>
       <div className="grid grid-cols-3 gap-3">
         <div className="rounded-xl bg-slate-50 p-3">
-          <div className="text-xs text-slate-500">Break-even units</div>
+          <div className="text-xs text-slate-500">{t.financial.breakeven} units</div>
           <div className="text-lg font-bold text-slate-900">
-            {breakeven.breakEvenUnits.toLocaleString('en-IN')}
+            {formatIndianNumber(breakeven.breakEvenUnits, lang)}
           </div>
         </div>
         <div className="rounded-xl bg-slate-50 p-3">
-          <div className="text-xs text-slate-500">Break-even revenue</div>
-          <div className="text-lg font-bold text-slate-900">{inrCompact(breakeven.breakEvenRevenue)}</div>
+          <div className="text-xs text-slate-500">{t.financial.breakeven} revenue</div>
+          <div className="text-lg font-bold text-slate-900">{formatIndianNumber(breakeven.breakEvenRevenue, lang, true, true)}</div>
         </div>
         <div className="rounded-xl bg-slate-50 p-3">
-          <div className="text-xs text-slate-500">Break-even Month</div>
-          <div className="text-lg font-bold text-slate-900">{breakeven.breakEvenMonth ? `Month ${breakeven.breakEvenMonth}` : 'N/A'}</div>
+          <div className="text-xs text-slate-500">{t.financial.breakeven} Month</div>
+          <div className="text-lg font-bold text-slate-900">{breakeven.breakEvenMonth ? `Month ${formatIndianNumber(breakeven.breakEvenMonth, lang)}` : 'N/A'}</div>
         </div>
       </div>
       <div className="relative mt-3 h-56 w-full">
