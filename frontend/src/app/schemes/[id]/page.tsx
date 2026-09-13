@@ -85,12 +85,20 @@ export default function SchemeDetailPage() {
               <Landmark className="h-6 w-6 text-brand-600" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">{scheme.name}</h1>
+              <h1 className="text-2xl font-bold text-slate-900">
+                {t.schemeData?.[scheme.schemeId as keyof typeof t.schemeData]?.name || scheme.name}
+              </h1>
               {scheme.shortName && (
-                <p className="text-sm text-slate-500">{scheme.shortName}</p>
+                <p className="text-sm text-slate-500">
+                  {t.schemeData?.[scheme.schemeId as keyof typeof t.schemeData]?.shortName || scheme.shortName}
+                </p>
               )}
-              <p className="mt-1 text-sm text-slate-600">{scheme.description}</p>
-              <p className="mt-1 text-xs text-slate-400">{t.schemes.nodalAgency}: {scheme.nodalAgency}</p>
+              <p className="mt-1 text-sm text-slate-600">
+                {t.schemeData?.[scheme.schemeId as keyof typeof t.schemeData]?.description || scheme.description}
+              </p>
+              <p className="mt-1 text-xs text-slate-400">
+                {t.schemes.nodalAgency}: {t.schemeData?.[scheme.schemeId as keyof typeof t.schemeData]?.nodalAgency || scheme.nodalAgency}
+              </p>
             </div>
           </div>
           <a

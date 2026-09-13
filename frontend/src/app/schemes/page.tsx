@@ -70,8 +70,12 @@ export default function SchemesPage() {
                       {t.schemes.details} <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   </div>
-                  <h3 className="mt-3 text-base font-semibold text-slate-900">{scheme.name}</h3>
-                  <p className="mt-1 text-xs text-slate-500 line-clamp-2">{scheme.description}</p>
+                  <h3 className="mt-3 text-base font-semibold text-slate-900">
+                    {t.schemeData?.[scheme.schemeId as keyof typeof t.schemeData]?.name || scheme.name}
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-500 line-clamp-2">
+                    {t.schemeData?.[scheme.schemeId as keyof typeof t.schemeData]?.description || scheme.description}
+                  </p>
 
                   <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
                     <div className="rounded-lg bg-slate-50 p-2.5">
@@ -105,7 +109,7 @@ export default function SchemesPage() {
 
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                   <span className="text-[11px] text-slate-400 truncate max-w-[140px]">
-                    {scheme.nodalAgency}
+                    {t.schemeData?.[scheme.schemeId as keyof typeof t.schemeData]?.nodalAgency || scheme.nodalAgency}
                   </span>
                   <a
                     href={portalUrl}

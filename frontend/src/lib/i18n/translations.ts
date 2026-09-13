@@ -646,6 +646,46 @@ const translations = {
     states: { EN: 'States', BN: 'রাজ্যসমূহ', HI: 'राज्य' },
   },
 
+  // ─── Scheme Data (Dynamic translations for backend content) ───
+  schemeData: {
+    mudra_kishore: {
+      name: { EN: 'Pradhan Mantri MUDRA Yojana (PMMY) - Kishore', BN: 'প্রধানমন্ত্রী মুদ্রা যোজনা (PMMY) - কিশোর', HI: 'प्रधानमंत्री मुद्रा योजना (PMMY) - किशोर' },
+      shortName: { EN: 'MUDRA Kishore', BN: 'মুদ্রা কিশোর', HI: 'मुद्रा किशोर' },
+      description: { EN: 'Collateral-free micro loans from ₹50,000 to ₹5,00,000 for non-farm micro enterprises.', BN: 'অ-কৃষি মাইক্রো উদ্যোগের জন্য ₹৫০,০০০ থেকে ₹৫,০০,০০০ পর্যন্ত জামানত-মুক্ত মাইক্রো ঋণ।', HI: 'गैर-कृषि सूक्ष्म उद्यमों के लिए ₹50,000 से ₹5,00,000 तक का संपार्श्विक-मुक्त सूक्ष्म ऋण।' },
+      nodalAgency: { EN: 'Ministry of Micro, Small and Medium Enterprises (MSME)', BN: 'অণু, ক্ষুদ্র ও মাঝারি উদ্যোগ মন্ত্রণালয় (MSME)', HI: 'सूक्ष्म, लघु और मध्यम उद्यम मंत्रालय (MSME)' }
+    },
+    mudra_shishu: {
+      name: { EN: 'Pradhan Mantri MUDRA Yojana (PMMY) - Shishu', BN: 'প্রধানমন্ত্রী মুদ্রা যোজনা (PMMY) - শিশু', HI: 'प्रधानमंत्री मुद्रा योजना (PMMY) - शिशु' },
+      shortName: { EN: 'MUDRA Shishu', BN: 'মুদ্রা শিশু', HI: 'मुद्रा शिशु' },
+      description: { EN: 'Collateral-free micro loans up to ₹50,000 for starting small businesses.', BN: 'ছোট ব্যবসা শুরু করার জন্য ₹৫০,০০০ পর্যন্ত জামানত-মুক্ত মাইক্রো ঋণ।', HI: 'छोटे व्यवसाय शुरू करने के लिए ₹50,000 तक का संपार्श्विक-मुक्त सूक्ष्म ऋण।' },
+      nodalAgency: { EN: 'Ministry of Micro, Small and Medium Enterprises (MSME)', BN: 'অণু, ক্ষুদ্র ও মাঝারি উদ্যোগ মন্ত্রণালয় (MSME)', HI: 'सूक्ष्म, लघु और मध्यम उद्यम मंत्रालय (MSME)' }
+    },
+    pmegp_micro: {
+      name: { EN: "Prime Minister's Employment Generation Programme (PMEGP)", BN: 'প্রধানমন্ত্রীর কর্মসংস্থান সৃষ্টি কর্মসূচি (PMEGP)', HI: 'प्रधानमंत्री रोजगार सृजन कार्यक्रम (PMEGP)' },
+      shortName: { EN: 'PMEGP', BN: 'PMEGP', HI: 'PMEGP' },
+      description: { EN: 'Credit-linked subsidy scheme offering 25-35% subsidy for setting up micro enterprises in rural areas.', BN: 'গ্রামীণ এলাকায় মাইক্রো এন্টারপ্রাইজ স্থাপনের জন্য ২৫-৩৫% ভর্তুকি প্রদানকারী ক্রেডিট-লিঙ্কযুক্ত ভর্তুকি প্রকল্প।', HI: 'ग्रामीण क्षेत्रों में सूक्ष्म उद्यम स्थापित करने के लिए 25-35% सब्सिडी प्रदान करने वाली क्रेडिट-लिंक्ड सब्सिडी योजना।' },
+      nodalAgency: { EN: 'KVIC / Ministry of MSME', BN: 'কেভিআইসি / এমএসএমই মন্ত্রণালয়', HI: 'केवीआईसी / एमएसएमई मंत्रालय' }
+    },
+    pm_svanidhi: {
+      name: { EN: "PM Street Vendor's AtmaNirbhar Nidhi (PM SVANidhi)", BN: 'প্রধানমন্ত্রী স্বনিধি যোজনা', HI: 'पीएम स्वनिधि योजना' },
+      shortName: { EN: 'PM SVANidhi', BN: 'প্রধানমন্ত্রী স্বনিধি', HI: 'पीएम स्वनिधि' },
+      description: { EN: 'Special micro-credit facility for street vendors to access affordable working capital loan.', BN: 'রাস্তার বিক্রেতাদের সাশ্রয়ী মূল্যের কার্যকরী মূলধন ঋণ পাওয়ার জন্য বিশেষ মাইক্রো-ক্রেডিট সুবিধা।', HI: 'स्ट्रीट वेंडर्स के लिए किफायती कार्यशील पूंजी ऋण तक पहुंचने के लिए विशेष माइक्रो-क्रेडिट सुविधा।' },
+      nodalAgency: { EN: 'Ministry of Housing and Urban Affairs (MoHUA)', BN: 'আবাসন ও নগর বিষয়ক মন্ত্রণালয় (MoHUA)', HI: 'आवास और शहरी मामलों के मंत्रालय (MoHUA)' }
+    },
+    standup_india: {
+      name: { EN: 'Stand-Up India Scheme', BN: 'স্ট্যান্ড-আপ ইন্ডিয়া স্কিম', HI: 'स्टैंड-अप इंडिया योजना' },
+      shortName: { EN: 'Stand-Up India', BN: 'স্ট্যান্ড-আপ ইন্ডিয়া', HI: 'स्टैंड-अप इंडिया' },
+      description: { EN: 'Bank loans between ₹10 lakh and ₹1 Crore to SC/ST or Women borrowers for setting up greenfield enterprises.', BN: 'নতুন উদ্যোগ স্থাপনের জন্য এসসি/এসটি বা মহিলা ঋণগ্রহীতাদের ₹১০ লক্ষ থেকে ₹১ কোটির মধ্যে ব্যাংক ঋণ।', HI: 'ग्रीनफील्ड उद्यम स्थापित करने के लिए एससी/एसटी या महिला उधारकर्ताओं को ₹10 लाख से ₹1 करोड़ के बीच बैंक ऋण।' },
+      nodalAgency: { EN: 'Department of Financial Services (DFS), Ministry of Finance', BN: 'আর্থিক পরিষেবা বিভাগ (DFS), অর্থ মন্ত্রণালয়', HI: 'वित्तीय सेवा विभाग (DFS), वित्त मंत्रालय' }
+    },
+    wb_bhabishyat: {
+      name: { EN: 'West Bengal Bhabishyat Credit Card Scheme (WB-BCCS)', BN: 'পশ্চিমবঙ্গ ভবিষ্যৎ ক্রেডিট কার্ড স্কিম (WB-BCCS)', HI: 'पश्चिम बंगाल भविष्यत क्रेडिट कार्ड योजना (WB-BCCS)' },
+      shortName: { EN: 'WB Bhabishyat', BN: 'পশ্চিমবঙ্গ ভবিষ্যৎ', HI: 'पश्चिम बंगाल भविष्यत' },
+      description: { EN: 'West Bengal State Scheme providing collateral-free loans up to ₹5 Lakh with 10% government subsidy for youth starting micro enterprises.', BN: 'পশ্চিমবঙ্গ রাজ্য প্রকল্প যুবকদের মাইক্রো এন্টারপ্রাইজ শুরু করার জন্য ১০% সরকারি ভর্তুকি সহ ₹৫ লক্ষ পর্যন্ত জামানত-মুক্ত ঋণ প্রদান করে।', HI: 'पश्चिम बंगाल राज्य योजना युवाओं को सूक्ष्म उद्यम शुरू करने के लिए 10% सरकारी सब्सिडी के साथ ₹5 लाख तक का संपार्श्विक-मुक्त ऋण प्रदान करती है।' },
+      nodalAgency: { EN: 'Department of Micro, Small & Medium Enterprises and Textiles, Govt of West Bengal', BN: 'মাইক্রো, ক্ষুদ্র ও মাঝারি উদ্যোগ এবং বস্ত্র বিভাগ, পশ্চিমবঙ্গ সরকার', HI: 'सूक्ष्म, लघु और मध्यम उद्यम और वस्त्र विभाग, पश्चिम बंगाल सरकार' }
+    }
+  },
+
   // ─── Login / Register Pages ───
   auth: {
     loginTitle:      { EN: 'Login to ArthSetu',        BN: 'ArthSetu-তে লগইন করুন',        HI: 'ArthSetu में लॉगिन करें' },
