@@ -7,8 +7,10 @@ import { api, apiEndpoints } from '@/lib/api/client';
 import { inr, percent } from '@/lib/format';
 import { getSchemePortalUrl } from '@/lib/api/feasibility';
 import type { SchemeConfig } from '@/types';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export default function SchemesPage() {
+  const { t } = useTranslation();
   const { data, isLoading, isError } = useQuery({
     queryKey: ['schemes-list'],
     queryFn: () => api<SchemeConfig[]>(apiEndpoints.schemes.list),
@@ -16,9 +18,9 @@ export default function SchemesPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="text-2xl font-bold text-slate-900">Government Schemes</h1>
+      <h1 className="text-2xl font-bold text-slate-900">{t.schemes.title}</h1>
       <p className="mt-1 text-sm text-slate-500">
-        Browse all active government credit and subsidy schemes available for rural entrepreneurs.
+        {t.schemes.subtitle}
       </p>
 
       {isLoading && (
@@ -36,14 +38,14 @@ export default function SchemesPage() {
       {isError && (
         <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-6 text-center">
           <p className="text-sm text-amber-800">
-            Unable to load schemes. Please ensure the backend is running.
+            {t.schemes.loadError}
           </p>
         </div>
       )}
 
       {data && data.length === 0 && (
         <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
-          <p className="text-sm text-slate-500">No schemes available yet.</p>
+          <p className="text-sm text-slate-500">{t.schemes.noSchemes}</p>
         </div>
       )}
 
@@ -65,7 +67,7 @@ export default function SchemesPage() {
                       href={`/schemes/${scheme.schemeId}`}
                       className="inline-flex items-center gap-1 text-xs font-semibold text-brand-600 hover:text-brand-800"
                     >
-                      Details <ArrowRight className="h-3.5 w-3.5" />
+                      {t.schemes.details} <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   </div>
                   <h3 className="mt-3 text-base font-semibold text-slate-900">{scheme.name}</h3>
@@ -73,29 +75,29 @@ export default function SchemesPage() {
 
                   <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
                     <div className="rounded-lg bg-slate-50 p-2.5">
-                      <div className="text-slate-500">Max Loan</div>
+                      <div className="text-slate-500">{t.schemes.maxLoan}</div>
                       <div className="mt-0.5 font-bold text-slate-900">
                         {inr(scheme.financial.maxLoanAmount)}
                       </div>
                     </div>
                     <div className="rounded-lg bg-slate-50 p-2.5">
-                      <div className="text-slate-500">Interest</div>
+                      <div className="text-slate-500">{t.schemes.interest}</div>
                       <div className="mt-0.5 font-bold text-slate-900">
                         {percent(scheme.financial.interestRate)}
                       </div>
                     </div>
                     {scheme.financial.subsidyPercentage > 0 && (
                       <div className="rounded-lg bg-emerald-50 p-2.5">
-                        <div className="text-emerald-600">Subsidy</div>
+                        <div className="text-emerald-600">{t.schemes.subsidy}</div>
                         <div className="mt-0.5 font-bold text-emerald-800">
                           {percent(scheme.financial.subsidyPercentage)}
                         </div>
                       </div>
                     )}
                     <div className="rounded-lg bg-slate-50 p-2.5">
-                      <div className="text-slate-500">Tenure</div>
+                      <div className="text-slate-500">{t.schemes.tenure}</div>
                       <div className="mt-0.5 font-bold text-slate-900">
-                        {scheme.financial.tenureMonths} months
+                        {scheme.financial.tenureMonths} {t.schemes.months}
                       </div>
                     </div>
                   </div>
@@ -111,7 +113,7 @@ export default function SchemesPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#E65C00] text-xs font-bold text-white hover:bg-[#cc5200] transition-colors shrink-0 shadow-xs"
                   >
-                    Apply Online <ExternalLink className="h-3 w-3" />
+                    {t.schemes.applyOnline} <ExternalLink className="h-3 w-3" />
                   </a>
                 </div>
               </div>

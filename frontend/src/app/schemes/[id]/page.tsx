@@ -17,8 +17,10 @@ import { api, apiEndpoints } from '@/lib/api/client';
 import { inr, percent } from '@/lib/format';
 import { getSchemePortalUrl } from '@/lib/api/feasibility';
 import type { SchemeConfig } from '@/types';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export default function SchemeDetailPage() {
+  const { t } = useTranslation();
   const params = useParams<{ id: string }>();
   const schemeId = params?.id;
 
@@ -43,12 +45,12 @@ export default function SchemeDetailPage() {
   if (isError || !scheme) {
     return (
       <div className="mx-auto max-w-xl px-4 py-20 text-center">
-        <h1 className="text-xl font-bold text-slate-900">Scheme not found</h1>
+        <h1 className="text-xl font-bold text-slate-900">{t.schemes.notFoundTitle}</h1>
         <p className="mt-2 text-sm text-slate-500">
-          This scheme may have been removed or the backend is unavailable.
+          {t.schemes.notFoundDesc}
         </p>
         <Link href="/schemes" className="btn-primary mt-6">
-          <ArrowLeft className="h-4 w-4" /> Back to Schemes
+          <ArrowLeft className="h-4 w-4" /> {t.schemes.backToSchemes}
         </Link>
       </div>
     );
@@ -59,21 +61,21 @@ export default function SchemeDetailPage() {
   const portalUrl = scheme.applyUrl || getSchemePortalUrl(scheme.name);
 
   const eligibilityItems = [
-    el.categories && el.categories.length > 0 && `Social categories: ${el.categories.join(', ')}`,
-    el.gender && el.gender.length > 0 && `Gender: ${el.gender.join(', ')}`,
-    el.ageMin && `Minimum age: ${el.ageMin}`,
-    el.ageMax && `Maximum age: ${el.ageMax}`,
-    el.isMinority !== undefined && el.isMinority !== null && (el.isMinority ? 'Minority community only' : 'Non-minority eligible'),
-    el.businessCategories && el.businessCategories.length > 0 && `Business types: ${el.businessCategories.join(', ')}`,
-    el.minProjectCost && `Min project cost: ${inr(el.minProjectCost)}`,
-    el.maxProjectCost && `Max project cost: ${inr(el.maxProjectCost)}`,
-    el.states && el.states.length > 0 && `States: ${el.states.join(', ')}`,
+    el.categories && el.categories.length > 0 && `${t.schemes.socialCategories}: ${el.categories.join(', ')}`,
+    el.gender && el.gender.length > 0 && `${t.schemes.gender}: ${el.gender.join(', ')}`,
+    el.ageMin && `${t.schemes.minAge}: ${el.ageMin}`,
+    el.ageMax && `${t.schemes.maxAge}: ${el.ageMax}`,
+    el.isMinority !== undefined && el.isMinority !== null && (el.isMinority ? t.schemes.minorityOnly : t.schemes.nonMinorityEligible),
+    el.businessCategories && el.businessCategories.length > 0 && `${t.schemes.businessTypes}: ${el.businessCategories.join(', ')}`,
+    el.minProjectCost && `${t.schemes.minProjectCost}: ${inr(el.minProjectCost)}`,
+    el.maxProjectCost && `${t.schemes.maxProjectCost}: ${inr(el.maxProjectCost)}`,
+    el.states && el.states.length > 0 && `${t.schemes.states}: ${el.states.join(', ')}`,
   ].filter(Boolean) as string[];
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
       <Link href="/schemes" className="mb-4 inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-brand-600">
-        <ArrowLeft className="h-3.5 w-3.5" /> All Schemes
+        <ArrowLeft className="h-3.5 w-3.5" /> {t.schemes.allSchemes}
       </Link>
 
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -88,7 +90,7 @@ export default function SchemeDetailPage() {
                 <p className="text-sm text-slate-500">{scheme.shortName}</p>
               )}
               <p className="mt-1 text-sm text-slate-600">{scheme.description}</p>
-              <p className="mt-1 text-xs text-slate-400">Nodal Agency: {scheme.nodalAgency}</p>
+              <p className="mt-1 text-xs text-slate-400">{t.schemes.nodalAgency}: {scheme.nodalAgency}</p>
             </div>
           </div>
           <a
@@ -97,37 +99,37 @@ export default function SchemeDetailPage() {
             rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#E65C00] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#cc5200] shadow-sm"
           >
-            Apply Online <ExternalLink className="h-4 w-4" />
+            {t.schemes.applyOnline} <ExternalLink className="h-4 w-4" />
           </a>
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-xl bg-slate-50 p-4">
             <div className="flex items-center gap-1.5 text-xs text-slate-500">
-              <Banknote className="h-3.5 w-3.5" /> Max Loan
+              <Banknote className="h-3.5 w-3.5" /> {t.schemes.maxLoan}
             </div>
             <div className="mt-1 text-xl font-bold text-slate-900">{inr(fin.maxLoanAmount)}</div>
           </div>
           <div className="rounded-xl bg-slate-50 p-4">
             <div className="flex items-center gap-1.5 text-xs text-slate-500">
-              <Percent className="h-3.5 w-3.5" /> Interest Rate
+              <Percent className="h-3.5 w-3.5" /> {t.schemes.interestRate}
             </div>
             <div className="mt-1 text-xl font-bold text-slate-900">{percent(fin.interestRate)}</div>
           </div>
           <div className="rounded-xl bg-slate-50 p-4">
             <div className="flex items-center gap-1.5 text-xs text-slate-500">
-              <Clock className="h-3.5 w-3.5" /> Tenure
+              <Clock className="h-3.5 w-3.5" /> {t.schemes.tenure}
             </div>
-            <div className="mt-1 text-xl font-bold text-slate-900">{fin.tenureMonths} months</div>
+            <div className="mt-1 text-xl font-bold text-slate-900">{fin.tenureMonths} {t.schemes.months}</div>
           </div>
           {fin.subsidyPercentage > 0 && (
             <div className="rounded-xl bg-emerald-50 p-4">
-              <div className="text-xs text-emerald-600">Subsidy</div>
+              <div className="text-xs text-emerald-600">{t.schemes.subsidy}</div>
               <div className="mt-1 text-xl font-bold text-emerald-800">
                 {percent(fin.subsidyPercentage)}
               </div>
               {fin.maxSubsidy > 0 && (
-                <div className="text-[11px] text-emerald-600">Cap: {inr(fin.maxSubsidy)}</div>
+                <div className="text-[11px] text-emerald-600">{t.schemes.cap}: {inr(fin.maxSubsidy)}</div>
               )}
             </div>
           )}
@@ -135,9 +137,9 @@ export default function SchemeDetailPage() {
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="rounded-xl border border-slate-200 p-5">
-            <h2 className="text-sm font-semibold text-slate-900">Eligibility</h2>
+            <h2 className="text-sm font-semibold text-slate-900">{t.schemes.eligibility}</h2>
             {eligibilityItems.length === 0 ? (
-              <p className="mt-2 text-xs text-slate-500">No specific eligibility restrictions.</p>
+              <p className="mt-2 text-xs text-slate-500">{t.schemes.noSpecificEligibility}</p>
             ) : (
               <ul className="mt-2 space-y-1.5">
                 {eligibilityItems.map((item) => (
@@ -151,16 +153,16 @@ export default function SchemeDetailPage() {
           </div>
 
           <div className="rounded-xl border border-slate-200 p-5">
-            <h2 className="text-sm font-semibold text-slate-900">Loan Details</h2>
+            <h2 className="text-sm font-semibold text-slate-900">{t.schemes.loanDetails}</h2>
             <dl className="mt-2 space-y-2 text-sm">
               <div className="flex justify-between">
-                <dt className="text-slate-500">Margin required</dt>
+                <dt className="text-slate-500">{t.schemes.marginRequired}</dt>
                 <dd className="font-medium text-slate-900">{percent(fin.marginPercentage)}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-slate-500">Moratorium</dt>
+                <dt className="text-slate-500">{t.schemes.moratorium}</dt>
                 <dd className="font-medium text-slate-900">
-                  {fin.moratoriumMonths} months ({fin.moratoriumType?.replace('_', ' ')})
+                  {fin.moratoriumMonths} {t.schemes.months} ({fin.moratoriumType?.replace('_', ' ')})
                 </dd>
               </div>
             </dl>
@@ -170,7 +172,7 @@ export default function SchemeDetailPage() {
         {scheme.requiredDocuments && scheme.requiredDocuments.length > 0 && (
           <div className="mt-6 rounded-xl border border-slate-200 p-5">
             <h2 className="flex items-center gap-1.5 text-sm font-semibold text-slate-900">
-              <FileText className="h-4 w-4 text-brand-600" /> Required Documents
+              <FileText className="h-4 w-4 text-brand-600" /> {t.schemes.requiredDocuments}
             </h2>
             <ul className="mt-2 space-y-1">
               {scheme.requiredDocuments.map((doc) => (
