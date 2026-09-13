@@ -40,3 +40,4 @@ venv/
 
 # Misc
 *.tsbuildinfo
+docs/frontend-build-prompt.md
