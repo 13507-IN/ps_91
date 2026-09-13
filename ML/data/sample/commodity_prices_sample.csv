@@ -1,0 +1,13 @@
+commodity,date,market,district,state,min_price,max_price,modal_price
+potato,2026-01-01,Central,North,A,1800,2200,2000
+potato,2026-01-02,Central,North,A,1810,2210,2010
+potato,2026-01-03,Central,North,A,1820,2220,2020
+potato,2026-01-04,Central,North,A,1830,2230,2030
+potato,2026-01-05,Central,North,A,1840,2240,2040
+potato,2026-01-06,Central,North,A,1850,2250,2050
+potato,2026-01-07,Central,North,A,1860,2260,2060
+potato,2026-01-08,Central,North,A,1850,2250,2050
+potato,2026-01-09,Central,North,A,1840,2240,2040
+potato,2026-01-10,Central,North,A,1830,2230,2030
+potato,2026-01-11,Central,North,A,1820,2220,2020
+potato,2026-01-12,Central,North,A,1810,2210,2010
