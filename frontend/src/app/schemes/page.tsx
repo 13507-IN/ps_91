@@ -24,7 +24,7 @@ export default function SchemesPage() {
       </p>
 
       {/* ── Udyam Registration Guide Banner ── */}
-      <div className="mt-8 relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1A3A6B] to-[#2a4d8c] p-6 sm:p-8 shadow-md border border-[#1A3A6B]/20">
+      <div className="mt-8 relative overflow-hidden rounded-2xl bg-[#0F2850] p-6 sm:p-8 shadow-md border border-[#1A3A6B]/20">
         <div className="relative z-10">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
@@ -32,7 +32,7 @@ export default function SchemesPage() {
                 <span className="bg-[#E65C00] text-white text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Guide</span>
                 {t.udyamGuide.title}
               </h2>
-              <p className="text-blue-100 text-sm max-w-2xl leading-relaxed">
+              <p className="text-blue-50 text-sm max-w-2xl leading-relaxed">
                 {t.udyamGuide.subtitle}
               </p>
             </div>
@@ -53,14 +53,14 @@ export default function SchemesPage() {
               { num: 3, title: t.udyamGuide.step3Title, desc: t.udyamGuide.step3Desc },
               { num: 4, title: t.udyamGuide.step4Title, desc: t.udyamGuide.step4Desc }
             ].map((step, idx) => (
-              <div key={idx} className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl p-4 flex flex-col hover:bg-white/15 transition-colors">
+              <div key={idx} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 flex flex-col hover:bg-white/20 transition-colors shadow-sm">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="flex items-center justify-center h-6 w-6 rounded-full bg-[#E65C00]/20 text-[#FF9933] text-xs font-black">
+                  <div className="flex items-center justify-center h-6 w-6 rounded-full bg-[#E65C00] text-white text-xs font-black">
                     {step.num}
                   </div>
-                  <h3 className="text-white text-sm font-bold">{step.title}</h3>
+                  <h3 className="text-white text-sm font-bold drop-shadow-sm">{step.title}</h3>
                 </div>
-                <p className="text-blue-100/80 text-xs leading-relaxed">
+                <p className="text-white text-xs leading-relaxed opacity-90 drop-shadow-sm">
                   {step.desc}
                 </p>
               </div>
@@ -68,7 +68,7 @@ export default function SchemesPage() {
           </div>
         </div>
         {/* Background accent */}
-        <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white/5 blur-3xl pointer-events-none" aria-hidden="true" />
+        <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" aria-hidden="true" />
       </div>
 
       {isLoading && (
