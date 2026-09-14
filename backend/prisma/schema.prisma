@@ -1,7 +1,3 @@
-// ============================================================
-// ArthSetu — Prisma Schema
-// Database: PostgreSQL + PostGIS (Neon)
-// ============================================================
 
 generator client {
   provider        = "prisma-client-js"
