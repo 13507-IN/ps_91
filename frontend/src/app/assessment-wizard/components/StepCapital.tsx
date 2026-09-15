@@ -1,9 +1,9 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { IndianRupee, ChevronDown } from 'lucide-react';
+import { IndianRupee, ChevronDown, UserCheck } from 'lucide-react';
 import { inr } from '@/lib/format';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { WizardDraft } from '@/types';
@@ -33,10 +33,11 @@ interface StepCapitalProps {
 
 export default function StepCapital({ draft, updateDraft, onNext, onBack }: StepCapitalProps) {
   const { t } = useTranslation();
-  const [showAdvanced, setShowAdvanced] = useState(false);
+  // Expanded by default so pre-filled details are immediately visible
+  const [showAdvanced, setShowAdvanced] = useState(true);
   const [capitalInput, setCapitalInput] = useState(draft.availableCapital ? String(draft.availableCapital) : '');
 
-  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormValues>({
+  const { register, handleSubmit, setValue, watch, reset, formState: { errors } } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       availableCapital: draft.availableCapital,
@@ -51,7 +52,26 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
     },
   });
 
+  // Re-sync form controls whenever draft prop updates (e.g. from user profile or async storage)
+  useEffect(() => {
+    reset({
+      availableCapital: draft.availableCapital,
+      age: draft.age,
+      gender: draft.gender,
+      category: draft.category,
+      isMinority: draft.isMinority,
+      businessExperience: draft.businessExperience,
+      availableLand: draft.availableLand,
+      availableEquipment: draft.availableEquipment,
+      expectedWorkingHours: draft.expectedWorkingHours,
+    });
+    if (draft.availableCapital) {
+      setCapitalInput(String(draft.availableCapital));
+    }
+  }, [draft, reset]);
+
   const capitalValue = watch('availableCapital');
+  const hasPrefilledProfile = Boolean(draft.age || draft.gender || draft.category);
 
   function selectChip(amount: number) {
     setValue('availableCapital', amount, { shouldValidate: true });
@@ -78,9 +98,11 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               key={`chip-${amount}`}
               type="button"
               onClick={() => selectChip(amount)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${capitalValue === amount
-                ? 'bg-teal-900 text-white border-teal-900' : 'bg-white border-border text-ink-muted hover:border-teal-400 hover:text-teal-900'
-                }`}
+              className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${
+                capitalValue === amount
+                  ? 'bg-teal-900 text-white border-teal-900'
+                  : 'bg-white border-border text-ink-muted hover:border-teal-400 hover:text-teal-900'
+              }`}
             >
               {inr(amount, true)}
             </button>
@@ -114,28 +136,41 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
         )}
       </div>
 
-      {/* Profile (optional) */}
+      {/* Profile / Personal Details */}
       <div>
-        <button
-          type="button"
-          onClick={() => setShowAdvanced(!showAdvanced)}
-          className="flex items-center gap-2 text-sm font-medium text-teal-600 hover:text-teal-900 transition-colors"
-        >
-          <ChevronDown
-            size={15}
-            className={`transition-transform ${showAdvanced ? 'rotate-180' : ''}`}
-          />
-          {t.capital.personalOptional}
-        </button>
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            className="flex items-center gap-2 text-sm font-medium text-teal-600 hover:text-teal-900 transition-colors"
+          >
+            <ChevronDown
+              size={15}
+              className={`transition-transform ${showAdvanced ? 'rotate-180' : ''}`}
+            />
+            {t.capital.personalOptional}
+          </button>
+          {hasPrefilledProfile && (
+            <span className="flex items-center gap-1 text-xs font-semibold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-200">
+              <UserCheck size={13} className="text-teal-600" />
+              Pre-filled from Profile
+            </span>
+          )}
+        </div>
 
         {showAdvanced && (
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-paper-dark rounded-xl border border-border">
+          <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-paper-dark rounded-xl border border-border">
             {/* Age */}
             <div>
               <label className="label-gov">{t.common.age}</label>
               <input
                 type="number"
                 {...register('age', { valueAsNumber: true })}
+                onChange={(e) => {
+                  const val = e.target.value ? Number(e.target.value) : undefined;
+                  setValue('age', val);
+                  updateDraft({ age: val });
+                }}
                 placeholder="e.g. 32"
                 className="input-gov font-tabular"
                 min={18} max={80}
@@ -145,7 +180,15 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
             {/* Gender */}
             <div>
               <label className="label-gov">{t.capital.gender}</label>
-              <select {...register('gender')} className="input-gov">
+              <select
+                {...register('gender')}
+                onChange={(e) => {
+                  const val = e.target.value as any;
+                  setValue('gender', val);
+                  updateDraft({ gender: val });
+                }}
+                className="input-gov"
+              >
                 <option value="">{t.common.notSelected}</option>
                 <option value="MALE">{t.capital.genderMale}</option>
                 <option value="FEMALE">{t.capital.genderFemale}</option>
@@ -156,7 +199,15 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
             {/* Category */}
             <div>
               <label className="label-gov">{t.capital.socialCategory}</label>
-              <select {...register('category')} className="input-gov">
+              <select
+                {...register('category')}
+                onChange={(e) => {
+                  const val = e.target.value as any;
+                  setValue('category', val);
+                  updateDraft({ category: val });
+                }}
+                className="input-gov"
+              >
                 <option value="">{t.common.notSelected}</option>
                 <option value="GENERAL">{t.capital.general}</option>
                 <option value="SC">SC</option>
@@ -172,6 +223,10 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <input
                 type="text"
                 {...register('businessExperience')}
+                onChange={(e) => {
+                  setValue('businessExperience', e.target.value);
+                  updateDraft({ businessExperience: e.target.value });
+                }}
                 placeholder={t.capital.expPlaceholder}
                 className="input-gov"
               />
@@ -183,6 +238,10 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <input
                 type="text"
                 {...register('availableLand')}
+                onChange={(e) => {
+                  setValue('availableLand', e.target.value);
+                  updateDraft({ availableLand: e.target.value });
+                }}
                 placeholder={t.capital.landPlaceholder}
                 className="input-gov"
               />
@@ -194,6 +253,10 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <input
                 type="text"
                 {...register('availableEquipment')}
+                onChange={(e) => {
+                  setValue('availableEquipment', e.target.value);
+                  updateDraft({ availableEquipment: e.target.value });
+                }}
                 placeholder={t.capital.equipPlaceholder}
                 className="input-gov"
               />
@@ -205,6 +268,11 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <input
                 type="number"
                 {...register('expectedWorkingHours', { valueAsNumber: true })}
+                onChange={(e) => {
+                  const val = e.target.value ? Number(e.target.value) : undefined;
+                  setValue('expectedWorkingHours', val);
+                  updateDraft({ expectedWorkingHours: val });
+                }}
                 placeholder={t.capital.hoursPlaceholder}
                 className="input-gov font-tabular"
                 min={1} max={16}
@@ -216,10 +284,14 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <input
                 type="checkbox"
                 {...register('isMinority')}
+                onChange={(e) => {
+                  setValue('isMinority', e.target.checked);
+                  updateDraft({ isMinority: e.target.checked });
+                }}
                 id="isMinority"
-                className="w-4 h-4 accent-teal-900"
+                className="w-4 h-4 accent-teal-900 cursor-pointer"
               />
-              <label htmlFor="isMinority" className="text-sm text-ink-muted cursor-pointer">
+              <label htmlFor="isMinority" className="text-sm text-ink-muted cursor-pointer font-medium">
                 {t.capital.isMinority}
               </label>
             </div>

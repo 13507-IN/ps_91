@@ -1,13 +1,11 @@
 import type { ApiError, AuthTokens } from '@/types';
 import toast from 'react-hot-toast';
+import { API_BASE_URL } from '@/lib/constants';
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://ps-91.onrender.com';
+export const apiBaseUrl = API_BASE_URL;
 
 const ACCESS_TOKEN_KEY = 'ArthSetu_access_token';
 const REFRESH_TOKEN_KEY = 'ArthSetu_refresh_token';
-
-export const apiBaseUrl = API_BASE_URL;
 
 // Token store in sessionStorage (per-tab, survives reload, more XSS-safe than localStorage).
 function readTokens(): { accessToken: string | null; refreshToken: string | null } {

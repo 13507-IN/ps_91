@@ -56,6 +56,21 @@ export const feasibilityRoutes: FastifyPluginAsync = async (fastify) => {
   });
 
   /**
+   * POST /api/feasibility/analyze-stream
+   * Real-time SSE streaming evaluation endpoint
+   */
+  fastify.post('/analyze-stream', {
+    schema: {
+      tags: ['Feasibility & Decision Support'],
+      summary: 'Stream real-time progress events for feasibility analysis pipeline (SSE)',
+    },
+    handler: async (request, reply) => {
+      const { handleAnalyzeStream } = await import('./feasibility.sse.js');
+      return handleAnalyzeStream(request, reply, fastify);
+    },
+  });
+
+  /**
    * GET /api/feasibility/analyses
    * List saved feasibility analyses for logged-in user
    */

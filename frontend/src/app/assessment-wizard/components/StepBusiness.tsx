@@ -1,11 +1,13 @@
 'use client';
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import AppImage from '@/components/ui/AppImage';
 import VoiceInput from '@/components/ui/VoiceInput';
 import { CATEGORY_PHOTOS } from '@/lib/constants/landing-media';
 import { Check, Sparkles, Loader2 } from 'lucide-react';
 import { inr } from '@/lib/format';
 import { useTranslation } from '@/lib/i18n/useTranslation';
+import { autoClassifyCategory } from '@/lib/ai/classifyCategory';
 import type { WizardDraft, BusinessCategory } from '@/types';
 
 interface StepBusinessProps {
@@ -33,22 +35,42 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
   const { t } = useTranslation();
   const [selected, setSelected] = useState<BusinessCategory | undefined>(draft.businessCategory);
   const [idea, setIdea] = useState(draft.businessIdea || '');
-  const [classifying, setClassifying] = useState(false);
-  const [aiSuggestion, setAiSuggestion] = useState<string | null>(null);
+  const [manualOverride, setManualOverride] = useState(false);
+  const [autoDetected, setAutoDetected] = useState<BusinessCategory | null>(null);
 
-  function selectCategory(code: BusinessCategory) {
-    setSelected(code);
-    updateDraft({ businessCategory: code });
+  // Auto classify on component mount or idea change
+  useEffect(() => {
+    if (idea && !selected) {
+      const detected = autoClassifyCategory(idea);
+      if (detected) {
+        setAutoDetected(detected);
+        setSelected(detected);
+        updateDraft({ businessCategory: detected });
+      }
+    }
+  }, []);
+
+  function handleIdeaChange(newIdea: string) {
+    setIdea(newIdea);
+    const detected = autoClassifyCategory(newIdea);
+
+    if (detected) {
+      setAutoDetected(detected);
+      if (!manualOverride) {
+        setSelected(detected);
+        updateDraft({ businessIdea: newIdea, businessCategory: detected });
+        return;
+      }
+    } else {
+      setAutoDetected(null);
+    }
+    updateDraft({ businessIdea: newIdea });
   }
 
-  function handleIdeaBlur() {
-    if (idea.length < 10) return;
-    setClassifying(true);
-    // Backend integration: POST /api/ai/classify { idea }
-    setTimeout(() => {
-      setAiSuggestion('DAIRY');
-      setClassifying(false);
-    }, 800);
+  function selectCategory(code: BusinessCategory) {
+    setManualOverride(true);
+    setSelected(code);
+    updateDraft({ businessCategory: code });
   }
 
   const canContinue = !!selected;
@@ -63,38 +85,27 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
         {/* Voice Input Toolbar */}
         <VoiceInput
           currentValue={idea}
-          onTranscript={(newText) => {
-            setIdea(newText);
-            updateDraft({ businessIdea: newText });
-          }}
+          onTranscript={handleIdeaChange}
         />
 
         <div className="relative mt-2">
           <textarea
             value={idea}
-            onChange={(e) => { setIdea(e.target.value); updateDraft({ businessIdea: e.target.value }); }}
-            onBlur={handleIdeaBlur}
+            onChange={(e) => handleIdeaChange(e.target.value)}
             placeholder={t.business.ideaPlaceholder}
             className="input-gov min-h-[120px] resize-none"
             rows={3}
           />
-          {classifying && (
-            <div className="absolute right-3 top-3 flex items-center gap-1.5 text-xs text-teal-600">
-              <Loader2 size={12} className="animate-spin" />
-              Classifying...
-            </div>
-          )}
         </div>
-        {aiSuggestion && (
-          <div className="mt-2 flex items-center gap-2 text-xs bg-saffron-soft border border-saffron/30 rounded-lg px-3 py-2">
-            <Sparkles size={13} className="text-saffron" />
-            <span className="text-ink-muted">AI suggests: <strong className="text-teal-900">{t.business.categories[aiSuggestion as BusinessCategory]}</strong></span>
-            <button
-              onClick={() => selectCategory(aiSuggestion as BusinessCategory)}
-              className="ml-auto text-teal-600 font-semibold hover:text-teal-900 transition-colors"
-            >
-              Apply
-            </button>
+
+        {/* Auto Category Banner */}
+        {autoDetected && (
+          <div className="mt-2.5 flex flex-wrap items-center gap-2 text-xs bg-teal-50 border border-teal-200 text-teal-950 rounded-xl px-3.5 py-2.5 shadow-xs">
+            <Sparkles size={15} className="text-teal-700 flex-shrink-0" />
+            <span>
+              Auto-detected Category: <strong className="font-bold underline text-teal-900">{t.business.categories[autoDetected]}</strong>
+            </span>
+            <span className="ml-auto text-[11px] text-teal-700 font-medium">Click any category below if you want to change it</span>
           </div>
         )}
       </div>
@@ -106,11 +117,13 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
           {CATEGORIES.map((cat) => (
             <button
               key={`cat-pick-${cat.code}`}
+              type="button"
               onClick={() => selectCategory(cat.code)}
-              className={`relative group rounded-xl border-2 overflow-hidden text-left transition-all duration-200 ${selected === cat.code
+              className={`relative group rounded-xl border-2 overflow-hidden text-left transition-all duration-200 ${
+                selected === cat.code
                   ? 'border-teal-900 shadow-gov-md ring-2 ring-teal-900/20'
                   : 'border-border hover:border-teal-400 hover:shadow-gov-sm'
-                }`}
+              }`}
             >
               {/* Photo */}
               <div className="relative h-24 overflow-hidden">
@@ -156,14 +169,16 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
       )}
 
       <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 sm:gap-4 pt-4">
-        <button onClick={onBack} className="w-full sm:w-auto px-6 py-3 sm:py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors">
+        <button type="button" onClick={onBack} className="w-full sm:w-auto px-6 py-3 sm:py-2.5 rounded-lg text-sm font-medium border border-border text-ink-muted hover:bg-paper-dark transition-colors">
           {t.common.back}
         </button>
         <button
+          type="button"
           onClick={onNext}
           disabled={!canContinue}
-          className={`w-full sm:w-auto px-7 py-3 sm:py-2.5 rounded-lg text-sm font-semibold transition-all ${canContinue ? 'btn-saffron' : 'bg-muted text-ink-subtle cursor-not-allowed'
-            }`}
+          className={`w-full sm:w-auto px-7 py-3 sm:py-2.5 rounded-lg text-sm font-semibold transition-all ${
+            canContinue ? 'btn-saffron' : 'bg-muted text-ink-subtle cursor-not-allowed'
+          }`}
         >
           {t.business.continueToCapital}
         </button>

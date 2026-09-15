@@ -5,6 +5,7 @@ import GovFooter from '@/components/govFooter';
 import LanguagePickerModal from '@/components/LanguagePickerModal';
 import ChatWidget from '@/components/ChatBot/ChatWidget';
 import PWARegistry from '@/components/pwa/pwa-registry';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { Toaster } from 'react-hot-toast';
 import '../styles/index.css';
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="flex min-h-screen flex-col font-sans">
         <Providers>
+          <OfflineIndicator />
           <PWARegistry />
           <LanguagePickerModal />
           <GovHeaderBar />

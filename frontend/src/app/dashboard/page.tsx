@@ -46,7 +46,7 @@ function DashboardContent() {
 
   useEffect(() => {
     if (userLocationObj?.village) setVillageQuery(userLocationObj.village);
-  }, [user]);
+  }, [user, userLocationObj]);
 
   useEffect(() => {
     const q = villageQuery.trim();

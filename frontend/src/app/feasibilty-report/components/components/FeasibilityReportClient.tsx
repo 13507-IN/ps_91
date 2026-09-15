@@ -18,7 +18,10 @@ import { AIRecommendationSection } from './AIRecommendationSection';
 import { ActionPlanSection } from './ActionPlanSection';
 import { ScoreBreakdownChart } from './ScoreBreakdownChart';
 import { LocalSuppliersSection } from '../LocalSuppliersSection';
+import { DPRExportBar } from './DPRExportBar';
+import { DocumentChecklist } from './DocumentChecklist';
 import { HyperlocalBusinessExplorer } from '@/components/HyperlocalBusinessExplorer/HyperlocalBusinessExplorer';
+import { saveReportOffline, getReportOffline } from '@/lib/offline/offlineStore';
 
 export function FeasibilityReportClient({
   reportId,
@@ -30,6 +33,7 @@ export function FeasibilityReportClient({
   // Hydration-safe: only touch sessionStorage after mount.
   const [mounted, setMounted] = useState(false);
   const [localReport, setLocalReport] = useState<FeasibilityReport | null>(null);
+  const [offlineLoadedReport, setOfflineLoadedReport] = useState<FeasibilityReport | null>(null);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -37,7 +41,10 @@ export function FeasibilityReportClient({
       const raw = window.sessionStorage.getItem(LAST_REPORT_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as FeasibilityReport;
-        if (parsed.businessCategory) setLocalReport(parsed);
+        if (parsed.businessCategory) {
+          setLocalReport(parsed);
+          saveReportOffline(parsed).catch(() => {});
+        }
       }
     } catch {
       // ignore
@@ -48,12 +55,24 @@ export function FeasibilityReportClient({
   const { data: fetched, isError } = useQuery({
     queryKey: ['feasibility', reportId],
     queryFn: async () => {
-      const raw = await api<BackendFeasibilityResult>(`${apiEndpoints.feasibility.analyses}/${reportId}`);
-      // If the backend returned a report formatted as FeasibilityReport or BackendFeasibilityResult
-      if ((raw as unknown as FeasibilityReport).marketIntelligence?.catchmentRadiusKm !== undefined) {
-        return raw as unknown as FeasibilityReport;
+      try {
+        const raw = await api<BackendFeasibilityResult>(`${apiEndpoints.feasibility.analyses}/${reportId}`);
+        const result = (raw as unknown as FeasibilityReport).marketIntelligence?.catchmentRadiusKm !== undefined
+          ? (raw as unknown as FeasibilityReport)
+          : toFeasibilityReport(raw);
+        saveReportOffline(result).catch(() => {});
+        return result;
+      } catch (err) {
+        // Try offline fallback
+        if (reportId) {
+          const offlineReport = await getReportOffline(reportId);
+          if (offlineReport) {
+            setOfflineLoadedReport(offlineReport);
+            return offlineReport;
+          }
+        }
+        throw err;
       }
-      return toFeasibilityReport(raw);
     },
     enabled: Boolean(reportId),
   });
@@ -61,7 +80,7 @@ export function FeasibilityReportClient({
   // When reportId is provided, prioritize fetched report from backend.
   // When no reportId is provided, fall back to localReport (sessionStorage) or mockReport.
   const report: FeasibilityReport | null =
-    reportId ? (fetched ?? null) : (localReport ?? (mounted ? mockReport : null));
+    reportId ? (fetched ?? offlineLoadedReport ?? null) : (localReport ?? (mounted ? mockReport : null));
 
   if (!mounted && !reportId) {
     return <LoadingSkeleton />;
@@ -140,7 +159,14 @@ export function FeasibilityReportClient({
         </div>
 
         <ActionPlanSection plan={report.actionPlan} />
+
+        <DocumentChecklist
+          schemeName={report.financialPlan.matchedSchemeName}
+          businessCategory={report.businessCategory}
+        />
       </div>
+
+      <DPRExportBar report={report} />
     </div>
   );
 }

@@ -133,4 +133,31 @@ export const marketRoutes: FastifyPluginAsync = async (fastify) => {
       return reply.send(result);
     },
   });
+
+  /**
+   * GET /api/market/seasonal-calendar
+   * 12-month business seasonality, price trends & demand forecast
+   */
+  fastify.get('/seasonal-calendar', {
+    schema: {
+      tags: ['Market Intelligence'],
+      summary: 'Get 12-month seasonal timeline, price index, and festival demand cycles for a business category',
+      querystring: {
+        type: 'object',
+        properties: {
+          category: { type: 'string', default: 'DAIRY' },
+          district: { type: 'string', default: 'Nadia' },
+        },
+      },
+    },
+    handler: async (request, reply) => {
+      const { SeasonalService } = await import('./seasonal.service.js');
+      const seasonalService = new SeasonalService(fastify.prisma);
+      const query = request.query as { category?: string; district?: string };
+      const category = (query.category as any) || 'DAIRY';
+      const district = query.district || 'Nadia';
+      const result = await seasonalService.getSeasonalCalendar(category, district);
+      return reply.send(result);
+    },
+  });
 };

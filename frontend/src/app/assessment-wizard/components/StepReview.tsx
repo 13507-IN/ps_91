@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 
 import { MapPin, Briefcase, IndianRupee, User, Loader2, ArrowRight, AlertTriangle } from 'lucide-react';
 import { inr } from '@/lib/format';
-import { LAST_REPORT_KEY, LAST_REPORT_ID_KEY } from '@/lib/constants';
+import { LAST_REPORT_KEY, LAST_REPORT_ID_KEY, API_BASE_URL } from '@/lib/constants';
 import { api, apiEndpoints, handleApiError } from '@/lib/api/client';
 import { toFeasibilityReport, type BackendFeasibilityResult } from '@/lib/api/feasibility';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { WizardDraft } from '@/types';
+import AnalysisProgress, { useAnalysisProgress } from './AnalysisProgress';
 
 interface StepReviewProps {
   draft: WizardDraft;
@@ -16,10 +17,10 @@ interface StepReviewProps {
   setIsSubmitting: (v: boolean) => void;
 }
 
-
 export default function StepReview({ draft, onBack, isSubmitting, setIsSubmitting }: StepReviewProps) {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const [error, setError] = useState<string | null>(null);
+  const progressState = useAnalysisProgress();
 
   async function handleAnalyze() {
     // Validate required fields before hitting the backend
@@ -38,6 +39,7 @@ export default function StepReview({ draft, onBack, isSubmitting, setIsSubmittin
 
     setError(null);
     setIsSubmitting(true);
+    progressState.start();
 
     const body = {
       latitude: draft.latitude,
@@ -55,27 +57,91 @@ export default function StepReview({ draft, onBack, isSubmitting, setIsSubmittin
       availableLand: draft.availableLand,
       availableEquipment: draft.availableEquipment,
       expectedWorkingHours: draft.expectedWorkingHours,
+      language: lang.toUpperCase() ?? 'EN',
     };
 
     try {
-      const result = await api<BackendFeasibilityResult>(
-        apiEndpoints.feasibility.analyze,
-        {
+      // Try SSE streaming first
+      let completedResult: BackendFeasibilityResult | null = null;
+      try {
+        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+        const sseUrl = `${API_BASE_URL}/api/feasibility/analyze-stream`;
+        const response = await fetch(sseUrl, {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
           body: JSON.stringify(body),
-        },
-      );
+        });
 
-      const report = toFeasibilityReport(result);
+        if (response.ok && response.body) {
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n\n');
+            buffer = lines.pop() ?? '';
+
+            for (const chunk of lines) {
+              const eventMatch = chunk.match(/event:\s*([^\n]+)/);
+              const dataMatch = chunk.match(/data:\s*([^\n]+)/);
+
+              if (dataMatch) {
+                try {
+                  const data = JSON.parse(dataMatch[1]);
+                  const eventType = eventMatch ? eventMatch[1].trim() : 'progress';
+
+                  if (eventType === 'progress') {
+                    progressState.updateFromSSE(data);
+                  } else if (eventType === 'complete') {
+                    completedResult = data as BackendFeasibilityResult;
+                  } else if (eventType === 'error') {
+                    throw new Error(data.error || 'SSE analysis failed');
+                  }
+                } catch (parseErr) {
+                  console.warn('SSE line parse error:', parseErr);
+                }
+              }
+            }
+          }
+        }
+      } catch (sseErr) {
+        console.warn('SSE stream unavailable or failed, falling back to standard POST:', sseErr);
+      }
+
+      // If SSE did not produce a result, fallback to standard POST
+      if (!completedResult) {
+        completedResult = await api<BackendFeasibilityResult>(
+          apiEndpoints.feasibility.analyze,
+          {
+            method: 'POST',
+            body: JSON.stringify(body),
+          },
+        );
+      }
+
+      progressState.complete();
+
+      const report = toFeasibilityReport(completedResult);
       if (report.id) {
         window.sessionStorage.setItem(LAST_REPORT_ID_KEY, report.id);
       }
       window.sessionStorage.setItem(LAST_REPORT_KEY, JSON.stringify(report));
-      window.location.href = '/feasibility-report?from=assessment';
+      
+      setTimeout(() => {
+        window.location.href = '/feasibility-report?from=assessment';
+      }, 500);
     } catch (err) {
       handleApiError(err, t.review.errorGeneric);
       setError(err instanceof Error ? err.message : t.review.errorGeneric);
       setIsSubmitting(false);
+      progressState.reset();
     }
   }
 
@@ -189,6 +255,14 @@ export default function StepReview({ draft, onBack, isSubmitting, setIsSubmittin
           </button>
         </div>
       </div>
+
+      {/* Real-time SSE / Simulated Analysis Progress Modal */}
+      <AnalysisProgress
+        isActive={progressState.isActive}
+        currentStep={progressState.currentStep}
+        progress={progressState.progress}
+        stepMessages={progressState.stepMessages}
+      />
     </div>
   );
 }

@@ -21,6 +21,9 @@ export const analyzeFeasibilityBodySchema = z.object({
   availableLand: z.string().optional(),
   availableEquipment: z.string().optional(),
   expectedWorkingHours: z.number().positive().max(24).optional(),
+
+  // Language preference for AI recommendations & action plan
+  language: z.enum(['EN', 'HI', 'BN']).optional().default('EN'),
 });
 
 export const getAnalysisParamsSchema = z.object({

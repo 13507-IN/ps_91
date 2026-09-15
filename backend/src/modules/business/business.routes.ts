@@ -141,4 +141,10 @@ export const businessRoutes: FastifyPluginAsync = async (fastify) => {
       return reply.send(result);
     },
   });
+
+  /**
+   * Register Community Verification & Leaderboard sub-routes
+   */
+  const { verificationRoutes } = await import('./verification.routes.js');
+  await fastify.register(verificationRoutes);
 };

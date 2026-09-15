@@ -4,6 +4,7 @@ import { Sparkles, ThumbsUp, AlertTriangle, ArrowRightCircle } from 'lucide-reac
 import { decisionColor } from '@/lib/format';
 import type { AiRecommendation } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
+import { TextToSpeech } from '@/components/TextToSpeech';
 
 export function AIRecommendationSection({ recommendation }: { recommendation: AiRecommendation }) {
   const { t } = useTranslation();
@@ -15,11 +16,24 @@ export function AIRecommendationSection({ recommendation }: { recommendation: Ai
     return decision.replaceAll('_', ' ');
   };
 
+  const narrationText = [
+    recommendation.summary,
+    recommendation.strengths && recommendation.strengths.length > 0
+      ? `Strengths: ${recommendation.strengths.join('. ')}`
+      : '',
+    recommendation.recommendedNextStep
+      ? `Recommended Next Step: ${recommendation.recommendedNextStep}`
+      : '',
+  ].filter(Boolean).join('. ');
+
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6">
-      <div className="flex items-center gap-2">
-        <Sparkles className="h-5 w-5 text-brand-600" />
-        <h2 className="text-lg font-semibold text-slate-900">{t.aiRecommendation.title} — Why?</h2>
+      <div className="flex items-center justify-between gap-2 flex-wrap">
+        <div className="flex items-center gap-2">
+          <Sparkles className="h-5 w-5 text-brand-600" />
+          <h2 className="text-lg font-semibold text-slate-900">{t.aiRecommendation.title} — Why?</h2>
+        </div>
+        <TextToSpeech text={narrationText} />
       </div>
       <p className="mt-1 text-xs text-slate-500">
         Every recommendation is explainable. Deterministic financial rules decide eligibility; AI only

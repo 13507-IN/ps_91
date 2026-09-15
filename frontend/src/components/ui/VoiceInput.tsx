@@ -12,13 +12,13 @@ interface VoiceInputProps {
   autoRefine?: boolean;
 }
 
-type VoiceLang = 'bn-BD' | 'bn-IN' | 'en-IN';
+export type VoiceLang = 'bn-IN' | 'bn-BD' | 'en-IN';
 
 export default function VoiceInput({ onTranscript, currentValue, autoRefine = true }: VoiceInputProps) {
   const { t, lang } = useTranslation();
   const [isListening, setIsListening] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [voiceLang, setVoiceLang] = useState<VoiceLang>(lang === 'BN' ? 'bn-BD' : 'en-IN');
+  const [voiceLang, setVoiceLang] = useState<VoiceLang>(lang === 'BN' ? 'bn-IN' : 'en-IN');
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [refinedBadge, setRefinedBadge] = useState(false);
 
@@ -28,11 +28,12 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
   const audioChunksRef = useRef<Blob[]>([]);
   const silenceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const rawTranscriptRef = useRef<string>('');
+  const activeLangRef = useRef<string>('bn-IN');
 
   // Update voice language default if global language changes
   useEffect(() => {
     if (lang === 'BN' && !voiceLang.startsWith('bn')) {
-      setVoiceLang('bn-BD');
+      setVoiceLang('bn-IN');
     } else if (lang === 'EN' && voiceLang !== 'en-IN') {
       setVoiceLang('en-IN');
     }
@@ -71,10 +72,14 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
     }
   }
 
-  // Start browser speech recognition
-  function startListening() {
+  // Start browser speech recognition with fallback language tags for Bengali
+  function startListening(requestedLang?: string) {
+    stopListening();
     rawTranscriptRef.current = '';
     setStatusMessage(null);
+
+    const targetLang = requestedLang || voiceLang;
+    activeLangRef.current = targetLang;
 
     const SpeechRecognition =
       (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -84,11 +89,11 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
         const recognition = new SpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = true;
-        recognition.lang = voiceLang;
+        recognition.lang = targetLang;
 
         recognition.onstart = () => {
           setIsListening(true);
-          setStatusMessage(t.business.voiceListening);
+          setStatusMessage(t.business.voiceListening + ` (${targetLang})`);
         };
 
         recognition.onresult = (event: any) => {
@@ -96,34 +101,43 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
           let finalText = '';
 
           for (let i = event.resultIndex; i < event.results.length; ++i) {
+            const transcriptSegment = event.results[i][0].transcript;
             if (event.results[i].isFinal) {
-              finalText += event.results[i][0].transcript + ' ';
+              finalText += transcriptSegment + ' ';
             } else {
-              interimText += event.results[i][0].transcript;
+              interimText += transcriptSegment;
             }
           }
 
           const combined = (finalText + interimText).trim();
           if (combined) {
             rawTranscriptRef.current = combined;
-            // Immediate live text update
             const updated = currentValue
               ? currentValue.trim() + ' ' + combined
               : combined;
             onTranscript(updated);
           }
 
-          // Reset silence timer for automatic AI accent refinement on pause
+          // Reset silence timer for automatic stop / refinement on pause
           if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
           silenceTimerRef.current = setTimeout(() => {
             if (rawTranscriptRef.current && autoRefine) {
               stopListening();
             }
-          }, 2500);
+          }, 3000);
         };
 
         recognition.onerror = (event: any) => {
-          console.warn('Speech recognition error:', event.error);
+          console.warn('Speech recognition error:', event.error, 'for lang:', targetLang);
+
+          // Language fallback: if bn-IN fails or isn't supported, try bn-BD automatically (or vice-versa)
+          if ((event.error === 'language-not-supported' || event.error === 'network') && targetLang.startsWith('bn')) {
+            const altLang = targetLang === 'bn-IN' ? 'bn-BD' : 'bn-IN';
+            console.info('Retrying speech recognition with alternate Bengali lang code:', altLang);
+            setTimeout(() => startListening(altLang), 200);
+            return;
+          }
+
           if (event.error !== 'no-speech') {
             setIsListening(false);
             setStatusMessage(t.business.voiceError);
@@ -238,6 +252,13 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
     }
   }
 
+  function handleSwitchLanguage(newLang: VoiceLang) {
+    setVoiceLang(newLang);
+    if (isListening) {
+      startListening(newLang);
+    }
+  }
+
   return (
     <div className="flex flex-wrap items-center justify-between gap-2 my-2.5 p-2 rounded-xl bg-paper-dark border border-teal-900/10">
       <div className="flex items-center gap-2">
@@ -263,7 +284,6 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
             <>
               <MicOff size={14} />
               <span>{t.business.voiceStop}</span>
-              {/* Sound wave pulse */}
               <span className="flex h-2 w-2 relative ml-1">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
@@ -281,7 +301,7 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
         <div className="flex items-center bg-white border border-border rounded-lg p-0.5 text-[11px] font-medium">
           <button
             type="button"
-            onClick={() => setVoiceLang('bn-BD')}
+            onClick={() => handleSwitchLanguage('bn-IN')}
             className={`px-2 py-0.5 rounded-md transition-colors ${
               voiceLang.startsWith('bn')
                 ? 'bg-teal-900 text-white font-semibold shadow-xs'
@@ -292,7 +312,7 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
           </button>
           <button
             type="button"
-            onClick={() => setVoiceLang('en-IN')}
+            onClick={() => handleSwitchLanguage('en-IN')}
             className={`px-2 py-0.5 rounded-md transition-colors ${
               voiceLang === 'en-IN'
                 ? 'bg-teal-900 text-white font-semibold shadow-xs'
