@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Risk Analysis Agent.
 """
 
@@ -21,39 +21,45 @@ class RiskItem(BaseModel):
 
 
 class RiskAnalysisResult(BaseModel):
-    risks: list[RiskItem] = Field(..., min_length=1)
+    risks: list[RiskItem] = Field(..., min_length=4)
 
 
-# Category-specific default risks
+# Category-specific default risks (5-6 detailed items per category)
 _DEFAULT_RISKS: dict[str, list[dict]] = {
     "DAIRY": [
         {"risk": "Feed and fodder price volatility", "category": "supply_chain", "probability": "high", "impact": "high", "severity": "high", "evidence": "Feed constitutes 50-60% of dairy operating costs in rural India.", "mitigation": "Establish agreements with 2-3 local fodder suppliers and maintain a 30-day fodder buffer stock."},
         {"risk": "Milk perishability without cold chain", "category": "operational", "probability": "medium", "impact": "high", "severity": "high", "evidence": "Milk spoils within 2-4 hours without chilling in warm climates.", "mitigation": "Invest in a small milk chiller or plan twice-daily collection and immediate sale cycles."},
         {"risk": "Seasonal supply variation", "category": "seasonal", "probability": "high", "impact": "medium", "severity": "medium", "evidence": "Lean season (Apr-Jul) typically reduces milk supply by 20-30%.", "mitigation": "Build customer relationships during flush season; diversify into value-added products (paneer, curd) to absorb surplus."},
         {"risk": "Informal competitor price undercutting", "category": "competition", "probability": "medium", "impact": "medium", "severity": "medium", "evidence": "Informal milk sellers often have zero overhead and undercut formal pricing.", "mitigation": "Differentiate on quality, hygiene, and reliability rather than competing on price alone."},
+        {"risk": "Livestock disease & health risk", "category": "operational", "probability": "low", "impact": "critical", "severity": "high", "evidence": "Mastitis and foot-and-mouth disease can stop milk yield immediately.", "mitigation": "Enroll in local veterinary immunization schedule and secure livestock insurance under government schemes."},
     ],
     "FOOD_PROCESSING": [
         {"risk": "Raw material price linked to harvest cycles", "category": "supply_chain", "probability": "high", "impact": "high", "severity": "high", "evidence": "Crop prices fluctuate 30-50% between harvest and off-season.", "mitigation": "Procure raw materials in bulk during post-harvest period; maintain 45-day inventory buffer."},
         {"risk": "Power supply disruption", "category": "infrastructure", "probability": "medium", "impact": "high", "severity": "high", "evidence": "Rural power supply averages 16-18 hours daily with frequent outages.", "mitigation": "Budget for a backup generator or inverter setup for critical equipment."},
         {"risk": "Food safety compliance requirements", "category": "regulatory", "probability": "medium", "impact": "medium", "severity": "medium", "evidence": "FSSAI registration is mandatory for food processing businesses.", "mitigation": "Obtain basic FSSAI registration early; maintain hygiene records for audit readiness."},
         {"risk": "Competition from branded products", "category": "competition", "probability": "medium", "impact": "medium", "severity": "medium", "evidence": "Urban FMCG brands are expanding rural distribution.", "mitigation": "Focus on freshness, local taste preferences, and custom processing that brands cannot match."},
+        {"risk": "Packaging & leakage spoilage", "category": "operational", "probability": "medium", "impact": "medium", "severity": "medium", "evidence": "Sub-standard pouch sealing leads to 5-10% product batch returns.", "mitigation": "Use heat-seal pouch packaging machine with nitrogen flushing for extended shelf life."},
     ],
     "RETAIL": [
         {"risk": "Working capital strain from credit sales", "category": "financial", "probability": "high", "impact": "high", "severity": "high", "evidence": "Rural kirana stores typically extend 15-30 day credit to regular customers.", "mitigation": "Limit credit to 30% of sales; maintain a credit register and enforce 15-day collection cycles."},
         {"risk": "Inventory spoilage for perishable goods", "category": "operational", "probability": "medium", "impact": "medium", "severity": "medium", "evidence": "Fresh produce spoilage can reach 10-15% without proper storage.", "mitigation": "Start with non-perishable inventory; add perishables only after demand pattern is established."},
         {"risk": "Thin margins on MRP products", "category": "financial", "probability": "high", "impact": "medium", "severity": "medium", "evidence": "FMCG products have fixed MRP with 8-15% retailer margin.", "mitigation": "Diversify into higher-margin items (fresh produce, agricultural inputs) alongside FMCG staples."},
         {"risk": "Competition from nearby town markets", "category": "competition", "probability": "medium", "impact": "medium", "severity": "medium", "evidence": "Weekly haats and town markets offer wider selection.", "mitigation": "Offer convenience (proximity, delivery, credit) as key differentiators."},
+        {"risk": "Pilferage and stock shrinkage", "category": "operational", "probability": "low", "impact": "medium", "severity": "low", "evidence": "Unmonitored retail counters experience 2-3% inventory shrinkage.", "mitigation": "Implement periodic digital stock audits and install low-cost CCTV or counter barrier."},
     ],
     "TEXTILES_TAILORING": [
         {"risk": "Seasonal demand concentration", "category": "seasonal", "probability": "high", "impact": "high", "severity": "high", "evidence": "60-70% of tailoring revenue concentrates in wedding and festival seasons.", "mitigation": "Secure school uniform contracts for baseline revenue; offer alteration services year-round."},
         {"risk": "Single-person skill dependency", "category": "operational", "probability": "medium", "impact": "high", "severity": "high", "evidence": "Business depends entirely on the tailor's health and availability.", "mitigation": "Train a family member or assistant as backup; build a 2-week order buffer during peak season."},
         {"risk": "Competition from readymade garments", "category": "competition", "probability": "high", "impact": "medium", "severity": "medium", "evidence": "Readymade garment availability is increasing in rural markets.", "mitigation": "Focus on custom fit, alteration services, and traditional garments that readymade cannot match."},
+        {"risk": "Fabric price fluctuations", "category": "supply_chain", "probability": "medium", "impact": "medium", "severity": "medium", "evidence": "Raw cloth prices increase 10-15% ahead of festive seasons.", "mitigation": "Buy popular fabric rolls in bulk 2 months ahead of festival rush."},
+        {"risk": "Equipment breakdown during rush season", "category": "operational", "probability": "low", "impact": "high", "severity": "medium", "evidence": "Stitching machine motor breakdown halts production during high-demand periods.", "mitigation": "Maintain a secondary manual sewing machine and perform monthly preventive servicing."},
     ],
     "POULTRY": [
         {"risk": "Disease outbreak (Bird flu, Newcastle)", "category": "operational", "probability": "medium", "impact": "high", "severity": "critical", "evidence": "Poultry diseases can cause 50-100% flock mortality in unvaccinated birds.", "mitigation": "Implement strict vaccination schedule, biosecurity measures, and maintain quarantine protocols."},
         {"risk": "Feed cost volatility", "category": "supply_chain", "probability": "high", "impact": "high", "severity": "high", "evidence": "Feed constitutes 60-70% of broiler production cost.", "mitigation": "Negotiate 3-month supply contracts with feed suppliers; explore local feed ingredient sourcing."},
         {"risk": "Heat stress mortality in summer", "category": "seasonal", "probability": "high", "impact": "high", "severity": "high", "evidence": "Summer temperatures above 35°C cause significant poultry mortality.", "mitigation": "Invest in ventilation, fogging systems, and adjust batch cycles to avoid peak summer months."},
         {"risk": "Consumer scare-driven demand drops", "category": "market", "probability": "low", "impact": "high", "severity": "medium", "evidence": "Media reports on bird flu can crash poultry demand overnight.", "mitigation": "Maintain hygiene certifications and diversify into eggs alongside broiler meat."},
+        {"risk": "Middleman price suppression", "category": "market", "probability": "high", "impact": "medium", "severity": "medium", "evidence": "Traders often compress farm-gate prices during oversupply.", "mitigation": "Sell directly to local meat shops and village consumers to retain margin."},
     ],
 }
 
@@ -64,7 +70,7 @@ class RiskAgent(BaseAgent):
     system_prompt = (
         "You are a rural business risk analyst for India. "
         "Identify, categorize, and provide mitigation strategies for business risks. "
-        "Return ONLY valid JSON. Every risk must include a mitigation."
+        "Return ALWAYS 5 to 6 distinct risks. Every risk must include a mitigation."
     )
 
     def fallback(self, **kwargs: Any) -> dict:
@@ -76,6 +82,7 @@ class RiskAgent(BaseAgent):
             {"risk": "Working capital shortage", "category": "financial", "probability": "medium", "impact": "high", "severity": "high", "evidence": "Micro-enterprises often underestimate working capital needs.", "mitigation": "Maintain a 45-day operating expense buffer in a separate account."},
             {"risk": "Informal competitor activity", "category": "competition", "probability": "medium", "impact": "medium", "severity": "medium", "evidence": "Informal operators are common in rural markets.", "mitigation": "Focus on quality, consistency, and reliability as key differentiators."},
             {"risk": "Infrastructure limitations", "category": "infrastructure", "probability": "medium", "impact": "medium", "severity": "medium", "evidence": "Rural infrastructure can be unreliable.", "mitigation": "Plan for backup power and alternative transport arrangements."},
+            {"risk": "Regulatory & licensing delay", "category": "regulatory", "probability": "low", "impact": "medium", "severity": "low", "evidence": "Trade license approval may take 2-4 weeks.", "mitigation": "File applications concurrently with site setup."},
         ])
 
         # Add financial risk if EMI ratio is high
@@ -93,4 +100,4 @@ class RiskAgent(BaseAgent):
                     "mitigation": "Explore longer tenure to reduce EMI, or start with a smaller project to improve cash flow ratios.",
                 })
 
-        return {"risks": risks[:6]}  # Cap at 6 risks
+        return {"risks": risks[:6]}

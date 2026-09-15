@@ -112,6 +112,7 @@ class BusinessModelRecommendation(BaseModel):
     name: str = Field(..., description="e.g. 'Dairy + Doorstep Delivery + Paneer'")
     reasoning: list[str] = Field(..., min_length=1)
     capital_fit: str = Field(..., description="How well the model fits available capital")
+    selection_reasoning: Optional[str] = Field(None, description="Detailed explanation of why this specific model was chosen over alternatives")
 
 
 class SwotOutput(BaseModel):

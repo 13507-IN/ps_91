@@ -1,6 +1,6 @@
 'use client';
 
-import { Sparkles, ThumbsUp, AlertTriangle, ArrowRightCircle } from 'lucide-react';
+import { Sparkles, ThumbsUp, AlertTriangle, ArrowRightCircle, CheckCircle2 } from 'lucide-react';
 import { decisionColor } from '@/lib/format';
 import type { AiRecommendation } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
@@ -18,6 +18,7 @@ export function AIRecommendationSection({ recommendation }: { recommendation: Ai
 
   const narrationText = [
     recommendation.summary,
+    recommendation.selectionReasoning ? `Why Selected: ${recommendation.selectionReasoning}` : '',
     recommendation.strengths && recommendation.strengths.length > 0
       ? `Strengths: ${recommendation.strengths.join('. ')}`
       : '',
@@ -31,14 +32,26 @@ export function AIRecommendationSection({ recommendation }: { recommendation: Ai
       <div className="flex items-center justify-between gap-2 flex-wrap">
         <div className="flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-brand-600" />
-          <h2 className="text-lg font-semibold text-slate-900">{t.aiRecommendation.title} — Why?</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{t.aiRecommendation.title}</h2>
         </div>
         <TextToSpeech text={narrationText} />
       </div>
       <p className="mt-1 text-xs text-slate-500">
-        Every recommendation is explainable. Deterministic financial rules decide eligibility; AI only
-        explains the results.
+        Every recommendation is explainable. Deterministic financial & demographic rules decide eligibility; AI explains the results.
       </p>
+
+      {/* WHY THIS MODEL WAS SELECTED JUSTIFICATION CARD */}
+      {recommendation.selectionReasoning && (
+        <div className="mt-4 rounded-xl border border-teal-200 bg-teal-50/90 p-4 animate-fade-in shadow-xs">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-900 mb-1">
+            <CheckCircle2 size={15} className="text-teal-700" />
+            Why This Model Was Selected
+          </div>
+          <p className="text-xs sm:text-sm text-teal-950 font-medium leading-relaxed">
+            {recommendation.selectionReasoning}
+          </p>
+        </div>
+      )}
 
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         <div className="rounded-xl border border-slate-200 p-4">

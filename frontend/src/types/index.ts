@@ -122,6 +122,7 @@ export interface OpportunityAnalysis {
   marketGaps: string[];
   potentialNiches: string[];
   recommendedModel: string;
+  selectionReasoning?: string;
   opportunityScore: number;
   estimatedAnnualDemandUnits: number;
   estimatedDailyDemandUnits: number;
@@ -170,6 +171,7 @@ export interface AiRecommendation {
   decision: Decision;
   viabilityScore: number;
   summary: string;
+  selectionReasoning?: string;
   strengths: string[];
   weaknesses: string[];
   recommendedNextStep: string;

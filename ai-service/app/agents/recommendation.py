@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Business Recommendation Agent.
 """
 
@@ -14,6 +14,9 @@ class RecommendationResult(BaseModel):
     name: str
     reasoning: list[str] = Field(..., min_length=1)
     capital_fit: str
+    selection_reasoning: str = Field(
+        default="This business model was selected based on local catchment demand, competitor density, and financial capital adequacy."
+    )
 
 
 # Category-specific default business model names
@@ -38,7 +41,7 @@ class RecommendationAgent(BaseAgent):
     system_prompt = (
         "You are a rural business strategy advisor for India. "
         "Recommend a specific, differentiated business model, not just a category. "
-        "Return ONLY valid JSON. Tie each reasoning point to data."
+        "Return ONLY valid JSON. Include selection_reasoning explaining why this model was chosen over alternatives."
     )
 
     def fallback(self, **kwargs: Any) -> dict:
@@ -97,8 +100,16 @@ class RecommendationAgent(BaseAgent):
         else:
             capital_fit = f"Tight capital position — ₹{fin.margin:,.0f} margin is {fin.margin / fin.project_cost:.0%} of project cost ₹{fin.project_cost:,.0f}. Consider starting with a smaller project or increasing own contribution."
 
+        cat_title = cat.replace("_", " ").title()
+        selection_reasoning = (
+            f"This model '{model_name}' was selected because the catchment area ({data.location.village}, {data.location.district}) "
+            f"has a population of {pop:,} with {comp} existing competitors. "
+            f"This model directly addresses local supply gaps while maximizing operating margins within your ₹{fin.margin:,.0f} available capital."
+        )
+
         return {
             "name": model_name,
             "reasoning": reasoning,
             "capital_fit": capital_fit,
+            "selection_reasoning": selection_reasoning,
         }

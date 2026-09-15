@@ -144,6 +144,7 @@ interface BackendOpportunityAnalysis {
   marketGaps: string[];
   potentialNiches: string[];
   recommendedModel: string;
+  selectionReasoning?: string;
   opportunityScore: number;
   estimatedAnnualDemandUnits?: number;
   estimatedDailyDemandUnits?: number;
@@ -317,6 +318,7 @@ function mapOpportunityAnalysis(raw: BackendOpportunityAnalysis): OpportunityAna
     marketGaps: raw.marketGaps ?? [],
     potentialNiches: raw.potentialNiches ?? [],
     recommendedModel: raw.recommendedModel ?? '',
+    selectionReasoning: raw.selectionReasoning,
     opportunityScore: raw.opportunityScore ?? 0,
     estimatedAnnualDemandUnits: raw.estimatedAnnualDemandUnits ?? 0,
     estimatedDailyDemandUnits: raw.estimatedDailyDemandUnits ?? 0,

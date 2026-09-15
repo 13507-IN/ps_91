@@ -5,6 +5,7 @@ import type { ChartOptions, TooltipItem } from 'chart.js';
 import type { FeasibilityScore } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
+import { ShieldCheck, Info } from 'lucide-react';
 
 function getScoreColor(value: number): string {
   if (value >= 14) return 'bg-emerald-500';
@@ -79,10 +80,11 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <div className="h-[180px] w-full">
         <Bar data={chartData} options={options} />
       </div>
+
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 rounded-xl bg-slate-900 px-4 py-3 text-white">
         <div className="w-full space-y-2">
           {dimensions.map(({ key, label }) => {
@@ -105,10 +107,32 @@ export function ScoreBreakdownChart({ score }: { score: FeasibilityScore }) {
           })}
         </div>
         <div className="sm:ml-6 shrink-0 text-left sm:text-right border-t sm:border-t-0 border-slate-800 pt-2 sm:pt-0">
-          <span className="text-xs sm:text-sm font-medium text-slate-300">Total Score</span>
-          <div className="text-base sm:text-lg font-bold">
+          <span className="text-xs sm:text-sm font-medium text-slate-300">Total Feasibility Score</span>
+          <div className="text-xl sm:text-2xl font-extrabold text-white">
             {formatIndianNumber(score.totalScore, lang)}
             <span className="ml-1 text-xs font-normal text-slate-400">/ 100 · {getGradeText(score.grade)}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Evidence Breakdown Grid */}
+      <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+        <div className="flex items-center gap-1.5 font-bold text-slate-800 uppercase tracking-wide text-[11px]">
+          <ShieldCheck size={14} className="text-teal-700" />
+          Empirical Score Evidence & Provenance
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-slate-600">
+          <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+            <span>Verified Census Catchment Data</span>
+          </div>
+          <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
+            <span className="w-2 h-2 rounded-full bg-sky-500 shrink-0"></span>
+            <span>PostGIS Competitor Mapping</span>
+          </div>
+          <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-slate-200">
+            <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0"></span>
+            <span>Agmarknet & Financial Debt Safety</span>
           </div>
         </div>
       </div>
