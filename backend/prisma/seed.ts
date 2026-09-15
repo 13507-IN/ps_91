@@ -40,7 +40,7 @@ async function seedDistrict(district: { key: string; label: string }): Promise<v
 
   const results = await runAllPipelines(fileMap, prisma, { batchSize: 100 });
 
-  console.log(`\n📊 Seeding Results Summary: ${district.label}`);
+  console.log(`\n Seeding Results Summary: ${district.label}`);
   console.table(
     results.map((r) => ({
       Source: r.source,
@@ -55,19 +55,19 @@ async function seedDistrict(district: { key: string; label: string }): Promise<v
 }
 
 async function main() {
-  console.log('🌱 Starting database seeding...');
+  console.log(' Starting database seeding...');
 
   for (const district of DISTRICTS) {
     const seedsDir = path.resolve(process.cwd(), `src/ingestion/seeds/${district.key}`);
     if (!existsSync(seedsDir)) {
-      console.log(`\n⚠️  Skipping "${district.label}" — seed directory not found: ${seedsDir}`);
+      console.log(`\n  Skipping "${district.label}" — seed directory not found: ${seedsDir}`);
       continue;
     }
     console.log(`\n--- Seeding ${district.label} ---`);
     await seedDistrict(district);
   }
 
-  console.log('\n✅ Database seeding finished successfully!');
+  console.log('\n Database seeding finished successfully!');
 
   // Seed demo users for UI testing
   await seedDemoUsers(prisma);
@@ -75,7 +75,7 @@ async function main() {
 
 main()
   .catch((e) => {
-    console.error('❌ Seeding failed:', e);
+    console.error(' Seeding failed:', e);
     process.exit(1);
   })
   .finally(async () => {

@@ -1,7 +1,3 @@
--- ============================================================
--- PostGIS Setup Migration
--- Run AFTER initial Prisma migration
--- ============================================================
 
 -- Enable PostGIS extension
 CREATE EXTENSION IF NOT EXISTS postgis;
