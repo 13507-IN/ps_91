@@ -217,6 +217,7 @@ export const assessmentInputSchema = z.object({
   location: locationInputSchema,
   business_category: z.nativeEnum(BusinessCategory),
   business_idea: z.string().optional(),
+  language: z.string().optional().default('EN'),
   market: marketInputSchema,
   competition: competitionInputSchema,
   pricing: pricingInputSchema.optional(),
