@@ -1,78 +1,129 @@
-const CACHE_VERSION = 'arthsetu-pwa-v2';
-const PRECACHE_URLS = ['/', '/logo.png', '/manifest.json'];
+/**
+ * ArthSetu — Progressive Web App Service Worker
+ * Implements App Shell caching, static asset caching, and network-first API caching.
+ */
+
+const CACHE_VERSION = 'v1.0.0';
+const STATIC_CACHE_NAME = `arthsetu-static-${CACHE_VERSION}`;
+const RUNTIME_CACHE_NAME = `arthsetu-runtime-${CACHE_VERSION}`;
+
+// Core assets to pre-cache on install
+const PRECACHE_ASSETS = [
+  '/',
+  '/assessment-wizard',
+  '/manifest.json',
+  '/favicon.ico',
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_VERSION).then((cache) => cache.addAll(PRECACHE_URLS)).then(() => self.skipWaiting())
+    caches.open(STATIC_CACHE_NAME).then((cache) => {
+      return cache.addAll(PRECACHE_ASSETS).catch((err) => {
+        console.warn('Pre-cache warning during SW install:', err);
+      });
+    }).then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches
-      .keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE_VERSION).map((k) => caches.delete(k))))
-      .then(() => self.clients.claim())
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== STATIC_CACHE_NAME && cacheName !== RUNTIME_CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
-  if (request.method !== 'GET' || request.url.startsWith('http') === false) return;
   const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return;
 
-  if (request.mode === 'navigate') {
+  // Skip non-GET requests and SSE streams
+  if (request.method !== 'GET' || url.pathname.includes('/analyze-stream')) {
+    return;
+  }
+
+  // Next.js static chunks / fonts / images: Cache-First
+  if (
+    url.pathname.startsWith('/_next/static') ||
+    url.pathname.match(/\.(png|jpg|jpeg|svg|webp|woff2|woff|ttf|css|js)$/)
+  ) {
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(request, clone));
-          return response;
-        })
-        .catch(() =>
-          caches.match(request).then((cached) => cached || caches.match('/'))
-        )
+      caches.match(request).then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+        return fetch(request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(STATIC_CACHE_NAME).then((cache) => {
+              cache.put(request, responseClone);
+            });
+          }
+          return networkResponse;
+        });
+      })
     );
     return;
   }
 
+  // API Requests: Network-first with Stale-While-Revalidate fallback
+  if (url.pathname.startsWith('/api/')) {
+    event.respondWith(
+      fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(RUNTIME_CACHE_NAME).then((cache) => {
+              cache.put(request, responseClone);
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return caches.match(request).then((cached) => {
+            if (cached) return cached;
+            return new Response(JSON.stringify({ error: 'Offline mode active' }), {
+              status: 503,
+              headers: { 'Content-Type': 'application/json' },
+            });
+          });
+        })
+    );
+    return;
+  }
+
+  // Page Navigation: Network-First with Cache fallback
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request).catch(() => {
+        return caches.match(request).then((cached) => {
+          if (cached) return cached;
+          return caches.match('/');
+        });
+      })
+    );
+    return;
+  }
+
+  // Default: Stale-While-Revalidate
   event.respondWith(
     caches.match(request).then((cached) => {
-      if (cached) return cached;
-      return fetch(request).then((response) => {
-        if (response.status === 200) {
-          const clone = response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(request, clone));
+      const fetchPromise = fetch(request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseClone = networkResponse.clone();
+          caches.open(RUNTIME_CACHE_NAME).then((cache) => {
+            cache.put(request, responseClone);
+          });
         }
-        return response;
+        return networkResponse;
       });
-    })
-  );
-});
-
-self.addEventListener('push', (event) => {
-  let data = { title: 'ArthSetu AI', body: 'You have a new notification.' };
-  try {
-    data = JSON.parse(event.data.text());
-  } catch {}
-  event.waitUntil(
-    self.registration.showNotification(data.title, {
-      body: data.body,
-      icon: '/logo.png',
-      badge: '/logo.png',
-      vibrate: [200, 100, 200],
-    })
-  );
-});
-
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  event.waitUntil(
-    self.clients.matchAll({ type: 'window' }).then((clients) => {
-      const existing = clients.find((c) => c.visibilityState === 'visible');
-      if (existing) return existing.focus();
-      return self.clients.openWindow('/');
+      return cached || fetchPromise;
     })
   );
 });
