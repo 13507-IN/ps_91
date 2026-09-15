@@ -133,6 +133,7 @@ class AssessmentInput(BaseModel):
     location: LocationInput
     business_category: BusinessCategory
     business_idea: Optional[str] = None
+    language: Optional[str] = Field("EN", description="Target language (EN, HI, BN)")
 
     market: MarketInput
     competition: CompetitionInput

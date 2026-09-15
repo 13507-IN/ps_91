@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Orchestrator.
 
 Central pipeline that coordinates deterministic engines and LLM agents
@@ -104,6 +104,7 @@ class Orchestrator:
             market_score=market_score,
             livestock=data.livestock,
             top_crops=data.top_crops,
+            language=data.language,
         )
         logger.info("step_3_market_analysis", condition=market_result.get("market_condition"))
 
@@ -120,6 +121,7 @@ class Orchestrator:
             infrastructure=data.infrastructure,
             livestock=data.livestock,
             top_crops=data.top_crops,
+            language=data.language,
         )
         market_gaps = opportunity_result.get("market_gaps", [])
         logger.info("step_4_opportunity", gaps_found=len(market_gaps))
@@ -132,6 +134,7 @@ class Orchestrator:
             competition=data.competition,
             business_category=data.business_category.value,
             informal_estimate=informal,
+            language=data.language,
         )
         logger.info("step_5_competition", level=competition_result.get("competition_level"))
 
@@ -149,6 +152,7 @@ class Orchestrator:
             infrastructure=data.infrastructure,
             risk_score=risk_score,
             market_analysis=market_result,
+            language=data.language,
         )
         risks = risk_result.get("risks", [])
         logger.info("step_6_risk", score=risk_score, risks_found=len(risks))
@@ -163,6 +167,7 @@ class Orchestrator:
             business_category=data.business_category.value,
             pricing=data.pricing,
             market_analysis=market_result,
+            language=data.language,
         )
         logger.info("step_7_pricing", strategy=pricing_result.get("strategy"))
 
@@ -181,6 +186,7 @@ class Orchestrator:
             market_analysis=market_result,
             market_gaps=market_gaps,
             risks=risks,
+            language=data.language,
         )
         logger.info("step_8_swot")
 
@@ -206,6 +212,7 @@ class Orchestrator:
             competition_analysis=competition_result,
             swot=swot_result,
             pricing_strategy=pricing_result,
+            language=data.language,
         )
         logger.info("step_9_recommendation", model=recommendation_result.get("name"))
 

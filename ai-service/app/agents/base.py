@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Base Agent.
 
 Provides the common pattern for all LLM-powered agents:
@@ -89,9 +89,17 @@ class BaseAgent:
                 logger.info("agent_no_llm", agent=self.agent_name, note="Using fallback")
                 return self.fallback(**kwargs)
 
+            # Multilingual system prompt injection
+            language_code = kwargs.get("language", "EN")
+            lang_map = {"EN": "English", "HI": "Hindi", "BN": "Bengali"}
+            target_lang = lang_map.get(str(language_code).upper(), "English")
+            system = self.system_prompt
+            if target_lang != "English":
+                system += f" Provide all textual reasoning, explanations, recommendations, strengths, and weaknesses in {target_lang}."
+
             raw_response = await self.llm.generate(
                 prompt=prompt,
-                system=self.system_prompt,
+                system=system,
             )
 
             # Parse JSON
