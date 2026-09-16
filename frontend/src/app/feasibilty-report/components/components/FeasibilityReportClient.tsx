@@ -10,6 +10,7 @@ import type { FeasibilityReport } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { ReportHeader } from './ReportHeader';
 import { VerdictHeroSection } from './VerdictHeroSection';
+import { PlainLanguageSummaryCard } from './PlainLanguageSummaryCard';
 import { MarketIntelligenceSection } from './MarketIntelligenceSection';
 import { CompetitionSection } from './CompetitionSection';
 import { FinancialPlanSection } from './FinancialPlanSection';
@@ -118,6 +119,7 @@ export function FeasibilityReportClient({
       <ReportHeader category={report.businessCategory} showSavePrompt={Boolean(isNew) && !hasSession()} />
       <div className="space-y-6">
         <VerdictHeroSection report={report} />
+        <PlainLanguageSummaryCard report={report} />
 
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-1">

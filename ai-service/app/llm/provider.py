@@ -66,6 +66,7 @@ class LLMClient:
     ) -> str:
         """
         Generate text using cached results if available, else call primary provider with Groq fallback.
+        Used for HIGH-IMPORTANCE agents (Market, Opportunity, Risk, Recommendation).
         """
         if not self._primary:
             raise RuntimeError("No LLM provider configured. Set GEMINI_API_KEY or GROQ_API_KEY.")
@@ -120,3 +121,48 @@ class LLMClient:
 
         # All attempts exhausted
         raise last_error or RuntimeError("LLM generation failed with no error details.")
+
+    async def generate_secondary(
+        self,
+        prompt: str,
+        system: str | None = None,
+        temperature: float | None = None,
+    ) -> str:
+        """
+        Generate text using the SECONDARY (Groq) provider directly.
+        Used for LOW-IMPORTANCE agents (Competition, Pricing, SWOT) to stay
+        within Gemini's free-tier rate limit of 5 calls/minute.
+        Falls back to primary if no secondary provider is configured.
+        """
+        if not self._primary and not self._fallback:
+            raise RuntimeError("No LLM provider configured. Set GEMINI_API_KEY or GROQ_API_KEY.")
+
+        # Compute cache key
+        raw_key = f"secondary::{system or ''}::{prompt}::{temperature or 0.3}"
+        cache_key = hashlib.sha256(raw_key.encode('utf-8')).hexdigest()
+
+        now = time.time()
+        if cache_key in _LLM_CACHE:
+            expire_at, cached_text = _LLM_CACHE[cache_key]
+            if now < expire_at:
+                logger.info("llm_cache_hit", key_hash=cache_key[:10], len=len(cached_text), provider="secondary")
+                return cached_text
+
+        # Route directly to Groq (fallback) if available
+        provider = self._fallback or self._primary
+        provider_name = "groq" if self._fallback and provider is self._fallback else "gemini"
+
+        try:
+            logger.info("llm_secondary_call", provider=provider_name)
+            result = await provider.generate(prompt, system=system, temperature=temperature)
+            _LLM_CACHE[cache_key] = (now + CACHE_TTL_SECONDS, result)
+            return result
+        except Exception as exc:
+            logger.warning("llm_secondary_failed", provider=provider_name, error=str(exc))
+            # If Groq failed and primary is different, try primary as last resort
+            if provider is self._fallback and self._primary and self._primary is not self._fallback:
+                logger.info("llm_secondary_escalate", note="Secondary failed, trying primary")
+                result = await self._primary.generate(prompt, system=system, temperature=temperature)
+                _LLM_CACHE[cache_key] = (now + CACHE_TTL_SECONDS, result)
+                return result
+            raise

@@ -5,6 +5,7 @@ import {
   Confidence,
   DataSource,
   OperatingStatus,
+  Prisma,
 } from '@prisma/client';
 import type { ListBusinessesQuery, CreateBusinessBody } from './business.schema.js';
 import { LocationService } from '../location/location.service.js';
@@ -240,7 +241,7 @@ export class BusinessService {
       }
       const villageIds = nearbyVillages.map((v) => v.id);
 
-      const ORConditions: Array<Record<string, unknown>> = [
+      const ORConditions: Prisma.BusinessWhereInput[] = [
         {
           latitude: { gte: lat - latDelta, lte: lat + latDelta },
           longitude: { gte: lng - lngDelta, lte: lng + lngDelta },
@@ -250,7 +251,7 @@ export class BusinessService {
         ORConditions.push({ villageId: { in: villageIds } });
       }
 
-      const where: Record<string, unknown> = { OR: ORConditions };
+      const where: Prisma.BusinessWhereInput = { OR: ORConditions };
       if (category) where.category = category;
 
       const dbBusinesses = await this.prisma.business.findMany({
@@ -276,7 +277,7 @@ export class BusinessService {
       });
 
       const results = dbBusinesses
-        .map((b) => {
+        .map((b: any) => {
           const bLat = b.latitude ?? b.village?.latitude;
           const bLng = b.longitude ?? b.village?.longitude;
           if (bLat == null || bLng == null) return null;
@@ -301,11 +302,11 @@ export class BusinessService {
             distanceKm,
           };
         })
-        .filter((b): b is NonNullable<typeof b> => b !== null && b.distanceKm <= radiusKm);
+        .filter((b: any) => b !== null && b.distanceKm <= radiusKm);
 
       if (category) {
-        const catFiltered = results.filter((b) => b.category === category);
-        catFiltered.sort((a, b) => a.distanceKm - b.distanceKm);
+        const catFiltered = results.filter((b: any) => b.category === category);
+        catFiltered.sort((a: any, b: any) => a.distanceKm - b.distanceKm);
         return {
           center: { lat, lng, radiusKm },
           totalFound: catFiltered.length,
@@ -313,7 +314,7 @@ export class BusinessService {
         };
       }
 
-      results.sort((a, b) => a.distanceKm - b.distanceKm);
+      results.sort((a: any, b: any) => a.distanceKm - b.distanceKm);
       return {
         center: { lat, lng, radiusKm },
         totalFound: results.length,
@@ -385,7 +386,7 @@ export class BusinessService {
   async getUnverifiedNearby(lat: number, lng: number, radiusKm = 25) {
     const nearby = await this.getHyperlocalBusinesses(lat, lng, radiusKm);
     const unverified = nearby.businesses.filter(
-      (b) => b.source === 'COMMUNITY_REPORT' || b.source === 'SURVEY' || b.source === 'OTHER',
+      (b: any) => b.source === 'COMMUNITY_REPORT' || b.source === 'SURVEY' || b.source === 'OTHER',
     );
     return {
       center: nearby.center,

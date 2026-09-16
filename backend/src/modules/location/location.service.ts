@@ -57,7 +57,7 @@ export class LocationService {
       },
     });
 
-    return villages.map((v) => this.toVillageSummary(v));
+    return villages.map((v: any) => this.toVillageSummary(v));
   }
 
   /**

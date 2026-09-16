@@ -1,0 +1,53 @@
+{
+  "schemeId": "mosje_swarnima_obc",
+  "name": "NBCFDC New Swarnima Scheme for OBC Women",
+  "shortName": "Swarnima Yojana",
+  "description": "Concessional credit scheme by NBCFDC (Ministry of Social Justice and Empowerment) providing term loans up to ₹20 Lakh at 5% interest rate to empower rural women entrepreneurs belonging to Other Backward Classes (OBC).",
+  "nodalAgency": "National Backward Classes Finance and Development Corporation (NBCFDC), Ministry of Social Justice and Empowerment",
+  "targetAudience": "Women entrepreneurs belonging to OBC / EBC categories in rural & semi-urban areas",
+  "eligibility": {
+    "categories": [
+      "OBC"
+    ],
+    "gender": [
+      "FEMALE"
+    ],
+    "ageMin": 18,
+    "ageMax": 55,
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "AGRICULTURE",
+      "LIVESTOCK",
+      "HANDICRAFT",
+      "SERVICES"
+    ],
+    "minProjectCost": 50000,
+    "maxProjectCost": 2000000
+  },
+  "financial": {
+    "maxLoanAmount": 2000000,
+    "interestRate": 5,
+    "subsidyPercentage": 10,
+    "maxSubsidy": 50000,
+    "marginPercentage": 5,
+    "tenureMonths": 84,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "OBC Caste Certificate",
+    "Income Certificate / Self-Declaration",
+    "Detailed Project Report (DPR) / Micro-Business Plan",
+    "Bank Account Statement & Passbook"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "http://www.nbcfdc.gov.in/"
+}

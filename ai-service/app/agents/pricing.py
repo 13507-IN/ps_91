@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Pricing Analysis Agent.
 """
 
@@ -35,6 +35,7 @@ _BENCHMARKS: dict[str, dict] = {
 class PricingAgent(BaseAgent):
     prompt_file = "pricing.txt"
     output_model = PricingResult
+    use_secondary = True  # Low importance → route to Groq to save Gemini quota
     system_prompt = (
         "You are a rural business pricing analyst for India. "
         "Interpret pricing data and recommend a strategy. "

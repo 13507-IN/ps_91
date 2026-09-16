@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — SWOT Analysis Agent.
 """
 
@@ -20,6 +20,7 @@ class SwotResult(BaseModel):
 class SwotAgent(BaseAgent):
     prompt_file = "swot.txt"
     output_model = SwotResult
+    use_secondary = True  # Low importance → route to Groq to save Gemini quota
     system_prompt = (
         "You are a rural business SWOT analyst for India. "
         "Generate a structured SWOT analysis using only supplied evidence. "

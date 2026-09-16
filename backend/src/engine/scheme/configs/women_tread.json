@@ -1,0 +1,55 @@
+{
+  "schemeId": "women_tread",
+  "name": "TREAD Scheme for Women Entrepreneurs",
+  "shortName": "TREAD Scheme",
+  "description": "Trade Related Entrepreneurship Assistance and Development (TREAD) scheme by Ministry of MSME providing loans up to ₹5 Lakh with 30% government grant/subsidy for rural women micro-entrepreneurs and Self-Help Group (SHG) members.",
+  "nodalAgency": "Ministry of Micro, Small and Medium Enterprises (MoMSME)",
+  "targetAudience": "Rural women entrepreneurs, artisan groups, and Self-Help Group (SHG) members",
+  "eligibility": {
+    "categories": [
+      "GENERAL",
+      "SC",
+      "ST",
+      "OBC",
+      "MINORITY"
+    ],
+    "gender": [
+      "FEMALE"
+    ],
+    "ageMin": 18,
+    "ageMax": 60,
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "AGRICULTURE",
+      "HANDICRAFT",
+      "SERVICES"
+    ],
+    "minProjectCost": 30000,
+    "maxProjectCost": 500000
+  },
+  "financial": {
+    "maxLoanAmount": 500000,
+    "interestRate": 7,
+    "subsidyPercentage": 30,
+    "maxSubsidy": 150000,
+    "marginPercentage": 0,
+    "tenureMonths": 60,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "SHG Registration / NGO Recommendation Letter",
+    "Trade / Project Description Proposal",
+    "Bank Account Statement"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://msme.gov.in/"
+}

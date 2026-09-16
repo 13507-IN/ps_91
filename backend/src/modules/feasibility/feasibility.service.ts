@@ -437,7 +437,7 @@ export class FeasibilityService {
     });
 
     // Map to frontend-expected shape
-    return raw.map((item) => {
+    return raw.map((item: any) => {
       const scoreBlob = item.feasibilityScore as Record<string, unknown> | null;
       const overallScore: number | null =
         scoreBlob && typeof scoreBlob['totalScore'] === 'number'

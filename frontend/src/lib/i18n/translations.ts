@@ -469,6 +469,64 @@ const translations = {
     hyperlocalTitle: { EN: 'Hyperlocal UDYAM & MSME Registered Business Explorer', BN: 'স্থানীয় উদ্যম এবং MSME নিবন্ধিত ব্যবসা এক্সপ্লোরার', HI: 'हाइपरलोकल उद्यम और MSME पंजीकृत व्यापार अन्वेषक' },
   },
 
+  // ─── Plain Language Summary (for rural/non-technical entrepreneurs) ───
+  plainSummary: {
+    badge:             { EN: 'In Simple Words',             BN: 'সহজ ভাষায় বুঝুন',             HI: 'आसान शब्दों में समझें' },
+    title:             { EN: 'Plain Summary of Your Business Report', BN: 'আপনার ব্যবসায়িক রিপোর্টের সহজ সারসংক্ষেপ', HI: 'आपकी रिपोर्ट का सरल और सीधा सारांश' },
+    subtitle:          { EN: 'Everything you need to know in 1 minute — no complex numbers or technical terms.',
+                         BN: '১ মিনিটে জানুন সব দরকারি তথ্য — কোনো জটিল সংখ্যা বা কঠিন পরিভাষা ছাড়া।',
+                         HI: '1 मिनट में पूरी बात समझें — बिना किसी कठिन शब्द या उलझाने वाले आंकड़ों के।' },
+    listenSummary:     { EN: 'Listen to Summary (Voice)',   BN: 'শুনে নিন (অডিও)',             HI: 'बोलकर सुनें (आवाज़)' },
+    
+    // Status Cards
+    statusGoodTitle:   { EN: 'Green Light: High Chance of Success', BN: 'সবুজ সংকেত: সফল হওয়ার দারুণ সুযোগ', HI: 'हरी झंडी: व्यापार सफल होने की बहुत अच्छी संभावना' },
+    statusGoodDesc:    { EN: 'This business idea fits your local area very well. Demand is strong and starting now is favorable.',
+                         BN: 'এই ব্যবসাটি আপনার এলাকার জন্য খুবই মানানসই। স্থানীয় চাহিদা ভালো এবং এখনই শুরু করা লাভজনক।',
+                         HI: 'यह काम आपके इलाके के लिए बहुत बढ़िया है। ग्राहकों की मांग अच्छी है और इसे अभी शुरू करना फायदेमंद रहेगा।' },
+
+    statusCautionTitle:{ EN: 'Yellow Light: Workable with Care',    BN: 'হলুদ সংকেত: সতর্কতার সাথে সম্ভব', HI: 'पीली झंडी: काम अच्छा है पर सावधानी जरूरी' },
+    statusCautionDesc: { EN: 'This business can work, but keep strict control on daily expenses and start at a manageable scale.',
+                         BN: 'এই ব্যবসাটি সফল হতে পারে, তবে প্রতিদিনের খরচের হিসাব রাখুন এবং সাবধানে ছোট পরিসরে শুরু করুন।',
+                         HI: 'यह व्यापार चल सकता है, लेकिन रोज़मर्रा के खर्चों पर नियंत्रण रखें और समझदारी से कदम बढ़ाएं।' },
+
+    statusRiskTitle:   { EN: 'Red Light: High Risk Area',          BN: 'লাল সংকেত: ঝুঁকি বেশি',          HI: 'लाल झंडी: इसमें जोखिम अधिक है' },
+    statusRiskDesc:    { EN: 'Demand is limited or competition is stiff. Consider exploring alternate categories or smaller trials first.',
+                         BN: 'চাহিদা কম বা প্রতিযোগিতা বেশি। অন্য কোনো ব্যবসার কথা ভাবুন বা খুব ছোট করে পরীক্ষা করুন।',
+                         HI: 'मांग सीमित है या पहले से बहुत दुकानें हैं। किसी अन्य व्यवसाय पर विचार करें या बहुत छोटे स्तर से परखें।' },
+
+    // 4 Key Pillars
+    cardCustomers:     { EN: 'Customers & Demand',          BN: 'গ্রাহক ও বাজারের চাহিদা',      HI: 'ग्राहक और बाजार की मांग' },
+    cardMoney:         { EN: 'Investment & Govt Help',      BN: 'খরচ ও সরকারি সাহায্য',        HI: 'लागत और सरकारी मदद' },
+    cardProfit:        { EN: 'Estimated Monthly Profit',    BN: 'মাসে আনুমানিক লাভ',          HI: 'हर महीने अनुमानित बचत' },
+    cardTip:           { EN: 'Key Advice to Win',           BN: 'সফল হওয়ার মূল পরামর্শ',        HI: 'सफल होने का मुख्य मंत्र' },
+
+    // Plain text helpers
+    costFromYou:       { EN: 'From your pocket',            BN: 'আপনার নিজের তহবিল',          HI: 'आपकी अपनी जेब से' },
+    costFromGovt:      { EN: 'Govt Loan Scheme',            BN: 'সরকারি ঋণ প্রকল্প',            HI: 'सरकारी योजना से लोन' },
+    subsidyBenefit:    { EN: 'Subsidy Support',             BN: 'ভর্তুকি সুবিধা',             HI: 'सब्सिडी छूट' },
+    monthlyEmiLabel:   { EN: 'Monthly Bank EMI',            BN: 'মাসিক ব্যাংক কিস্তি',         HI: 'मासिक बैंक किश्त' },
+    takeHomeProfit:    { EN: 'Net profit in hand',          BN: 'হাতে পাওয়া খাঁটি লাভ',         HI: 'हाथ में शुद्ध बचत' },
+    localPopulation:   { EN: 'people living nearby',        BN: 'নিকটবর্তী জনসংখ্যা',         HI: 'आस-पास रहने वाले लोग' },
+    competitionLow:    { EN: 'Very few competitors in area',BN: 'এলাকায় প্রতিযোগী খুব কম',     HI: 'इलाके में दुकानें/प्रतिस्पर्धी बहुत कम' },
+    competitionMod:    { EN: 'Moderate competition',        BN: 'মাঝারি প্রতিযোগিতা',         HI: 'मध्यम प्रतियोगिता' },
+    competitionHigh:   { EN: 'High competition present',    BN: 'উচ্চ প্রতিযোগিতা বিদ্যমান',     HI: 'ज्यादा दुकानें पहले से मौजूद' },
+
+    // Action Steps
+    stepsHeader:       { EN: 'How to Get Started (3 Easy Steps)', BN: 'শুরু করার ৩টি সহজ ধাপ', HI: 'शुरू करने के 3 आसान कदम' },
+    step1Title:        { EN: '1. Arrange Raw Material & Spot',   BN: '১. কাঁচামাল ও জায়গা ঠিক করুন', HI: '1. कच्चा माल और जगह तय करें' },
+    step1Desc:         { EN: 'Connect with local suppliers and secure a clean, easily accessible workspace.',
+                         BN: 'স্থানীয় সরবরাহকারীদের সাথে যোগাযোগ করুন এবং সহজে যাতায়াত করা যায় এমন জায়গা বেছে নিন।',
+                         HI: 'स्थानीय सप्लायर से संपर्क करें और आने-जाने में आसान, साफ-सुथरी जगह तय करें।' },
+    step2Title:        { EN: '2. Apply for Government Scheme',   BN: '২. সরকারি ঋণের আবেদন করুন',   HI: '2. सरकारी योजना का लाभ लें' },
+    step2Desc:         { EN: 'Take this report to your nearest Bank or CSC center to apply for eligible loan subsidy.',
+                         BN: 'এই রিপোর্টটি নিয়ে নিকটস্থ ব্যাংক বা সিএসসি সেন্টারে গিয়ে প্রকল্পের ঋণের জন্য আবেদন করুন।',
+                         HI: 'इस रिपोर्ट को लेकर नजदीकी बैंक या CSC केंद्र जाएं और योजना के लोन/सब्सिडी का आवेदन करें।' },
+    step3Title:        { EN: '3. Secure 15 Regular Buyers',      BN: '৩. ১৫ জন নিয়মিত ক্রেতা বানান', HI: '3. पहले 15 पक्के ग्राहक बनाएं' },
+    step3Desc:         { EN: 'Talk to local residents and village shopkeepers before grand launch to guarantee Day-1 sales.',
+                         BN: 'ব্যবসা পুরোদমে শুরুর আগেই স্থানীয় বাসিন্দা ও দোকানদারদের সাথে কথা বলে অর্ডার নিশ্চিত করুন।',
+                         HI: 'शुरुआत करने से पहले स्थानीय ग्रामीणों और दुकानदारों से बात कर पहले दिन से बिक्री पक्की करें।' },
+  },
+
   // ─── Score Breakdown ───
   scores: {
     title:           { EN: 'Viability Score Breakdown',    BN: 'সম্ভাব্যতা স্কোর বিশ্লেষণ',    HI: 'व्यवहार्यता स्कोर विश्लेषण' },
