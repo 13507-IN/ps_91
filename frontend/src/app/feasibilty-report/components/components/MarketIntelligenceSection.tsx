@@ -5,7 +5,7 @@ import { SourceTag } from '@/components/SourceTag';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { MarketIntelligence } from '@/types';
-import { CheckCircle2, Sparkles, Building2, MapPin } from 'lucide-react';
+import { Building2, MapPin } from 'lucide-react';
 
 export function MarketIntelligenceSection({ market }: { market: MarketIntelligence }) {
   const { t, lang } = useTranslation();
