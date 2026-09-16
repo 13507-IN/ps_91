@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Competition Analysis Agent.
 """
 
@@ -23,6 +23,7 @@ class CompetitionAnalysisResultModel(BaseModel):
 class CompetitionAgent(BaseAgent):
     prompt_file = "competitor_analysis.txt"
     output_model = CompetitionAnalysisResultModel
+    use_secondary = True  # Low importance → route to Groq to save Gemini quota
     system_prompt = (
         "You are a rural business competition analyst for India. "
         "Interpret competition data including informal businesses. "

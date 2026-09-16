@@ -48,6 +48,7 @@ class BaseAgent:
 
     prompt_file: str = ""
     output_model: Type[BaseModel] = BaseModel
+    use_secondary: bool = False  # Set True in low-importance agents to route to Groq
     system_prompt: str = (
         "You are a rural business intelligence analyst for India. "
         "Return ONLY valid JSON matching the requested format. "
@@ -97,9 +98,10 @@ class BaseAgent:
             if target_lang != "English":
                 system += f" Provide all textual reasoning, explanations, recommendations, strengths, and weaknesses in {target_lang}."
 
-            raw_response = await self.llm.generate(
-                prompt=prompt,
-                system=system,
+            raw_response = await (
+                self.llm.generate_secondary(prompt=prompt, system=system)
+                if self.use_secondary
+                else self.llm.generate(prompt=prompt, system=system)
             )
 
             # Parse JSON
