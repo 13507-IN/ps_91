@@ -11,7 +11,7 @@ export function createPrismaClient(options?: Record<string, unknown>): PrismaCli
     'postgresql://postgres:postgres@localhost:5432/arthsetu';
   const pool = new pg.Pool({ connectionString });
   const adapter = new PrismaPg(pool);
-  return new PrismaClient({ adapter, ...options } as never);
+  return new PrismaClient({ adapter, ...(options as any) });
 }
 
 /**
