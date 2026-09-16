@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import AppImage from '@/components/ui/AppImage';
 import VoiceInput from '@/components/ui/VoiceInput';
 import { CATEGORY_PHOTOS } from '@/lib/constants/landing-media';
-import { Check, Sparkles, Loader2 } from 'lucide-react';
+import { Check, Sparkles } from 'lucide-react';
 import { inr } from '@/lib/format';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { autoClassifyCategory } from '@/lib/ai/classifyCategory';
@@ -38,7 +38,7 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
   const [manualOverride, setManualOverride] = useState(false);
   const [autoDetected, setAutoDetected] = useState<BusinessCategory | null>(null);
 
-  // Auto classify on component mount or idea change
+  // Auto classify on component mount if idea exists and category not selected
   useEffect(() => {
     if (idea && !selected) {
       const detected = autoClassifyCategory(idea);
@@ -48,6 +48,7 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
         updateDraft({ businessCategory: detected });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleIdeaChange(newIdea: string) {

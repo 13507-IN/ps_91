@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { IndianRupee, ChevronDown, UserCheck } from 'lucide-react';
 import { inr } from '@/lib/format';
 import { useTranslation } from '@/lib/i18n/useTranslation';
-import type { WizardDraft } from '@/types';
+import type { WizardDraft, Gender, SocialCategory } from '@/types';
 
 const schema = z.object({
   availableCapital: z.number({ message: 'Enter a valid amount' }).min(10000, 'Minimum ₹10,000').max(50000000, 'Maximum ₹5 Crore'),
@@ -183,7 +183,7 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <select
                 {...register('gender')}
                 onChange={(e) => {
-                  const val = e.target.value as any;
+                  const val = (e.target.value || undefined) as Gender | undefined;
                   setValue('gender', val);
                   updateDraft({ gender: val });
                 }}
@@ -202,7 +202,7 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <select
                 {...register('category')}
                 onChange={(e) => {
-                  const val = e.target.value as any;
+                  const val = (e.target.value || undefined) as SocialCategory | undefined;
                   setValue('category', val);
                   updateDraft({ category: val });
                 }}
