@@ -1,11 +1,11 @@
-import { PrismaClient } from '@prisma/client';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { runAllPipelines } from '../src/ingestion/runner.js';
 import type { IngestionSource } from '../src/ingestion/types.js';
 import { seedDemoUsers } from '../src/ingestion/seeds/demo_users/index.js';
+import { createPrismaClient } from '../src/plugins/prisma.js';
 
-const prisma = new PrismaClient();
+const prisma = createPrismaClient();
 
 /**
  * Districts available for seeding. Add a new entry to extend the pilot

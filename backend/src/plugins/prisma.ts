@@ -1,25 +1,37 @@
 import type { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import pg from 'pg';
+
+export function createPrismaClient(options?: Record<string, unknown>): PrismaClient {
+  const connectionString =
+    process.env['DATABASE_URL'] ||
+    process.env['DIRECT_DATABASE_URL'] ||
+    'postgresql://postgres:postgres@localhost:5432/arthsetu';
+  const pool = new pg.Pool({ connectionString });
+  const adapter = new PrismaPg(pool);
+  return new PrismaClient({ adapter, ...options } as never);
+}
 
 /**
  * Prisma plugin — decorates fastify.prisma with a PrismaClient instance.
  * Handles graceful shutdown on app close.
  */
 async function prismaPlugin(fastify: FastifyInstance): Promise<void> {
-  const prisma = new PrismaClient({
-    log:
-      process.env['NODE_ENV'] === 'development'
-        ? [
-            { emit: 'event', level: 'query' },
-            { emit: 'stdout', level: 'warn' },
-            { emit: 'stdout', level: 'error' },
-          ]
-        : [
-            { emit: 'stdout', level: 'warn' },
-            { emit: 'stdout', level: 'error' },
-          ],
-  });
+  const logOptions =
+    process.env['NODE_ENV'] === 'development'
+      ? [
+          { emit: 'event', level: 'query' },
+          { emit: 'stdout', level: 'warn' },
+          { emit: 'stdout', level: 'error' },
+        ]
+      : [
+          { emit: 'stdout', level: 'warn' },
+          { emit: 'stdout', level: 'error' },
+        ];
+
+  const prisma = createPrismaClient({ log: logOptions });
 
   try {
     await prisma.$connect();
