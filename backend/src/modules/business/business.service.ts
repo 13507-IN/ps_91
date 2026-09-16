@@ -277,7 +277,7 @@ export class BusinessService {
       });
 
       const results = dbBusinesses
-        .map((b) => {
+        .map((b: any) => {
           const bLat = b.latitude ?? b.village?.latitude;
           const bLng = b.longitude ?? b.village?.longitude;
           if (bLat == null || bLng == null) return null;
@@ -302,11 +302,11 @@ export class BusinessService {
             distanceKm,
           };
         })
-        .filter((b): b is NonNullable<typeof b> => b !== null && b.distanceKm <= radiusKm);
+        .filter((b: any) => b !== null && b.distanceKm <= radiusKm);
 
       if (category) {
-        const catFiltered = results.filter((b) => b.category === category);
-        catFiltered.sort((a, b) => a.distanceKm - b.distanceKm);
+        const catFiltered = results.filter((b: any) => b.category === category);
+        catFiltered.sort((a: any, b: any) => a.distanceKm - b.distanceKm);
         return {
           center: { lat, lng, radiusKm },
           totalFound: catFiltered.length,
@@ -314,7 +314,7 @@ export class BusinessService {
         };
       }
 
-      results.sort((a, b) => a.distanceKm - b.distanceKm);
+      results.sort((a: any, b: any) => a.distanceKm - b.distanceKm);
       return {
         center: { lat, lng, radiusKm },
         totalFound: results.length,
