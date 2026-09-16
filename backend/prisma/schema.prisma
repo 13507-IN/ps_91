@@ -139,6 +139,25 @@ model RefreshToken {
   @@index([token])
 }
 
+// OTP codes for phone number verification (REGISTER / LOGIN / VERIFY)
+model OtpCode {
+  id        String   @id @default(cuid())
+  phone     String
+  /// bcrypt-hashed 6-digit OTP (never stored as plain text)
+  code      String
+  /// Purpose: REGISTER | LOGIN | VERIFY
+  purpose   String
+  /// Number of failed verification attempts (max 5 before invalidation)
+  attempts  Int      @default(0)
+  expiresAt DateTime
+  /// Marked true after successful verification (then record is deleted)
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([phone, purpose])
+  @@index([expiresAt])
+}
+
 // ===================== GEOGRAPHY (LGD) =====================
 
 model State {
