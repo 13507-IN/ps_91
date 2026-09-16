@@ -71,7 +71,11 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
   }, [draft, reset]);
 
   const capitalValue = watch('availableCapital');
-  const hasPrefilledProfile = Boolean(draft.age || draft.gender || draft.category);
+  const watchAge = watch('age');
+  const watchGender = watch('gender');
+  const watchCategory = watch('category');
+  const watchIsMinority = watch('isMinority');
+  const hasPrefilledProfile = Boolean(watchAge || watchGender || watchCategory || draft.age || draft.gender || draft.category);
 
   function selectChip(amount: number) {
     setValue('availableCapital', amount, { shouldValidate: true });
@@ -166,6 +170,7 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <input
                 type="number"
                 {...register('age', { valueAsNumber: true })}
+                value={watchAge ?? ''}
                 onChange={(e) => {
                   const val = e.target.value ? Number(e.target.value) : undefined;
                   setValue('age', val);
@@ -182,6 +187,7 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <label className="label-gov">{t.capital.gender}</label>
               <select
                 {...register('gender')}
+                value={watchGender ?? ''}
                 onChange={(e) => {
                   const val = (e.target.value || undefined) as Gender | undefined;
                   setValue('gender', val);
@@ -201,6 +207,7 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <label className="label-gov">{t.capital.socialCategory}</label>
               <select
                 {...register('category')}
+                value={watchCategory ?? ''}
                 onChange={(e) => {
                   const val = (e.target.value || undefined) as SocialCategory | undefined;
                   setValue('category', val);
@@ -284,6 +291,7 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
               <input
                 type="checkbox"
                 {...register('isMinority')}
+                checked={Boolean(watchIsMinority)}
                 onChange={(e) => {
                   setValue('isMinority', e.target.checked);
                   updateDraft({ isMinority: e.target.checked });

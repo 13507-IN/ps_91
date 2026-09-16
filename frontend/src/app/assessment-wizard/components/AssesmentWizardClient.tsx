@@ -59,20 +59,38 @@ export default function AssessmentWizardClient() {
   React.useEffect(() => {
     getDraftOffline().then((saved) => {
       if (saved && (saved.villageName || saved.businessIdea || saved.availableCapital)) {
-        setDraft((prev) => ({ ...prev, ...saved }));
+        setDraft((prev) => {
+          const merged = { ...prev, ...saved };
+          if (!merged.gender && user?.gender) merged.gender = user.gender;
+          if (!merged.category && user?.category) merged.category = user.category;
+          if (!merged.age && user?.dateOfBirth) {
+            const dob = new Date(user.dateOfBirth);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+              age--;
+            }
+            if (age >= 18 && age <= 80) merged.age = age;
+          }
+          if (merged.isMinority === undefined && user?.isMinority !== undefined) {
+            merged.isMinority = user.isMinority;
+          }
+          return merged;
+        });
         if (saved.step && saved.step > 1) {
           setCurrentStep(saved.step);
         }
       }
     }).catch(() => {});
-  }, []);
+  }, [user]);
 
   // Dynamic user profile sync
   React.useEffect(() => {
     if (!user) return;
     setDraft((prev) => {
       const patch: Partial<WizardDraft> = {};
-      if (user.dateOfBirth && !prev.age) {
+      if (user.dateOfBirth) {
         const dob = new Date(user.dateOfBirth);
         const today = new Date();
         let age = today.getFullYear() - dob.getFullYear();
@@ -80,11 +98,15 @@ export default function AssessmentWizardClient() {
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
           age--;
         }
-        if (age >= 18 && age <= 80) patch.age = age;
+        if (age >= 18 && age <= 80 && !prev.age) patch.age = age;
       }
       if (user.gender && !prev.gender) patch.gender = user.gender;
       if (user.category && !prev.category) patch.category = user.category;
       if (user.isMinority !== undefined && prev.isMinority === undefined) patch.isMinority = user.isMinority;
+
+      // Always populate if not yet in draft
+      if (user.gender && prev.gender !== user.gender && !prev.gender) patch.gender = user.gender;
+      if (user.category && prev.category !== user.category && !prev.category) patch.category = user.category;
 
       if (Object.keys(patch).length > 0) {
         return { ...prev, ...patch };
