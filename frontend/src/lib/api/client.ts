@@ -153,6 +153,8 @@ export const apiEndpoints = {
     login: '/api/auth/login',
     refresh: '/api/auth/refresh',
     logout: '/api/auth/logout',
+    sendOtp: '/api/auth/otp/send',
+    verifyOtp: '/api/auth/otp/verify',
   },
   users: {
     me: '/api/users/me',

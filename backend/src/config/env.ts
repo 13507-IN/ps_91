@@ -31,6 +31,16 @@ const envSchema = z.object({
   // Rate Limiting
   RATE_LIMIT_GLOBAL_MAX: z.coerce.number().positive().default(100),
   RATE_LIMIT_AUTH_MAX: z.coerce.number().positive().default(10),
+
+  // httpSMS (OTP / SMS) — send SMS from your Android phone via httpsms.com
+  // Leave blank in development — the OTP is returned to the caller instead
+  HTTPSMS_API_KEY: z.string().optional(),
+  HTTPSMS_FROM_NUMBER: z.string().optional(),
+
+  // httpSMS Webhook — set this to the signing key you configured in
+  // httpSMS dashboard (Settings → Webhooks) so incoming events are verified.
+  // Leave blank in development — the webhook endpoint will return 503.
+  HTTPSMS_WEBHOOK_SECRET: z.string().optional(),
 });
 
 export type Env = z.infer<typeof envSchema>;

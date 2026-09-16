@@ -9,11 +9,13 @@ import { AppError } from './lib/errors.js';
 import prismaPlugin from './plugins/prisma.js';
 import redisPlugin from './plugins/redis.js';
 import authPlugin from './plugins/auth.js';
+import authControlPlugin from './plugins/auth.control.js';
 import rateLimitPlugin from './plugins/rateLimit.js';
 import swaggerPlugin from './plugins/swagger.js';
 
 // Routes
 import { authRoutes } from './modules/auth/auth.routes.js';
+import { otpAuthRoutes } from './modules/auth/auth2.rout.js';
 import { userRoutes } from './modules/user/user.routes.js';
 import { adminRoutes } from './modules/admin/admin.routes.js';
 import { financialRoutes } from './modules/financial/financial.routes.js';
@@ -24,6 +26,7 @@ import { businessRoutes } from './modules/business/business.routes.js';
 import { aiRoutes } from './modules/ai/ai.routes.js';
 import { feasibilityRoutes } from './modules/feasibility/feasibility.routes.js';
 import { chatRoutes } from './modules/chat/chat.routes.js';
+import httpsmsWebhookRoutes from './modules/webhooks/httpsms.webhook.rout.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const env = getEnv();
@@ -69,6 +72,7 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   // ---- Auth ----
   await app.register(authPlugin);
+  await app.register(authControlPlugin);
 
   // ---- Global Error Handler ----
   app.setErrorHandler((error: any, request, reply) => {
@@ -137,6 +141,7 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   // ---- API Routes ----
   await app.register(authRoutes, { prefix: `${API_PREFIX}/auth` });
+  await app.register(otpAuthRoutes, { prefix: `${API_PREFIX}/auth` });
   await app.register(userRoutes, { prefix: `${API_PREFIX}/users` });
   await app.register(adminRoutes, { prefix: `${API_PREFIX}/admin` });
   await app.register(financialRoutes, { prefix: `${API_PREFIX}/financial` });
@@ -147,6 +152,9 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(aiRoutes, { prefix: `${API_PREFIX}/ai` });
   await app.register(feasibilityRoutes, { prefix: `${API_PREFIX}/feasibility` });
   await app.register(chatRoutes, { prefix: `${API_PREFIX}/chat` });
+
+  // ---- Webhooks (no API prefix — called by external services) ----
+  await app.register(httpsmsWebhookRoutes, { prefix: '/webhooks' });
 
   return app;
 }
