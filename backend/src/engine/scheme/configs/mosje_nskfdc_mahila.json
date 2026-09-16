@@ -1,0 +1,60 @@
+{
+  "schemeId": "mosje_nskfdc_mahila",
+  "name": "NSKFDC Mahila Samridhi & Micro Credit Yojana",
+  "shortName": "NSKFDC Mahila Samridhi",
+  "description": "Special micro-credit & self-employment scheme by NSKFDC (Ministry of Social Justice and Empowerment) providing loans up to ₹5 Lakh at a highly concessional 4% interest rate with 35% capital subsidy for Safai Karamcharis, Waste Pickers & their dependents.",
+  "nodalAgency": "National Safai Karamcharis Finance and Development Corporation (NSKFDC), Ministry of Social Justice and Empowerment",
+  "targetAudience": "Safai Karamcharis, Manual Scavengers, Waste Pickers and their dependents setting up rural micro-units",
+  "eligibility": {
+    "categories": [
+      "GENERAL",
+      "SC",
+      "ST",
+      "OBC",
+      "MINORITY"
+    ],
+    "gender": [
+      "MALE",
+      "FEMALE",
+      "OTHER"
+    ],
+    "ageMin": 18,
+    "ageMax": 60,
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "AGRICULTURE",
+      "LIVESTOCK",
+      "HANDICRAFT",
+      "SERVICES",
+      "OTHER"
+    ],
+    "minProjectCost": 25000,
+    "maxProjectCost": 500000
+  },
+  "financial": {
+    "maxLoanAmount": 500000,
+    "interestRate": 4,
+    "subsidyPercentage": 35,
+    "maxSubsidy": 50000,
+    "marginPercentage": 0,
+    "tenureMonths": 60,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "Safai Karamchari / Waste Picker Identification Certificate or Local Authority Verification",
+    "Address Proof",
+    "Simple Business Plan",
+    "Bank Account Details"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://nskfdc.nic.in/"
+}

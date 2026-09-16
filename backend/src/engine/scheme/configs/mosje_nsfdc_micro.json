@@ -1,0 +1,56 @@
+{
+  "schemeId": "mosje_nsfdc_micro",
+  "name": "NSFDC Micro-Credit & Term Loan Scheme for SCs",
+  "shortName": "NSFDC Micro-Credit",
+  "description": "Concessional credit and term loan support by NSFDC (Ministry of Social Justice and Empowerment) providing loans up to ₹15 Lakh at 6% interest rate for Scheduled Caste entrepreneurs establishing rural micro-enterprises.",
+  "nodalAgency": "National Scheduled Castes Finance and Development Corporation (NSFDC), Ministry of Social Justice and Empowerment",
+  "targetAudience": "Scheduled Caste (SC) micro-entrepreneurs, rural artisans, and self-employed youth",
+  "eligibility": {
+    "categories": [
+      "SC"
+    ],
+    "gender": [
+      "MALE",
+      "FEMALE",
+      "OTHER"
+    ],
+    "ageMin": 18,
+    "ageMax": 60,
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "AGRICULTURE",
+      "LIVESTOCK",
+      "TRANSPORT",
+      "HANDICRAFT",
+      "SERVICES"
+    ],
+    "minProjectCost": 50000,
+    "maxProjectCost": 1500000
+  },
+  "financial": {
+    "maxLoanAmount": 1500000,
+    "interestRate": 6,
+    "subsidyPercentage": 15,
+    "maxSubsidy": 50000,
+    "marginPercentage": 5,
+    "tenureMonths": 72,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "Scheduled Caste (SC) Certificate",
+    "Proof of Residence / Panchayat Certificate",
+    "Project Proposal & Machinery Quotation",
+    "Bank Account Details"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://nsfdc.nic.in/"
+}

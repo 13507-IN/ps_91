@@ -1,0 +1,58 @@
+{
+  "schemeId": "women_stree_shakti",
+  "name": "Stree Shakti Package for Women Entrepreneurs",
+  "shortName": "Stree Shakti Package",
+  "description": "Special bank credit package offering collateral concessions and 0.5% interest rate rebate for women entrepreneurs holding more than 50% financial ownership in small / micro business enterprises.",
+  "nodalAgency": "Public Sector Banks / Ministry of Women and Child Development",
+  "targetAudience": "Women-owned micro and small enterprises (>50% ownership by women)",
+  "eligibility": {
+    "categories": [
+      "GENERAL",
+      "SC",
+      "ST",
+      "OBC",
+      "MINORITY"
+    ],
+    "gender": [
+      "FEMALE"
+    ],
+    "ageMin": 18,
+    "ageMax": 65,
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "AGRICULTURE",
+      "LIVESTOCK",
+      "TRANSPORT",
+      "HANDICRAFT",
+      "SERVICES"
+    ],
+    "minProjectCost": 100000,
+    "maxProjectCost": 2500000
+  },
+  "financial": {
+    "maxLoanAmount": 2500000,
+    "interestRate": 8,
+    "subsidyPercentage": 0,
+    "maxSubsidy": 0,
+    "marginPercentage": 5,
+    "tenureMonths": 84,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "Proof of Ownership (>50% share holding by woman entrepreneur)",
+    "Udyam Registration Certificate",
+    "Project Feasibility Report",
+    "Bank Account Statement"
+  ],
+  "priority": 2,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://wcd.nic.in/"
+}

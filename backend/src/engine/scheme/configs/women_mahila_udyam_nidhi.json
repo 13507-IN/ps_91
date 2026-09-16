@@ -1,0 +1,56 @@
+{
+  "schemeId": "women_mahila_udyam_nidhi",
+  "name": "Mahila Udyam Nidhi (MUN) Scheme",
+  "shortName": "Mahila Udyam Nidhi",
+  "description": "SIDBI & NABARD scheme offering financial assistance and soft equity up to ₹10 Lakhs at 7.5% interest rate to women entrepreneurs for setting up new micro-enterprises in rural & semi-urban areas.",
+  "nodalAgency": "Small Industries Development Bank of India (SIDBI) / NABARD",
+  "targetAudience": "Women entrepreneurs starting micro-enterprises in rural & semi-urban areas",
+  "eligibility": {
+    "categories": [
+      "GENERAL",
+      "SC",
+      "ST",
+      "OBC",
+      "MINORITY"
+    ],
+    "gender": [
+      "FEMALE"
+    ],
+    "ageMin": 18,
+    "ageMax": 55,
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "AGRICULTURE",
+      "HANDICRAFT",
+      "SERVICES"
+    ],
+    "minProjectCost": 50000,
+    "maxProjectCost": 1000000
+  },
+  "financial": {
+    "maxLoanAmount": 1000000,
+    "interestRate": 7.5,
+    "subsidyPercentage": 25,
+    "maxSubsidy": 250000,
+    "marginPercentage": 5,
+    "tenureMonths": 120,
+    "moratoriumMonths": 24,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "Proof of Business Premise / Lease Deed",
+    "Detailed Project Report (DPR)",
+    "Quotations for Machinery / Equipment",
+    "Bank Account Passbook"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://www.sidbi.in/"
+}

@@ -243,7 +243,7 @@ export class LgdPipeline implements DataPipeline {
       for (let i = 0; i < villageEntries.length; i += batchSize) {
         const batch = villageEntries.slice(i, i + batchSize);
         await this.prisma.$transaction(
-          async (tx) => {
+          async (tx: any) => {
             for (const [id, data] of batch) {
               await tx.village.upsert({
                 where: { id },

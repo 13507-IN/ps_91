@@ -285,17 +285,17 @@ export class MarketService {
 
     // Aggregate amenities
     const amenities: CatchmentAmenities = {
-      villagesWithPrimarySchool: amenityRecords.filter((a) => a.hasPrimarySchool).length,
-      villagesWithMiddleSchool: amenityRecords.filter((a) => a.hasMiddleSchool).length,
-      villagesWithHighSchool: amenityRecords.filter((a) => a.hasHighSchool).length,
-      villagesWithPHC: amenityRecords.filter((a) => a.hasPHC).length,
-      villagesWithBankBranch: amenityRecords.filter((a) => a.hasBankBranch).length,
-      villagesWithATM: amenityRecords.filter((a) => a.hasATM).length,
-      villagesWithElectricity: amenityRecords.filter((a) => a.hasElectricity).length,
-      villagesWithBusService: amenityRecords.filter((a) => a.hasBusService).length,
-      villagesWithRailway: amenityRecords.filter((a) => a.hasRailway).length,
-      villagesWithMobileNetwork: amenityRecords.filter((a) => a.hasMobileNetwork).length,
-      villagesWithInternet: amenityRecords.filter((a) => a.hasInternet).length,
+      villagesWithPrimarySchool: amenityRecords.filter((a: any) => a.hasPrimarySchool).length,
+      villagesWithMiddleSchool: amenityRecords.filter((a: any) => a.hasMiddleSchool).length,
+      villagesWithHighSchool: amenityRecords.filter((a: any) => a.hasHighSchool).length,
+      villagesWithPHC: amenityRecords.filter((a: any) => a.hasPHC).length,
+      villagesWithBankBranch: amenityRecords.filter((a: any) => a.hasBankBranch).length,
+      villagesWithATM: amenityRecords.filter((a: any) => a.hasATM).length,
+      villagesWithElectricity: amenityRecords.filter((a: any) => a.hasElectricity).length,
+      villagesWithBusService: amenityRecords.filter((a: any) => a.hasBusService).length,
+      villagesWithRailway: amenityRecords.filter((a: any) => a.hasRailway).length,
+      villagesWithMobileNetwork: amenityRecords.filter((a: any) => a.hasMobileNetwork).length,
+      villagesWithInternet: amenityRecords.filter((a: any) => a.hasInternet).length,
     };
 
     // Aggregate crops
@@ -402,10 +402,10 @@ export class MarketService {
     });
 
     const observed = businesses.filter(
-      (b) => b.verificationStatus === 'VERIFIED' || b.source === 'UDYAM' || b.source === 'GOVERNMENT',
+      (b: any) => b.verificationStatus === 'VERIFIED' || b.source === 'UDYAM' || b.source === 'GOVERNMENT',
     );
     const reported = businesses.filter(
-      (b) => b.source === 'COMMUNITY_REPORT' || b.source === 'SURVEY',
+      (b: any) => b.source === 'COMMUNITY_REPORT' || b.source === 'SURVEY',
     );
 
     // Heuristic inference of informal competitors based on population:
@@ -604,7 +604,7 @@ export class MarketService {
     // Map the distance using the village distance
     const villageMap = new Map(nearbyVillages.map(v => [v.id, v.distanceKm]));
 
-    const suppliers: SupplierItem[] = businesses.map(b => ({
+    const suppliers: SupplierItem[] = businesses.map((b: any) => ({
       id: b.id,
       name: b.name,
       category: b.category,

@@ -5,6 +5,7 @@ import {
   Confidence,
   DataSource,
   OperatingStatus,
+  Prisma,
 } from '@prisma/client';
 import type { ListBusinessesQuery, CreateBusinessBody } from './business.schema.js';
 import { LocationService } from '../location/location.service.js';
@@ -240,7 +241,7 @@ export class BusinessService {
       }
       const villageIds = nearbyVillages.map((v) => v.id);
 
-      const ORConditions: Array<Record<string, unknown>> = [
+      const ORConditions: Prisma.BusinessWhereInput[] = [
         {
           latitude: { gte: lat - latDelta, lte: lat + latDelta },
           longitude: { gte: lng - lngDelta, lte: lng + lngDelta },
@@ -250,7 +251,7 @@ export class BusinessService {
         ORConditions.push({ villageId: { in: villageIds } });
       }
 
-      const where: Record<string, unknown> = { OR: ORConditions };
+      const where: Prisma.BusinessWhereInput = { OR: ORConditions };
       if (category) where.category = category;
 
       const dbBusinesses = await this.prisma.business.findMany({
@@ -385,7 +386,7 @@ export class BusinessService {
   async getUnverifiedNearby(lat: number, lng: number, radiusKm = 25) {
     const nearby = await this.getHyperlocalBusinesses(lat, lng, radiusKm);
     const unverified = nearby.businesses.filter(
-      (b) => b.source === 'COMMUNITY_REPORT' || b.source === 'SURVEY' || b.source === 'OTHER',
+      (b: any) => b.source === 'COMMUNITY_REPORT' || b.source === 'SURVEY' || b.source === 'OTHER',
     );
     return {
       center: nearby.center,

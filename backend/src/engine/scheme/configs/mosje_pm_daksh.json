@@ -1,0 +1,56 @@
+{
+  "schemeId": "mosje_pm_daksh",
+  "name": "PM-DAKSH Rural Self-Employment & Enterprise Scheme",
+  "shortName": "PM-DAKSH Enterprise",
+  "description": "Flagship scheme under Ministry of Social Justice and Empowerment offering skill training linked credit and capital grant up to ₹10 Lakh at 5% interest rate for rural youth belonging to SC, OBC, EBC, DNT and Safai Karamchari families.",
+  "nodalAgency": "Ministry of Social Justice and Empowerment (MoSJE)",
+  "targetAudience": "SC, OBC, EBC, DNT, and Safai Karamchari youth establishing rural micro-enterprises",
+  "eligibility": {
+    "categories": [
+      "SC",
+      "OBC",
+      "MINORITY"
+    ],
+    "gender": [
+      "MALE",
+      "FEMALE",
+      "OTHER"
+    ],
+    "ageMin": 18,
+    "ageMax": 45,
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "AGRICULTURE",
+      "HANDICRAFT",
+      "SERVICES"
+    ],
+    "minProjectCost": 50000,
+    "maxProjectCost": 1000000
+  },
+  "financial": {
+    "maxLoanAmount": 1000000,
+    "interestRate": 5,
+    "subsidyPercentage": 15,
+    "maxSubsidy": 50000,
+    "marginPercentage": 0,
+    "tenureMonths": 60,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "Caste / Category Certificate (SC/OBC/EBC/DNT)",
+    "PM-DAKSH Skill Certificate or Vocational Training Proof",
+    "Project Proposal",
+    "Bank Passbook"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://pmdaksh.dosje.gov.in/"
+}
