@@ -13,6 +13,7 @@ async function authPlugin(fastify: FastifyInstance): Promise<void> {
 
   await fastify.register(fjwt, {
     secret: env.JWT_SECRET,
+    decoratorName: 'jwtUser',
     sign: {
       expiresIn: env.JWT_ACCESS_EXPIRY,
     },
