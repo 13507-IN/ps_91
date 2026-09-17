@@ -7,4 +7,5 @@ models/**/*.json
 outputs/**/*.csv
 outputs/**/*.json
 !models/**/.gitkeep
+!models/**/*.joblib
 !outputs/**/.gitkeep
