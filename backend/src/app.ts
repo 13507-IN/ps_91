@@ -148,6 +148,7 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(authRoutes, { prefix: `${API_PREFIX}/auth` });
   await app.register(otpAuthRoutes, { prefix: `${API_PREFIX}/auth` });
   await app.register(googleAuthRoutes, { prefix: `${API_PREFIX}/auth` });
+  await app.register(googleAuthRoutes, { prefix: '/api/v1/auth' });
   await app.register(userRoutes, { prefix: `${API_PREFIX}/users` });
   await app.register(adminRoutes, { prefix: `${API_PREFIX}/admin` });
   await app.register(financialRoutes, { prefix: `${API_PREFIX}/financial` });
