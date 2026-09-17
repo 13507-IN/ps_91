@@ -221,7 +221,7 @@ export class OtpService {
     return {
       user: {
         id: user.id,
-        phone: user.phone,
+        phone: user.phone!,
         name: user.name,
         isNew,
       },

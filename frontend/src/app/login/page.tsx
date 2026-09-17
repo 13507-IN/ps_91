@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Phone, Lock, ArrowRight, AlertCircle } from 'lucide-react';
-import { api, apiEndpoints, setTokens, handleApiError } from '@/lib/api/client';
+import { api, apiEndpoints, apiBaseUrl, setTokens, handleApiError } from '@/lib/api/client';
 import { useAuthStore } from '@/lib/store/auth';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { AuthTokens, UserProfile } from '@/types';
@@ -90,8 +90,33 @@ export default function LoginPage() {
             <p className="text-white/60 text-sm mt-1">{t.auth.signInToAccess}</p>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} noValidate className="px-8 py-7 space-y-5">
+          <div className="px-8 py-7">
+            {/* Google Sign-in */}
+            <button
+              type="button"
+              onClick={() => {
+                window.location.href = `${apiBaseUrl}${apiEndpoints.auth.google}`;
+              }}
+              className="w-full flex items-center justify-center gap-3 py-3 rounded-lg border-2 border-[#DDDDDD] bg-white text-[#555] font-semibold text-sm hover:border-[#4285F4] hover:bg-[#F8FAFC] transition-all shadow-sm"
+            >
+              <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.8-6.8C35.8 2.5 30.2 0 24 0 14.8 0 6.9 5.4 3 13.3l7.9 6.1C12.8 13.3 17.9 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8C43.5 37.3 46.5 31.4 46.5 24.5z"/>
+                <path fill="#FBBC05" d="M10.9 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.4 13.3A24 24 0 0 0 0 24c0 3.8.9 7.4 2.4 10.7l8.5-6.1z"/>
+                <path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.5l-7.5-5.8c-2 1.4-4.6 2.2-7.7 2.2-6.1 0-11.2-3.8-13-9.3l-8 6.2C6.9 42.6 14.8 48 24 48z"/>
+              </svg>
+              Continue with Google
+            </button>
+
+            {/* Divider */}
+            <div className="flex items-center gap-3 my-4">
+              <div className="flex-1 h-px bg-[#E5E7EB]" />
+              <span className="text-xs text-[#9CA3AF] font-medium uppercase">OR SIGN IN WITH PHONE</span>
+              <div className="flex-1 h-px bg-[#E5E7EB]" />
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} noValidate className="space-y-5">
             {/* Error banner */}
             {error && (
               <div className="flex items-start gap-2.5 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm">
@@ -182,16 +207,17 @@ export default function LoginPage() {
               </Link>
             </p>
           </form>
-
-          {/* Tricolor bottom */}
-          <div className="tricolor-divider w-full" />
         </div>
 
-        {/* Back to home */}
-        <p className="text-center text-xs text-[#888] mt-5">
-          <Link href="/" className="hover:text-[#E65C00] transition-colors">← {t.auth.backToHome}</Link>
-        </p>
+        {/* Tricolor bottom */}
+        <div className="tricolor-divider w-full" />
       </div>
+
+      {/* Back to home */}
+      <p className="text-center text-xs text-[#888] mt-5">
+        <Link href="/" className="hover:text-[#E65C00] transition-colors">← {t.auth.backToHome}</Link>
+      </p>
     </div>
+  </div>
   );
 }

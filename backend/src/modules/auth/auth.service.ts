@@ -46,7 +46,7 @@ export class AuthService {
     // Generate tokens
     const tokens = await this.generateTokens(user.id);
 
-    return { user, tokens };
+    return { user: { id: user.id, phone: user.phone!, name: user.name }, tokens };
   }
 
   /**
@@ -63,7 +63,7 @@ export class AuthService {
       },
     });
 
-    if (!user) {
+    if (!user || !user.passwordHash) {
       throw new UnauthorizedError('Invalid phone number or password');
     }
 
@@ -77,7 +77,7 @@ export class AuthService {
     return {
       user: {
         id: user.id,
-        phone: user.phone,
+        phone: user.phone!,
         name: user.name,
       },
       tokens,

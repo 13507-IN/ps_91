@@ -12,7 +12,7 @@ import {
   RefreshCw,
   ChevronLeft,
 } from 'lucide-react';
-import { api, apiEndpoints, setTokens, handleApiError } from '@/lib/api/client';
+import { api, apiEndpoints, apiBaseUrl, setTokens, handleApiError } from '@/lib/api/client';
 import { useAuthStore } from '@/lib/store/auth';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { AuthTokens, UserProfile } from '@/types';
@@ -344,12 +344,13 @@ export default function RegisterPage() {
             {/* ── STEP 1: Phone + Name ── */}
             {step === 1 && (
               <>
-                {/* Google Sign-in (placeholder — teammate implements OAuth) */}
+                {/* Google Sign-in */}
                 <button
                   type="button"
-                  disabled
-                  title="Google sign-in coming soon"
-                  className="w-full flex items-center justify-center gap-3 py-3 rounded-lg border-2 border-[#DDDDDD] bg-white text-[#555] font-semibold text-sm mb-5 opacity-60 cursor-not-allowed transition-all"
+                  onClick={() => {
+                    window.location.href = `${apiBaseUrl}${apiEndpoints.auth.google}`;
+                  }}
+                  className="w-full flex items-center justify-center gap-3 py-3 rounded-lg border-2 border-[#DDDDDD] bg-white text-[#555] font-semibold text-sm hover:border-[#4285F4] hover:bg-[#F8FAFC] transition-all shadow-sm mb-5"
                 >
                   <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
                     <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.8-6.8C35.8 2.5 30.2 0 24 0 14.8 0 6.9 5.4 3 13.3l7.9 6.1C12.8 13.3 17.9 9.5 24 9.5z"/>
@@ -358,9 +359,6 @@ export default function RegisterPage() {
                     <path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.5l-7.5-5.8c-2 1.4-4.6 2.2-7.7 2.2-6.1 0-11.2-3.8-13-9.3l-8 6.2C6.9 42.6 14.8 48 24 48z"/>
                   </svg>
                   Continue with Google
-                  <span className="ml-1 text-[10px] bg-[#FFF3E0] text-[#E65C00] px-1.5 py-0.5 rounded-full font-bold">
-                    SOON
-                  </span>
                 </button>
 
                 {/* Divider */}

@@ -108,23 +108,28 @@ enum AnalysisStatus {
 // ===================== USERS & AUTH =====================
 
 model User {
-  id            String          @id @default(cuid())
-  phone         String          @unique
-  name          String?
-  email         String?         @unique
-  passwordHash  String
-  gender        Gender?
-  dateOfBirth   DateTime?
-  category      SocialCategory?
-  isMinority    Boolean         @default(false)
-  role          String          @default("USER")
-  location      Json?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  refreshTokens RefreshToken[]
-  analyses      Analysis[]
+  id              String          @id @default(cuid())
+  phone           String?         @unique
+  name            String?
+  email           String?         @unique
+  passwordHash    String?
+  gender          Gender?
+  dateOfBirth     DateTime?
+  category        SocialCategory?
+  isMinority      Boolean         @default(false)
+  role            String          @default("USER")
+  googleId        String?         @unique
+  avatarUrl       String?
+  isPhoneVerified Boolean         @default(false)
+  whatsappOptIn   Boolean         @default(true)
+  location        Json?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  refreshTokens   RefreshToken[]
+  analyses        Analysis[]
 
   @@index([phone])
+  @@index([googleId])
 }
 
 model RefreshToken {

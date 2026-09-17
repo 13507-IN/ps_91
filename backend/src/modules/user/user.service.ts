@@ -35,7 +35,7 @@ export class UserService {
 
     return {
       id: user.id,
-      phone: user.phone,
+      phone: user.phone ?? '',
       name: user.name,
       email: user.email,
       gender: user.gender,
@@ -93,7 +93,7 @@ export class UserService {
 
     return {
       id: user.id,
-      phone: user.phone,
+      phone: user.phone ?? '',
       name: user.name,
       email: user.email,
       gender: user.gender,

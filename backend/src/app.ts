@@ -10,12 +10,14 @@ import prismaPlugin from './plugins/prisma.js';
 import redisPlugin from './plugins/redis.js';
 import authPlugin from './plugins/auth.js';
 import authControlPlugin from './plugins/auth.control.js';
+import passportPlugin from './plugins/passport.js';
 import rateLimitPlugin from './plugins/rateLimit.js';
 import swaggerPlugin from './plugins/swagger.js';
 
 // Routes
 import { authRoutes } from './modules/auth/auth.routes.js';
 import { otpAuthRoutes } from './modules/auth/auth2.rout.js';
+import { googleAuthRoutes } from './modules/auth/google.routes.js';
 import { userRoutes } from './modules/user/user.routes.js';
 import { adminRoutes } from './modules/admin/admin.routes.js';
 import { financialRoutes } from './modules/financial/financial.routes.js';
@@ -73,6 +75,7 @@ export async function buildApp(): Promise<FastifyInstance> {
   // ---- Auth ----
   await app.register(authPlugin);
   await app.register(authControlPlugin);
+  await app.register(passportPlugin);
 
   // ---- Global Error Handler ----
   app.setErrorHandler((error: any, request, reply) => {
@@ -142,6 +145,7 @@ export async function buildApp(): Promise<FastifyInstance> {
   // ---- API Routes ----
   await app.register(authRoutes, { prefix: `${API_PREFIX}/auth` });
   await app.register(otpAuthRoutes, { prefix: `${API_PREFIX}/auth` });
+  await app.register(googleAuthRoutes, { prefix: `${API_PREFIX}/auth` });
   await app.register(userRoutes, { prefix: `${API_PREFIX}/users` });
   await app.register(adminRoutes, { prefix: `${API_PREFIX}/admin` });
   await app.register(financialRoutes, { prefix: `${API_PREFIX}/financial` });

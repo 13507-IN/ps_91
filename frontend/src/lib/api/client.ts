@@ -155,6 +155,9 @@ export const apiEndpoints = {
     logout: '/api/auth/logout',
     sendOtp: '/api/auth/otp/send',
     verifyOtp: '/api/auth/otp/verify',
+    google: '/api/v1/auth/google',
+    googleLinkSendOtp: '/api/v1/auth/google/link-phone/send-otp',
+    googleLinkVerifyOtp: '/api/v1/auth/google/link-phone/verify-otp',
   },
   users: {
     me: '/api/users/me',

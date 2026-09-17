@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { Download, Printer, Share2, Loader2, MessageCircle } from 'lucide-react';
-import { downloadDPR, shareViaWhatsApp } from '@/lib/pdf/generateDPR';
+import { downloadDPR, shareViaWhatsApp, type DPRApplicant } from '@/lib/pdf/generateDPR';
+import { useAuthStore } from '@/lib/store/auth';
 import type { FeasibilityReport } from '@/types';
 
 interface DPRExportBarProps {
@@ -12,11 +13,25 @@ interface DPRExportBarProps {
 export function DPRExportBar({ report }: DPRExportBarProps) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSharing, setIsSharing] = useState(false);
+  const user = useAuthStore((s) => s.user);
+
+  const applicant: DPRApplicant = {
+    name: user?.name ?? undefined,
+    phone: user?.phone ?? undefined,
+    email: user?.email ?? undefined,
+    gender: user?.gender ?? undefined,
+    category: user?.category ?? undefined,
+    dateOfBirth: user?.dateOfBirth ?? undefined,
+    village: user?.location?.village ?? undefined,
+    block: user?.location?.block ?? undefined,
+    district: user?.location?.district ?? undefined,
+    state: user?.location?.state ?? undefined,
+  };
 
   async function handleDownload() {
     setIsGenerating(true);
     try {
-      await downloadDPR(report);
+      await downloadDPR(report, applicant);
     } catch (err) {
       console.error('PDF generation failed:', err);
     } finally {
@@ -31,7 +46,7 @@ export function DPRExportBar({ report }: DPRExportBarProps) {
   async function handleWhatsApp() {
     setIsSharing(true);
     try {
-      await shareViaWhatsApp(report);
+      await shareViaWhatsApp(report, applicant);
     } catch (err) {
       console.error('WhatsApp share failed:', err);
     } finally {
