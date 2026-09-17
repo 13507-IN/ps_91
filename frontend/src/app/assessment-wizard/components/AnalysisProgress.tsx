@@ -59,27 +59,27 @@ export default function AnalysisProgress({
         className="w-full max-w-lg mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden"
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-teal-800 to-teal-900 px-6 py-5 text-white">
-          <h2 className="text-lg font-bold">Analyzing Your Business</h2>
-          <p className="text-teal-200 text-sm mt-0.5">
+        <div className="bg-gradient-to-r from-[#1A3A6B] to-[#254d8c] px-6 py-5 text-white shadow-sm">
+          <h2 className="text-lg font-bold tracking-tight">Analyzing Your Business</h2>
+          <p className="text-blue-100/90 text-sm mt-0.5">
             Running 8 analysis engines — this takes 15-30 seconds
           </p>
           {/* Progress bar */}
-          <div className="mt-3 h-2 bg-teal-700/50 rounded-full overflow-hidden">
+          <div className="mt-3.5 h-2.5 bg-white/20 rounded-full overflow-hidden p-0.5">
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-amber-400 to-emerald-400"
+              className="h-full rounded-full bg-gradient-to-r from-[#FF9933] to-[#E65C00] shadow-sm"
               initial={{ width: 0 }}
               animate={{ width: `${Math.min(progress, 100)}%` }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             />
           </div>
-          <div className="mt-1 text-right text-xs text-teal-300 font-tabular">
+          <div className="mt-1 text-right text-xs font-bold text-[#FF9933] font-tabular">
             {Math.round(progress)}%
           </div>
         </div>
 
         {/* Steps */}
-        <div className="px-6 py-4 space-y-1 max-h-[50vh] overflow-y-auto">
+        <div className="px-6 py-4 space-y-1.5 max-h-[50vh] overflow-y-auto">
           {STEPS_CONFIG.map((step, index) => {
             const stepNum = index + 1;
             const isCompleted = currentStep > stepNum;
@@ -93,11 +93,11 @@ export default function AnalysisProgress({
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${
                   isCurrent
-                    ? 'bg-teal-50 border border-teal-200'
+                    ? 'bg-blue-50/80 border border-[#1A3A6B]/25 shadow-xs'
                     : isCompleted
-                      ? 'bg-emerald-50/50'
+                      ? 'bg-emerald-50/60 border border-emerald-100'
                       : 'opacity-50'
                 }`}
               >
@@ -109,10 +109,10 @@ export default function AnalysisProgress({
                       animate={{ scale: 1 }}
                       transition={{ type: 'spring', damping: 12 }}
                     >
-                      <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                      <CheckCircle2 className="h-5 w-5 text-emerald-600" />
                     </motion.div>
                   ) : isCurrent ? (
-                    <Loader2 className="h-5 w-5 text-teal-600 animate-spin" />
+                    <Loader2 className="h-5 w-5 text-[#1A3A6B] animate-spin" />
                   ) : (
                     <Circle className="h-5 w-5 text-slate-300" />
                   )}
@@ -120,13 +120,13 @@ export default function AnalysisProgress({
 
                 {/* Step icon */}
                 <Icon className={`h-4 w-4 flex-shrink-0 ${
-                  isCompleted ? 'text-emerald-500' : isCurrent ? step.color : 'text-slate-300'
+                  isCompleted ? 'text-emerald-600' : isCurrent ? 'text-[#E65C00]' : 'text-slate-300'
                 }`} />
 
                 {/* Label */}
                 <div className="flex-1 min-w-0">
                   <p className={`text-sm ${
-                    isCurrent ? 'font-semibold text-teal-900' : isCompleted ? 'text-emerald-700' : 'text-slate-400'
+                    isCurrent ? 'font-bold text-[#1A3A6B]' : isCompleted ? 'text-emerald-900 font-medium' : 'text-slate-400'
                   }`}>
                     {customMessage || step.label}
                   </p>
@@ -134,7 +134,7 @@ export default function AnalysisProgress({
 
                 {/* Duration badge for completed */}
                 {isCompleted && (
-                  <span className="text-[10px] font-medium text-emerald-500 bg-emerald-50 px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded-md border border-emerald-200">
                     ✓
                   </span>
                 )}
@@ -150,10 +150,10 @@ export default function AnalysisProgress({
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="border-t border-slate-100 px-6 py-3 bg-amber-50"
+              className="border-t border-[#E65C00]/20 px-6 py-3 bg-[#FFF8F0]"
             >
-              <p className="text-xs text-amber-700">
-                💡 <strong>Tip:</strong> Your report will include market intelligence, financial plan, scheme matching, risk assessment, and a 30-day action plan.
+              <p className="text-xs text-[#993D00]">
+                💡 <strong className="text-[#E65C00]">Tip:</strong> Your report will include market intelligence, financial plan, scheme matching, risk assessment, and a 30-day action plan.
               </p>
             </motion.div>
           )}

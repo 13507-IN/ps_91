@@ -236,6 +236,12 @@ export interface UserProfile {
   dateOfBirth?: string | null;
   category?: SocialCategory | null;
   isMinority?: boolean;
+  businessExperience?: string | null;
+  availableLand?: string | null;
+  availableEquipment?: string | null;
+  expectedWorkingHours?: number | null;
+  preferredCategory?: BusinessCategory | null;
+  catchmentRadiusKm?: number | null;
   location?: {
     latitude?: number;
     longitude?: number;
@@ -249,7 +255,22 @@ export interface UserProfile {
 }
 
 export type UpdateUserProfileBody = Partial<
-  Pick<UserProfile, 'name' | 'email' | 'gender' | 'dateOfBirth' | 'category' | 'isMinority' | 'location'>
+  Pick<
+    UserProfile,
+    | 'name'
+    | 'email'
+    | 'gender'
+    | 'dateOfBirth'
+    | 'category'
+    | 'isMinority'
+    | 'businessExperience'
+    | 'availableLand'
+    | 'availableEquipment'
+    | 'expectedWorkingHours'
+    | 'preferredCategory'
+    | 'catchmentRadiusKm'
+    | 'location'
+  >
 >;
 
 export type AnalyzeFeasibilityBody = WizardDraft;

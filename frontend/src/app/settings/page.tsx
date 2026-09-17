@@ -46,6 +46,10 @@ function SettingsContent() {
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [category, setCategory] = useState<SocialCategory | ''>('');
   const [isMinority, setIsMinority] = useState(false);
+  const [businessExperience, setBusinessExperience] = useState('');
+  const [availableLand, setAvailableLand] = useState('');
+  const [availableEquipment, setAvailableEquipment] = useState('');
+  const [expectedWorkingHours, setExpectedWorkingHours] = useState<number | ''>('');
 
   // Location & Enterprise Preferences
   const [village, setVillage] = useState('Nadia Rural');
@@ -75,6 +79,12 @@ function SettingsContent() {
       setDateOfBirth(activeUser.dateOfBirth ? activeUser.dateOfBirth.split('T')[0] : '');
       setCategory((activeUser.category as SocialCategory) || '');
       setIsMinority(Boolean(activeUser.isMinority));
+      setBusinessExperience(activeUser.businessExperience || '');
+      setAvailableLand(activeUser.availableLand || '');
+      setAvailableEquipment(activeUser.availableEquipment || '');
+      setExpectedWorkingHours(activeUser.expectedWorkingHours ?? '');
+      if (activeUser.preferredCategory) setPreferredCategory(activeUser.preferredCategory);
+      if (activeUser.catchmentRadiusKm) setCatchmentRadiusKm(activeUser.catchmentRadiusKm);
 
       if (activeUser.location && typeof activeUser.location === 'object') {
         const loc = activeUser.location as Record<string, string>;
@@ -112,6 +122,12 @@ function SettingsContent() {
       dateOfBirth: dateOfBirth ? new Date(dateOfBirth).toISOString() : undefined,
       category: category || undefined,
       isMinority,
+      businessExperience: businessExperience.trim() || undefined,
+      availableLand: availableLand.trim() || undefined,
+      availableEquipment: availableEquipment.trim() || undefined,
+      expectedWorkingHours: expectedWorkingHours ? Number(expectedWorkingHours) : undefined,
+      preferredCategory: preferredCategory || undefined,
+      catchmentRadiusKm: catchmentRadiusKm ? Number(catchmentRadiusKm) : undefined,
       location: {
         village,
         block,

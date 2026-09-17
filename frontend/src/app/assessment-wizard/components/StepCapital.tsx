@@ -3,10 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { IndianRupee, ChevronDown, UserCheck } from 'lucide-react';
+import { IndianRupee, ChevronDown, UserCheck, RefreshCw } from 'lucide-react';
+import toast from 'react-hot-toast';
 import { inr } from '@/lib/format';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { WizardDraft, Gender, SocialCategory } from '@/types';
+
+import { useAuthStore } from '@/lib/store/auth';
 
 const schema = z.object({
   availableCapital: z.number({ message: 'Enter a valid amount' }).min(10000, 'Minimum ₹10,000').max(50000000, 'Maximum ₹5 Crore'),
@@ -33,6 +36,8 @@ interface StepCapitalProps {
 
 export default function StepCapital({ draft, updateDraft, onNext, onBack }: StepCapitalProps) {
   const { t } = useTranslation();
+  const user = useAuthStore((s) => s.user);
+
   // Expanded by default so pre-filled details are immediately visible
   const [showAdvanced, setShowAdvanced] = useState(true);
   const [capitalInput, setCapitalInput] = useState(draft.availableCapital ? String(draft.availableCapital) : '');
@@ -75,7 +80,76 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
   const watchGender = watch('gender');
   const watchCategory = watch('category');
   const watchIsMinority = watch('isMinority');
-  const hasPrefilledProfile = Boolean(watchAge || watchGender || watchCategory || draft.age || draft.gender || draft.category);
+
+  // Check what fields were actually pre-filled from user profile
+  const profileFieldsSet: string[] = [];
+  if (user?.dateOfBirth) profileFieldsSet.push('Age');
+  if (user?.gender) profileFieldsSet.push('Gender');
+  if (user?.category) profileFieldsSet.push('Category');
+  if (user?.isMinority) profileFieldsSet.push('Minority');
+  if (user?.businessExperience) profileFieldsSet.push('Experience');
+  if (user?.availableLand) profileFieldsSet.push('Land');
+  if (user?.availableEquipment) profileFieldsSet.push('Equipment');
+  if (user?.expectedWorkingHours) profileFieldsSet.push('Hours');
+  const hasPrefilledProfile = profileFieldsSet.length > 0;
+
+  function handlePrefillFromProfile() {
+    if (!user) {
+      toast.error('Please log in to load profile details.');
+      return;
+    }
+
+    const patch: Partial<WizardDraft> = {};
+
+    if (user.dateOfBirth) {
+      const dob = new Date(user.dateOfBirth);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const monthDiff = today.getMonth() - dob.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      if (age >= 18 && age <= 80) {
+        patch.age = age;
+        setValue('age', age);
+      }
+    }
+    if (user.gender) {
+      patch.gender = user.gender;
+      setValue('gender', user.gender);
+    }
+    if (user.category) {
+      patch.category = user.category;
+      setValue('category', user.category);
+    }
+    if (user.isMinority !== undefined) {
+      patch.isMinority = user.isMinority;
+      setValue('isMinority', user.isMinority);
+    }
+    if (user.businessExperience) {
+      patch.businessExperience = user.businessExperience;
+      setValue('businessExperience', user.businessExperience);
+    }
+    if (user.availableLand) {
+      patch.availableLand = user.availableLand;
+      setValue('availableLand', user.availableLand);
+    }
+    if (user.availableEquipment) {
+      patch.availableEquipment = user.availableEquipment;
+      setValue('availableEquipment', user.availableEquipment);
+    }
+    if (user.expectedWorkingHours) {
+      patch.expectedWorkingHours = user.expectedWorkingHours;
+      setValue('expectedWorkingHours', user.expectedWorkingHours);
+    }
+
+    if (Object.keys(patch).length > 0) {
+      updateDraft(patch);
+      toast.success('Profile details pre-filled into form!');
+    } else {
+      toast('No stored profile details found to pre-fill.', { icon: 'ℹ️' });
+    }
+  }
 
   function selectChip(amount: number) {
     setValue('availableCapital', amount, { shouldValidate: true });
@@ -154,12 +228,20 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
             />
             {t.capital.personalOptional}
           </button>
-          {hasPrefilledProfile && (
-            <span className="flex items-center gap-1 text-xs font-semibold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-200">
-              <UserCheck size={13} className="text-teal-600" />
-              Pre-filled from Profile
-            </span>
-          )}
+          {user ? (
+            <button
+              type="button"
+              onClick={handlePrefillFromProfile}
+              className="flex items-center gap-1.5 text-xs font-semibold text-teal-800 bg-teal-50 hover:bg-teal-100 active:scale-95 transition-all px-3 py-1.5 rounded-lg border border-teal-200 shadow-sm"
+              title="Click to apply all stored profile details to form"
+            >
+              <UserCheck size={14} className="text-teal-600 flex-shrink-0" />
+              {hasPrefilledProfile
+                ? `Pre-filled from Profile (${profileFieldsSet.join(', ')})`
+                : 'Pre-fill from Profile'}
+              <RefreshCw size={11} className="text-teal-600 opacity-70 ml-1" />
+            </button>
+          ) : null}
         </div>
 
         {showAdvanced && (

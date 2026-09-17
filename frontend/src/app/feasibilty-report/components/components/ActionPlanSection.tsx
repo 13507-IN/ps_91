@@ -1,47 +1,11 @@
-'use client';
-
-import { useEffect, useMemo, useState } from 'react';
-import { ClipboardCheck, CalendarRange } from 'lucide-react';
+import React from 'react';
+import { CalendarRange } from 'lucide-react';
 import type { ActionPlan } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 export function ActionPlanSection({ plan }: { plan: ActionPlan }) {
   const { t, lang } = useTranslation();
-  const storageKey = useMemo(() => 'ArthSetu-checklist', []);
-  // Always start with an empty set so SSR and client produce identical markup.
-  // Hydrate from sessionStorage after mount to avoid React hydration warning.
-  const [done, setDone] = useState<Set<number>>(new Set());
-
-  useEffect(() => {
-    try {
-      const raw = window.sessionStorage.getItem(storageKey);
-      if (raw) setDone(new Set<number>(JSON.parse(raw)));
-    } catch {
-      // storage unavailable — leave empty
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    try {
-      window.sessionStorage.setItem(storageKey, JSON.stringify(Array.from(done)));
-    } catch {
-      // storage unavailable
-    }
-  }, [done, storageKey]);
-
-  const progress = plan.fundingReadinessChecklist.length
-    ? Math.round((done.size / plan.fundingReadinessChecklist.length) * 100)
-    : 0;
-
-  const toggle = (i: number) =>
-    setDone((prev) => {
-      const next = new Set(prev);
-      if (next.has(i)) next.delete(i);
-      else next.add(i);
-      return next;
-    });
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6">
@@ -81,38 +45,6 @@ export function ActionPlanSection({ plan }: { plan: ActionPlan }) {
         ))}
       </div>
 
-      <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-5">
-        <div className="flex items-center justify-between">
-          <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-800">
-            <ClipboardCheck className="h-4 w-4 text-brand-600" /> Funding Readiness Checklist
-          </h3>
-          <span className="text-sm font-bold text-brand-700">{progress}%</span>
-        </div>
-        <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-slate-200">
-          <div className="h-full rounded-full bg-brand-600 transition-all" style={{ width: `${progress}%` }} />
-        </div>
-        <ul className="mt-4 space-y-2">
-          {plan.fundingReadinessChecklist.map((item, i) => (
-            <li key={item}>
-              <label className="flex cursor-pointer items-start gap-3 rounded-lg p-2 hover:bg-white">
-                <input
-                  type="checkbox"
-                  checked={done.has(i)}
-                  onChange={() => toggle(i)}
-                  className="mt-0.5 h-4 w-4 accent-brand-600"
-                />
-                <span
-                  className={`text-sm ${
-                    done.has(i) ? 'text-slate-400 line-through' : 'text-slate-700'
-                  }`}
-                >
-                  {item}
-                </span>
-              </label>
-            </li>
-          ))}
-        </ul>
-      </div>
     </section>
   );
 }
