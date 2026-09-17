@@ -195,6 +195,11 @@ export default function RegisterPage() {
     e.preventDefault();
     setError('');
 
+    if (!name.trim()) {
+      setError('Please enter your full name.');
+      return;
+    }
+
     if (!phoneValid) {
       setError('Please enter a valid 10-digit Indian mobile number.');
       return;
@@ -376,7 +381,7 @@ export default function RegisterPage() {
                   {/* Name */}
                   <div>
                     <label htmlFor="reg-name" className="block text-sm font-semibold text-[#333] mb-1.5">
-                      Full Name <span className="text-[#999] font-normal">(optional)</span>
+                      Full Name *
                     </label>
                     <div className="relative">
                       <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#999]" />
@@ -387,6 +392,7 @@ export default function RegisterPage() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Your full name"
+                        required
                         className="w-full pl-10 pr-4 py-3 border-2 border-[#DDDDDD] rounded-lg text-sm outline-none focus:border-[#E65C00] focus:shadow-[0_0_0_3px_rgba(230,92,0,0.12)] transition-all"
                       />
                     </div>
