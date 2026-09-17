@@ -48,7 +48,9 @@ export async function buildApp(): Promise<FastifyInstance> {
             }
           : undefined,
     },
-    ignoreTrailingSlash: true,
+    routerOptions: {
+      ignoreTrailingSlash: true,
+    },
   });
 
   // ---- Security ----

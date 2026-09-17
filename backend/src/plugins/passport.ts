@@ -11,7 +11,7 @@ export default fp(async function passportPlugin(fastify: FastifyInstance): Promi
   // 1. Session Plugin required for Passport
   await fastify.register(secureSession, {
     secret: env.SESSION_SECRET,
-    salt: 'udyamsetu_salt_16',
+    salt: 'udyamsetu_salt16',
     cookieName: 'arthsetu_session',
     cookie: {
       path: '/',
