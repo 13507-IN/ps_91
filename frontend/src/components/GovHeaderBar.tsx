@@ -224,8 +224,11 @@ export default function GovHeaderBar() {
 
       {/* ── Mobile drawer ── */}
       {mobileOpen && (
-        <div id="mobile-nav" className="lg:hidden bg-[#1A3A6B] border-b border-white/10 shadow-lg">
-          <nav className="flex flex-col px-4 py-3 gap-0.5" aria-label="Mobile navigation">
+        <div
+          id="mobile-nav"
+          className="lg:hidden bg-[#1A3A6B] border-b border-white/10 shadow-2xl max-h-[calc(100dvh-110px)] overflow-y-auto"
+        >
+          <nav className="flex flex-col px-3 py-2 gap-0.5" aria-label="Mobile navigation">
             {visibleNavLinks.map((link) => {
               const isActive = pathname === link.href;
               const blocked  = link.requiresAuth && !loggedIn;
@@ -234,44 +237,50 @@ export default function GovHeaderBar() {
                   key={`mob-${link.href}`}
                   href={blocked ? `/login?next=${encodeURIComponent(link.href)}` : link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded text-sm font-medium transition-colors ${
-                    isActive ? 'bg-[#E65C00] text-white' : 'text-white/80 hover:text-white hover:bg-white/10'
-                  } ${blocked ? 'opacity-50' : ''}`}
+                  className={`flex items-center gap-2.5 px-3 py-2 rounded text-xs sm:text-sm font-medium transition-colors ${
+                    isActive ? 'bg-[#E65C00] text-white font-semibold' : 'text-white/85 hover:text-white hover:bg-white/10'
+                  } ${blocked ? 'opacity-60' : ''}`}
                 >
-                  <link.icon size={16} className="flex-shrink-0" />
-                  {link.label}
+                  <link.icon size={15} className="flex-shrink-0 opacity-90" />
+                  <span>{link.label}</span>
                   {blocked && <span className="ml-auto text-[10px] text-white/40">{t.common.loginRequired}</span>}
                 </Link>
               );
             })}
 
             {/* Auth section in mobile drawer */}
-            <div className="border-t border-white/15 mt-2 pt-2 space-y-1">
+            <div className="border-t border-white/15 mt-1.5 pt-2 pb-1.5">
               {loggedIn ? (
-                <>
+                <div className="space-y-1">
                   {user?.name && (
-                    <p className="px-4 py-1 text-xs text-white/50">
-                      Signed in as <span className="font-semibold text-white/75">{user.name}</span>
+                    <p className="px-3 py-0.5 text-[11px] text-white/60">
+                      Signed in as <span className="font-semibold text-white/90">{user.name}</span>
                     </p>
                   )}
                   <button
                     onClick={() => { setMobileOpen(false); handleLogout(); }}
-                    className="w-full flex items-center gap-3 px-4 py-3 rounded text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded text-xs font-semibold text-white/90 bg-white/10 hover:bg-red-600/80 transition-colors"
                   >
-                    <LogOut size={16} /> {t.nav.logout}
+                    <LogOut size={15} /> {t.nav.logout}
                   </button>
-                </>
+                </div>
               ) : (
-                <>
-                  <Link href="/login" onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3 rounded text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors">
-                    <LogIn size={16} /> {t.nav.login}
+                <div className="grid grid-cols-2 gap-2 pt-0.5">
+                  <Link
+                    href="/login"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-center gap-1.5 px-3 py-2 rounded border border-white/30 text-xs font-semibold text-white hover:bg-white/10 transition-colors"
+                  >
+                    <LogIn size={14} /> {t.nav.login}
                   </Link>
-                  <Link href="/register" onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-center gap-2 bg-[#E65C00] hover:bg-[#CC5200] text-white font-bold px-5 py-3 rounded text-sm transition-colors mt-1">
-                    <UserPlus size={16} /> {t.nav.register}
+                  <Link
+                    href="/register"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-center gap-1.5 bg-[#E65C00] hover:bg-[#CC5200] text-white font-bold px-3 py-2 rounded text-xs transition-colors shadow-sm"
+                  >
+                    <UserPlus size={14} /> {t.nav.register}
                   </Link>
-                </>
+                </div>
               )}
             </div>
           </nav>
