@@ -76,11 +76,16 @@ class Orchestrator:
         opportunity_score = compute_opportunity_score(market_score, data)
         viability_score = compute_viability_score(market_score, risk_score, data)
 
+        # ── ML signals: demand estimate + commodity price forecast ──
+        ml_signals = _collect_ml_signals(data)
+
         logger.info(
             "stage_0_deterministic",
             market_score=market_score,
             risk_score=risk_score,
             viability_score=viability_score,
+            ml_demand=ml_signals["demand"]["daily_demand"] if ml_signals["demand"] else None,
+            ml_forecast=ml_signals["commodity_forecast"]["commodity"] if ml_signals["commodity_forecast"] else None,
         )
 
         # ── Stage 1: Parallel LLM Execution (Market, Opportunity, Competition, Risk, Pricing) ──
@@ -92,6 +97,7 @@ class Orchestrator:
             business_category=data.business_category.value,
             business_idea=data.business_idea,
             market_score=market_score,
+            ml_demand_estimate=ml_signals["demand"],
             livestock=data.livestock,
             top_crops=data.top_crops,
             language=data.language,
@@ -129,6 +135,7 @@ class Orchestrator:
             financial=data.financial,
             business_category=data.business_category.value,
             pricing=data.pricing,
+            commodity_forecast=ml_signals["commodity_forecast"],
             market_analysis={},
             language=data.language,
         )
@@ -216,7 +223,7 @@ class Orchestrator:
         # ── Stage 3: Assemble reasoning & confidence ──
         reasoning = _build_reasoning(
             data, market_score, opportunity_score, risk_score, viability_score,
-            market_result, competition_result, market_gaps,
+            market_result, competition_result, market_gaps, ml_signals,
         )
 
         confidence = _determine_confidence(data, market_result, competition_result, pricing_result)
@@ -256,6 +263,66 @@ class Orchestrator:
 
 # ── Helper functions ───────────────────────────────────────────────────
 
+def _collect_ml_signals(data: AssessmentInput) -> dict:
+    """
+    Compute optional ML-derived signals for the assessment pipeline.
+
+    Returns {"demand": dict | None, "commodity_forecast": dict | None}.
+    Never raises — every signal is wrapped so the pipeline stays deterministic.
+    """
+    demand = None
+    try:
+        from app.ml.predictor import predict_demand
+
+        livestock_count = sum(l.total_count for l in (data.livestock or []))
+        crop_area = sum(c.total_area_hectares or 0 for c in (data.top_crops or []))
+        nearest_town = data.market.nearest_town_km
+        if nearest_town is None and data.infrastructure is not None:
+            nearest_town = data.infrastructure.nearest_town_km
+
+        result = predict_demand(
+            business_category=data.business_category.value,
+            population=data.market.population,
+            households=data.market.households,
+            literacy_rate=data.market.avg_literacy_rate,
+            workers=data.market.total_workers,
+            livestock_count=livestock_count,
+            crop_area=crop_area or None,
+            nearest_town_distance=nearest_town,
+            district=data.location.district,
+        )
+        if result.available and result.daily_demand is not None:
+            demand = {
+                "available": True,
+                "daily_demand": result.daily_demand,
+                "model": result.model,
+            }
+    except Exception as exc:
+        logger.warning("ml_demand_signal_failed", error=str(exc))
+
+    commodity_forecast = None
+    try:
+        commodity = data.pricing.commodity if data.pricing else None
+        if commodity:
+            from app.ml.predictor import forecast_commodity
+
+            result = forecast_commodity(commodity, horizon_days=30)
+            if result.available and result.daily:
+                commodity_forecast = {
+                    "available": True,
+                    "commodity": result.commodity,
+                    "last_observed_date": result.last_observed_date,
+                    "window_buy": result.window_buy,
+                    "window_sell": result.window_sell,
+                    "alert": result.alert,
+                    "daily": result.daily,
+                }
+    except Exception as exc:
+        logger.warning("ml_forecast_signal_failed", error=str(exc))
+
+    return {"demand": demand, "commodity_forecast": commodity_forecast}
+
+
 def _build_reasoning(
     data: AssessmentInput,
     market_score: int,
@@ -265,6 +332,7 @@ def _build_reasoning(
     market_result: dict,
     competition_result: dict,
     market_gaps: list,
+    ml_signals: dict | None = None,
 ) -> list[dict]:
     """Build structured reasoning items with evidence tagging."""
     reasoning = []
@@ -301,6 +369,34 @@ def _build_reasoning(
         "inference": False,
         "confidence": 0.88,
     })
+
+    # ML demand estimate reasoning
+    ml_demand = ml_signals.get("demand") if isinstance(ml_signals, dict) else None
+    if ml_demand and ml_demand.get("available"):
+        reasoning.append({
+            "claim": f"ML demand model estimates {ml_demand['daily_demand']:,.0f} units/day of demand in this catchment",
+            "evidence": [
+                f"Model: {ml_demand['model']}",
+                f"Demographics input: {pop:,} population, {hh:,} households",
+            ],
+            "inference": True,
+            "confidence": 0.82,
+        })
+
+    # ML commodity price forecast reasoning
+    ml_forecast = ml_signals.get("commodity_forecast") if isinstance(ml_signals, dict) else None
+    if ml_forecast and ml_forecast.get("available"):
+        alert = ml_forecast.get("alert", {})
+        reasoning.append({
+            "claim": f"ML price forecast for '{ml_forecast['commodity']}' over the next month is available",
+            "evidence": [
+                f"Buy window: {ml_forecast['window_buy']['recommended_buying_window']} at ₹{ml_forecast['window_buy']['predicted_lowest_price']:,.2f}",
+                f"Sell window: {ml_forecast['window_sell']['potential_selling_window']} at ₹{ml_forecast['window_sell']['predicted_highest_price']:,.2f}",
+                f"Alert level: {alert.get('alert_level', 'NORMAL')} (expected +{alert.get('expected_price_increase_pct', 0):.2f}%)",
+            ],
+            "inference": True,
+            "confidence": 0.82,
+        })
 
     # Opportunity reasoning
     if market_gaps:

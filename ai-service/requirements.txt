@@ -27,3 +27,16 @@ structlog==25.4.0
 # Testing / evaluation
 pytest==8.4.1
 pytest-asyncio==1.0.0
+
+# ML model inference (loads joblib bundles trained by the ML/ pipeline)
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+joblib>=1.3
+# Demand forecaster: the trained demand_model.joblib bundles an XGBoost /
+# LightGBM / HistGradientBoosting regressor, so one of these must be present.
+xgboost>=2.0
+# Commodity forecaster: the trained <commodity>.joblib bundles a Prophet model.
+# Line is kept optional — heavy dependency (cmdstanpy). Without it, the
+# /ai/forecast-commodity endpoint reports the model unavailable.
+prophet>=1.1

@@ -19,6 +19,21 @@ Competition:
 - Verified businesses: {{ competition.verified }}
 - Total estimated: {{ competition.verified + competition.reported }}{% if competition.estimated_informal %} + {{ competition.estimated_informal.min }}–{{ competition.estimated_informal.max }} informal{% endif %}
 
+{% if commodity_forecast and commodity_forecast.available %}
+Commodity Price Forecast (ML model, next month):
+{% if commodity_forecast.commodity %}
+- Commodity: {{ commodity_forecast.commodity }}
+{% endif %}
+- Last observed date: {{ commodity_forecast.last_observed_date }}
+- Forecast period: {{ commodity_forecast.alert.expected_period[0] }} → {{ commodity_forecast.alert.expected_period[1] }}
+- Expected price increase: {{ commodity_forecast.alert.expected_price_increase_pct }}%
+- Alert level: {{ commodity_forecast.alert.alert_level }}
+- Recommended buying window: {{ commodity_forecast.window_buy.recommended_buying_window }} at ₹{{ commodity_forecast.window_buy.predicted_lowest_price }}
+- Potential selling window: {{ commodity_forecast.window_sell.potential_selling_window }} at ₹{{ commodity_forecast.window_sell.predicted_highest_price }}
+- Next-day forecast (first day): ₹{{ commodity_forecast.daily[0].predicted_price }} (range ₹{{ commodity_forecast.daily[0].lower_bound }}–₹{{ commodity_forecast.daily[0].upper_bound }})
+Use these forecast prices to anchor the recommended price range for the base commodity.
+{% endif %}
+
 Financial:
 - Project cost: ₹{{ financial.project_cost | default(0) | int }}
 {% if financial.monthly_operating_cost %}- Monthly operating cost: ₹{{ financial.monthly_operating_cost | int }}{% endif %}

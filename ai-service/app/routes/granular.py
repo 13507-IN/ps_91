@@ -8,6 +8,7 @@ Individual endpoints matching the existing Node.js AiClient contract:
   POST /ai/risk-assess
   POST /ai/recommend
   POST /ai/action-plan
+  POST /ai/forecast-commodity   # ML-powered price forecast
 """
 
 from __future__ import annotations
@@ -24,6 +25,7 @@ from app.schemas.input import (
     RecommendationInput,
     ActionPlanInput,
     RefineVoiceInput,
+    ForecastCommodityInput,
 )
 from app.schemas.output import (
     ClassifyBusinessOutput,
@@ -35,6 +37,8 @@ from app.schemas.output import (
     ActionPlanOutput,
     ActionMilestone,
     RefineVoiceOutput,
+    ForecastCommodityOutput,
+    ForecastDay,
 )
 
 logger = structlog.get_logger(__name__)
@@ -97,6 +101,38 @@ async def demand_estimate(body: DemandEstimateInput) -> DemandEstimateOutput:
     """Estimate local demand for a business category."""
     hh = body.totalHouseholds or 1000
 
+    # ── Try the trained ML demand model first ──
+    try:
+        from app.ml.predictor import predict_demand
+
+        result = predict_demand(
+            business_category=body.businessCategory.value,
+            population=body.totalPopulation,
+            households=hh,
+            literacy_rate=body.avgLiteracyRate,
+            nearest_town_distance=body.nearbyTownDistanceKm,
+        )
+        if result.available and result.daily_demand is not None:
+            daily = max(1, round(result.daily_demand))
+            return DemandEstimateOutput(
+                estimatedAnnualDemandUnits=daily * 365,
+                estimatedDailyDemandUnits=daily,
+                unit="Units",
+                confidence="MEDIUM",
+                keyDrivers=[
+                    "Trained demand model prediction",
+                    "Catchment population and household demographics",
+                    "Local literacy, connectivity and market access proxies",
+                ],
+                source="ml",
+                modelUsed=result.model,
+            )
+        if result.reason:
+            logger.info("demand_ml_unavailable_fallback_benchmark", reason=result.reason)
+    except Exception as exc:
+        logger.warning("demand_ml_error_fallback_benchmark", error=str(exc))
+
+    # ── Deterministic benchmark fallback ──
     # Per-household daily consumption benchmarks
     benchmarks: dict[str, tuple[float, str]] = {
         "DAIRY": (1.5, "Litres of Milk"),
@@ -125,6 +161,34 @@ async def demand_estimate(body: DemandEstimateInput) -> DemandEstimateOutput:
             "Standard rural daily consumption benchmarks",
             "Proximity to local panchayat hat/market centres",
         ],
+        source="benchmark",
+    )
+
+
+@router.post("/forecast-commodity", response_model=ForecastCommodityOutput)
+async def forecast_commodity(body: ForecastCommodityInput) -> ForecastCommodityOutput:
+    """Forecast next-month prices for a commodity using the trained ML model."""
+    from app.ml.predictor import forecast_commodity as run_forecast
+
+    result = run_forecast(commodity=body.commodity, horizon_days=body.horizonDays)
+
+    if not result.available or result.daily is None:
+        return ForecastCommodityOutput(
+            commodity=body.commodity,
+            available=False,
+            message=result.reason or "Commodity model unavailable.",
+            horizonDays=body.horizonDays,
+        )
+
+    return ForecastCommodityOutput(
+        commodity=body.commodity,
+        available=True,
+        last_observed_date=result.last_observed_date,
+        horizonDays=result.horizon_days or body.horizonDays,
+        daily=[ForecastDay(**point) for point in result.daily],
+        bestBuyWindow=result.window_buy,
+        bestSellWindow=result.window_sell,
+        priceAlert=result.alert,
     )
 
 

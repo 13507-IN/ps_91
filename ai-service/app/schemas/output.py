@@ -197,6 +197,11 @@ class DemandEstimateOutput(BaseModel):
     unit: str
     confidence: str
     keyDrivers: list[str]
+    source: str = Field(
+        "benchmark",
+        description="Estimation backend used: 'ml' or 'benchmark'",
+    )
+    modelUsed: Optional[str] = Field(None, description="ML model class used, when source='ml'")
 
 
 class OpportunityDiscoveryOutput(BaseModel):
@@ -245,4 +250,23 @@ class RefineVoiceOutput(BaseModel):
     original_text: str = Field(..., description="Original raw transcript or spoken text")
     detected_language: str = Field("Bengali", description="Language processed (e.g., Bengali, English)")
     suggested_category: Optional[str] = Field(None, description="Suggested business category code")
+
+
+class ForecastDay(BaseModel):
+    date: str = Field(..., description="ISO date of the forecast day")
+    predicted_price: float = Field(..., ge=0, description="Modal price forecast")
+    lower_bound: float = Field(..., ge=0, description="Lower confidence bound")
+    upper_bound: float = Field(..., ge=0, description="Upper confidence bound")
+
+
+class ForecastCommodityOutput(BaseModel):
+    commodity: str = Field(..., description="Commodity requested")
+    available: bool = Field(..., description="True when a trained model produced a forecast")
+    message: Optional[str] = Field(None, description="Reason when the model is unavailable")
+    last_observed_date: Optional[str] = Field(None, description="Last date in model training history")
+    horizonDays: int = Field(30, description="Forecast horizon in days")
+    daily: list[ForecastDay] = Field(default_factory=list)
+    bestBuyWindow: Optional[dict] = Field(None, description="Lowest forecast price / buying window")
+    bestSellWindow: Optional[dict] = Field(None, description="Highest forecast price / selling window")
+    priceAlert: Optional[dict] = Field(None, description="Expected increase and alert level")
 

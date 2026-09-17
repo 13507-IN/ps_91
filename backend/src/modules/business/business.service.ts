@@ -241,12 +241,35 @@ export class BusinessService {
       }
       const villageIds = nearbyVillages.map((v) => v.id);
 
-      const ORConditions: Prisma.BusinessWhereInput[] = [
-        {
+      // Fast path: use the PostGIS geom GIST index to pre-filter businesses in the
+      // radius, avoiding a full sequential scan on latitude/longitude ranges.
+      let geomIds: string[] = [];
+      try {
+        const rawIds = await this.prisma.$queryRaw<Array<{ id: string }>>`
+          SELECT b.id
+          FROM "Business" b
+          WHERE b.geom IS NOT NULL
+            AND b.geom && ST_Expand(ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326), ${radiusKm / 111.0})
+            AND ST_Distance(
+              b.geom::geography,
+              ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography
+            ) <= ${radiusKm * 1000}
+          LIMIT 400;
+        `;
+        geomIds = rawIds.map((r) => r.id);
+      } catch {
+        geomIds = [];
+      }
+
+      const ORConditions: Prisma.BusinessWhereInput[] = [];
+      if (geomIds.length > 0) {
+        ORConditions.push({ id: { in: geomIds } });
+      } else {
+        ORConditions.push({
           latitude: { gte: lat - latDelta, lte: lat + latDelta },
           longitude: { gte: lng - lngDelta, lte: lng + lngDelta },
-        },
-      ];
+        });
+      }
       if (villageIds.length > 0) {
         ORConditions.push({ villageId: { in: villageIds } });
       }

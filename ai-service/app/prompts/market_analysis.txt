@@ -31,6 +31,13 @@ Top crops:
 
 Market Score (pre-computed): {{ market_score }}/100
 
+{% if ml_demand_estimate %}
+ML Demand Estimate (trained model on district demographics):
+- Predicted daily demand: {{ ml_demand_estimate.daily_demand | int }} units/day
+- Model: {{ ml_demand_estimate.model }}
+This is a data-driven estimate and should inform the demand_level assessment.
+{% endif %}
+
 ## CATEGORY-SPECIFIC CONTEXT
 
 {% if business_category == "DAIRY" %}

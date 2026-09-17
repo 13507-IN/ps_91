@@ -112,6 +112,11 @@ async def health_check():
             "temperature": settings.LLM_TEMPERATURE,
             "max_retries": settings.LLM_MAX_RETRIES,
         },
+        "ml": {
+            "models_dir": str(settings.ML_MODELS_DIR),
+            "demand_model": settings.has_ml_demand,
+            "commodities": settings.ml_commodities,
+        },
     }
 
 

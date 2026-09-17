@@ -18,6 +18,17 @@ CREATE INDEX IF NOT EXISTS idx_business_geom ON "Business" USING GIST(geom);
 -- Create trigram index for fuzzy village name search
 CREATE INDEX IF NOT EXISTS idx_village_name_trgm ON "Village" USING GIN(name gin_trgm_ops);
 
+-- Create trigram indexes for local name and commodity/district fuzzy search
+CREATE INDEX IF NOT EXISTS idx_village_name_local_trgm ON "Village" USING GIN("nameLocal" gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS idx_commodity_price_commodity_trgm ON "CommodityPrice" USING GIN("commodity" gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS idx_commodity_price_district_trgm ON "CommodityPrice" USING GIN("district" gin_trgm_ops);
+
+-- Backfill geometry for rows created before the geom column / triggers existed
+UPDATE "Village" SET geom = ST_SetSRID(ST_MakePoint("longitude", "latitude"), 4326)
+WHERE geom IS NULL AND "latitude" IS NOT NULL AND "longitude" IS NOT NULL;
+UPDATE "Business" SET geom = ST_SetSRID(ST_MakePoint("longitude", "latitude"), 4326)
+WHERE geom IS NULL AND "latitude" IS NOT NULL AND "longitude" IS NOT NULL;
+
 -- Function to auto-populate geom from lat/lng
 CREATE OR REPLACE FUNCTION update_village_geom()
 RETURNS TRIGGER AS $$

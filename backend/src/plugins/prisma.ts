@@ -9,7 +9,12 @@ export function createPrismaClient(options?: Record<string, unknown>): PrismaCli
     process.env['DATABASE_URL'] ||
     process.env['DIRECT_DATABASE_URL'] ||
     'postgresql://postgres:postgres@localhost:5432/arthsetu';
-  const pool = new pg.Pool({ connectionString });
+  // Pool size is configurable so concurrent requests don't queue behind the
+  // default 10 connections (queued queries show up as "slow queries").
+  const pool = new pg.Pool({
+    connectionString,
+    max: Number(process.env['DATABASE_POOL_SIZE'] ?? 10),
+  });
   const adapter = new PrismaPg(pool);
   return new PrismaClient({ adapter, ...(options as any) });
 }

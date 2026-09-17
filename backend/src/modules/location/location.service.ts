@@ -1,5 +1,6 @@
 import type { PrismaClient, Village, Block, District, State } from '@prisma/client';
 import { NotFoundError } from '../../lib/errors.js';
+import { cacheGet, cacheSet, cacheKey } from '../../lib/cache.js';
 import { geocodePlace, type Geocoder } from './geocode.js';
 import type { CreateVillageInput } from './location.schema.js';
 
@@ -261,27 +262,15 @@ export class LocationService {
     radiusKm = 10,
     limit = 50,
   ): Promise<VillageSummary[]> {
-    try {
-      const latDelta = radiusKm / 111.0;
-      const lngDelta = radiusKm / (111.0 * Math.cos((lat * Math.PI) / 180));
+    const key = cacheKey('nearby_villages', lat.toFixed(3), lng.toFixed(3), radiusKm, limit);
+    const cached = await cacheGet<VillageSummary[]>(key);
+    if (cached && cached.length > 0) return cached;
 
-      // Pure SQL Haversine query using latitude/longitude columns (works on ALL Postgres DBs without requiring PostGIS 'geom' column)
-      const rawResults = await this.prisma.$queryRaw<
-        Array<{
-          id: number;
-          name: string;
-          nameLocal: string | null;
-          blockName: string;
-          districtName: string;
-          stateName: string;
-          latitude: number | null;
-          longitude: number | null;
-          distanceKm: number;
-          totalPopulation: number | null;
-          totalHouseholds: number | null;
-        }>
-      >`
-        SELECT 
+    // Fast path: PostGIS geometry + GIST index (ST_Expand bounding box -> index scan).
+    // Requires the geom column populated by 00_postgis_setup.sql / its triggers.
+    try {
+      const rawResults = await this.prisma.$queryRaw<VillageSummary[]>`
+        SELECT
           v.id,
           v.name,
           v."nameLocal",
@@ -290,12 +279,10 @@ export class LocationService {
           s.name AS "stateName",
           v.latitude,
           v.longitude,
-          ROUND((6371.0 * acos(
-            LEAST(1.0, GREATEST(-1.0,
-              cos(radians(${lat})) * cos(radians(v.latitude)) * cos(radians(v.longitude) - radians(${lng})) +
-              sin(radians(${lat})) * sin(radians(v.latitude))
-            ))
-          ))::numeric, 2)::float AS "distanceKm",
+          ROUND((ST_Distance(
+            v.geom::geography,
+            ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography
+          ) / 1000)::numeric, 2)::float AS "distanceKm",
           c."totalPopulation",
           c."totalHouseholds"
         FROM "Village" v
@@ -303,74 +290,86 @@ export class LocationService {
         JOIN "District" d ON b."districtId" = d.id
         JOIN "State" s ON d."stateId" = s.id
         LEFT JOIN "CensusData" c ON v.id = c."villageId"
-        WHERE v.latitude IS NOT NULL 
-          AND v.longitude IS NOT NULL
-          AND v.latitude BETWEEN (${lat - latDelta}) AND (${lat + latDelta})
-          AND v.longitude BETWEEN (${lng - lngDelta}) AND (${lng + lngDelta})
+        WHERE v.geom IS NOT NULL
+          AND v.geom && ST_Expand(ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326), ${radiusKm / 111.0})
+          AND ST_Distance(
+            v.geom::geography,
+            ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326)::geography
+          ) <= ${radiusKm * 1000}
         ORDER BY "distanceKm" ASC
         LIMIT ${limit};
       `;
 
-      return rawResults;
+      if (rawResults.length > 0) {
+        await cacheSet(key, rawResults, 3600);
+        return rawResults;
+      }
     } catch {
-      // Fallback: Haversine bounding-box search via Prisma when PostGIS geom column is not populated
-      const latDelta = radiusKm / 111.0;
-      const lngDelta = radiusKm / (111.0 * Math.cos((lat * Math.PI) / 180));
+      // PostGIS geom column unavailable — fall through to the index-backed bounding box.
+    }
 
-      const candidates = await this.prisma.village.findMany({
-        where: {
-          latitude: {
-            gte: lat - latDelta,
-            lte: lat + latDelta,
-          },
-          longitude: {
-            gte: lng - lngDelta,
-            lte: lng + lngDelta,
-          },
+    // Fallback: Haversine bounding-box search via Prisma.
+    // Indexed by Village(latitude, longitude); legacy rows without geom are covered here.
+    const latDelta = radiusKm / 111.0;
+    const lngDelta = radiusKm / (111.0 * Math.cos((lat * Math.PI) / 180));
+
+    const candidates = await this.prisma.village.findMany({
+      where: {
+        latitude: {
+          gte: lat - latDelta,
+          lte: lat + latDelta,
         },
-        include: {
-          block: {
-            include: {
-              district: {
-                include: {
-                  state: true,
-                },
+        longitude: {
+          gte: lng - lngDelta,
+          lte: lng + lngDelta,
+        },
+      },
+      include: {
+        block: {
+          include: {
+            district: {
+              include: {
+                state: true,
               },
             },
           },
-          censusData: {
-            select: {
-              totalPopulation: true,
-              totalHouseholds: true,
-            },
+        },
+        censusData: {
+          select: {
+            totalPopulation: true,
+            totalHouseholds: true,
           },
         },
-      });
+      },
+    });
 
-      const withDistance: VillageSummary[] = [];
-      for (const v of candidates) {
-        if (v.latitude === null || v.longitude === null) continue;
-        const dist = this.haversineDistance(lat, lng, v.latitude, v.longitude);
-        if (dist <= radiusKm) {
-          withDistance.push({
-            id: v.id,
-            name: v.name,
-            nameLocal: v.nameLocal,
-            blockName: v.block.name,
-            districtName: v.block.district.name,
-            stateName: v.block.district.state.name,
-            latitude: v.latitude,
-            longitude: v.longitude,
-            distanceKm: Math.round(dist * 100) / 100,
-            totalPopulation: v.censusData?.totalPopulation ?? null,
-            totalHouseholds: v.censusData?.totalHouseholds ?? null,
-          });
-        }
+    const withDistance: VillageSummary[] = [];
+    for (const v of candidates) {
+      if (v.latitude === null || v.longitude === null) continue;
+      const dist = this.haversineDistance(lat, lng, v.latitude, v.longitude);
+      if (dist <= radiusKm) {
+        withDistance.push({
+          id: v.id,
+          name: v.name,
+          nameLocal: v.nameLocal,
+          blockName: v.block.name,
+          districtName: v.block.district.name,
+          stateName: v.block.district.state.name,
+          latitude: v.latitude,
+          longitude: v.longitude,
+          distanceKm: Math.round(dist * 100) / 100,
+          totalPopulation: v.censusData?.totalPopulation ?? null,
+          totalHouseholds: v.censusData?.totalHouseholds ?? null,
+        });
       }
-
-      withDistance.sort((a, b) => (a.distanceKm ?? 0) - (b.distanceKm ?? 0));
-      return withDistance.slice(0, limit);
     }
+
+    withDistance.sort((a, b) => (a.distanceKm ?? 0) - (b.distanceKm ?? 0));
+    const result = withDistance.slice(0, limit);
+    if (result.length > 0) {
+      await cacheSet(key, result, 3600);
+    }
+    return result;
   }
 
   /**

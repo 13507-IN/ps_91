@@ -29,13 +29,22 @@ class MarketAgent(BaseAgent):
     def fallback(self, **kwargs: Any) -> dict:
         data: AssessmentInput = kwargs.get("data")
         market_score: int = kwargs.get("market_score", 50)
+        ml_demand = kwargs.get("ml_demand_estimate")
 
         demand = data.market.estimated_demand or 0
         supply = data.market.estimated_supply or 0
         pop = data.market.population
 
+        ml_demand_value = (
+            ml_demand.get("daily_demand")
+            if isinstance(ml_demand, dict) and ml_demand.get("available")
+            else None
+        )
+
         # Determine demand level
-        if demand > 0 and supply > 0:
+        if ml_demand_value:
+            demand_level = "high" if ml_demand_value > pop * 0.10 else ("medium" if ml_demand_value > pop * 0.03 else "low")
+        elif demand > 0 and supply > 0:
             gap = (demand - supply) / demand
             demand_level = "high" if gap > 0.15 else ("medium" if gap > -0.1 else "low")
         elif pop > 5000:
@@ -56,6 +65,8 @@ class MarketAgent(BaseAgent):
             condition = "saturated"
 
         reasoning = []
+        if ml_demand_value:
+            reasoning.append(f"ML demand model predicts approximately {ml_demand_value:,.0f} units/day of demand in this catchment.")
         if demand > supply:
             reasoning.append(f"Estimated demand ({demand:.0f}) exceeds known supply ({supply:.0f}), indicating unmet market need.")
         elif demand > 0:

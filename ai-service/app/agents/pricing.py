@@ -45,6 +45,31 @@ class PricingAgent(BaseAgent):
     def fallback(self, **kwargs: Any) -> dict:
         data: AssessmentInput = kwargs.get("data")
         cat = data.business_category.value
+        forecast = kwargs.get("commodity_forecast")
+
+        # Use the ML commodity forecast when available — it anchors the range
+        forecast_available = isinstance(forecast, dict) and forecast.get("available") and forecast.get("window_buy") and forecast.get("window_sell")
+        if forecast_available:
+            price_min = float(forecast["window_buy"]["predicted_lowest_price"])
+            price_max = float(forecast["window_sell"]["predicted_highest_price"])
+            if price_max < price_min:
+                price_min, price_max = price_max, price_min
+
+            total_comp = data.competition.verified + data.competition.reported
+            unit = data.pricing.unit if data.pricing else "per unit"
+            strategy = "competitive penetration" if total_comp > 10 else ("market matching" if total_comp > 3 else "value-based premium")
+            reasoning = (
+                f"ML price forecast for {forecast.get('commodity', cat.lower())} ranges ₹{price_min:.0f}–₹{price_max:.0f} {unit} over the next month "
+                f"(buy window {forecast['window_buy']['recommended_buying_window']}, sell window {forecast['window_sell']['potential_selling_window']}, "
+                f"alert {forecast['alert']['alert_level']} / +{forecast['alert']['expected_price_increase_pct']}%). "
+                f"Anchor retail pricing to the forecast range with {strategy} given {total_comp} known competitors."
+            )
+            return {
+                "recommended_price_range": {"min": price_min, "max": price_max},
+                "strategy": strategy,
+                "reasoning": reasoning,
+                "confidence": "medium",
+            }
 
         # Use actual pricing data if available
         if data.pricing and data.pricing.min is not None and data.pricing.max is not None:

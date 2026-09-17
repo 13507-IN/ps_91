@@ -41,11 +41,12 @@ POST /ai/assessment    → Full business intelligence pipeline
 ### Granular Endpoints (used by Node.js backend)
 ```
 POST /ai/classify-business     → Classify free-text business idea
-POST /ai/demand-estimate       → Estimate local demand
+POST /ai/demand-estimate       → Estimate local demand (ML model, benchmark fallback)
 POST /ai/opportunity-discover  → Detect market gaps
 POST /ai/risk-assess           → Risk analysis
 POST /ai/recommend             → Business recommendation
 POST /ai/action-plan           → 30-day action plan
+POST /ai/forecast-commodity    → Commodity price forecast (ML model)
 ```
 
 ### Health
@@ -66,6 +67,58 @@ If no API keys are configured, the service runs entirely on deterministic fallba
 ## Environment Variables
 
 See `.env.example` for all configurable options.
+
+## ML Model Integration
+
+The service loads the trained model artifacts produced by the [`ML/`](../ML/README.md)
+pipeline and exposes them over the existing granular endpoints:
+
+- `/ai/demand-estimate` uses `ML/models/demand/demand_model.joblib` (XGBoost/
+  LightGBM/HistGradientBoosting regressor) and falls back to the benchmark
+  heuristic if the model or its dependencies are missing.
+- `/ai/forecast-commodity` uses `ML/models/commodity/<commodity>.joblib`
+  (Prophet/ARIMA/seasonal-naive bundle) and reports `available=false` when no
+  trained model exists for the requested commodity.
+
+Both are loaded lazily at first call via `app/ml/predictor.py`. Point
+`ML_MODELS_DIR` at a different location to override the default
+(`<repo>/ML/models`). Retraining stays in the ML pipeline — the service only
+consumes the artifacts.
+
+The unified `POST /ai/assessment` pipeline also consumes these ML signals as
+evidence:
+
+- The market agent receives the ML demand estimate (`market_analysis`).
+- The pricing agent receives the next-month commodity forecast (set
+  `pricing.commodity`, e.g. `"potato"`) and anchors its recommended price
+  range to the forecast, including buy/sell windows and spike alerts.
+- Matching reasoning items are added to the output's `reasoning` block.
+
+Forcing the deterministic fallbacks is supported: agents gracefully skip ML
+signals that are unavailable.
+
+## Deploying the service
+
+The ML models run **inside** this service — no separate model deployment is
+needed — but the trained artifacts must be reachable at startup/at first call:
+
+- Ship the `ML/models/` directory alongside the service, **or**
+- Set `ML_MODELS_DIR` to wherever the artifacts live
+  (e.g. `ML_MODELS_DIR=/opt/models/arthsetu`).
+
+Verify the wiring after deploy with `GET /health`, which now reports:
+
+```json
+"ml": {
+  "models_dir": "/path/to/ML/models",
+  "demand_model": true,
+  "commodities": ["potato.joblib"]
+}
+```
+
+`demand_model: false` or an empty `commodities` list means the artifacts are
+missing — endpoints degrade to benchmark heuristics (`/ai/demand-estimate`) or
+return `available:false` (`/ai/forecast-commodity`).
 
 ## Evaluation
 

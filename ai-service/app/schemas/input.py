@@ -72,6 +72,7 @@ class CompetitionInput(BaseModel):
 
 class PricingInput(BaseModel):
     """Commodity pricing data (e.g. from AGMARKNET)."""
+    commodity: Optional[str] = Field(None, description="Commodity name, e.g. 'potato'")
     min: Optional[float] = Field(None, description="Minimum observed price")
     max: Optional[float] = Field(None, description="Maximum observed price")
     modal: Optional[float] = Field(None, description="Modal / most frequent price")
@@ -197,4 +198,9 @@ class RefineVoiceInput(BaseModel):
     audio_base64: Optional[str] = Field(None, description="Base64 encoded audio recording")
     mime_type: Optional[str] = Field("audio/webm", description="MIME type of audio")
     language: Optional[str] = Field("bn", description="Spoken language code (e.g. bn, en)")
+
+
+class ForecastCommodityInput(BaseModel):
+    commodity: str = Field(..., min_length=1, description="Commodity name, e.g. 'potato'")
+    horizonDays: int = Field(30, ge=1, le=90, description="Forecast horizon in days")
 

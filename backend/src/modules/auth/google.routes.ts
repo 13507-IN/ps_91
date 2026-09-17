@@ -10,7 +10,7 @@ interface TempTokenPayload {
 
 export async function googleAuthRoutes(fastify: FastifyInstance): Promise<void> {
   const env = getEnv();
-  const FRONTEND_URL = process.env['FRONTEND_URL'] || 'http://localhost:3000';
+  const FRONTEND_URL = env.FRONTEND_URL;
 
   // ---- 1. GET /api/v1/auth/google ----
   fastify.get(

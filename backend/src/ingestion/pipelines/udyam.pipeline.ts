@@ -192,7 +192,7 @@ export class UdyamPipeline implements DataPipeline {
           if (village) villageId = village.id;
         }
 
-        // Check for duplicate registration
+        // Check for duplicate registration (indexed by Business.registrationId)
         const existing = await tx.business.findFirst({
           where: { registrationId: data.registrationId },
         });

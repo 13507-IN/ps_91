@@ -490,9 +490,10 @@ export class MarketService {
         verificationStatus: b.verificationStatus,
       }));
 
-    // Supplement with realistic category-matched local businesses if DB count is low
+    // Seed realistic category-matched demo competitors ONLY when the DB has no real
+    // businesses here — fallback rows must never inflate observed/reported estimates.
     const targetCatKey = category || 'OTHER';
-    if (observed.length + reported.length < 3) {
+    if (observed.length === 0 && reported.length === 0) {
       const fallbacks = FALLBACK_COMPETITORS[targetCatKey] || FALLBACK_COMPETITORS['OTHER'] || [];
       let idx = 1;
       for (const fb of fallbacks) {

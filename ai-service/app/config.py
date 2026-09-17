@@ -40,6 +40,12 @@ class Settings:
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO").upper()
     LOG_FORMAT: str = os.getenv("LOG_FORMAT", "json")  # "json" or "console"
 
+    # ML model artifacts (shared with the ML/ pipeline)
+    REPO_ROOT: Path = Path(__file__).resolve().parents[2]
+    ML_MODELS_DIR: Path = Path(
+        os.getenv("ML_MODELS_DIR", str(REPO_ROOT / "ML" / "models"))
+    )
+
     # Paths
     BASE_DIR: Path = Path(__file__).resolve().parent
     PROMPTS_DIR: Path = BASE_DIR / "prompts"
@@ -57,6 +63,23 @@ class Settings:
     @property
     def has_any_llm(self) -> bool:
         return self.has_gemini or self.has_groq
+
+    @property
+    def has_ml_models(self) -> bool:
+        """True when the ML models directory exists and is non-empty."""
+        return bool(self.ML_MODELS_DIR.is_dir()) and any(self.ML_MODELS_DIR.rglob("*.joblib"))
+
+    @property
+    def has_ml_demand(self) -> bool:
+        return (self.ML_MODELS_DIR / "demand" / "demand_model.joblib").exists()
+
+    @property
+    def ml_commodities(self) -> list[str]:
+        """Commodity names with a trained model (from 'commodity/<name>.joblib')."""
+        dir_path = self.ML_MODELS_DIR / "commodity"
+        if not dir_path.is_dir():
+            return []
+        return sorted(p.name for p in dir_path.glob("*.joblib"))
 
 
 settings = Settings()

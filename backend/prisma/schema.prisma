@@ -209,11 +209,12 @@ model Village {
   roads       RoadConnectivity[]
   amenities   VillageAmenity?
 
-  // NOTE: PostGIS geometry column 'geom' added via raw SQL migration.
-  // Use $queryRaw for spatial queries (ST_DWithin, ST_Distance, etc.)
+  // PostGIS geometry column — use $queryRaw for spatial queries (ST_DWithin, ST_Distance, etc.)
+  geom  Unsupported("geometry(Point,4326)")?
 
   @@index([blockId])
   @@index([name])
+  @@index([latitude, longitude])
 }
 
 // ===================== DEMOGRAPHIC DATA =====================
@@ -267,10 +268,13 @@ model Business {
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
 
-  // NOTE: PostGIS geometry column 'geom' added via raw SQL migration.
+  // PostGIS geometry column — use $queryRaw for spatial queries
+  geom  Unsupported("geometry(Point,4326)")?
 
   @@index([category])
   @@index([villageId])
+  @@index([latitude, longitude])
+  @@index([registrationId])
 }
 
 // ===================== LIVESTOCK DATA =====================
@@ -331,6 +335,7 @@ model CommodityPrice {
   createdAt  DateTime   @default(now())
 
   @@index([commodity, district, date(sort: Desc)])
+  @@index([commodity, market, date])
 }
 
 // ===================== ROAD CONNECTIVITY =====================
