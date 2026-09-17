@@ -8,4 +8,8 @@ def logger(name):
     return logging.getLogger(name)
 
 def metrics(actual, predicted):
-    return {"mae": float(mean_absolute_error(actual, predicted)), "rmse": float(np.sqrt(mean_squared_error(actual, predicted))), "r2": float(r2_score(actual, predicted)) if len(set(actual)) > 1 else 0.0}
+    actual = np.asarray(actual, dtype=float)
+    predicted = np.asarray(predicted, dtype=float)
+    denominator = (np.abs(actual) + np.abs(predicted)) / 2
+    valid = denominator > 1e-9
+    return {"mae": float(mean_absolute_error(actual, predicted)), "rmse": float(np.sqrt(mean_squared_error(actual, predicted))), "r2": float(r2_score(actual, predicted)) if len(set(actual)) > 1 else 0.0, "smape": float(np.mean(np.abs(actual[valid] - predicted[valid]) / denominator[valid]) * 100) if valid.any() else 0.0}

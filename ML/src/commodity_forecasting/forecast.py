@@ -36,6 +36,12 @@ def forecast_next_month(root: Path, commodity: str, horizon: int = FORECAST_HORI
     if bundle["kind"] == "prophet":
         output = bundle["model"].predict(pd.DataFrame({"ds": dates}))
         predicted = output.yhat.to_numpy(); lower = output.yhat_lower.to_numpy(); upper = output.yhat_upper.to_numpy()
+    elif bundle["kind"] == "arima":
+        output = bundle["model"].get_forecast(steps=horizon)
+        predicted = np.asarray(output.predicted_mean, dtype=float)
+        interval = output.conf_int(alpha=0.05)
+        lower = np.asarray(interval.iloc[:, 0], dtype=float)
+        upper = np.asarray(interval.iloc[:, 1], dtype=float)
     else:
         predicted = np.resize(bundle["values"][-min(7, len(bundle["values"])):], horizon)
         spread = max(bundle.get("residual_std", 0.0), float(np.std(bundle["values"]) * 0.05))

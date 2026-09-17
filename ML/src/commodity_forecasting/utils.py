@@ -5,7 +5,7 @@ import logging
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
 def logger(name: str) -> logging.Logger:
@@ -17,10 +17,14 @@ def metrics(actual, predicted) -> dict[str, float]:
     actual = np.asarray(actual, dtype=float)
     predicted = np.asarray(predicted, dtype=float)
     nonzero = np.abs(actual) > 1e-9
+    denominator = (np.abs(actual) + np.abs(predicted)) / 2
+    valid = denominator > 1e-9
     return {
         "mae": float(mean_absolute_error(actual, predicted)),
         "rmse": float(np.sqrt(mean_squared_error(actual, predicted))),
+        "r2": float(r2_score(actual, predicted)) if len(set(actual)) > 1 else 0.0,
         "mape": float(np.mean(np.abs((actual[nonzero] - predicted[nonzero]) / actual[nonzero])) * 100) if nonzero.any() else 0.0,
+        "smape": float(np.mean(np.abs(actual[valid] - predicted[valid]) / denominator[valid]) * 100) if valid.any() else 0.0,
     }
 
 

@@ -1,336 +1,1769 @@
 date,modal_price,commodity,market,district,state
-2026-01-01,2000.0,potato,Central,North,A
-2026-01-02,2000.3225806451612,potato,Central,North,A
-2026-01-03,2000.6451612903227,potato,Central,North,A
-2026-01-04,2000.967741935484,potato,Central,North,A
-2026-01-05,2001.2903225806451,potato,Central,North,A
-2026-01-06,2001.6129032258063,potato,Central,North,A
-2026-01-07,2001.9354838709678,potato,Central,North,A
-2026-01-08,2002.258064516129,potato,Central,North,A
-2026-01-09,2002.5806451612902,potato,Central,North,A
-2026-01-10,2002.9032258064517,potato,Central,North,A
-2026-01-11,2003.225806451613,potato,Central,North,A
-2026-01-12,2003.5483870967741,potato,Central,North,A
-2026-01-13,2003.8709677419354,potato,Central,North,A
-2026-01-14,2004.1935483870968,potato,Central,North,A
-2026-01-15,2004.516129032258,potato,Central,North,A
-2026-01-16,2004.8387096774193,potato,Central,North,A
-2026-01-17,2005.1612903225807,potato,Central,North,A
-2026-01-18,2005.483870967742,potato,Central,North,A
-2026-01-19,2005.8064516129032,potato,Central,North,A
-2026-01-20,2006.1290322580646,potato,Central,North,A
-2026-01-21,2006.4516129032259,potato,Central,North,A
-2026-01-22,2006.774193548387,potato,Central,North,A
-2026-01-23,2007.0967741935483,potato,Central,North,A
-2026-01-24,2007.4193548387098,potato,Central,North,A
-2026-01-25,2007.741935483871,potato,Central,North,A
-2026-01-26,2008.0645161290322,potato,Central,North,A
-2026-01-27,2008.3870967741937,potato,Central,North,A
-2026-01-28,2008.7096774193549,potato,Central,North,A
-2026-01-29,2009.032258064516,potato,Central,North,A
-2026-01-30,2009.3548387096773,potato,Central,North,A
-2026-01-31,2009.6774193548388,potato,Central,North,A
-2026-02-01,2010.0,potato,Central,North,A
-2026-02-02,2010.357142857143,potato,Central,North,A
-2026-02-03,2010.7142857142858,potato,Central,North,A
-2026-02-04,2011.0714285714287,potato,Central,North,A
-2026-02-05,2011.4285714285713,potato,Central,North,A
-2026-02-06,2011.7857142857142,potato,Central,North,A
-2026-02-07,2012.142857142857,potato,Central,North,A
-2026-02-08,2012.5,potato,Central,North,A
-2026-02-09,2012.857142857143,potato,Central,North,A
-2026-02-10,2013.2142857142858,potato,Central,North,A
-2026-02-11,2013.5714285714287,potato,Central,North,A
-2026-02-12,2013.9285714285713,potato,Central,North,A
-2026-02-13,2014.2857142857142,potato,Central,North,A
-2026-02-14,2014.642857142857,potato,Central,North,A
-2026-02-15,2015.0,potato,Central,North,A
-2026-02-16,2015.357142857143,potato,Central,North,A
-2026-02-17,2015.7142857142858,potato,Central,North,A
-2026-02-18,2016.0714285714287,potato,Central,North,A
-2026-02-19,2016.4285714285713,potato,Central,North,A
-2026-02-20,2016.7857142857142,potato,Central,North,A
-2026-02-21,2017.142857142857,potato,Central,North,A
-2026-02-22,2017.5,potato,Central,North,A
-2026-02-23,2017.857142857143,potato,Central,North,A
-2026-02-24,2018.2142857142858,potato,Central,North,A
-2026-02-25,2018.5714285714287,potato,Central,North,A
-2026-02-26,2018.9285714285713,potato,Central,North,A
-2026-02-27,2019.2857142857142,potato,Central,North,A
-2026-02-28,2019.642857142857,potato,Central,North,A
-2026-03-01,2020.0,potato,Central,North,A
-2026-03-02,2020.3225806451612,potato,Central,North,A
-2026-03-03,2020.6451612903227,potato,Central,North,A
-2026-03-04,2020.967741935484,potato,Central,North,A
-2026-03-05,2021.2903225806451,potato,Central,North,A
-2026-03-06,2021.6129032258063,potato,Central,North,A
-2026-03-07,2021.9354838709678,potato,Central,North,A
-2026-03-08,2022.258064516129,potato,Central,North,A
-2026-03-09,2022.5806451612902,potato,Central,North,A
-2026-03-10,2022.9032258064517,potato,Central,North,A
-2026-03-11,2023.225806451613,potato,Central,North,A
-2026-03-12,2023.5483870967741,potato,Central,North,A
-2026-03-13,2023.8709677419354,potato,Central,North,A
-2026-03-14,2024.1935483870968,potato,Central,North,A
-2026-03-15,2024.516129032258,potato,Central,North,A
-2026-03-16,2024.8387096774193,potato,Central,North,A
-2026-03-17,2025.1612903225807,potato,Central,North,A
-2026-03-18,2025.483870967742,potato,Central,North,A
-2026-03-19,2025.8064516129032,potato,Central,North,A
-2026-03-20,2026.1290322580646,potato,Central,North,A
-2026-03-21,2026.4516129032259,potato,Central,North,A
-2026-03-22,2026.774193548387,potato,Central,North,A
-2026-03-23,2027.0967741935483,potato,Central,North,A
-2026-03-24,2027.4193548387098,potato,Central,North,A
-2026-03-25,2027.741935483871,potato,Central,North,A
-2026-03-26,2028.0645161290322,potato,Central,North,A
-2026-03-27,2028.3870967741937,potato,Central,North,A
-2026-03-28,2028.7096774193549,potato,Central,North,A
-2026-03-29,2029.032258064516,potato,Central,North,A
-2026-03-30,2029.3548387096773,potato,Central,North,A
-2026-03-31,2029.6774193548388,potato,Central,North,A
-2026-04-01,2030.0,potato,Central,North,A
-2026-04-02,2030.3333333333333,potato,Central,North,A
-2026-04-03,2030.6666666666667,potato,Central,North,A
-2026-04-04,2031.0,potato,Central,North,A
-2026-04-05,2031.3333333333333,potato,Central,North,A
-2026-04-06,2031.6666666666667,potato,Central,North,A
-2026-04-07,2032.0,potato,Central,North,A
-2026-04-08,2032.3333333333333,potato,Central,North,A
-2026-04-09,2032.6666666666667,potato,Central,North,A
-2026-04-10,2033.0,potato,Central,North,A
-2026-04-11,2033.3333333333333,potato,Central,North,A
-2026-04-12,2033.6666666666667,potato,Central,North,A
-2026-04-13,2034.0,potato,Central,North,A
-2026-04-14,2034.3333333333333,potato,Central,North,A
-2026-04-15,2034.6666666666667,potato,Central,North,A
-2026-04-16,2035.0,potato,Central,North,A
-2026-04-17,2035.3333333333333,potato,Central,North,A
-2026-04-18,2035.6666666666667,potato,Central,North,A
-2026-04-19,2036.0,potato,Central,North,A
-2026-04-20,2036.3333333333333,potato,Central,North,A
-2026-04-21,2036.6666666666667,potato,Central,North,A
-2026-04-22,2037.0,potato,Central,North,A
-2026-04-23,2037.3333333333333,potato,Central,North,A
-2026-04-24,2037.6666666666667,potato,Central,North,A
-2026-04-25,2038.0,potato,Central,North,A
-2026-04-26,2038.3333333333333,potato,Central,North,A
-2026-04-27,2038.6666666666667,potato,Central,North,A
-2026-04-28,2039.0,potato,Central,North,A
-2026-04-29,2039.3333333333333,potato,Central,North,A
-2026-04-30,2039.6666666666667,potato,Central,North,A
-2026-05-01,2040.0,potato,Central,North,A
-2026-05-02,2040.3225806451612,potato,Central,North,A
-2026-05-03,2040.6451612903227,potato,Central,North,A
-2026-05-04,2040.967741935484,potato,Central,North,A
-2026-05-05,2041.2903225806451,potato,Central,North,A
-2026-05-06,2041.6129032258063,potato,Central,North,A
-2026-05-07,2041.9354838709678,potato,Central,North,A
-2026-05-08,2042.258064516129,potato,Central,North,A
-2026-05-09,2042.5806451612902,potato,Central,North,A
-2026-05-10,2042.9032258064517,potato,Central,North,A
-2026-05-11,2043.225806451613,potato,Central,North,A
-2026-05-12,2043.5483870967741,potato,Central,North,A
-2026-05-13,2043.8709677419354,potato,Central,North,A
-2026-05-14,2044.1935483870968,potato,Central,North,A
-2026-05-15,2044.516129032258,potato,Central,North,A
-2026-05-16,2044.8387096774193,potato,Central,North,A
-2026-05-17,2045.1612903225807,potato,Central,North,A
-2026-05-18,2045.483870967742,potato,Central,North,A
-2026-05-19,2045.8064516129032,potato,Central,North,A
-2026-05-20,2046.1290322580646,potato,Central,North,A
-2026-05-21,2046.4516129032259,potato,Central,North,A
-2026-05-22,2046.774193548387,potato,Central,North,A
-2026-05-23,2047.0967741935483,potato,Central,North,A
-2026-05-24,2047.4193548387098,potato,Central,North,A
-2026-05-25,2047.741935483871,potato,Central,North,A
-2026-05-26,2048.064516129032,potato,Central,North,A
-2026-05-27,2048.3870967741937,potato,Central,North,A
-2026-05-28,2048.7096774193546,potato,Central,North,A
-2026-05-29,2049.032258064516,potato,Central,North,A
-2026-05-30,2049.3548387096776,potato,Central,North,A
-2026-05-31,2049.6774193548385,potato,Central,North,A
-2026-06-01,2050.0,potato,Central,North,A
-2026-06-02,2050.3333333333335,potato,Central,North,A
-2026-06-03,2050.6666666666665,potato,Central,North,A
-2026-06-04,2051.0,potato,Central,North,A
-2026-06-05,2051.3333333333335,potato,Central,North,A
-2026-06-06,2051.6666666666665,potato,Central,North,A
-2026-06-07,2052.0,potato,Central,North,A
-2026-06-08,2052.3333333333335,potato,Central,North,A
-2026-06-09,2052.6666666666665,potato,Central,North,A
-2026-06-10,2053.0,potato,Central,North,A
-2026-06-11,2053.3333333333335,potato,Central,North,A
-2026-06-12,2053.6666666666665,potato,Central,North,A
-2026-06-13,2054.0,potato,Central,North,A
-2026-06-14,2054.3333333333335,potato,Central,North,A
-2026-06-15,2054.6666666666665,potato,Central,North,A
-2026-06-16,2055.0,potato,Central,North,A
-2026-06-17,2055.3333333333335,potato,Central,North,A
-2026-06-18,2055.6666666666665,potato,Central,North,A
-2026-06-19,2056.0,potato,Central,North,A
-2026-06-20,2056.3333333333335,potato,Central,North,A
-2026-06-21,2056.6666666666665,potato,Central,North,A
-2026-06-22,2057.0,potato,Central,North,A
-2026-06-23,2057.3333333333335,potato,Central,North,A
-2026-06-24,2057.6666666666665,potato,Central,North,A
-2026-06-25,2058.0,potato,Central,North,A
-2026-06-26,2058.3333333333335,potato,Central,North,A
-2026-06-27,2058.6666666666665,potato,Central,North,A
-2026-06-28,2059.0,potato,Central,North,A
-2026-06-29,2059.3333333333335,potato,Central,North,A
-2026-06-30,2059.6666666666665,potato,Central,North,A
-2026-07-01,2060.0,potato,Central,North,A
-2026-07-02,2059.6774193548385,potato,Central,North,A
-2026-07-03,2059.3548387096776,potato,Central,North,A
-2026-07-04,2059.032258064516,potato,Central,North,A
-2026-07-05,2058.7096774193546,potato,Central,North,A
-2026-07-06,2058.3870967741937,potato,Central,North,A
-2026-07-07,2058.064516129032,potato,Central,North,A
-2026-07-08,2057.7419354838707,potato,Central,North,A
-2026-07-09,2057.4193548387098,potato,Central,North,A
-2026-07-10,2057.0967741935483,potato,Central,North,A
-2026-07-11,2056.7741935483873,potato,Central,North,A
-2026-07-12,2056.451612903226,potato,Central,North,A
-2026-07-13,2056.1290322580644,potato,Central,North,A
-2026-07-14,2055.8064516129034,potato,Central,North,A
-2026-07-15,2055.483870967742,potato,Central,North,A
-2026-07-16,2055.1612903225805,potato,Central,North,A
-2026-07-17,2054.8387096774195,potato,Central,North,A
-2026-07-18,2054.516129032258,potato,Central,North,A
-2026-07-19,2054.1935483870966,potato,Central,North,A
-2026-07-20,2053.8709677419356,potato,Central,North,A
-2026-07-21,2053.548387096774,potato,Central,North,A
-2026-07-22,2053.2258064516127,potato,Central,North,A
-2026-07-23,2052.9032258064517,potato,Central,North,A
-2026-07-24,2052.5806451612902,potato,Central,North,A
-2026-07-25,2052.2580645161293,potato,Central,North,A
-2026-07-26,2051.935483870968,potato,Central,North,A
-2026-07-27,2051.6129032258063,potato,Central,North,A
-2026-07-28,2051.2903225806454,potato,Central,North,A
-2026-07-29,2050.967741935484,potato,Central,North,A
-2026-07-30,2050.6451612903224,potato,Central,North,A
-2026-07-31,2050.3225806451615,potato,Central,North,A
-2026-08-01,2050.0,potato,Central,North,A
-2026-08-02,2049.6774193548385,potato,Central,North,A
-2026-08-03,2049.3548387096776,potato,Central,North,A
-2026-08-04,2049.032258064516,potato,Central,North,A
-2026-08-05,2048.7096774193546,potato,Central,North,A
-2026-08-06,2048.3870967741937,potato,Central,North,A
-2026-08-07,2048.064516129032,potato,Central,North,A
-2026-08-08,2047.741935483871,potato,Central,North,A
-2026-08-09,2047.4193548387098,potato,Central,North,A
-2026-08-10,2047.0967741935483,potato,Central,North,A
-2026-08-11,2046.774193548387,potato,Central,North,A
-2026-08-12,2046.4516129032259,potato,Central,North,A
-2026-08-13,2046.1290322580646,potato,Central,North,A
-2026-08-14,2045.8064516129032,potato,Central,North,A
-2026-08-15,2045.483870967742,potato,Central,North,A
-2026-08-16,2045.1612903225807,potato,Central,North,A
-2026-08-17,2044.8387096774193,potato,Central,North,A
-2026-08-18,2044.516129032258,potato,Central,North,A
-2026-08-19,2044.1935483870968,potato,Central,North,A
-2026-08-20,2043.8709677419354,potato,Central,North,A
-2026-08-21,2043.5483870967741,potato,Central,North,A
-2026-08-22,2043.225806451613,potato,Central,North,A
-2026-08-23,2042.9032258064517,potato,Central,North,A
-2026-08-24,2042.5806451612902,potato,Central,North,A
-2026-08-25,2042.258064516129,potato,Central,North,A
-2026-08-26,2041.9354838709678,potato,Central,North,A
-2026-08-27,2041.6129032258063,potato,Central,North,A
-2026-08-28,2041.2903225806451,potato,Central,North,A
-2026-08-29,2040.967741935484,potato,Central,North,A
-2026-08-30,2040.6451612903227,potato,Central,North,A
-2026-08-31,2040.3225806451612,potato,Central,North,A
-2026-09-01,2040.0,potato,Central,North,A
-2026-09-02,2039.6666666666667,potato,Central,North,A
-2026-09-03,2039.3333333333333,potato,Central,North,A
-2026-09-04,2039.0,potato,Central,North,A
-2026-09-05,2038.6666666666667,potato,Central,North,A
-2026-09-06,2038.3333333333333,potato,Central,North,A
-2026-09-07,2038.0,potato,Central,North,A
-2026-09-08,2037.6666666666667,potato,Central,North,A
-2026-09-09,2037.3333333333333,potato,Central,North,A
-2026-09-10,2037.0,potato,Central,North,A
-2026-09-11,2036.6666666666667,potato,Central,North,A
-2026-09-12,2036.3333333333333,potato,Central,North,A
-2026-09-13,2036.0,potato,Central,North,A
-2026-09-14,2035.6666666666667,potato,Central,North,A
-2026-09-15,2035.3333333333333,potato,Central,North,A
-2026-09-16,2035.0,potato,Central,North,A
-2026-09-17,2034.6666666666667,potato,Central,North,A
-2026-09-18,2034.3333333333333,potato,Central,North,A
-2026-09-19,2034.0,potato,Central,North,A
-2026-09-20,2033.6666666666667,potato,Central,North,A
-2026-09-21,2033.3333333333333,potato,Central,North,A
-2026-09-22,2033.0,potato,Central,North,A
-2026-09-23,2032.6666666666667,potato,Central,North,A
-2026-09-24,2032.3333333333333,potato,Central,North,A
-2026-09-25,2032.0,potato,Central,North,A
-2026-09-26,2031.6666666666667,potato,Central,North,A
-2026-09-27,2031.3333333333333,potato,Central,North,A
-2026-09-28,2031.0,potato,Central,North,A
-2026-09-29,2030.6666666666667,potato,Central,North,A
-2026-09-30,2030.3333333333333,potato,Central,North,A
-2026-10-01,2030.0,potato,Central,North,A
-2026-10-02,2029.6774193548388,potato,Central,North,A
-2026-10-03,2029.3548387096773,potato,Central,North,A
-2026-10-04,2029.032258064516,potato,Central,North,A
-2026-10-05,2028.7096774193549,potato,Central,North,A
-2026-10-06,2028.3870967741937,potato,Central,North,A
-2026-10-07,2028.0645161290322,potato,Central,North,A
-2026-10-08,2027.741935483871,potato,Central,North,A
-2026-10-09,2027.4193548387098,potato,Central,North,A
-2026-10-10,2027.0967741935483,potato,Central,North,A
-2026-10-11,2026.774193548387,potato,Central,North,A
-2026-10-12,2026.4516129032259,potato,Central,North,A
-2026-10-13,2026.1290322580646,potato,Central,North,A
-2026-10-14,2025.8064516129032,potato,Central,North,A
-2026-10-15,2025.483870967742,potato,Central,North,A
-2026-10-16,2025.1612903225807,potato,Central,North,A
-2026-10-17,2024.8387096774193,potato,Central,North,A
-2026-10-18,2024.516129032258,potato,Central,North,A
-2026-10-19,2024.1935483870968,potato,Central,North,A
-2026-10-20,2023.8709677419354,potato,Central,North,A
-2026-10-21,2023.5483870967741,potato,Central,North,A
-2026-10-22,2023.225806451613,potato,Central,North,A
-2026-10-23,2022.9032258064517,potato,Central,North,A
-2026-10-24,2022.5806451612902,potato,Central,North,A
-2026-10-25,2022.258064516129,potato,Central,North,A
-2026-10-26,2021.9354838709678,potato,Central,North,A
-2026-10-27,2021.6129032258063,potato,Central,North,A
-2026-10-28,2021.2903225806451,potato,Central,North,A
-2026-10-29,2020.967741935484,potato,Central,North,A
-2026-10-30,2020.6451612903227,potato,Central,North,A
-2026-10-31,2020.3225806451612,potato,Central,North,A
-2026-11-01,2020.0,potato,Central,North,A
-2026-11-02,2019.6666666666667,potato,Central,North,A
-2026-11-03,2019.3333333333333,potato,Central,North,A
-2026-11-04,2019.0,potato,Central,North,A
-2026-11-05,2018.6666666666667,potato,Central,North,A
-2026-11-06,2018.3333333333333,potato,Central,North,A
-2026-11-07,2018.0,potato,Central,North,A
-2026-11-08,2017.6666666666667,potato,Central,North,A
-2026-11-09,2017.3333333333333,potato,Central,North,A
-2026-11-10,2017.0,potato,Central,North,A
-2026-11-11,2016.6666666666667,potato,Central,North,A
-2026-11-12,2016.3333333333333,potato,Central,North,A
-2026-11-13,2016.0,potato,Central,North,A
-2026-11-14,2015.6666666666667,potato,Central,North,A
-2026-11-15,2015.3333333333333,potato,Central,North,A
-2026-11-16,2015.0,potato,Central,North,A
-2026-11-17,2014.6666666666667,potato,Central,North,A
-2026-11-18,2014.3333333333333,potato,Central,North,A
-2026-11-19,2014.0,potato,Central,North,A
-2026-11-20,2013.6666666666667,potato,Central,North,A
-2026-11-21,2013.3333333333333,potato,Central,North,A
-2026-11-22,2013.0,potato,Central,North,A
-2026-11-23,2012.6666666666667,potato,Central,North,A
-2026-11-24,2012.3333333333333,potato,Central,North,A
-2026-11-25,2012.0,potato,Central,North,A
-2026-11-26,2011.6666666666667,potato,Central,North,A
-2026-11-27,2011.3333333333333,potato,Central,North,A
-2026-11-28,2011.0,potato,Central,North,A
-2026-11-29,2010.6666666666667,potato,Central,North,A
-2026-11-30,2010.3333333333333,potato,Central,North,A
-2026-12-01,2010.0,potato,Central,North,A
+2025-10-29,11000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-10-30,12000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-10-31,10000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-01,11000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-02,10000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-03,10000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-04,9000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-05,8500.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-06,8000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-07,8333.333333333334,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-08,8666.666666666666,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-09,9000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-10,10000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-11,10000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-12,11000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-13,9000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-14,8000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-15,8500.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-16,9000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-17,9500.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-18,10000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-19,11000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-20,10000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-21,11000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-22,13000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-23,14000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-24,12000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-25,13000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-26,14000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-27,15000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-28,14000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-29,13000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-11-30,12000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-12-01,11000.0,apple,Mechua Apmc,Kolkata,West Bengal
+2025-10-27,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-10-28,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-10-29,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-10-30,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-10-31,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-01,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-02,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-03,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-04,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-05,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-06,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-07,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-08,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-09,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-10,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-11,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-12,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-13,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-14,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-15,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-16,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-17,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-18,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-19,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-20,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-21,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-22,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-23,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-24,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-25,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-26,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-27,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-28,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-29,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-30,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-12-01,1900.0,banana,Siliguri Apmc,Darjeeling,West Bengal
+2025-10-27,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-10-28,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-10-29,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-10-30,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-10-31,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-11-01,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-11-02,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-11-03,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-11-04,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-11-05,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-11-06,8500.0,bengal gram dal(chana dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-10-27,19750.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-10-28,20187.5,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-10-29,20625.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-10-30,21062.5,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-10-31,21500.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-01,21500.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-02,21500.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-03,21000.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-04,20500.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-05,20000.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-06,20300.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-07,20600.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-08,20900.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-09,21200.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-10,21500.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-11,20000.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-12,20750.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-13,21500.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-14,21416.666666666668,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-15,21333.333333333332,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-16,21250.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-17,21500.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-18,21250.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-19,21000.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-20,20750.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-21,21500.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-22,21250.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-23,21500.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-24,21000.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-25,21250.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-26,21000.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-27,22250.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-28,23000.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-29,24000.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-30,24000.0,betal leaves,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-10-27,4800.0,bhindi(ladies finger),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-10-28,4700.0,bhindi(ladies finger),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-10-29,4550.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-10-30,4000.0,bhindi(ladies finger),Kasipur Apmc,Purulia,West Bengal
+2025-10-31,4100.0,bhindi(ladies finger),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-01,3500.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-02,3600.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-03,3500.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-04,3600.0,bhindi(ladies finger),Kasipur Apmc,Purulia,West Bengal
+2025-11-05,3600.0,bhindi(ladies finger),Kasipur Apmc,Purulia,West Bengal
+2025-11-06,3700.0,bhindi(ladies finger),Kasipur Apmc,Purulia,West Bengal
+2025-11-07,3800.0,bhindi(ladies finger),Egra/Contai Apmc,Purba Medinipur,West Bengal
+2025-11-08,3700.0,bhindi(ladies finger),Egra/Contai Apmc,Purba Medinipur,West Bengal
+2025-11-09,4000.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-10,3700.0,bhindi(ladies finger),Kasipur Apmc,Purulia,West Bengal
+2025-11-11,3800.0,bhindi(ladies finger),Kasipur Apmc,Purulia,West Bengal
+2025-11-12,4000.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-13,4300.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-14,4300.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-15,4000.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-16,4200.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-17,4600.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-18,4200.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-19,4650.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-20,4700.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-21,5100.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-22,5400.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-23,5500.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-24,5550.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-25,5500.0,bhindi(ladies finger),Kasipur Apmc,Purulia,West Bengal
+2025-11-26,5600.0,bhindi(ladies finger),Balarampur Apmc,Purulia,West Bengal
+2025-11-27,5500.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-28,5600.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-29,5800.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-30,5800.0,bhindi(ladies finger),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-12-01,5500.0,bhindi(ladies finger),Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-10-27,3400.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-10-28,3500.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-10-29,3500.0,bitter gourd,Memari Apmc,Purba Bardhaman,West Bengal
+2025-10-30,3250.0,bitter gourd,Memari Apmc,Purba Bardhaman,West Bengal
+2025-10-31,3300.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-01,3500.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-02,3300.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-03,3100.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-04,3000.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-05,3050.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-06,3200.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-07,3000.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-08,3050.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-09,3000.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-10,3400.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-11,3200.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-12,3350.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-13,3700.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-14,3900.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-15,4000.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-16,3650.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-17,3800.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-18,4250.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-19,4350.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-20,4450.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-21,4800.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-22,4800.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-23,5000.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-24,5000.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-25,4850.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-26,4800.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-27,4800.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-28,4500.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-29,4600.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-30,5000.0,bitter gourd,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-12-01,5000.0,bitter gourd,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-10-27,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-28,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-29,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-30,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-31,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-01,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-02,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-03,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-04,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-05,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-06,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-07,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-08,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-09,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-10,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-11,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-12,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-13,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-14,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-15,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-16,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-17,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-18,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-19,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-20,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-21,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-22,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-23,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-24,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-25,10100.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-26,10200.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-27,10700.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-28,10100.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-29,10500.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-30,10500.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-12-01,10500.0,black gram dal(urd dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-27,1000.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-10-28,1200.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-10-29,1100.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-10-30,1000.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-10-31,1150.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-01,1200.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-02,1000.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-03,1050.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-04,1150.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-05,1200.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-06,1257.142857142857,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-07,1314.2857142857142,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-08,1371.4285714285716,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-09,1428.5714285714287,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-10,1485.7142857142858,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-11,1542.857142857143,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-12,1600.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-13,1425.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-14,1400.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-15,1425.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-16,1425.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-17,1500.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-18,1800.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-19,1800.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-20,1900.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-21,1700.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-22,1650.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-23,1700.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-11-24,1750.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-25,1700.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-26,1750.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-27,1725.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-28,1625.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-29,1625.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-30,1675.0,bottle gourd,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-12-01,1800.0,bottle gourd,Khatra Apmc,Bankura,West Bengal
+2025-10-27,4550.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-28,4500.0,brinjal,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-29,4275.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-30,4050.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-31,4000.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-01,4000.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-02,4000.0,brinjal,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-03,3800.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-04,3800.0,brinjal,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-05,4000.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-06,3900.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-07,3950.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-08,3900.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-09,3800.0,brinjal,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-10,3900.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-11,3900.0,brinjal,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-12,4100.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-13,4125.0,brinjal,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-14,4100.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-15,4000.0,brinjal,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-16,4100.0,brinjal,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-17,4700.0,brinjal,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-18,5200.0,brinjal,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-19,5450.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-20,5400.0,brinjal,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-21,5500.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-22,5500.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-23,5500.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-24,5400.0,brinjal,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-25,5325.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-26,5400.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-27,5200.0,brinjal,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-28,5000.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-29,5000.0,brinjal,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-30,5000.0,brinjal,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-12-01,5100.0,brinjal,Jhargram Apmc,Jhargram,West Bengal
+2025-10-27,3700.0,cabbage,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-10-28,3700.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-29,3700.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-30,3450.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-31,3100.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-01,3300.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-02,3300.0,cabbage,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-03,3300.0,cabbage,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-04,2950.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-05,3050.0,cabbage,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-06,3100.0,cabbage,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-07,3000.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-08,2750.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-09,2750.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-10,3000.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-11,2900.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-12,2850.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-13,2800.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-14,2800.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-15,2500.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-16,2750.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-17,2800.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-18,2700.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-19,2700.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-20,2600.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-21,2400.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-22,2400.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-23,2400.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-24,2300.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-25,2300.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-26,2400.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-27,2300.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-28,2050.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-29,2200.0,cabbage,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-30,2200.0,cabbage,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-12-01,2000.0,cabbage,Jhargram Apmc,Jhargram,West Bengal
+2025-10-27,8000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-10-28,8000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-10-29,8000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-10-30,8000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-10-31,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-01,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-02,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-03,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-04,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-05,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-06,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-07,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-08,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-09,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-10,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-11,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-12,6000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-13,6000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-14,6500.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-15,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-16,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-17,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-18,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-19,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-20,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-21,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-22,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-23,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-24,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-25,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-26,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-27,7000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-28,6500.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-29,6000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-30,6000.0,capsicum,Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-10-27,5500.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-28,5600.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-29,6000.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-30,5500.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-31,5500.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-01,6100.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-02,6000.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-03,5650.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-04,6000.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-05,6000.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-06,5750.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-07,6000.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-08,6000.0,carrot,Ghatal Apmc,Paschim Medinipur,West Bengal
+2025-11-09,5200.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-10,5800.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-11,5500.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-12,5600.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-13,5800.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-14,5650.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-15,5750.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-16,5500.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-17,5550.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-18,5750.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-19,5800.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-20,5800.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-21,5200.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-22,5200.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-23,5200.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-24,5400.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-25,5500.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-26,5800.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-27,5350.0,carrot,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-28,5400.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-29,5500.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-30,5200.0,carrot,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-12-01,5050.0,carrot,Jhargram Apmc,Jhargram,West Bengal
+2025-10-27,3350.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-28,3350.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-29,2800.0,cauliflower,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-30,2950.0,cauliflower,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-31,2750.0,cauliflower,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-01,2700.0,cauliflower,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-02,2700.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-03,3100.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-04,2700.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-05,2700.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-06,2700.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-07,2400.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-08,2300.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-09,2200.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-10,2600.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-11,2800.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-12,3100.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-13,3500.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-14,3300.0,cauliflower,Garbeta(Medinipur) Apmc,Paschim Medinipur,West Bengal
+2025-11-15,3200.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-16,3300.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-17,3400.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-18,3800.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-19,3650.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-20,3400.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-21,3050.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-22,3050.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-23,2800.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-24,3300.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-25,3100.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-26,3200.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-27,3300.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-28,3250.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-29,3100.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-30,2800.0,cauliflower,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-12-01,2950.0,cauliflower,Jhargram Apmc,Jhargram,West Bengal
+2025-10-27,3100.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-10-28,3100.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-29,3100.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-30,3200.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-31,3100.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-01,2950.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-02,3050.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-03,3150.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-04,3150.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-05,3800.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-06,3600.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-07,3600.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-08,3600.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-09,3800.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-10,3900.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-11,3900.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-12,3900.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-13,4400.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-14,4500.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-15,4700.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-16,4600.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-17,4900.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-18,4875.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-19,4900.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-20,5000.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-21,4600.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-22,4750.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-23,6000.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-24,5800.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-25,6000.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-26,6000.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-27,6000.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-28,6308.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-29,6000.0,cucumbar(kheera),Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-30,5750.0,cucumbar(kheera),Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-12-01,6000.0,cucumbar(kheera),Jhargram Apmc,Jhargram,West Bengal
+2025-10-28,16650.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-29,17150.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-30,16650.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-31,16650.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-01,16400.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-02,16650.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-03,17150.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-04,16800.0,fish,Jhargram Apmc,Jhargram,West Bengal
+2025-11-05,16650.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-06,16650.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-07,16791.666666666668,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-08,16933.333333333332,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-09,17075.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-10,17216.666666666668,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-11,17358.333333333332,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-12,17500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-13,17500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-14,16500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-15,16500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-16,16500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-17,16500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-18,17000.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-19,16750.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-20,17000.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-21,16500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-22,16750.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-23,17000.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-24,16500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-25,17000.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-26,16500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-27,16500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-28,16000.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-29,16250.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-30,16500.0,fish,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-27,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-10-28,6800.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-10-29,6200.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-10-30,6200.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-10-31,6200.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-01,6200.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-02,6200.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-03,6200.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-04,6200.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-05,6400.0,french beans(frasbean),Kalimpong Apmc,Kalimpong,West Bengal
+2025-11-06,6400.0,french beans(frasbean),Kalimpong Apmc,Kalimpong,West Bengal
+2025-11-07,5800.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-08,8500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-09,8500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-10,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-11,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-12,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-13,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-14,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-15,7150.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-16,6800.0,french beans(frasbean),Kalimpong Apmc,Kalimpong,West Bengal
+2025-11-17,6800.0,french beans(frasbean),Kalimpong Apmc,Kalimpong,West Bengal
+2025-11-18,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-19,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-20,8500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-21,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-22,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-23,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-24,6800.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-25,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-26,7500.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-27,6900.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-28,6800.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-29,7200.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-11-30,7400.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-12-01,7200.0,french beans(frasbean),Karsiyang(Matigara) Apmc,Darjeeling,West Bengal
+2025-10-27,8000.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-28,8000.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-29,8000.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-30,7800.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-31,7200.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-01,7500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-02,7500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-03,7500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-04,7500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-05,7650.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-06,7000.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-07,6500.0,garlic,Sheoraphuly Apmc,Hooghly,West Bengal
+2025-11-08,6800.0,garlic,Sheoraphuly Apmc,Hooghly,West Bengal
+2025-11-09,6800.0,garlic,Sheoraphuly Apmc,Hooghly,West Bengal
+2025-11-10,5900.0,garlic,Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-11-11,6800.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-12,6500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-13,6500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-14,6500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-15,5750.0,garlic,Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-11-16,6500.0,garlic,Sheoraphuly Apmc,Hooghly,West Bengal
+2025-11-17,6500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-18,6500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-19,6500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-20,6500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-21,6500.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-22,5750.0,garlic,Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-11-23,7500.0,garlic,Sheoraphuly Apmc,Hooghly,West Bengal
+2025-11-24,7800.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-25,7800.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-26,8000.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-27,7800.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-28,6250.0,garlic,Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-11-29,7750.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-30,7550.0,garlic,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-12-01,6250.0,garlic,Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-10-27,7325.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-28,7000.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-29,6750.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-30,6600.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-31,6500.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-01,6650.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-02,6500.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-03,6350.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-04,6350.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-05,6800.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-06,6500.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-07,6500.0,ginger(dry),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-08,6500.0,ginger(dry),Sheoraphuly Apmc,Hooghly,West Bengal
+2025-11-09,6500.0,ginger(dry),Sheoraphuly Apmc,Hooghly,West Bengal
+2025-11-10,6500.0,ginger(dry),Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-11-11,6450.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-12,6025.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-13,6025.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-14,6225.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-15,6225.0,ginger(dry),Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-11-16,6950.0,ginger(dry),Sheoraphuly Apmc,Hooghly,West Bengal
+2025-11-17,6500.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-18,6400.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-19,6350.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-20,6200.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-21,6200.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-22,5900.0,ginger(dry),Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-11-23,6800.0,ginger(dry),Sheoraphuly Apmc,Hooghly,West Bengal
+2025-11-24,6800.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-25,6650.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-26,7000.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-27,6800.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-28,6500.0,ginger(dry),Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-11-29,6600.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-30,6800.0,ginger(dry),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-12-01,6800.0,ginger(dry),Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-10-27,6350.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-28,6350.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-29,6350.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-30,6350.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-31,6350.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-01,6300.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-02,6300.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-03,6200.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-04,6200.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-05,6200.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-06,6200.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-07,6200.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-08,6075.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-09,6075.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-10,6200.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-11,6075.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-12,6200.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-13,6200.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-14,6150.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-15,6250.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-16,6250.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-17,6250.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-18,6250.0,ginger(green),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-19,6250.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-20,6250.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-21,6250.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-22,6250.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-23,6250.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-24,6275.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-25,6250.0,ginger(green),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-26,6100.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-27,6075.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-28,6075.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-29,6100.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-30,6075.0,ginger(green),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-12-01,6100.0,ginger(green),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-27,5900.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-28,5800.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-29,5550.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-30,5800.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-31,6000.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-01,5900.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-02,5900.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-03,5500.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-04,5600.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-05,5400.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-06,5400.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-07,5200.0,green chilli,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-08,4800.0,green chilli,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-09,4900.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-10,4900.0,green chilli,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-11,5100.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-12,4750.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-13,4800.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-14,4800.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-15,4950.0,green chilli,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-16,4800.0,green chilli,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-17,4800.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-18,4950.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-19,5050.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-20,5300.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-21,5050.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-22,5000.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-23,5400.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-24,5800.0,green chilli,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-25,5550.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-26,5500.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-27,5400.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-28,5600.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-29,5400.0,green chilli,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-30,5000.0,green chilli,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-12-01,5400.0,green chilli,Jhargram Apmc,Jhargram,West Bengal
+2025-10-27,10800.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-28,10800.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-29,10800.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-30,10800.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-31,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-01,10800.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-02,10800.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-03,10800.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-04,10800.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-05,10800.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-06,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-07,9700.0,green gram dal(moong dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-08,9700.0,green gram dal(moong dal),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-09,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-10,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-11,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-12,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-13,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-14,11525.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-15,10825.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-16,10825.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-17,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-18,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-19,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-20,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-21,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-22,10875.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-23,10800.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-24,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-25,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-26,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-27,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-28,11000.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-29,10950.0,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-30,10937.5,green gram dal(moong dal),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-12-01,10350.0,green gram dal(moong dal),Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-11-18,9500.0,groundnut,Gajol Apmc,Malda,West Bengal
+2025-11-19,9500.0,groundnut,Gajol Apmc,Malda,West Bengal
+2025-11-20,9500.0,groundnut,Gajol Apmc,Malda,West Bengal
+2025-11-21,9500.0,groundnut,Gajol Apmc,Malda,West Bengal
+2025-10-27,7700.0,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-10-28,7700.0,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-10-29,7733.333333333333,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-10-30,7766.666666666667,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-10-31,7800.0,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-01,7800.0,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-02,7700.0,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-03,7700.0,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-04,7600.0,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-05,7600.0,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-06,7600.0,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-07,7652.631578947368,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-08,7705.263157894737,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-09,7757.894736842105,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-10,7810.526315789473,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-11,7863.157894736842,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-12,7915.789473684211,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-13,7968.421052631579,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-14,8021.0526315789475,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-15,8073.684210526316,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-16,8126.315789473684,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-17,8178.9473684210525,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-18,8231.578947368422,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-19,8284.21052631579,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-20,8336.842105263158,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-21,8389.473684210527,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-22,8442.105263157895,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-23,8494.736842105263,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-24,8547.368421052632,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-25,8600.0,guava,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-10-27,3981.25,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-10-28,4037.5,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-10-29,4000.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-10-30,3962.5,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-10-31,4150.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-01,4000.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-02,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-03,4200.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-04,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-05,4200.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-06,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-07,4287.5,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-08,4325.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-09,4362.5,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-10,4400.0,gur(jaggery),Burdwan Apmc,Purba Bardhaman,West Bengal
+2025-11-11,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-12,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-13,4200.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-14,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-15,4200.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-16,4200.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-17,4250.0,gur(jaggery),Burdwan Apmc,Purba Bardhaman,West Bengal
+2025-11-18,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-19,4250.0,gur(jaggery),Burdwan Apmc,Purba Bardhaman,West Bengal
+2025-11-20,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-21,4175.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-22,4200.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-23,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-24,4200.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-25,4200.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-26,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-27,4265.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-28,4300.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-29,4300.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-30,4250.0,gur(jaggery),Purulia Apmc,Purulia,West Bengal
+2025-11-28,5300.0,indian beans(seam),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-29,4200.0,indian beans(seam),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-30,4200.0,indian beans(seam),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-27,8325.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-28,8050.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-29,8175.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-30,8600.0,jute,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-31,8600.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-01,8350.0,jute,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-02,8600.0,jute,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-03,8450.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-04,8600.0,jute,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-05,8600.0,jute,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-06,8600.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-07,8600.0,jute,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-08,8400.0,jute,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-09,8600.0,jute,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-10,8450.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-11,8400.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-12,8400.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-13,8400.0,jute,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-14,8300.0,jute,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-15,8300.0,jute,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-16,8300.0,jute,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-17,8450.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-18,8600.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-19,8450.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-20,8600.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-21,8600.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-22,8600.0,jute,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-23,8500.0,jute,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-24,8600.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-25,8600.0,jute,Kalna Apmc,Purba Bardhaman,West Bengal
+2025-11-26,8600.0,jute,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-27,8600.0,jute,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-28,8600.0,jute,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-29,8600.0,jute,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-30,8900.0,jute,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-12-01,8600.0,jute,Champadanga Apmc,Hooghly,West Bengal
+2025-10-27,9900.0,lentil(masur)(whole),English Bazar Apmc,Malda,West Bengal
+2025-10-28,9900.0,lentil(masur)(whole),Balarampur Apmc,Purulia,West Bengal
+2025-10-29,9900.0,lentil(masur)(whole),Balarampur Apmc,Purulia,West Bengal
+2025-10-30,9900.0,lentil(masur)(whole),Balarampur Apmc,Purulia,West Bengal
+2025-10-31,9900.0,lentil(masur)(whole),Balarampur Apmc,Purulia,West Bengal
+2025-11-01,9900.0,lentil(masur)(whole),Balarampur Apmc,Purulia,West Bengal
+2025-11-02,9900.0,lentil(masur)(whole),Balarampur Apmc,Purulia,West Bengal
+2025-11-03,9950.0,lentil(masur)(whole),Balarampur Apmc,Purulia,West Bengal
+2025-11-04,9950.0,lentil(masur)(whole),Balarampur Apmc,Purulia,West Bengal
+2025-11-05,9000.0,lentil(masur)(whole),English Bazar Apmc,Malda,West Bengal
+2025-11-06,8900.0,lentil(masur)(whole),English Bazar Apmc,Malda,West Bengal
+2025-11-07,8800.0,lentil(masur)(whole),English Bazar Apmc,Malda,West Bengal
+2025-11-08,8700.0,lentil(masur)(whole),English Bazar Apmc,Malda,West Bengal
+2025-11-09,8600.0,lentil(masur)(whole),English Bazar Apmc,Malda,West Bengal
+2025-11-10,8800.0,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-11,8800.0,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-12,9100.0,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-13,9400.0,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-14,9400.0,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-15,9400.0,lentil(masur)(whole),Gajol Apmc,Malda,West Bengal
+2025-11-16,9400.0,lentil(masur)(whole),Gajol Apmc,Malda,West Bengal
+2025-11-17,9300.0,lentil(masur)(whole),Gajol Apmc,Malda,West Bengal
+2025-11-18,8600.0,lentil(masur)(whole),Gajol Apmc,Malda,West Bengal
+2025-11-19,8600.0,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-20,8600.0,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-21,8533.333333333334,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-22,8850.0,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-23,9166.666666666666,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-24,9166.666666666666,lentil(masur)(whole),Kasipur Apmc,Purulia,West Bengal
+2025-11-25,9325.0,lentil(masur)(whole),Gajol Apmc,Malda,West Bengal
+2025-11-22,2000.0,maize,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-23,2100.0,maize,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-24,2150.0,maize,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-25,2250.0,maize,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-26,2250.0,maize,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-27,2300.0,maize,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-28,2235.0,maize,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-29,2250.0,maize,Jangipur Apmc,Murshidabad,West Bengal
+2025-10-27,11000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-28,10000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-29,9000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-30,8000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-31,7000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-01,6000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-02,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-03,5000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-04,5250.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-05,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-06,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-07,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-08,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-09,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-10,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-11,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-12,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-13,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-14,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-15,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-16,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-17,6000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-18,5500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-19,7250.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-20,9000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-21,11000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-22,12000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-23,12500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-24,13000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-25,15000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-26,13000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-27,15500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-28,16000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-29,15500.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-30,17000.0,marigold(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-27,9500.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-10-28,9500.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-10-29,9500.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-10-30,9500.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-10-31,9500.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-01,9550.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-02,9525.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-03,9550.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-04,9500.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-05,9500.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-06,9475.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-07,9500.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-08,9500.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-09,9500.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-10,9625.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-11,9550.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-12,9625.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-13,9650.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-14,9600.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-15,9650.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-16,9600.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-17,9600.0,masur dal,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-18,9630.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-19,9575.0,masur dal,Kasipur Apmc,Purulia,West Bengal
+2025-11-20,9625.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-21,9600.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-22,9650.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-23,9700.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-24,9800.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-25,9800.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-26,9850.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-27,9800.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-28,9800.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-29,9800.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-11-30,9900.0,masur dal,Purulia Apmc,Purulia,West Bengal
+2025-12-01,9800.0,masur dal,Ramkrishanpur(Howrah) Apmc,Howrah,West Bengal
+2025-10-27,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-10-28,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-10-29,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-10-30,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-10-31,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-11-01,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-11-02,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-11-03,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-11-04,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-11-05,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-11-06,9600.0,moath dal,Purulia Apmc,Purulia,West Bengal
+2025-10-29,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-10-30,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-10-31,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-01,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-02,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-03,6000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-04,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-05,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-06,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-07,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-08,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-09,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-10,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-11,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-12,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-13,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-14,7000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-15,7250.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-16,7500.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-17,7750.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-18,8000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-19,8000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-20,8000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-21,9000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-22,9000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-23,9000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-24,9000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-25,9000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-26,9000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-27,9000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-28,10000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-29,9750.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-11-30,9500.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-12-01,10000.0,mousambi(sweet lime),Mechua Apmc,Kolkata,West Bengal
+2025-10-27,6200.0,mustard,Guskara Apmc,Purba Bardhaman,West Bengal
+2025-10-28,6250.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-29,6362.5,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-30,6375.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-31,6350.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-01,6350.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-02,6475.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-03,6380.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-04,6400.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-05,6450.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-06,6550.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-07,6525.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-08,6450.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-09,6525.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-10,6500.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-11,6450.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-12,6350.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-13,6450.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-14,6400.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-15,6325.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-16,6350.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-17,6387.5,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-18,6475.0,mustard,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-19,6400.0,mustard,Kasipur Apmc,Purulia,West Bengal
+2025-11-20,6375.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-21,6400.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-22,6500.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-23,6350.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-24,6400.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-25,6400.0,mustard,Kasipur Apmc,Purulia,West Bengal
+2025-11-26,6462.5,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-27,6400.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-28,6375.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-29,6537.5,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-30,6400.0,mustard,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-12-01,6300.0,mustard,Rampurhat Apmc,Birbhum,West Bengal
+2025-10-27,16212.5,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-10-28,16225.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-10-29,16200.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-10-30,16225.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-10-31,16250.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-01,16200.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-02,16200.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-03,16200.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-04,16225.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-05,16200.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-06,16200.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-07,16200.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-08,16200.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-09,16200.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-10,16250.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-11,16250.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-12,15925.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-13,15875.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-14,15900.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-15,15900.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-16,15875.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-17,15900.0,mustard oil,Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-18,16350.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-19,16250.0,mustard oil,Kasipur Apmc,Purulia,West Bengal
+2025-11-20,16250.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-21,16250.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-22,16400.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-23,16250.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-24,16125.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-25,15900.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-26,16125.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-27,15900.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-28,15900.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-29,15900.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-11-30,15900.0,mustard oil,Purulia Apmc,Purulia,West Bengal
+2025-12-01,15500.0,mustard oil,Sainthia Apmc,Birbhum,West Bengal
+2025-10-27,1650.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-28,1800.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-29,1800.0,onion,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-30,1800.0,onion,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-31,1800.0,onion,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-01,1750.0,onion,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-02,1700.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-03,1800.0,onion,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-04,1800.0,onion,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-05,1800.0,onion,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-06,1800.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-07,1800.0,onion,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-08,1800.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-09,1700.0,onion,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-10,1675.0,onion,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-11,1800.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-12,1800.0,onion,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-13,1800.0,onion,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-14,1800.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-15,1800.0,onion,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-16,1700.0,onion,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-17,1800.0,onion,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-18,1800.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-19,1800.0,onion,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-20,1775.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-21,1775.0,onion,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-22,1725.0,onion,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-23,1725.0,onion,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-24,1800.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-25,1800.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-26,1700.0,onion,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-27,1800.0,onion,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-28,1800.0,onion,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-29,1600.0,onion,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-30,1600.0,onion,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-12-01,1775.0,onion,Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-11-09,9600.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-10,9600.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-11,9600.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-12,9500.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-13,9600.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-14,9600.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-15,9550.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-16,9500.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-17,9550.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-18,9600.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-19,9550.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-20,9500.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-21,9500.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-22,9500.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-23,9600.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-24,9500.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-25,9550.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-26,9550.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-27,9600.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-28,9600.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-29,9500.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-11-30,9500.0,other pulses,Purulia Apmc,Purulia,West Bengal
+2025-10-27,2310.0,paddy(common),Guskara Apmc,Purba Bardhaman,West Bengal
+2025-10-28,2320.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-29,2315.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-30,2315.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-31,2320.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-01,2310.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-02,2310.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-03,2310.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-04,2310.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-05,2340.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-06,2310.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-07,2340.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-08,2354.5,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-09,2354.5,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-10,2340.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-11,2349.5,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-12,2369.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-13,2370.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-14,2370.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-15,2379.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-16,2372.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-17,2370.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-18,2374.5,paddy(common),Kalna Apmc,Purba Bardhaman,West Bengal
+2025-11-19,2379.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-20,2370.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-21,2370.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-22,2370.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-23,2370.0,paddy(common),Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-24,2371.0,paddy(common),Ghatal Apmc,Paschim Medinipur,West Bengal
+2025-11-25,2371.0,paddy(common),Ghatal Apmc,Paschim Medinipur,West Bengal
+2025-11-26,2371.0,paddy(common),Ghatal Apmc,Paschim Medinipur,West Bengal
+2025-11-27,2371.0,paddy(common),Ghatal Apmc,Paschim Medinipur,West Bengal
+2025-11-28,2372.0,paddy(common),Ghatal Apmc,Paschim Medinipur,West Bengal
+2025-11-29,2370.0,paddy(common),Ghatal Apmc,Paschim Medinipur,West Bengal
+2025-11-30,2372.0,paddy(common),Ghatal Apmc,Paschim Medinipur,West Bengal
+2025-12-01,2372.0,paddy(common),Kalipur Apmc,Hooghly,West Bengal
+2025-10-27,1000.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-10-28,1000.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-10-29,1000.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-10-30,1000.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-10-31,1000.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-01,1050.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-02,1100.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-03,1100.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-04,1400.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-05,1400.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-06,1360.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-07,1320.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-08,1280.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-09,1240.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-10,1200.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-11,1300.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-12,1200.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-13,1600.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-14,1500.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-15,1500.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-16,1700.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-17,1700.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-18,1700.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-19,1700.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-20,1700.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-21,1600.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-22,1600.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-23,1300.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-24,1300.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-25,1300.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-26,1000.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-27,1000.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-28,1000.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-29,1300.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-11-30,1300.0,papaya(raw),Habra Apmc,North 24 Parganas,West Bengal
+2025-10-27,6207.5,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-28,6225.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-29,6175.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-30,6225.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-31,6250.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-01,6200.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-02,6225.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-03,6225.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-04,6225.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-05,6225.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-06,6225.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-07,6166.666666666667,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-08,6225.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-09,6225.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-10,6250.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-11,6250.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-12,6350.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-13,6375.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-14,6400.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-15,6375.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-16,6425.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-17,6450.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-18,6400.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-19,6425.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-20,6450.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-21,6425.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-22,6475.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-23,6400.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-24,6450.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-25,6400.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-26,6350.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-27,6350.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-28,6400.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-29,6250.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-30,6350.0,peas(dry),Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-27,4400.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-28,4350.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-29,3900.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-30,3700.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-31,4100.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-01,4100.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-02,4200.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-03,4200.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-04,3800.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-05,3800.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-06,3500.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-07,4000.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-08,3800.0,pointed gourd(parval),Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-09,4000.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-10,4000.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-11,3200.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-12,3500.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-13,3500.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-14,3800.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-15,3600.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-16,4100.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-17,4200.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-18,4150.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-19,4400.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-20,4550.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-21,5200.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-22,5200.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-23,5400.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-24,5350.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-25,5350.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-26,5200.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-27,5000.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-28,5000.0,pointed gourd(parval),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-29,4900.0,pointed gourd(parval),Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-30,5000.0,pointed gourd(parval),Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-12-01,5400.0,pointed gourd(parval),Jhargram Apmc,Jhargram,West Bengal
+2025-10-29,14000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-10-30,13000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-10-31,11000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-01,10000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-02,11000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-03,12000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-04,10000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-05,9500.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-06,9000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-07,9000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-08,8500.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-09,8000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-10,9000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-11,10000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-12,10000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-13,11000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-14,10000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-15,10000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-16,10000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-17,10000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-18,10000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-19,11000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-20,12000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-21,14000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-22,15000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-23,14000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-24,15000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-25,14000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-26,13000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-27,14000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-28,13000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-29,14000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-11-30,13500.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-12-01,13000.0,pomegranate,Mechua Apmc,Kolkata,West Bengal
+2025-10-27,1360.0,potato,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-10-28,1370.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-29,1350.0,potato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-30,1350.0,potato,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-10-31,1360.0,potato,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-01,1355.0,potato,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-02,1355.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-03,1355.0,potato,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-04,1355.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-05,1360.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-06,1380.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-07,1349.745,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-08,1360.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-09,1380.0,potato,Purulia Apmc,Purulia,West Bengal
+2025-11-10,1370.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-11,1360.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-12,1360.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-13,1380.0,potato,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-14,1360.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-15,1350.0,potato,Purulia Apmc,Purulia,West Bengal
+2025-11-16,1350.0,potato,Purulia Apmc,Purulia,West Bengal
+2025-11-17,1350.0,potato,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-18,1360.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-19,1350.0,potato,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-20,1355.0,potato,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-21,1370.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-22,1340.0,potato,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-23,1355.0,potato,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-24,1350.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-25,1350.0,potato,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-26,1350.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-27,1350.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-28,1335.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-29,1360.0,potato,Purulia Apmc,Purulia,West Bengal
+2025-11-30,1360.0,potato,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-12-01,1347.5,potato,Bara Bazar (Posta Bazar) Apmc,Kolkata,West Bengal
+2025-10-27,2500.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-10-28,2500.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-10-29,2400.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-10-30,2500.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-10-31,2350.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-01,2500.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-02,2500.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-03,2200.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-04,2400.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-05,2400.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-06,2250.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-07,2175.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-08,2100.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-09,2200.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-10,2050.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-11,2100.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-12,2150.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-13,2050.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-14,2100.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-15,2075.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-16,2100.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-17,2200.0,pumpkin,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-18,2050.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-19,2100.0,pumpkin,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-20,2050.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-21,2050.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-22,2200.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-23,2050.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-24,1950.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-25,1900.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-26,2100.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-27,2050.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-28,2000.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-29,1850.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-11-30,1775.0,pumpkin,Purulia Apmc,Purulia,West Bengal
+2025-10-27,2750.0,raddish,Gangarampur(Dakshin Dinajpur) Apmc,Dakshin Dinajpur,West Bengal
+2025-10-28,2750.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-29,2750.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-30,2750.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-31,2750.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-01,2550.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-02,2500.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-03,2450.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-04,2300.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-05,2400.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-06,2350.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-07,2366.6666666666665,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-08,2383.3333333333335,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-09,2400.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-10,2300.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-11,2400.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-12,2500.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-13,2600.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-14,2600.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-15,2700.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-16,2600.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-17,2600.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-18,2300.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-19,2200.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-20,2300.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-21,2200.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-22,2300.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-23,2250.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-24,2200.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-25,2250.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-26,2100.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-27,2100.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-28,2200.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-29,2100.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-30,2100.0,raddish,Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-27,11500.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-28,11500.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-29,11450.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-30,11500.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-10-31,11500.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-01,11500.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-02,11450.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-03,11475.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-04,11500.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-05,11500.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-06,11450.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-07,10650.0,red gram split/arhar dal/tur dal,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-08,10300.0,red gram split/arhar dal/tur dal,Siliguri Apmc,Darjeeling,West Bengal
+2025-11-09,11050.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-10,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-11,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-12,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-13,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-14,11525.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-15,11112.5,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-16,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-17,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-18,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-19,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-20,11175.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-21,11200.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-22,11200.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-23,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-24,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-25,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-26,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-27,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-28,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-29,11025.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-11-30,11000.0,red gram split/arhar dal/tur dal,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-12-01,10500.0,red gram split/arhar dal/tur dal,Siliguri Apmc,Darjeeling,West Bengal
+2025-10-27,3700.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-28,3700.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-29,3700.0,rice,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-30,3700.0,rice,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-31,3720.0,rice,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-01,3720.0,rice,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-02,3740.0,rice,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-03,3740.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-04,3700.0,rice,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-05,3700.0,rice,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-06,3675.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-07,3700.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-08,3700.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-09,3710.0,rice,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-10,3700.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-11,3700.0,rice,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-12,3700.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-13,3675.0,rice,Islampur Apmc,Uttar Dinajpur,West Bengal
+2025-11-14,3700.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-15,3700.0,rice,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-16,3725.0,rice,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-17,3700.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-18,3710.0,rice,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-19,3700.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-20,3700.0,rice,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-21,3700.0,rice,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-22,3700.0,rice,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-23,3700.0,rice,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-24,3700.0,rice,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-25,3710.0,rice,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-26,3700.0,rice,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-27,3700.0,rice,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-28,3700.0,rice,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-29,3710.0,rice,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-30,3700.0,rice,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-12-01,3700.0,rice,Uluberia Apmc,Howrah,West Bengal
+2025-10-27,2500.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-10-28,2500.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-10-29,2550.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-10-30,2550.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-10-31,2650.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-01,2400.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-02,2450.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-03,2600.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-04,2800.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-05,2950.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-06,2900.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-07,2900.0,ridgeguard(tori),Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-08,2950.0,ridgeguard(tori),Sealdah Koley Market Apmc,Kolkata,West Bengal
+2025-11-09,2800.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-10,3200.0,ridgeguard(tori),Kasipur Apmc,Purulia,West Bengal
+2025-11-11,3000.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-12,3400.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-13,3400.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-14,3400.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-15,3400.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-16,3600.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-17,4100.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-18,4050.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-19,4000.0,ridgeguard(tori),Kasipur Apmc,Purulia,West Bengal
+2025-11-20,4150.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-21,4300.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-22,4600.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-23,4600.0,ridgeguard(tori),Bethuadahari Apmc,Nadia,West Bengal
+2025-11-24,4600.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-25,4800.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-26,4450.0,ridgeguard(tori),Balarampur Apmc,Purulia,West Bengal
+2025-11-27,4400.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-28,4450.0,ridgeguard(tori),Medinipur(West) Apmc,Paschim Medinipur,West Bengal
+2025-11-29,4450.0,ridgeguard(tori),Nadia Apmc,Nadia,West Bengal
+2025-11-30,4600.0,ridgeguard(tori),Nadia Apmc,Nadia,West Bengal
+2025-12-01,4525.0,ridgeguard(tori),Sheoraphuly Apmc,Hooghly,West Bengal
+2025-10-27,10000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-28,9750.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-29,9500.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-30,9250.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-31,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-01,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-02,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-03,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-04,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-05,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-06,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-07,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-08,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-09,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-10,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-11,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-12,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-13,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-14,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-15,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-16,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-17,9000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-18,9250.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-19,9500.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-20,9750.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-21,10000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-22,11000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-23,12000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-24,10000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-25,12000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-26,11500.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-27,13000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-28,13000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-29,14000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-30,16000.0,rose(local),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-27,6500.0,"sesamum(sesame,gingelly,til)",Guskara Apmc,Purba Bardhaman,West Bengal
+2025-10-28,6550.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-29,6500.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-30,6650.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-31,6600.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-01,6550.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-02,6550.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-03,6550.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-04,6550.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-05,6500.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-06,6600.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-07,6600.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-08,6600.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-09,6600.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-10,6500.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-11,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-12,6750.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-13,6600.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-14,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-15,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-16,6600.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-17,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-18,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-19,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-20,6750.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-21,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-22,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-23,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-24,6600.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-25,6650.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-26,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-27,6600.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-28,6600.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-29,6500.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-11-30,6700.0,"sesamum(sesame,gingelly,til)",Katwa Apmc,Purba Bardhaman,West Bengal
+2025-10-27,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-28,1400.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-29,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-30,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-31,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-01,1400.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-02,1400.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-03,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-04,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-05,1500.0,squash(chappal kadoo),Kalimpong Apmc,Kalimpong,West Bengal
+2025-11-06,1500.0,squash(chappal kadoo),Kalimpong Apmc,Kalimpong,West Bengal
+2025-11-07,1400.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-08,900.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-09,1250.0,squash(chappal kadoo),Dhupguri Apmc,Jalpaiguri,West Bengal
+2025-11-10,1350.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-11,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-12,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-13,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-14,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-15,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-16,1500.0,squash(chappal kadoo),Kalimpong Apmc,Kalimpong,West Bengal
+2025-11-17,1500.0,squash(chappal kadoo),Kalimpong Apmc,Kalimpong,West Bengal
+2025-11-18,1500.0,squash(chappal kadoo),Kalimpong Apmc,Kalimpong,West Bengal
+2025-11-19,1500.0,squash(chappal kadoo),Kalimpong Apmc,Kalimpong,West Bengal
+2025-11-20,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-21,1400.0,squash(chappal kadoo),Moynaguri Apmc,Jalpaiguri,West Bengal
+2025-11-22,1450.0,squash(chappal kadoo),Moynaguri Apmc,Jalpaiguri,West Bengal
+2025-11-23,1425.0,squash(chappal kadoo),Moynaguri Apmc,Jalpaiguri,West Bengal
+2025-11-24,1450.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-25,1400.0,squash(chappal kadoo),Dhupguri Apmc,Jalpaiguri,West Bengal
+2025-11-26,1400.0,squash(chappal kadoo),Jalpaiguri Sadar Apmc,Jalpaiguri,West Bengal
+2025-11-27,1500.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-11-28,1300.0,squash(chappal kadoo),Belacoba Apmc,Jalpaiguri,West Bengal
+2025-11-29,1300.0,squash(chappal kadoo),Belacoba Apmc,Jalpaiguri,West Bengal
+2025-11-30,1300.0,squash(chappal kadoo),Belacoba Apmc,Jalpaiguri,West Bengal
+2025-12-01,1300.0,squash(chappal kadoo),Siliguri Apmc,Darjeeling,West Bengal
+2025-10-27,2200.0,sweet pumpkin,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-10-28,2400.0,sweet pumpkin,Egra/Contai Apmc,Purba Medinipur,West Bengal
+2025-10-29,2500.0,sweet pumpkin,Memari Apmc,Purba Bardhaman,West Bengal
+2025-10-30,2400.0,sweet pumpkin,Memari Apmc,Purba Bardhaman,West Bengal
+2025-10-31,2250.0,sweet pumpkin,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-01,2200.0,sweet pumpkin,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-02,2200.0,sweet pumpkin,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-03,2300.0,sweet pumpkin,Egra/Contai Apmc,Purba Medinipur,West Bengal
+2025-11-04,2400.0,sweet pumpkin,Memari Apmc,Purba Bardhaman,West Bengal
+2025-11-05,2250.0,sweet pumpkin,Tamluk (Medinipur E) Apmc,Purba Medinipur,West Bengal
+2025-11-06,2300.0,sweet pumpkin,Egra/Contai Apmc,Purba Medinipur,West Bengal
+2025-11-07,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-08,2250.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-09,2400.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-10,2400.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-11,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-12,2300.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-13,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-14,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-15,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-16,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-17,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-18,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-19,2250.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-20,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-21,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-22,2300.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-23,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-24,2200.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-25,2050.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-26,2000.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-27,1975.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-28,2000.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-29,1900.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-11-30,2000.0,sweet pumpkin,Baruipur(Canning) Apmc,South 24 Parganas,West Bengal
+2025-12-01,1800.0,sweet pumpkin,Jhargram Apmc,Jhargram,West Bengal
+2025-10-27,3600.0,tomato,Egra/Contai Apmc,Purba Medinipur,West Bengal
+2025-10-28,3500.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-29,3500.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-30,3450.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-10-31,3300.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-01,3400.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-02,3300.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-03,3300.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-04,3450.0,tomato,Balarampur Apmc,Purulia,West Bengal
+2025-11-05,3400.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-06,3500.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-07,3500.0,tomato,Egra/Contai Apmc,Purba Medinipur,West Bengal
+2025-11-08,3350.0,tomato,Egra/Contai Apmc,Purba Medinipur,West Bengal
+2025-11-09,3500.0,tomato,Kalna Apmc,Purba Bardhaman,West Bengal
+2025-11-10,3500.0,tomato,Kasipur Apmc,Purulia,West Bengal
+2025-11-11,3450.0,tomato,Kasipur Apmc,Purulia,West Bengal
+2025-11-12,3750.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-13,3900.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-14,4100.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-15,4200.0,tomato,Balarampur Apmc,Purulia,West Bengal
+2025-11-16,4700.0,tomato,Egra/Contai Apmc,Purba Medinipur,West Bengal
+2025-11-17,4700.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-18,4800.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-19,4700.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-20,4700.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-21,4800.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-22,5000.0,tomato,Memari Apmc,Purba Bardhaman,West Bengal
+2025-11-23,5000.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-24,5000.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-25,5150.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-26,5000.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-27,5100.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-28,5000.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-11-29,5000.0,tomato,Kalna Apmc,Purba Bardhaman,West Bengal
+2025-11-30,5100.0,tomato,Diamond Harbour(South 24-Pgs) Apmc,South 24 Parganas,West Bengal
+2025-12-01,5050.0,tomato,Uluberia Apmc,Howrah,West Bengal
+2025-10-27,10000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-28,9125.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-29,8250.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-30,7375.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-31,6500.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-01,6000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-02,6000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-03,5500.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-04,5750.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-05,6000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-06,6000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-07,6000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-08,6000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-09,6000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-10,6000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-11,5500.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-12,5750.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-13,6000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-14,6166.666666666667,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-15,6333.333333333333,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-16,6500.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-17,6500.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-18,6000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-19,7000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-20,8000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-21,9500.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-22,9000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-23,9000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-24,10500.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-25,10000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-26,10000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-27,12500.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-28,10000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-29,11000.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-11-30,14500.0,tube rose(loose),Kolaghat Apmc,Purba Medinipur,West Bengal
+2025-10-27,16600.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-10-28,16700.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-10-29,16600.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-10-30,16700.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-10-31,16600.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-01,16600.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-02,16600.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-03,16650.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-04,16625.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-05,16600.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-06,16700.0,turmeric,Jangipur Apmc,Murshidabad,West Bengal
+2025-11-16,10000.0,walnut,Gajol Apmc,Malda,West Bengal
+2025-10-27,2610.0,wheat,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-28,2650.0,wheat,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-29,2610.0,wheat,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-30,2650.0,wheat,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-10-31,2650.0,wheat,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-01,2605.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-02,2610.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-03,2610.0,wheat,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-04,2610.0,wheat,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-05,2605.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-06,2600.0,wheat,Kaliaganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-07,2550.0,wheat,Kandi Apmc,Murshidabad,West Bengal
+2025-11-08,2550.0,wheat,Kandi Apmc,Murshidabad,West Bengal
+2025-11-09,2600.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-10,2610.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-11,2570.0,wheat,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-12,2620.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-13,2620.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-14,2610.0,wheat,Raiganj Apmc,Uttar Dinajpur,West Bengal
+2025-11-15,2620.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-16,2620.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-17,2630.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-18,2620.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-19,2620.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-20,2665.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-21,2700.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-22,2630.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-23,2681.5,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-24,2620.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-25,2620.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-26,2610.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-27,2665.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-28,2630.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-29,2620.0,wheat,Durgapur Apmc,Paschim Bardhaman,West Bengal
+2025-11-30,2600.0,wheat,Asansol Apmc,Paschim Bardhaman,West Bengal
+2025-12-01,2600.0,wheat,Rampurhat Apmc,Birbhum,West Bengal
