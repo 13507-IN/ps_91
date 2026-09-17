@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { MapPin, Briefcase, IndianRupee, User, Loader2, ArrowRight, AlertTriangle } from 'lucide-react';
 import { inr } from '@/lib/format';
 import { LAST_REPORT_KEY, LAST_REPORT_ID_KEY, API_BASE_URL } from '@/lib/constants';
-import { api, apiEndpoints, handleApiError } from '@/lib/api/client';
+import { api, apiEndpoints, handleApiError, getAccessToken } from '@/lib/api/client';
 import { toFeasibilityReport, type BackendFeasibilityResult } from '@/lib/api/feasibility';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { WizardDraft } from '@/types';
@@ -64,7 +64,7 @@ export default function StepReview({ draft, onBack, isSubmitting, setIsSubmittin
       // Try SSE streaming first
       let completedResult: BackendFeasibilityResult | null = null;
       try {
-        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+        const token = getAccessToken();
         const sseUrl = `${API_BASE_URL}/api/feasibility/analyze-stream`;
         const response = await fetch(sseUrl, {
           method: 'POST',

@@ -1,13 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { FileText, Loader2, Calendar, MapPin } from 'lucide-react';
 import { api, apiEndpoints } from '@/lib/api/client';
 import { useTranslation } from '@/lib/i18n/useTranslation';
+import { LAST_REPORT_KEY } from '@/lib/constants';
+import { listCachedReports } from '@/lib/offline/offlineStore';
+import type { FeasibilityReport } from '@/types';
 import Link from 'next/link';
 
-// Using partial types based on what the backend likely returns for the list
 interface FeasibilityAnalysisSummary {
   id: string;
   businessCategory: string;
@@ -21,35 +23,91 @@ interface FeasibilityAnalysisSummary {
 
 export function PastAssessments() {
   const { t } = useTranslation();
-  
+  const [localAnalyses, setLocalAnalyses] = useState<FeasibilityAnalysisSummary[]>([]);
+
+  // Load offline or session-stored report fallback
+  useEffect(() => {
+    async function loadOffline() {
+      const items: FeasibilityAnalysisSummary[] = [];
+
+      // Check session storage last report
+      try {
+        const sessionRaw = window.sessionStorage.getItem(LAST_REPORT_KEY);
+        if (sessionRaw) {
+          const parsed = JSON.parse(sessionRaw) as FeasibilityReport;
+          if (parsed && parsed.id) {
+            items.push({
+              id: parsed.id,
+              businessCategory: parsed.businessCategory,
+              businessIdea: parsed.businessIdea,
+              villageName: 'Nadia Rural',
+              district: 'Nadia',
+              state: 'West Bengal',
+              overallScore: parsed.feasibilityScore?.totalScore ?? null,
+              createdAt: parsed.createdAt || new Date().toISOString(),
+            });
+          }
+        }
+      } catch {
+        // ignore
+      }
+
+      // Check IndexedDB offline reports
+      try {
+        const cached = await listCachedReports();
+        for (const c of cached) {
+          if (!items.some((i) => i.id === c.id)) {
+            items.push({
+              id: c.id,
+              businessCategory: c.category,
+              businessIdea: c.idea,
+              villageName: 'Nadia Rural',
+              district: 'Nadia',
+              state: 'West Bengal',
+              overallScore: null,
+              createdAt: c.savedAt || new Date().toISOString(),
+            });
+          }
+        }
+      } catch {
+        // ignore
+      }
+
+      setLocalAnalyses(items);
+    }
+
+    loadOffline();
+  }, []);
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ['feasibility-analyses'],
     queryFn: () => api<{ total: number; analyses: FeasibilityAnalysisSummary[] }>(apiEndpoints.feasibility.analyses),
+    retry: 1,
   });
 
-  const analyses = data?.analyses ?? [];
-
-  if (isLoading) {
-    return (
-      <div className="rounded-2xl border border-[#DDDDDD] bg-white p-6">
-        <h2 className="flex items-center gap-2 text-base font-bold text-[#1A3A6B] mb-4">
-          <FileText className="h-5 w-5 text-[#E65C00]" /> {t.nav.sampleReport || 'Past Assessments'}
-        </h2>
-        <div className="flex justify-center py-8">
-          <Loader2 className="h-6 w-6 animate-spin text-[#E65C00]" />
-        </div>
-      </div>
-    );
+  const apiAnalyses = data?.analyses ?? [];
+  
+  // Merge API analyses with localAnalyses (deduplicating by id)
+  const mergedMap = new Map<string, FeasibilityAnalysisSummary>();
+  for (const item of localAnalyses) {
+    mergedMap.set(item.id, item);
+  }
+  for (const item of apiAnalyses) {
+    mergedMap.set(item.id, item);
   }
 
-  if (isError || !data) {
+  const analyses = Array.from(mergedMap.values()).sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
+
+  if (isLoading && localAnalyses.length === 0) {
     return (
-      <div className="rounded-2xl border border-[#DDDDDD] bg-white p-6">
+      <div className="rounded-2xl border border-[#DDDDDD] bg-white p-6 mt-6">
         <h2 className="flex items-center gap-2 text-base font-bold text-[#1A3A6B] mb-4">
           <FileText className="h-5 w-5 text-[#E65C00]" /> {t.dashboard.pastAssessments}
         </h2>
-        <div className="text-center py-8 text-sm text-red-600 bg-red-50 rounded-xl border border-red-100">
-          Failed to load past assessments.
+        <div className="flex justify-center py-8">
+          <Loader2 className="h-6 w-6 animate-spin text-[#E65C00]" />
         </div>
       </div>
     );
