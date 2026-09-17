@@ -73,21 +73,28 @@ export const mockReport: FeasibilityReport = {
       monthsCovered: 3,
     },
     cashflow: {
-      projections: Array.from({ length: 12 }, (_, i) => ({
-        month: i + 1,
-        revenue: i === 7 ? 9800 : 14500,
-        operatingCosts: 8200,
-        emi: 3847,
-        netCashflow: i === 7 ? 9800 - 8200 - 3847 : 14500 - 8200 - 3847,
-        cumulativeCashflow: (i + 1) * 2453 - (i === 7 ? 4906 : 0),
-      })),
-      averageMonthlyCashflow: 2200,
+      projections: Array.from({ length: 12 }, (_, i) => {
+        const season = [0.75, 0.88, 0.95, 1.0, 0.92, 0.88, 0.94, 1.0, 1.04, 1.08, 1.12, 1.10][i];
+        const rev = Math.round(14500 * season);
+        const ops = 8200;
+        const emi = 3847;
+        const net = rev - ops - emi;
+        return {
+          month: i + 1,
+          revenue: rev,
+          operatingCosts: ops,
+          emi: emi,
+          netCashflow: net,
+          cumulativeCashflow: Math.round((i + 1) * 2453 * season),
+        };
+      }),
+      averageMonthlyCashflow: 2450,
       isCashflowPositive: true,
     },
     breakEven: {
       breakEvenUnits: 820,
       breakEvenRevenue: 12300,
-      breakEvenMonth: 2,
+      breakEvenMonth: 6,
       isViable: true,
       chartData: Array.from({ length: 12 }, (_, i) => ({
         month: i + 1,

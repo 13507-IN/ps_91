@@ -1,23 +1,24 @@
 'use client';
 
-import { MapPin, RefreshCw } from 'lucide-react';
+import { MapPin, RefreshCw, FileText, Sparkles, TrendingUp, Landmark, ShieldCheck } from 'lucide-react';
 import { VerdictGauge } from './VerdictGauge';
 import { ConfidenceBadge } from '@/components/ConfidenceBadge';
 import { decisionColor, gradeBadge, dateTime } from '@/lib/format';
 import type { FeasibilityReport } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
+import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 const bgGradient: Record<string, string> = {
-  EXCELLENT: 'bg-gradient-to-br from-emerald-50 to-teal-50/50 border-emerald-200',
-  GOOD: 'bg-gradient-to-br from-teal-50 to-sky-50/50 border-teal-200',
-  MODERATE: 'bg-gradient-to-br from-amber-50 to-orange-50/50 border-amber-200',
-  POOR: 'bg-gradient-to-br from-rose-50 to-red-50/50 border-rose-200',
+  EXCELLENT: 'bg-gradient-to-br from-emerald-50/90 via-teal-50/50 to-white border-emerald-200',
+  GOOD: 'bg-gradient-to-br from-sky-50/90 via-teal-50/40 to-white border-teal-200',
+  MODERATE: 'bg-gradient-to-br from-amber-50/90 via-orange-50/40 to-white border-amber-200',
+  POOR: 'bg-gradient-to-br from-rose-50/90 via-red-50/40 to-white border-rose-200',
 };
 
 export function VerdictHeroSection({ report }: { report: FeasibilityReport }) {
-  const { feasibilityScore, aiRecommendation, confidence, catchment, createdAt, businessIdea } =
+  const { feasibilityScore, aiRecommendation, confidence, catchment, createdAt, businessIdea, financialPlan } =
     report;
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const getDecisionText = (decision: string) => {
     if (decision === 'PROCEED') return t.report.proceed;
@@ -33,14 +34,24 @@ export function VerdictHeroSection({ report }: { report: FeasibilityReport }) {
     return grade;
   };
 
-  return (
-    <section className={`rounded-2xl border p-6 ${bgGradient[feasibilityScore.grade] || 'bg-white border-slate-200'}`}>
-      <div className="flex flex-col items-center gap-6 md:flex-row md:items-center">
-        <VerdictGauge score={feasibilityScore.totalScore} grade={feasibilityScore.grade} />
-        <div className="flex-1 text-center md:text-left">
-          <h1 className="text-2xl font-bold text-slate-900">{businessIdea}</h1>
+  const avgMonthlyCashflow = financialPlan?.cashflow?.averageMonthlyCashflow ?? 0;
+  const matchedSchemeName = financialPlan?.matchedSchemeName;
 
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-2 md:justify-start">
+  return (
+    <section className={`rounded-2xl border p-6 md:p-7 shadow-xs transition-all ${bgGradient[feasibilityScore.grade] || 'bg-white border-slate-200'}`}>
+      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <VerdictGauge score={feasibilityScore.totalScore} grade={feasibilityScore.grade} />
+        
+        <div className="flex-1 text-center md:text-left">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+            <span className="inline-flex items-center gap-1">
+              <Sparkles className="h-3.5 w-3.5 text-[#E65C00]" /> Feasibility Verdict
+            </span>
+          </div>
+
+          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight">{businessIdea}</h1>
+
+          <div className="mt-3 flex flex-wrap items-center justify-center md:justify-start gap-2">
             <span
               className={`rounded-full px-3 py-1 text-xs font-semibold ${decisionColor[aiRecommendation.decision]}`}
             >
@@ -54,18 +65,57 @@ export function VerdictHeroSection({ report }: { report: FeasibilityReport }) {
             <ConfidenceBadge level={confidence} />
           </div>
 
-          <p className="mt-3 text-sm text-slate-600">{aiRecommendation.summary}</p>
-
-          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-500">
-            <span className="inline-flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5" />
-              {catchment.latitude.toFixed(4)}, {catchment.longitude.toFixed(4)} · {catchment.radiusKm} km
+          <div className="mt-4 flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2 text-xs text-slate-500">
+            <span className="inline-flex items-center gap-1.5 font-medium">
+              <MapPin className="h-3.5 w-3.5 text-slate-400" />
+              {catchment.latitude.toFixed(4)}, {catchment.longitude.toFixed(4)} · {catchment.radiusKm} km radius
             </span>
-            <span className="inline-flex items-center gap-1.5">
-              <RefreshCw className="h-3.5 w-3.5" />
+            <span className="inline-flex items-center gap-1.5 font-medium">
+              <RefreshCw className="h-3.5 w-3.5 text-slate-400" />
               {dateTime(createdAt)}
             </span>
           </div>
+        </div>
+      </div>
+
+      {/* Prominent Executive Summary Card */}
+      <div className="mt-6 rounded-xl border border-sky-200/80 bg-gradient-to-r from-sky-50/90 via-white to-sky-50/40 p-5 shadow-xs">
+        <div className="flex items-center justify-between gap-2 border-b border-sky-100 pb-3 mb-3">
+          <div className="flex items-center gap-2">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#1A3A6B] text-white">
+              <FileText className="h-4 w-4" />
+            </div>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-[#1A3A6B]">
+              Executive Analysis Summary
+            </h3>
+          </div>
+          <span className="rounded-full bg-sky-100 px-2.5 py-0.5 text-[11px] font-bold text-sky-800">
+            AI Generated
+          </span>
+        </div>
+
+        <p className="text-sm md:text-base leading-relaxed text-slate-800 font-normal">
+          {aiRecommendation.summary}
+        </p>
+
+        {/* Snapshot Badges */}
+        <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-sky-100/70 text-xs">
+          <div className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 border border-sky-200/60 font-semibold text-slate-700 shadow-xs">
+            <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
+            Viability Score: <span className="font-bold text-emerald-700">{feasibilityScore.totalScore}/100</span>
+          </div>
+          {avgMonthlyCashflow > 0 && (
+            <div className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 border border-sky-200/60 font-semibold text-slate-700 shadow-xs">
+              <TrendingUp className="h-3.5 w-3.5 text-emerald-600" />
+              Est. Monthly Profit: <span className="font-bold text-emerald-700">₹{formatIndianNumber(Math.round(avgMonthlyCashflow), lang)}</span>
+            </div>
+          )}
+          {matchedSchemeName && (
+            <div className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 border border-sky-200/60 font-semibold text-slate-700 shadow-xs">
+              <Landmark className="h-3.5 w-3.5 text-sky-600" />
+              Matched Scheme: <span className="font-bold text-slate-900">{matchedSchemeName}</span>
+            </div>
+          )}
         </div>
       </div>
     </section>

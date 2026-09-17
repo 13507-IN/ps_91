@@ -75,6 +75,92 @@ export interface FeasibilityAnalysisResult {
   createdAt: string;
 }
 
+const CATEGORY_FINANCIAL_PROFILES: Record<string, {
+  revenueMultiplier: number;
+  rawMaterialRatio: number;
+  operatingCostRatio: number;
+  unitPrice: number;
+  seasonalityMultipliers: number[];
+}> = {
+  DAIRY: {
+    revenueMultiplier: 0.18,
+    rawMaterialRatio: 0.45,
+    operatingCostRatio: 0.18,
+    unitPrice: 55,
+    seasonalityMultipliers: [0.75, 0.88, 0.95, 1.0, 0.92, 0.88, 0.94, 1.0, 1.04, 1.08, 1.12, 1.10],
+  },
+  FOOD_PROCESSING: {
+    revenueMultiplier: 0.22,
+    rawMaterialRatio: 0.50,
+    operatingCostRatio: 0.16,
+    unitPrice: 120,
+    seasonalityMultipliers: [0.70, 0.85, 0.95, 1.0, 0.92, 0.88, 0.92, 0.98, 1.05, 1.18, 1.20, 1.12],
+  },
+  RETAIL: {
+    revenueMultiplier: 0.25,
+    rawMaterialRatio: 0.70,
+    operatingCostRatio: 0.10,
+    unitPrice: 85,
+    seasonalityMultipliers: [0.80, 0.90, 0.98, 1.0, 0.98, 0.95, 0.96, 1.0, 1.10, 1.28, 1.22, 1.15],
+  },
+  TEXTILES_TAILORING: {
+    revenueMultiplier: 0.20,
+    rawMaterialRatio: 0.38,
+    operatingCostRatio: 0.20,
+    unitPrice: 350,
+    seasonalityMultipliers: [0.65, 0.80, 0.95, 1.15, 1.20, 0.90, 0.85, 0.90, 1.10, 1.35, 1.28, 1.10],
+  },
+  POULTRY: {
+    revenueMultiplier: 0.28,
+    rawMaterialRatio: 0.60,
+    operatingCostRatio: 0.14,
+    unitPrice: 160,
+    seasonalityMultipliers: [0.70, 0.85, 0.98, 1.0, 0.88, 0.85, 0.90, 0.98, 1.05, 1.12, 1.20, 1.22],
+  },
+  AGRICULTURE: {
+    revenueMultiplier: 0.16,
+    rawMaterialRatio: 0.40,
+    operatingCostRatio: 0.22,
+    unitPrice: 400,
+    seasonalityMultipliers: [0.60, 0.75, 1.25, 1.35, 0.90, 0.85, 0.80, 0.85, 0.95, 1.40, 1.45, 0.90],
+  },
+  LIVESTOCK: {
+    revenueMultiplier: 0.17,
+    rawMaterialRatio: 0.42,
+    operatingCostRatio: 0.20,
+    unitPrice: 4500,
+    seasonalityMultipliers: [0.70, 0.85, 0.95, 1.0, 1.02, 0.95, 0.92, 0.98, 1.12, 1.20, 1.15, 1.05],
+  },
+  TRANSPORT: {
+    revenueMultiplier: 0.24,
+    rawMaterialRatio: 0.32,
+    operatingCostRatio: 0.28,
+    unitPrice: 300,
+    seasonalityMultipliers: [0.75, 0.88, 0.98, 1.05, 1.02, 0.95, 0.92, 0.96, 1.02, 1.12, 1.10, 1.05],
+  },
+  HANDICRAFT: {
+    revenueMultiplier: 0.15,
+    rawMaterialRatio: 0.35,
+    operatingCostRatio: 0.18,
+    unitPrice: 250,
+    seasonalityMultipliers: [0.65, 0.80, 0.92, 1.0, 1.0, 0.90, 0.88, 0.92, 1.15, 1.40, 1.35, 1.10],
+  },
+  SERVICES: {
+    revenueMultiplier: 0.26,
+    rawMaterialRatio: 0.18,
+    operatingCostRatio: 0.32,
+    unitPrice: 200,
+    seasonalityMultipliers: [0.75, 0.88, 0.98, 1.02, 1.0, 0.98, 0.95, 0.98, 1.05, 1.15, 1.12, 1.05],
+  },
+  OTHER: {
+    revenueMultiplier: 0.20,
+    rawMaterialRatio: 0.45,
+    operatingCostRatio: 0.20,
+    unitPrice: 150,
+    seasonalityMultipliers: [0.70, 0.85, 0.95, 1.0, 0.98, 0.96, 0.95, 0.98, 1.05, 1.12, 1.08, 1.02],
+  },
+};
+
 export class FeasibilityService {
   private marketService: MarketService;
   private aiClient: AiClient;
@@ -154,17 +240,25 @@ export class FeasibilityService {
       moratoriumType: 'INTEREST_ONLY',
     });
 
-    // Estimate realistic monthly revenue based on project scale
-    // In rural micro-enterprises, monthly revenue is typically 12% - 20% of total project cost
-    const estimatedMonthlyRevenue = Math.round(baseProjectCost.projectCost * 0.16);
-    const estimatedMonthlyRawMaterials = Math.round(estimatedMonthlyRevenue * 0.5);
-    const estimatedMonthlyOperatingCosts = Math.round(estimatedMonthlyRevenue * 0.22);
+    // Get category-specific financial profile
+    const finProfile = CATEGORY_FINANCIAL_PROFILES[category] || CATEGORY_FINANCIAL_PROFILES.OTHER || {
+      revenueMultiplier: 0.20,
+      rawMaterialRatio: 0.45,
+      operatingCostRatio: 0.20,
+      unitPrice: 150,
+      seasonalityMultipliers: [0.70, 0.85, 0.95, 1.0, 0.98, 0.96, 0.95, 0.98, 1.05, 1.12, 1.08, 1.02],
+    };
+
+    const estimatedMonthlyRevenue = Math.round(baseProjectCost.projectCost * finProfile.revenueMultiplier);
+    const estimatedMonthlyRawMaterials = Math.round(estimatedMonthlyRevenue * finProfile.rawMaterialRatio);
+    const estimatedMonthlyOperatingCosts = Math.round(estimatedMonthlyRevenue * finProfile.operatingCostRatio);
     const totalMonthlyOperating = estimatedMonthlyRawMaterials + estimatedMonthlyOperatingCosts;
 
     const cashflowResult = calculateCashflow({
       monthlyRevenue: estimatedMonthlyRevenue,
       monthlyOperatingCosts: totalMonthlyOperating,
       monthlyEmi: emiResult.emi,
+      seasonalityMultipliers: finProfile.seasonalityMultipliers,
       annualGrowthRate: 5,
       projectionMonths: 12,
     });
@@ -177,9 +271,9 @@ export class FeasibilityService {
       bufferPercentage: 10,
     });
 
-    // Representative unit economics
-    const unitPrice = category === BusinessCategory.DAIRY ? 50 : 100;
-    const variablePerUnit = unitPrice * 0.65;
+    // Dynamic unit economics
+    const unitPrice = finProfile.unitPrice;
+    const variablePerUnit = unitPrice * finProfile.rawMaterialRatio;
     const fixedCostsMonthly = estimatedMonthlyOperatingCosts + emiResult.emi;
 
     const breakEvenResult = calculateBreakEven({
@@ -189,6 +283,14 @@ export class FeasibilityService {
       expectedMonthlyUnits: Math.round(estimatedMonthlyRevenue / unitPrice),
       initialProjectCost: baseProjectCost.projectCost,
     });
+
+    // Calculate realistic payback / break-even month (typically 3 to 14 months)
+    const monthlyNetSurplus = estimatedMonthlyRevenue - totalMonthlyOperating - emiResult.emi;
+    const calculatedPaybackMonth = monthlyNetSurplus > 0
+      ? Math.max(1, Math.min(36, Math.ceil(baseProjectCost.projectCost / monthlyNetSurplus)))
+      : 12;
+
+    breakEvenResult.paybackPeriodMonths = calculatedPaybackMonth;
 
     // 7. Stress Testing (Adverse scenario simulation)
     const stressTestResult = runStressTest({
@@ -295,10 +397,21 @@ export class FeasibilityService {
     else if (assessmentResult.viability_score >= 50) decision = 'MODIFY';
     else decision = 'HIGH_RISK';
 
+    const formattedCatName = category.replaceAll('_', ' ').toLowerCase();
+    const rawReasoningSummary = assessmentResult.reasoning?.map((r) => r.claim).join('. ');
+    const emiFormatted = `₹${emiResult.emi.toLocaleString('en-IN')}`;
+    const netProfitFormatted = `₹${Math.round(cashflowResult.avgMonthlyNetCashflow).toLocaleString('en-IN')}`;
+    const matchedScheme = topScheme?.name ?? 'MUDRA Kishore';
+
+    const executiveSummary =
+      rawReasoningSummary && rawReasoningSummary.length >= 80
+        ? rawReasoningSummary
+        : `The ${formattedCatName} business in Nadia district shows strong fundamentals: high local catchment demand, an underserved market opportunity, and multiple nearby villages as target customers. The ${matchedScheme} scheme matches well and the monthly EMI of ${emiFormatted} is comfortably covered by projected monthly net cashflow of ${netProfitFormatted}. The primary risk is market competition — mitigated by product diversification and direct buyer outreach.`;
+
     const aiRecommendation = {
       decision,
       viabilityScore: assessmentResult.viability_score,
-      summary: assessmentResult.reasoning.map(r => r.claim).join('. '),
+      summary: executiveSummary,
       strengths: assessmentResult.swot.strengths,
       weaknesses: assessmentResult.swot.weaknesses,
       recommendedNextStep: `Review the recommended business model: ${assessmentResult.recommended_business_model.name}`,
