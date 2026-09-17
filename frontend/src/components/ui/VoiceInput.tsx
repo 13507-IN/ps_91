@@ -12,13 +12,13 @@ interface VoiceInputProps {
   autoRefine?: boolean;
 }
 
-export type VoiceLang = 'bn-IN' | 'bn-BD' | 'en-IN';
+export type VoiceLang = 'bn-IN' | 'bn-BD' | 'hi-IN' | 'en-IN';
 
 export default function VoiceInput({ onTranscript, currentValue, autoRefine = true }: VoiceInputProps) {
   const { t, lang } = useTranslation();
   const [isListening, setIsListening] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [voiceLang, setVoiceLang] = useState<VoiceLang>(lang === 'BN' ? 'bn-IN' : 'en-IN');
+  const [voiceLang, setVoiceLang] = useState<VoiceLang>(lang === 'BN' ? 'bn-IN' : lang === 'HI' ? 'hi-IN' : 'en-IN');
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [refinedBadge, setRefinedBadge] = useState(false);
 
@@ -30,14 +30,20 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
   const rawTranscriptRef = useRef<string>('');
   const activeLangRef = useRef<string>('bn-IN');
 
-  // Update voice language default if global language changes
+  // Update voice language default only when the global site language changes
+  const prevLangRef = useRef(lang);
   useEffect(() => {
-    if (lang === 'BN' && !voiceLang.startsWith('bn')) {
-      setVoiceLang('bn-IN');
-    } else if (lang === 'EN' && voiceLang !== 'en-IN') {
-      setVoiceLang('en-IN');
+    if (prevLangRef.current !== lang) {
+      prevLangRef.current = lang;
+      if (lang === 'BN') {
+        setVoiceLang('bn-IN');
+      } else if (lang === 'HI') {
+        setVoiceLang('hi-IN');
+      } else {
+        setVoiceLang('en-IN');
+      }
     }
-  }, [lang, voiceLang]);
+  }, [lang]);
 
   // Handle automatic AI accent & dialect refinement
   async function triggerAiRefinement(textToRefine: string) {
@@ -298,7 +304,7 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
         </button>
 
         {/* Language selector toggle */}
-        <div className="flex items-center bg-white border border-border rounded-lg p-0.5 text-[11px] font-medium">
+        <div className="flex items-center bg-white border border-border rounded-lg p-0.5 text-[11px] font-medium gap-0.5">
           <button
             type="button"
             onClick={() => handleSwitchLanguage('bn-IN')}
@@ -309,6 +315,17 @@ export default function VoiceInput({ onTranscript, currentValue, autoRefine = tr
             }`}
           >
             বাংলা (BD/IN)
+          </button>
+          <button
+            type="button"
+            onClick={() => handleSwitchLanguage('hi-IN')}
+            className={`px-2 py-0.5 rounded-md transition-colors ${
+              voiceLang === 'hi-IN'
+                ? 'bg-teal-900 text-white font-semibold shadow-xs'
+                : 'text-ink-muted hover:text-ink'
+            }`}
+          >
+            हिंदी
           </button>
           <button
             type="button"

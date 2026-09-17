@@ -37,6 +37,7 @@ interface VerifyOtpResponse {
 // ============================================================
 
 function StepIndicator({ step }: { step: 1 | 2 }) {
+  const { t } = useTranslation();
   return (
     <div className="flex items-center justify-center gap-3 mb-6">
       {/* Step 1 */}
@@ -49,7 +50,7 @@ function StepIndicator({ step }: { step: 1 | 2 }) {
           {step > 1 ? <CheckCircle2 size={14} /> : '1'}
         </div>
         <span className={`text-xs font-medium ${step >= 1 ? 'text-[#E65C00]' : 'text-[#9CA3AF]'}`}>
-          Phone
+          {t.auth.phoneStep}
         </span>
       </div>
 
@@ -70,7 +71,7 @@ function StepIndicator({ step }: { step: 1 | 2 }) {
           2
         </div>
         <span className={`text-xs font-medium ${step >= 2 ? 'text-[#E65C00]' : 'text-[#9CA3AF]'}`}>
-          Verify OTP
+          {t.auth.verifyOtpStep}
         </span>
       </div>
     </div>
@@ -321,7 +322,7 @@ export default function RegisterPage() {
       </div>
       <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest mb-1">अर्थसेतु</div>
       <h1 className="text-white text-2xl font-bold">{t.auth.registerTitle}</h1>
-      <p className="text-white/60 text-sm mt-1">Join the rural enterprise network</p>
+      <p className="text-white/60 text-sm mt-1">{t.auth.joinNetwork}</p>
     </div>
   );
 
@@ -358,13 +359,13 @@ export default function RegisterPage() {
                     <path fill="#FBBC05" d="M10.9 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6L2.4 13.3A24 24 0 0 0 0 24c0 3.8.9 7.4 2.4 10.7l8.5-6.1z"/>
                     <path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.5l-7.5-5.8c-2 1.4-4.6 2.2-7.7 2.2-6.1 0-11.2-3.8-13-9.3l-8 6.2C6.9 42.6 14.8 48 24 48z"/>
                   </svg>
-                  Continue with Google
+                  {t.auth.continueGoogle}
                 </button>
 
                 {/* Divider */}
                 <div className="flex items-center gap-3 mb-5">
                   <div className="flex-1 h-px bg-[#E5E7EB]" />
-                  <span className="text-xs text-[#9CA3AF] font-medium">OR REGISTER WITH PHONE</span>
+                  <span className="text-xs text-[#9CA3AF] font-medium">{t.auth.orRegisterPhone}</span>
                   <div className="flex-1 h-px bg-[#E5E7EB]" />
                 </div>
 
@@ -379,7 +380,7 @@ export default function RegisterPage() {
                   {/* Name */}
                   <div>
                     <label htmlFor="reg-name" className="block text-sm font-semibold text-[#333] mb-1.5">
-                      Full Name *
+                      {t.auth.fullName}
                     </label>
                     <div className="relative">
                       <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#999]" />
@@ -389,7 +390,7 @@ export default function RegisterPage() {
                         autoComplete="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Your full name"
+                        placeholder={t.auth.fullNamePlaceholder}
                         required
                         className="w-full pl-10 pr-4 py-3 border-2 border-[#DDDDDD] rounded-lg text-sm outline-none focus:border-[#E65C00] focus:shadow-[0_0_0_3px_rgba(230,92,0,0.12)] transition-all"
                       />
@@ -458,12 +459,12 @@ export default function RegisterPage() {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                         </svg>
-                        Sending OTP…
+                        {t.auth.sendingOtp}
                       </span>
                     ) : (
                       <>
                         <Phone size={16} />
-                        Send OTP
+                        {t.auth.sendOtp}
                         <ArrowRight size={18} />
                       </>
                     )}
@@ -490,7 +491,7 @@ export default function RegisterPage() {
                   className="flex items-center gap-1.5 text-sm text-[#666] hover:text-[#E65C00] transition-colors -mt-2 mb-1"
                 >
                   <ChevronLeft size={16} />
-                  Change number
+                  {t.auth.changeNumber}
                 </button>
 
                 {/* Info banner */}
@@ -498,8 +499,8 @@ export default function RegisterPage() {
                   <div className="flex items-start gap-2.5">
                     <ShieldCheck size={16} className="text-[#1D4ED8] flex-shrink-0 mt-0.5" />
                     <div className="text-sm text-[#1E40AF]">
-                      <p className="font-semibold">OTP sent to +91 {phone}</p>
-                      <p className="text-xs mt-0.5 text-[#3B82F6]">Enter the 6-digit code below. Valid for 5 minutes.</p>
+                      <p className="font-semibold">{t.auth.otpSentTo} +91 {phone}</p>
+                      <p className="text-xs mt-0.5 text-[#3B82F6]">{t.auth.validForMinutes}</p>
                     </div>
                   </div>
                 </div>
@@ -524,7 +525,7 @@ export default function RegisterPage() {
                 {/* OTP boxes */}
                 <div>
                   <label className="block text-sm font-semibold text-[#333] mb-3 text-center">
-                    Enter 6-digit OTP
+                    {t.auth.enter6DigitOtp}
                   </label>
                   <OtpInput value={otpCode} onChange={setOtpCode} disabled={loading} />
                 </div>
@@ -541,12 +542,12 @@ export default function RegisterPage() {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                       </svg>
-                      Verifying…
+                      {t.auth.verifying}
                     </span>
                   ) : (
                     <>
                       <ShieldCheck size={16} />
-                      Verify & Create Account
+                      {t.auth.verifyAndCreate}
                       <ArrowRight size={18} />
                     </>
                   )}
@@ -556,7 +557,7 @@ export default function RegisterPage() {
                 <div className="text-center">
                   {resendCooldown > 0 ? (
                     <p className="text-sm text-[#9CA3AF]">
-                      Resend OTP in{' '}
+                      {t.auth.resendOtpIn}{' '}
                       <span className="font-semibold text-[#E65C00]">{resendCooldown}s</span>
                     </p>
                   ) : (
@@ -567,7 +568,7 @@ export default function RegisterPage() {
                       className="flex items-center gap-1.5 text-sm text-[#1A3A6B] font-semibold hover:text-[#E65C00] transition-colors mx-auto disabled:opacity-60"
                     >
                       <RefreshCw size={14} />
-                      Resend OTP
+                      {t.auth.resendOtp}
                     </button>
                   )}
                 </div>
