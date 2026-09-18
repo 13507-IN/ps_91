@@ -423,10 +423,7 @@ export class FeasibilityService {
     const netProfitFormatted = `₹${Math.round(cashflowResult.avgMonthlyNetCashflow).toLocaleString('en-IN')}`;
     const matchedScheme = topScheme?.name ?? 'MUDRA Kishore';
 
-    const executiveSummary =
-      rawReasoningSummary && rawReasoningSummary.length >= 80
-        ? rawReasoningSummary
-        : `The ${formattedCatName} business in ${locationInfo.districtName} district shows strong fundamentals: high local catchment demand, an underserved market opportunity, and multiple nearby villages as target customers. The ${matchedScheme} scheme matches well and the monthly EMI of ${emiFormatted} is comfortably covered by projected monthly net cashflow of ${netProfitFormatted}. The primary risk is market competition — mitigated by product diversification and direct buyer outreach.`;
+    const executiveSummary = `The ${formattedCatName} business in ${locationInfo.districtName} district shows strong fundamentals: high local catchment demand, an underserved market opportunity, and multiple nearby villages as target customers. The ${matchedScheme} scheme matches well and the monthly EMI of ${emiFormatted} is comfortably covered by projected monthly net cashflow of ${netProfitFormatted}. The primary risk is market competition — mitigated by product diversification and direct buyer outreach.`;
 
     const aiRecommendation = {
       decision,

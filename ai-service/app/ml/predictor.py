@@ -142,7 +142,7 @@ def predict_demand(
             "nearest_town_distance": nearest_town_distance,
             "internet_access": float(internet_access or 0.5),
         }
-        frame = pd.DataFrame([[row[f] for f in features]], columns=features)
+        frame = pd.DataFrame([[row.get(f, 0) for f in features]], columns=features)
         daily = float(bundle["pipeline"].predict(frame)[0])
         return DemandMLResult(
             available=True,
