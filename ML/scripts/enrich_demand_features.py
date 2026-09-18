@@ -81,6 +81,6 @@ def build_enriched(input_csv: Path, output_csv: Path) -> None:
 
 
 if __name__ == "__main__":
-    src = Path(sys.argv[sys.argv.index("--input") + 1]) if "--input" in sys.argv else ROOT / "data/raw/wb_demand_training_data.csv"
-    out = Path(sys.argv[sys.argv.index("--output") + 1]) if "--output" in sys.argv else ROOT / "data/raw/wb_demand_training_data_enriched.csv"
+    src = Path(sys.argv[sys.argv.index("--input") + 1]) if "--input" in sys.argv else ROOT / "data/raw/west_demand_training_data.csv"
+    out = Path(sys.argv[sys.argv.index("--output") + 1]) if "--output" in sys.argv else ROOT / "data/raw/west_demand_training_data_enriched.csv"
     build_enriched(src, out)
