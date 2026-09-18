@@ -135,6 +135,7 @@ export class OtpService {
     code: string,
     purpose: OtpPurpose,
     name?: string,
+    password?: string,
   ): Promise<VerifyOtpResponse> {
     const normalizedPhone = this.normalizePhone(phone);
 
@@ -193,15 +194,23 @@ export class OtpService {
     });
 
     if (!user) {
-      // First-time registration — create account (no password needed for OTP users)
-      const placeholderHash = await bcrypt.hash(
-        crypto.randomBytes(32).toString('hex'),
-        10,
-      );
+      // First-time registration
+      let passwordHash: string;
+      if (password) {
+        // Use provided password (from new signup flow)
+        passwordHash = await bcrypt.hash(password, 10);
+      } else {
+        // Fallback placeholder for OTP-only registration
+        passwordHash = await bcrypt.hash(
+          crypto.randomBytes(32).toString('hex'),
+          10,
+        );
+      }
+      
       user = await this.fastify.prisma.user.create({
         data: {
           phone: normalizedPhone,
-          passwordHash: placeholderHash,
+          passwordHash,
           name: name?.trim() ?? null,
         },
         select: { id: true, phone: true, name: true },

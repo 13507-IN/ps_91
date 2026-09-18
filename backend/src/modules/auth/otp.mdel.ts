@@ -33,6 +33,7 @@ export const verifyOtpSchema = z.object({
     .regex(/^\d{6}$/, 'OTP must contain only digits'),
   purpose: z.enum(['REGISTER', 'LOGIN', 'VERIFY']).default('REGISTER'),
   name: z.string().min(1).max(200).optional(),
+  password: z.string().min(6, 'Password must be at least 6 characters').max(100).optional(),
 });
 
 // ============================================================

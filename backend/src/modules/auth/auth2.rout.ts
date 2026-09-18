@@ -43,6 +43,7 @@ export async function otpAuthRoutes(fastify: FastifyInstance): Promise<void> {
       parsed.data.code,
       parsed.data.purpose,
       parsed.data.name,
+      parsed.data.password,
     );
 
     return reply.send(result);
@@ -68,6 +69,7 @@ export async function otpAuthRoutes(fastify: FastifyInstance): Promise<void> {
       otp: { type: 'string', minLength: 6, maxLength: 6, description: 'Alias for code' },
       purpose: { type: 'string', enum: ['REGISTER', 'LOGIN', 'VERIFY'], default: 'REGISTER' },
       name: { type: 'string', maxLength: 200 },
+      password: { type: 'string', minLength: 6, maxLength: 100, nullable: true },
     },
   };
 

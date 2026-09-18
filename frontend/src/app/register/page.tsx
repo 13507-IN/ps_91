@@ -164,6 +164,7 @@ export default function RegisterPage() {
   // Step 1 fields
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
 
   // Step 2 fields
   const [otpCode, setOtpCode] = useState('');
@@ -203,6 +204,11 @@ export default function RegisterPage() {
 
     if (!phoneValid) {
       setError('Please enter a valid 10-digit Indian mobile number.');
+      return;
+    }
+    
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long.');
       return;
     }
 
@@ -252,6 +258,7 @@ export default function RegisterPage() {
           code: otpCode,
           purpose: 'REGISTER',
           name: name.trim() || undefined,
+          password: password,
         }),
       });
 
@@ -437,6 +444,26 @@ export default function RegisterPage() {
                     {phone.length > 0 && !phoneValid && (
                       <p className="mt-1 text-xs text-red-500">Must be a valid 10-digit Indian mobile number (starts with 6–9).</p>
                     )}
+                  </div>
+
+                  {/* Password */}
+                  <div>
+                    <label htmlFor="reg-password" className="block text-sm font-semibold text-[#333] mb-1.5">
+                      Password *
+                    </label>
+                    <div className="relative">
+                      <ShieldCheck size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#999]" />
+                      <input
+                        id="reg-password"
+                        type="password"
+                        autoComplete="new-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Min. 6 characters"
+                        required
+                        className="w-full pl-10 pr-4 py-3 border-2 border-[#DDDDDD] rounded-lg text-sm outline-none focus:border-[#E65C00] focus:shadow-[0_0_0_3px_rgba(230,92,0,0.12)] transition-all"
+                      />
+                    </div>
                   </div>
 
                   {/* Terms */}
