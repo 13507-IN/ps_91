@@ -74,7 +74,7 @@ export function extractVoiceIntent(rawText: string): ExtractedVoiceIntent {
     // Direct numbers e.g. 50000, 40,000, 15000, 50k
     const numMatch = text.match(/(?:rs\.?|inr|₹|টাকা|रुपये)?\s*(\d{1,3}(?:,\d{3})+|\d{4,7}|\d{1,3}\s*k)\b/i);
     if (numMatch) {
-      let rawVal = numMatch[1].replace(/,/g, '').toLowerCase();
+      const rawVal = numMatch[1].replace(/,/g, '').toLowerCase();
       if (rawVal.endsWith('k')) {
         const num = parseFloat(rawVal);
         extractedCapital = isNaN(num) ? null : Math.round(num * 1000);
