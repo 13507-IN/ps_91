@@ -64,7 +64,9 @@ class DemandMLResult:
     daily_demand: float | None = None
     model: str | None = None
     reason: str | None = None
-
+    confidence: str | None = None
+    is_synthetic: bool = False
+    notes: str | None = None
 
 def _load_demand_bundle():
     """Load (and cache) the demand model bundle once."""
@@ -144,6 +146,9 @@ def predict_demand(
             available=True,
             daily_demand=max(daily, 0.0),
             model=bundle["pipeline"].named_steps["model"].__class__.__name__,
+            confidence="LOW",
+            is_synthetic=True,
+            notes="WARNING: Demand prediction is driven by a synthetic-trained proxy model and is not calibrated to real-world ground truth.",
         )
     except Exception as exc:
         logger.warning("demand_prediction_failed", error=str(exc))

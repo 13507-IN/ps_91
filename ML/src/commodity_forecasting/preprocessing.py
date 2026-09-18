@@ -10,7 +10,11 @@ LOG = logger(__name__)
 def clean_prices(frame: pd.DataFrame, frequency: str = COMMODITY_FREQUENCY) -> pd.DataFrame:
     data = frame.copy()
     before = len(data)
-    data["date"] = pd.to_datetime(data["date"], errors="coerce", dayfirst=True)
+    parsed = pd.to_datetime(data["date"], errors="coerce")
+    ambiguous = parsed.isna() & data["date"].notna()
+    if ambiguous.any():
+        parsed.loc[ambiguous] = pd.to_datetime(data["date"][ambiguous], errors="coerce", dayfirst=True)
+    data["date"] = parsed
     data["modal_price"] = pd.to_numeric(data["modal_price"], errors="coerce")
     data = data.dropna(subset=["commodity", "date", "modal_price"])
     data = data[data["modal_price"] > 0]
