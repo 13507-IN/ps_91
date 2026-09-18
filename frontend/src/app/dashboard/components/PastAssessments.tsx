@@ -79,7 +79,7 @@ export function PastAssessments() {
     loadOffline();
   }, []);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['feasibility-analyses'],
     queryFn: () => api<{ total: number; analyses: FeasibilityAnalysisSummary[] }>(apiEndpoints.feasibility.analyses),
     retry: 1,
