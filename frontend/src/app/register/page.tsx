@@ -16,6 +16,14 @@ import { api, apiEndpoints, apiBaseUrl, setTokens, handleApiError } from '@/lib/
 import { useAuthStore } from '@/lib/store/auth';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import type { AuthTokens, UserProfile } from '@/types';
+import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
+import { auth } from '@/lib/firebase/config';
+
+declare global {
+  interface Window {
+    recaptchaVerifier: any;
+  }
+}
 
 // ============================================================
 // Types
@@ -177,8 +185,24 @@ export default function RegisterPage() {
   // Dev mode OTP hint (shown in dev if backend returns devOtp)
   const [devOtp, setDevOtp] = useState<string | null>(null);
 
+  // Firebase confirmation result
+  const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
+
   // Phone validation: 10-digit Indian mobile
   const phoneValid = /^[6-9]\d{9}$/.test(phone.trim());
+
+  // Initialize Recaptcha
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !window.recaptchaVerifier) {
+      try {
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+          size: 'invisible',
+        });
+      } catch (e) {
+        console.error("Recaptcha init error:", e);
+      }
+    }
+  }, []);
 
   // ---- Countdown timer for resend ----
   useEffect(() => {
@@ -214,22 +238,16 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
-      const data = await api<SendOtpResponse>(apiEndpoints.auth.sendOtp, {
-        method: 'POST',
-        body: JSON.stringify({
-          phone: phone.trim(),
-          purpose: 'REGISTER',
-          name: name.trim() || undefined,
-        }),
-      });
-
-      // Dev mode OTP hint
-      if (data.devOtp) setDevOtp(data.devOtp);
+      const appVerifier = window.recaptchaVerifier;
+      const formattedPhone = `+91${phone.trim()}`;
+      
+      const result = await signInWithPhoneNumber(auth, formattedPhone, appVerifier);
+      setConfirmationResult(result);
 
       setStep(2);
       setResendCooldown(30);
     } catch (err: unknown) {
-      handleApiError(err, 'Failed to send OTP. Please try again.');
+      console.error(err);
       setError(err instanceof Error ? err.message : 'Failed to send OTP.');
     } finally {
       setLoading(false);
@@ -251,11 +269,15 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
+      if (!confirmationResult) throw new Error("Please request a new OTP.");
+
+      const result = await confirmationResult.confirm(otpCode);
+      const firebaseIdToken = await result.user.getIdToken();
+
       const data = await api<VerifyOtpResponse>(apiEndpoints.auth.verifyOtp, {
         method: 'POST',
         body: JSON.stringify({
-          phone: phone.trim(),
-          code: otpCode,
+          firebaseIdToken,
           purpose: 'REGISTER',
           name: name.trim() || undefined,
           password: password,
@@ -286,18 +308,15 @@ export default function RegisterPage() {
     setDevOtp(null);
     setLoading(true);
     try {
-      const data = await api<SendOtpResponse>(apiEndpoints.auth.sendOtp, {
-        method: 'POST',
-        body: JSON.stringify({
-          phone: phone.trim(),
-          purpose: 'REGISTER',
-          name: name.trim() || undefined,
-        }),
-      });
-      if (data.devOtp) setDevOtp(data.devOtp);
+      const appVerifier = window.recaptchaVerifier;
+      const formattedPhone = `+91${phone.trim()}`;
+      
+      const result = await signInWithPhoneNumber(auth, formattedPhone, appVerifier);
+      setConfirmationResult(result);
       setResendCooldown(30);
     } catch (err: unknown) {
-      handleApiError(err, 'Failed to resend OTP.');
+      console.error(err);
+      setError('Failed to resend OTP.');
     } finally {
       setLoading(false);
     }
@@ -377,6 +396,7 @@ export default function RegisterPage() {
                 </div>
 
                 <form onSubmit={handleSendOtp} noValidate className="space-y-5">
+                  <div id="recaptcha-container"></div>
                   {error && (
                     <div className="flex items-start gap-2.5 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm">
                       <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />

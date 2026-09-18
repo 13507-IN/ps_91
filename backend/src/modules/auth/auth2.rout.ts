@@ -25,22 +25,15 @@ export async function otpAuthRoutes(fastify: FastifyInstance): Promise<void> {
     return reply.send(result);
   };
 
-  // ---- Verify OTP and authenticate; registers user if first time ----
+  // ---- Verify Firebase ID Token and authenticate; registers user if first time ----
   const handleVerifyOtp = async (request: FastifyRequest, reply: FastifyReply) => {
-    // Accept the code under both the `code` (otp/verify) and the
-    // `otp` (verify-otp) field names.
-    const raw = (request.body ?? {}) as Record<string, unknown>;
-    const parsed = verifyOtpSchema.safeParse({
-      ...raw,
-      code: raw.code ?? raw.otp,
-    });
+    const parsed = verifyOtpSchema.safeParse(request.body);
     if (!parsed.success) {
       throw new BadRequestError(parsed.error.errors[0]?.message ?? 'Invalid input');
     }
 
-    const result = await otpService.verifyOtp(
-      parsed.data.phone,
-      parsed.data.code,
+    const result = await otpService.verifyFirebaseToken(
+      parsed.data.firebaseIdToken,
       parsed.data.purpose,
       parsed.data.name,
       parsed.data.password,
@@ -62,11 +55,9 @@ export async function otpAuthRoutes(fastify: FastifyInstance): Promise<void> {
 
   const verifyBody = {
     type: 'object',
-    required: ['phone'],
+    required: ['firebaseIdToken'],
     properties: {
-      phone: { type: 'string', minLength: 10, maxLength: 15 },
-      code: { type: 'string', minLength: 6, maxLength: 6 },
-      otp: { type: 'string', minLength: 6, maxLength: 6, description: 'Alias for code' },
+      firebaseIdToken: { type: 'string' },
       purpose: { type: 'string', enum: ['REGISTER', 'LOGIN', 'VERIFY'], default: 'REGISTER' },
       name: { type: 'string', maxLength: 200 },
       password: { type: 'string', minLength: 6, maxLength: 100, nullable: true },

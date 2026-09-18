@@ -22,15 +22,7 @@ export const sendOtpSchema = z.object({
  * Schema for verifying an OTP submitted by the user.
  */
 export const verifyOtpSchema = z.object({
-  phone: z
-    .string()
-    .min(10, 'Phone number is required')
-    .max(15)
-    .regex(/^\+?[0-9]{10,15}$/, 'Invalid phone number format'),
-  code: z
-    .string()
-    .length(6, 'OTP must be exactly 6 digits')
-    .regex(/^\d{6}$/, 'OTP must contain only digits'),
+  firebaseIdToken: z.string().min(1, 'Firebase ID Token is required'),
   purpose: z.enum(['REGISTER', 'LOGIN', 'VERIFY']).default('REGISTER'),
   name: z.string().min(1).max(200).optional(),
   password: z.string().min(6, 'Password must be at least 6 characters').max(100).optional(),

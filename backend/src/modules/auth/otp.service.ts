@@ -15,6 +15,7 @@ import { BadRequestError, ServiceUnavailableError, TooManyRequestsError, Unautho
 import { sendSms } from '../../lib/httpsms.js';
 import type { SendOtpResponse, VerifyOtpResponse } from './otp.mdel.js';
 import { AuthService } from './auth.service.js';
+import { admin } from '../../lib/firebase-admin.js';
 
 // ============================================================
 // OTP Service — httpSMS SMS + DB-backed OTP lifecycle
@@ -127,61 +128,28 @@ export class OtpService {
   }
 
   // ----------------------------------------------------------
-  // verifyOtp — check code, issue JWT, register if new user
+  // verifyFirebaseToken — verify ID token, issue JWT, register if new user
   // ----------------------------------------------------------
 
-  async verifyOtp(
-    phone: string,
-    code: string,
+  async verifyFirebaseToken(
+    firebaseIdToken: string,
     purpose: OtpPurpose,
     name?: string,
     password?: string,
   ): Promise<VerifyOtpResponse> {
-    const normalizedPhone = this.normalizePhone(phone);
-
-    // Fetch the most recent unexpired, unverified OTP for this phone+purpose
-    const record = await this.fastify.prisma.otpCode.findFirst({
-      where: {
-        phone: normalizedPhone,
-        purpose,
-        verified: false,
-        expiresAt: { gt: new Date() },
-      },
-      orderBy: { createdAt: 'desc' },
-    });
-
-    if (!record) {
-      throw new BadRequestError(
-        'OTP not found or has expired. Please request a new one.',
-      );
+    let decodedToken;
+    try {
+      decodedToken = await admin.auth().verifyIdToken(firebaseIdToken);
+    } catch (err) {
+      this.fastify.log.error({ err }, 'Firebase token verification failed');
+      throw new UnauthorizedError('Invalid or expired Firebase ID token');
     }
 
-    // Guard against brute force
-    if (record.attempts >= OTP_MAX_ATTEMPTS) {
-      // Invalidate this OTP
-      await this.fastify.prisma.otpCode.delete({ where: { id: record.id } });
-      throw new TooManyRequestsError(
-        'Too many incorrect attempts. Please request a new OTP.',
-      );
+    if (!decodedToken.phone_number) {
+      throw new BadRequestError('Firebase token does not contain a phone number');
     }
 
-    // Verify the code against the stored hash
-    const isValid = await bcrypt.compare(code, record.code);
-
-    if (!isValid) {
-      // Increment attempts
-      await this.fastify.prisma.otpCode.update({
-        where: { id: record.id },
-        data: { attempts: { increment: 1 } },
-      });
-      const remaining = OTP_MAX_ATTEMPTS - (record.attempts + 1);
-      throw new UnauthorizedError(
-        `Incorrect OTP. ${remaining} attempt${remaining === 1 ? '' : 's'} remaining.`,
-      );
-    }
-
-    // Mark OTP as verified and delete it (single-use)
-    await this.fastify.prisma.otpCode.delete({ where: { id: record.id } });
+    const normalizedPhone = this.normalizePhone(decodedToken.phone_number);
 
     // ----------------------------------------------------------
     // Register new user or look up existing user
