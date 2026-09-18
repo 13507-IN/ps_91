@@ -12,14 +12,14 @@ export interface ProgressStep {
 }
 
 const STEPS_CONFIG = [
-  { icon: Search, label: 'Classifying business idea', color: 'text-purple-500' },
+  { icon: Search, label: 'Classifying business idea', color: 'text-indigo-500' },
   { icon: MapPin, label: 'Analyzing local market & demographics', color: 'text-teal-500' },
   { icon: TrendingUp, label: 'Estimating competition density', color: 'text-blue-500' },
   { icon: IndianRupee, label: 'Building financial plan & EMI', color: 'text-emerald-500' },
-  { icon: Shield, label: 'Matching government schemes', color: 'text-saffron' },
+  { icon: Shield, label: 'Matching government schemes', color: 'text-sky-500' },
   { icon: Brain, label: 'Running AI assessment pipeline', color: 'text-violet-500' },
   { icon: BarChart3, label: 'Calculating viability score', color: 'text-amber-500' },
-  { icon: ListChecks, label: 'Generating action plan', color: 'text-green-500' },
+  { icon: ListChecks, label: 'Generating action plan', color: 'text-emerald-600' },
 ];
 
 interface AnalysisProgressProps {
@@ -56,24 +56,24 @@ export default function AnalysisProgress({
         initial={{ scale: 0.9, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-        className="w-full max-w-lg mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden"
+        className="w-full max-w-lg mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-100"
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#1A3A6B] to-[#254d8c] px-6 py-5 text-white shadow-sm">
+        <div className="bg-gradient-to-r from-[#0F264A] via-[#1A3A6B] to-[#1E4A8A] px-6 py-5 text-white shadow-sm">
           <h2 className="text-lg font-bold tracking-tight">Analyzing Your Business</h2>
           <p className="text-blue-100/90 text-sm mt-0.5">
             Running 8 analysis engines — this takes 15-30 seconds
           </p>
           {/* Progress bar */}
-          <div className="mt-3.5 h-2.5 bg-white/20 rounded-full overflow-hidden p-0.5">
+          <div className="mt-3.5 h-2.5 bg-slate-900/40 rounded-full overflow-hidden p-0.5 ring-1 ring-white/15 backdrop-blur-sm">
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-[#FF9933] to-[#E65C00] shadow-sm"
+              className="h-full rounded-full bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300 shadow-[0_0_10px_rgba(52,211,153,0.55)]"
               initial={{ width: 0 }}
               animate={{ width: `${Math.min(progress, 100)}%` }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             />
           </div>
-          <div className="mt-1 text-right text-xs font-bold text-[#FF9933] font-tabular">
+          <div className="mt-1 text-right text-xs font-semibold text-teal-300 font-tabular tracking-wide">
             {Math.round(progress)}%
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function AnalysisProgress({
                 transition={{ delay: index * 0.05 }}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${
                   isCurrent
-                    ? 'bg-blue-50/80 border border-[#1A3A6B]/25 shadow-xs'
+                    ? 'bg-teal-50/90 border border-teal-200/90 shadow-xs ring-1 ring-teal-500/10'
                     : isCompleted
                       ? 'bg-emerald-50/60 border border-emerald-100'
                       : 'opacity-50'
@@ -112,7 +112,7 @@ export default function AnalysisProgress({
                       <CheckCircle2 className="h-5 w-5 text-emerald-600" />
                     </motion.div>
                   ) : isCurrent ? (
-                    <Loader2 className="h-5 w-5 text-[#1A3A6B] animate-spin" />
+                    <Loader2 className="h-5 w-5 text-teal-600 animate-spin" />
                   ) : (
                     <Circle className="h-5 w-5 text-slate-300" />
                   )}
@@ -120,13 +120,13 @@ export default function AnalysisProgress({
 
                 {/* Step icon */}
                 <Icon className={`h-4 w-4 flex-shrink-0 ${
-                  isCompleted ? 'text-emerald-600' : isCurrent ? 'text-[#E65C00]' : 'text-slate-300'
+                  isCompleted ? 'text-emerald-600' : isCurrent ? 'text-teal-600' : 'text-slate-300'
                 }`} />
 
                 {/* Label */}
                 <div className="flex-1 min-w-0">
                   <p className={`text-sm ${
-                    isCurrent ? 'font-bold text-[#1A3A6B]' : isCompleted ? 'text-emerald-900 font-medium' : 'text-slate-400'
+                    isCurrent ? 'font-bold text-teal-950' : isCompleted ? 'text-slate-800 font-medium' : 'text-slate-400'
                   }`}>
                     {customMessage || step.label}
                   </p>
@@ -150,10 +150,10 @@ export default function AnalysisProgress({
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="border-t border-[#E65C00]/20 px-6 py-3 bg-[#FFF8F0]"
+              className="border-t border-slate-100 px-6 py-3.5 bg-slate-50"
             >
-              <p className="text-xs text-[#993D00]">
-                💡 <strong className="text-[#E65C00]">Tip:</strong> Your report will include market intelligence, financial plan, scheme matching, risk assessment, and a 30-day action plan.
+              <p className="text-xs text-slate-600">
+                💡 <strong className="text-teal-900 font-semibold">Tip:</strong> Your report will include market intelligence, financial plan, scheme matching, risk assessment, and a 30-day action plan.
               </p>
             </motion.div>
           )}
