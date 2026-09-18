@@ -12,8 +12,8 @@ No existing application file is required or modified. Put database exports in `d
 Place downloaded government files here before running the preparation commands:
 
 ```text
-ML/data/raw/commodity_prices.csv
-ML/data/raw/demand_training_data.csv
+ML/data/raw/west_bengal_commodity_prices_full.csv
+ML/data/raw/west_demand_training_data.csv
 ```
 
 Commodity data must contain at least:
@@ -70,9 +70,9 @@ python scripts/test_demand_model.py
 With real data, run:
 
 ```powershell
-python scripts/prepare_commodity_data.py --input data/raw/commodity_prices.csv
+python scripts/prepare_commodity_data.py --input data/raw/west_bengal_commodity_prices_full.csv
 python scripts/train_commodity_model.py --input data/processed/commodity_prices_processed.csv --commodity potato
-python scripts/prepare_demand_data.py --input data/raw/demand_training_data.csv
+python scripts/prepare_demand_data.py --input data/raw/west_demand_training_data.csv
 python scripts/train_demand_model.py
 ```
 
