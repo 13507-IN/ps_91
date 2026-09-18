@@ -478,7 +478,11 @@ export class FeasibilityService {
         marketGaps: assessmentResult.market_gaps.map(g => g.name),
         potentialNiches: assessmentResult.market_gaps.map(g => g.reason),
         recommendedModel: assessmentResult.recommended_business_model.name,
-        opportunityScore: assessmentResult.opportunity_score
+        opportunityScore: assessmentResult.opportunity_score,
+        estimatedDailyDemandUnits: Math.max(competitorIntel.totalEstimatedMin * 20, estimatedHouseholds * 2),
+        estimatedAnnualDemandUnits: Math.max(competitorIntel.totalEstimatedMin * 20, estimatedHouseholds * 2) * 365,
+        unit: category === 'DAIRY' ? 'Litres' : category === 'POULTRY' ? 'Birds / Day' : category === 'RETAIL' ? 'Footfalls / Day' : 'Units / Day',
+        selectionReasoning: assessmentResult.recommended_business_model.selection_reasoning,
       } as unknown as Record<string, unknown>,
       localSuppliers: localSuppliers as unknown as Record<string, unknown>[],
       financialPlan,
