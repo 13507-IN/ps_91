@@ -256,6 +256,7 @@ export const businessModelRecommendationSchema = z.object({
   name: z.string(),
   reasoning: z.array(z.string()),
   capital_fit: z.string(),
+  selection_reasoning: z.string().optional(),
 });
 
 export const swotOutputSchema = z.object({
