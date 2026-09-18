@@ -5,6 +5,7 @@ import type { ChartOptions, TooltipItem } from 'chart.js';
 import type { FeasibilityScore } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
+import '@/lib/chart-setup';
 import { ShieldCheck } from 'lucide-react';
 
 function getScoreColor(value: number): string {
