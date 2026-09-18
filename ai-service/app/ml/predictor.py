@@ -105,6 +105,7 @@ def predict_demand(
     nearest_town_distance: float = 10.0,
     internet_access: float = 0.5,
     district: str = "Unknown",
+    state: str = "West Bengal",
 ) -> DemandMLResult:
     """
     Predict daily demand (units/day) for a catchment using the trained model.
@@ -125,6 +126,7 @@ def predict_demand(
         market_distance = 5.0 if market_distance is None else float(market_distance)
         nearest_town_distance = 10.0 if nearest_town_distance is None else float(nearest_town_distance)
         row = {
+            "state": state,
             "district": district,
             "business_category": business_category.upper(),
             "population": pop,
