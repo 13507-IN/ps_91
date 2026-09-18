@@ -205,7 +205,7 @@ export class FeasibilityService {
     ]);
     
     // Resolve location info for AI and Schemes context
-    const locationInfo = nearbyVillages.length > 0 ? nearbyVillages[0] : {
+    const locationInfo = nearbyVillages[0] ?? {
       name: 'Unknown Village',
       blockName: 'Unknown Block',
       districtName: 'Nadia', // Safe fallback for demo
