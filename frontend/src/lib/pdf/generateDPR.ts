@@ -22,11 +22,8 @@ const TEAL_PRIMARY: readonly [number, number, number] = [13, 78, 73];       // #
 const TEAL_DARK: readonly [number, number, number] = [7, 45, 42];          // #072D2A
 const TEAL_LIGHT: readonly [number, number, number] = [238, 246, 244];     // #EEF6F4
 const SAFFRON: readonly [number, number, number] = [230, 92, 0];           // #E65C00 National Saffron
-const SAFFRON_LIGHT: readonly [number, number, number] = [255, 244, 232];  // #FFF4E8
 const GREEN_ACCENT: readonly [number, number, number] = [15, 118, 110];    // #0F766E
 const GREEN_BG: readonly [number, number, number] = [236, 253, 245];       // #ECFDF5
-const RED_ACCENT: readonly [number, number, number] = [185, 28, 28];       // #B91C1C
-const RED_BG: readonly [number, number, number] = [254, 242, 242];         // #FEF2F2
 const AMBER_BG: readonly [number, number, number] = [254, 243, 199];       // #FEF3C7
 const SLATE_DARK: readonly [number, number, number] = [15, 23, 42];        // #0F172A Primary Text
 const SLATE_MUTED: readonly [number, number, number] = [71, 85, 105];      // #475569 Secondary Text
@@ -38,7 +35,6 @@ type RGB = readonly [number, number, number];
 
 // ── Layout Dimensions (mm) ──
 const PAGE_W = 210;
-const PAGE_H = 297;
 const MARGIN_X = 18;
 const CONTENT_W = PAGE_W - MARGIN_X * 2; // 174mm
 const PAGE_BOTTOM = 278;
@@ -130,7 +126,7 @@ function drawSectionHeader(doc: jsPDF, y: number, sectionNum: string, title: str
   doc.setFontSize(11.5);
   doc.setFont('helvetica', 'bold');
   setColor(doc, TEAL_PRIMARY);
-  doc.text(`${sectionNum}. ${title}`, MARGIN_X + 6, y + 4.5);
+  doc.text(cleanPdfText(`${sectionNum}. ${title}`), MARGIN_X + 6, y + 4.5);
 
   // Divider line
   setDraw(doc, SLATE_BORDER, 0.4);
@@ -144,7 +140,7 @@ function drawSubHeader(doc: jsPDF, y: number, title: string, color: RGB = TEAL_D
   doc.setFontSize(9.5);
   doc.setFont('helvetica', 'bold');
   setColor(doc, color);
-  doc.text(title, MARGIN_X, y);
+  doc.text(cleanPdfText(title), MARGIN_X, y);
   return y + 4.5;
 }
 
@@ -272,7 +268,7 @@ function renderTable(
     const w = colWidths[i];
     const a = aligns[i] ?? 'L';
     const ax = a === 'R' ? cx + w - 2.5 : a === 'C' ? cx + w / 2 : cx + 2.5;
-    doc.text(headers[i], ax, y + headerH / 2 + 1.2, {
+    doc.text(cleanPdfText(headers[i]), ax, y + headerH / 2 + 1.2, {
       align: a === 'R' ? 'right' : a === 'C' ? 'center' : 'left',
     } as const);
     cx += w;
@@ -307,7 +303,8 @@ function renderTable(
       const a = aligns[c] ?? 'L';
       const ax = a === 'R' ? rcx + w - 2.5 : a === 'C' ? rcx + w / 2 : rcx + 2.5;
       const textVal = cleanPdfText(String(rows[i][c] ?? '-'));
-      doc.text(textVal, ax, y + rowH / 2 + 1, {
+      const truncated = doc.splitTextToSize(textVal, w - 4)[0] || '';
+      doc.text(truncated, ax, y + rowH / 2 + 1, {
         align: a === 'R' ? 'right' : a === 'C' ? 'center' : 'left',
       } as const);
       rcx += w;
@@ -399,7 +396,7 @@ function applyHeadersAndFooters(doc: jsPDF, ref: string, category: string, dateS
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(7.5);
       setColor(doc, SLATE_MUTED);
-      doc.text(`Ref: ${ref}  |  ${dateStr}`, PAGE_W - MARGIN_X, 8.5, { align: 'right' });
+      doc.text(cleanPdfText(`Ref: ${ref}  |  ${dateStr}`), PAGE_W - MARGIN_X, 8.5, { align: 'right' });
     }
 
     // Bottom footer banner
@@ -409,7 +406,7 @@ function applyHeadersAndFooters(doc: jsPDF, ref: string, category: string, dateS
     doc.setFontSize(7);
     doc.setFont('helvetica', 'normal');
     setColor(doc, SLATE_MUTED);
-    doc.text(`Doc Ref: ${ref}  |  Scheme Appraisal Document`, MARGIN_X, PAGE_BOTTOM + 6.5);
+    doc.text(cleanPdfText(`Doc Ref: ${ref}  |  Scheme Appraisal Document`), MARGIN_X, PAGE_BOTTOM + 6.5);
     doc.text(`Confidential - For Bank / Lending Appraisal`, PAGE_W / 2, PAGE_BOTTOM + 6.5, { align: 'center' });
     doc.text(`Page ${p} of ${totalPages}`, PAGE_W - MARGIN_X, PAGE_BOTTOM + 6.5, { align: 'right' });
 
@@ -484,7 +481,7 @@ export async function generateDPR(
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(7.5);
   setColor(doc, [200, 230, 225]);
-  doc.text(`REF: ${ref}`, PAGE_W - MARGIN_X, 17, { align: 'right' });
+  doc.text(cleanPdfText(`REF: ${ref}`), PAGE_W - MARGIN_X, 17, { align: 'right' });
 
   doc.setFontSize(19);
   doc.setFont('helvetica', 'bold');
@@ -494,16 +491,17 @@ export async function generateDPR(
   doc.setFontSize(9.5);
   doc.setFont('helvetica', 'normal');
   setColor(doc, [230, 245, 242]);
-  doc.text(`Prepared for Institutional Credit Appraisal  |  ${categoryTitle}`, MARGIN_X, 33.5);
+  doc.text(cleanPdfText(`Prepared for Institutional Credit Appraisal  |  ${categoryTitle}`), MARGIN_X, 33.5);
 
   // Promoter subtitle strip
   const locStr = [applicant?.village, applicant?.block, applicant?.district, applicant?.state].filter(Boolean).join(', ');
   const promoterLine = `Promoter: ${applicant?.name || 'Prospective Entrepreneur'}  ${locStr ? ' |  ' + locStr : ''}`;
   doc.setFontSize(8);
   setColor(doc, [255, 240, 220]);
-  doc.text(promoterLine, MARGIN_X, 42);
+  const safePromoterLine = doc.splitTextToSize(cleanPdfText(promoterLine), 110)[0] || '';
+  doc.text(safePromoterLine, MARGIN_X, 42);
 
-  doc.text(`Appraisal Date: ${reportDate}`, PAGE_W - MARGIN_X, 42, { align: 'right' });
+  doc.text(cleanPdfText(`Appraisal Date: ${reportDate}`), PAGE_W - MARGIN_X, 42, { align: 'right' });
 
   let y = 60;
 
@@ -580,7 +578,7 @@ export async function generateDPR(
   doc.setFontSize(9);
   doc.setFont('helvetica', 'bold');
   setColor(doc, TEAL_PRIMARY);
-  doc.text(`Recommended Scheme: ${matchedScheme}`, summaryX, y + 7.5);
+  doc.text(cleanPdfText(`Recommended Scheme: ${matchedScheme}`), summaryX, y + 7.5);
 
   doc.setFontSize(8);
   doc.setFont('helvetica', 'normal');
@@ -592,7 +590,7 @@ export async function generateDPR(
   doc.setFontSize(7.5);
   doc.setFont('helvetica', 'bold');
   setColor(doc, GREEN_ACCENT);
-  doc.text(`AI Recommendation: ${rec.decision}  |  Confidence Level: ${report.confidence}`, summaryX, y + 26);
+  doc.text(cleanPdfText(`AI Recommendation: ${rec.decision}  |  Confidence Level: ${report.confidence}`), summaryX, y + 26);
 
   y += 36;
 

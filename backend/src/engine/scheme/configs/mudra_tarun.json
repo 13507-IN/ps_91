@@ -1,0 +1,60 @@
+{
+  "schemeId": "mudra_tarun",
+  "name": "Pradhan Mantri MUDRA Yojana (PMMY) - Tarun",
+  "shortName": "MUDRA Tarun",
+  "description": "Collateral-free enterprise loans from ₹5,00,000 to ₹20,00,000 for scaling micro and small enterprises.",
+  "nodalAgency": "Ministry of Micro, Small and Medium Enterprises (MSME)",
+  "targetAudience": "Established micro enterprises seeking growth capital",
+  "eligibility": {
+    "categories": [
+      "GENERAL",
+      "SC",
+      "ST",
+      "OBC",
+      "MINORITY"
+    ],
+    "gender": [
+      "MALE",
+      "FEMALE",
+      "OTHER"
+    ],
+    "ageMin": 18,
+    "ageMax": 65,
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "AGRICULTURE",
+      "SERVICES",
+      "HANDICRAFT",
+      "OTHER"
+    ],
+    "minProjectCost": 500000,
+    "maxProjectCost": 2000000
+  },
+  "financial": {
+    "maxLoanAmount": 2000000,
+    "interestRate": 9,
+    "subsidyPercentage": 0,
+    "maxSubsidy": 0,
+    "marginPercentage": 15,
+    "tenureMonths": 84,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card",
+    "PAN Card",
+    "Bank Account Statement (12 months)",
+    "Quotations of Machinery/Equipment",
+    "Udyam Registration Certificate",
+    "IT Returns (past 2 years if available)"
+  ],
+  "priority": 2,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://www.mudra.org.in/"
+}

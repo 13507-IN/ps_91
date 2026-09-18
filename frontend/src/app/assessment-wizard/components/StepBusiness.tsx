@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 import AppImage from '@/components/ui/AppImage';
 import VoiceInput from '@/components/ui/VoiceInput';
 import { CATEGORY_PHOTOS } from '@/lib/constants/landing-media';
-import { Check, Sparkles } from 'lucide-react';
+import { Check, Sparkles, Banknote, Tag, Layers, Mic, Volume2 } from 'lucide-react';
 import { inr } from '@/lib/format';
 import { useTranslation } from '@/lib/i18n/useTranslation';
-import { autoClassifyCategory } from '@/lib/ai/classifyCategory';
+import { extractVoiceIntent, type ExtractedVoiceIntent } from '@/lib/ai/voiceIntentExtractor';
 import type { WizardDraft, BusinessCategory } from '@/types';
 
 interface StepBusinessProps {
@@ -32,20 +32,23 @@ const CATEGORIES = [
 ];
 
 export default function StepBusiness({ draft, updateDraft, onNext, onBack }: StepBusinessProps) {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const [selected, setSelected] = useState<BusinessCategory | undefined>(draft.businessCategory);
   const [idea, setIdea] = useState(draft.businessIdea || '');
   const [manualOverride, setManualOverride] = useState(false);
-  const [autoDetected, setAutoDetected] = useState<BusinessCategory | null>(null);
+  const [voiceIntent, setVoiceIntent] = useState<ExtractedVoiceIntent | null>(null);
 
-  // Auto classify on component mount if idea exists and category not selected
+  // Auto classify on component mount if idea exists
   useEffect(() => {
-    if (idea && !selected) {
-      const detected = autoClassifyCategory(idea);
-      if (detected) {
-        setAutoDetected(detected);
-        setSelected(detected);
-        updateDraft({ businessCategory: detected });
+    if (idea) {
+      const intent = extractVoiceIntent(idea);
+      setVoiceIntent(intent);
+      if (intent.category && !selected) {
+        setSelected(intent.category);
+        updateDraft({
+          businessCategory: intent.category,
+          ...(intent.capital ? { availableCapital: intent.capital } : {}),
+        });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,19 +56,25 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
 
   function handleIdeaChange(newIdea: string) {
     setIdea(newIdea);
-    const detected = autoClassifyCategory(newIdea);
+    const intent = extractVoiceIntent(newIdea);
+    setVoiceIntent(intent);
 
-    if (detected) {
-      setAutoDetected(detected);
-      if (!manualOverride) {
-        setSelected(detected);
-        updateDraft({ businessIdea: newIdea, businessCategory: detected });
-        return;
-      }
-    } else {
-      setAutoDetected(null);
+    const patch: Partial<WizardDraft> = { businessIdea: newIdea };
+
+    if (intent.category && !manualOverride) {
+      setSelected(intent.category);
+      patch.businessCategory = intent.category;
     }
-    updateDraft({ businessIdea: newIdea });
+
+    if (intent.capital && (!draft.availableCapital || draft.availableCapital === 50000)) {
+      patch.availableCapital = intent.capital;
+    }
+
+    if (intent.scale && !draft.businessExperience) {
+      patch.businessExperience = intent.scale;
+    }
+
+    updateDraft(patch);
   }
 
   function selectCategory(code: BusinessCategory) {
@@ -78,10 +87,46 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
 
   return (
     <div className="space-y-6">
-      {/* Free-text idea */}
-      <div>
-        <label className="label-gov">{t.business.describeIdea}</label>
-        <p className="text-xs text-ink-muted mb-2">{t.business.ideaHint}</p>
+      {/* Zero-Typing Voice Intake Hero */}
+      <div className="rounded-2xl border-2 border-amber-300 bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50/50 p-5 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-[#E65C00] text-white flex items-center justify-center shadow-xs flex-shrink-0">
+              <Mic className="h-5 w-5 animate-pulse" />
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-slate-900">
+                {lang === 'BN'
+                  ? 'কথা বলে শুরু করুন (Zero-Typing Voice Intake)'
+                  : lang === 'HI'
+                    ? 'बोलकर शुरू करें (Zero-Typing Voice Intake)'
+                    : 'Zero-Typing Voice Intake'}
+              </h3>
+              <p className="text-xs text-slate-600">
+                {lang === 'BN'
+                  ? 'টাইপ করার দরকার নেই—মাইক্রোফোনে আপনার ব্যবসার ইচ্ছে ও জমানো টাকার কথা বলুন।'
+                  : lang === 'HI'
+                    ? 'टाइप करने की जरूरत नहीं—माइक दबाकर अपने व्यवसाय और पूंजी के बारे में बोलें।'
+                    : 'Speak naturally in your own language—ArthSetu auto-extracts business type, capital & scale.'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Example prompts */}
+        <div className="mb-3 rounded-xl bg-white/80 border border-amber-200 p-3 text-xs text-slate-700 space-y-1">
+          <div className="flex items-center gap-1.5 font-bold text-amber-900">
+            <Volume2 className="h-3.5 w-3.5 text-[#E65C00]" />
+            <span>{lang === 'BN' ? 'যেমন বলতে পারেন:' : lang === 'HI' ? 'उदाहरण के लिए ऐसे बोलें:' : 'Example Spoken Prompts:'}</span>
+          </div>
+          <p className="italic text-slate-600 pl-5">
+            {lang === 'BN'
+              ? '🗣️ "আমি ৩টে গরু নিয়ে দুধের ব্যবসা করতে চাই, আমার কাছে ৫০ হাজার টাকা আছে"'
+              : lang === 'HI'
+                ? '🗣️ "मुझे गांव में किराने की दुकान खोलनी है, मेरे पास 40 हजार रुपये हैं"'
+                : '🗣️ "I want to start a 3-cow dairy farm with 50,000 rupees capital in Nadia"'}
+          </p>
+        </div>
 
         {/* Voice Input Toolbar */}
         <VoiceInput
@@ -93,20 +138,62 @@ export default function StepBusiness({ draft, updateDraft, onNext, onBack }: Ste
           <textarea
             value={idea}
             onChange={(e) => handleIdeaChange(e.target.value)}
-            placeholder={t.business.ideaPlaceholder}
-            className="input-gov min-h-[120px] resize-none"
+            placeholder={
+              lang === 'BN'
+                ? 'মাইক্রোফোনে বলুন অথবা এখানে ব্যবসার বিবরণ লিখুন...'
+                : lang === 'HI'
+                  ? 'माइक से बोलें या यहाँ अपने व्यापार का विवरण लिखें...'
+                  : t.business.ideaPlaceholder
+            }
+            className="input-gov min-h-[100px] resize-none bg-white font-medium"
             rows={3}
           />
         </div>
 
-        {/* Auto Category Banner */}
-        {autoDetected && (
-          <div className="mt-2.5 flex flex-wrap items-center gap-2 text-xs bg-teal-50 border border-teal-200 text-teal-950 rounded-xl px-3.5 py-2.5 shadow-xs">
-            <Sparkles size={15} className="text-teal-700 flex-shrink-0" />
-            <span>
-              Auto-detected Category: <strong className="font-bold underline text-teal-900">{t.business.categories[autoDetected]}</strong>
-            </span>
-            <span className="ml-auto text-[11px] text-teal-700 font-medium">Click any category below if you want to change it</span>
+        {/* Real-time Extracted Blueprint Card */}
+        {voiceIntent && voiceIntent.isComplete && (
+          <div className="mt-3 rounded-xl border border-emerald-300 bg-emerald-50/90 p-3.5 text-xs text-emerald-950 shadow-xs animate-in fade-in duration-200">
+            <div className="flex items-center gap-1.5 font-bold text-emerald-900 mb-2">
+              <Sparkles className="h-4 w-4 text-emerald-600" />
+              <span>
+                {lang === 'BN'
+                  ? 'আপনার কণ্ঠস্বর থেকে শনাক্তকৃত তথ্য (Auto-Extracted Blueprint):'
+                  : lang === 'HI'
+                    ? 'आपकी आवाज से स्वतः निकाली गई जानकारी:'
+                    : 'Auto-Extracted Business Blueprint from Voice:'}
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {voiceIntent.category && (
+                <div className="rounded-lg bg-white p-2 border border-emerald-200 flex items-center gap-2">
+                  <Tag className="h-4 w-4 text-emerald-600 flex-shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-slate-500 block">{lang === 'BN' ? 'ব্যবসার ধরণ' : lang === 'HI' ? 'व्यवसाय प्रकार' : 'Category'}</span>
+                    <strong className="font-bold text-slate-900">{t.business.categories[voiceIntent.category]}</strong>
+                  </div>
+                </div>
+              )}
+
+              {voiceIntent.capital && (
+                <div className="rounded-lg bg-white p-2 border border-emerald-200 flex items-center gap-2">
+                  <Banknote className="h-4 w-4 text-emerald-600 flex-shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-slate-500 block">{lang === 'BN' ? 'জমা পুঁজি' : lang === 'HI' ? 'अपनी पूंजी' : 'Available Capital'}</span>
+                    <strong className="font-bold text-emerald-700">{voiceIntent.capitalFormatted}</strong>
+                  </div>
+                </div>
+              )}
+
+              {voiceIntent.scale && (
+                <div className="rounded-lg bg-white p-2 border border-emerald-200 flex items-center gap-2">
+                  <Layers className="h-4 w-4 text-emerald-600 flex-shrink-0" />
+                  <div>
+                    <span className="text-[10px] text-slate-500 block">{lang === 'BN' ? 'কাজের পরিধি' : lang === 'HI' ? 'कार्य पैमाना' : 'Scale'}</span>
+                    <strong className="font-bold text-slate-900">{voiceIntent.scale}</strong>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

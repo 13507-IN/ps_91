@@ -24,6 +24,7 @@ import {
 } from '../../engine/financial/index.js';
 import { SchemeEvaluator, type MatchedSchemeResult } from '../../engine/scheme/index.js';
 import type { AnalyzeFeasibilityBody } from './feasibility.schema.js';
+import { enrichBusinessIdea } from './ideaEnricher.js';
 import { NotFoundError } from '../../lib/errors.js';
 
 export interface FeasibilityScoreBreakdown {
@@ -212,6 +213,18 @@ export class FeasibilityService {
       stateName: 'West Bengal', // Safe fallback for demo
     };
 
+    // Enrich brief/sparse business idea for rural user (e.g. 1-2 words expanded to full operational context)
+    const enrichedConcept = enrichBusinessIdea({
+      idea: body.businessIdea,
+      category,
+      villageName: locationInfo.name,
+      blockName: locationInfo.blockName,
+      districtName: locationInfo.districtName,
+      stateName: locationInfo.stateName,
+      availableCapital: body.availableCapital,
+      language: body.language,
+    });
+
     // 3. Estimating competition density
     onProgress?.(3, 'Estimating competition density...', 38);
 
@@ -287,7 +300,7 @@ export class FeasibilityService {
         longitude: lng,
       },
       business_category: category,
-      business_idea: body.businessIdea,
+      business_idea: enrichedConcept.enrichedIdea,
       language: body.language ?? 'EN',
       market: {
         population: estimatedPopulation,
@@ -466,7 +479,7 @@ export class FeasibilityService {
 
     const analysisData: FeasibilityAnalysisResult = {
       businessCategory: category,
-      businessIdea: body.businessIdea,
+      businessIdea: enrichedConcept.enrichedIdea,
       catchment: {
         latitude: lat,
         longitude: lng,
@@ -510,7 +523,7 @@ export class FeasibilityService {
           longitude: lng,
           catchmentRadiusKm: radiusKm,
           businessCategory: category,
-          businessIdea: body.businessIdea,
+          businessIdea: enrichedConcept.enrichedIdea,
           availableCapital: body.availableCapital,
           businessExperience: body.businessExperience,
           availableLand: body.availableLand,

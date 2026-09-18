@@ -59,17 +59,21 @@ export interface UserSchemeFacts {
 }
 
 export interface MatchedSchemeResult {
+  id: string;
   schemeId: string;
   name: string;
   shortName?: string;
   description: string;
   nodalAgency: string;
   priority: number;
+  eligible: boolean;
+  reason: string;
   
   // Financial match results
   projectCost: number;
   userMargin: number;
   requiredMargin: number;
+  maxLoan: number;
   eligibleLoanAmount: number;
   subsidyAmount: number;
   netLoanAmount: number;
