@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { useQuery } from '@tanstack/react-query';
 import { api, apiEndpoints, hasSession } from '@/lib/api/client';
 import { toFeasibilityReport, type BackendFeasibilityResult } from '@/lib/api/feasibility';
@@ -8,21 +9,59 @@ import { LAST_REPORT_KEY } from '@/lib/constants';
 import { mockReport } from './mockReportData';
 import type { FeasibilityReport } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
+// Above-the-fold: keep as static imports (immediately visible)
 import { ReportHeader } from './ReportHeader';
 import { VerdictHeroSection } from './VerdictHeroSection';
 import { PlainLanguageSummaryCard } from './PlainLanguageSummaryCard';
-import { MarketIntelligenceSection } from './MarketIntelligenceSection';
-import { CompetitionSection } from './CompetitionSection';
-import { FinancialPlanSection } from './FinancialPlanSection';
-import { RiskAssessmentSection } from './RiskAssessmentSection';
-import { AIRecommendationSection } from './AIRecommendationSection';
-import { ActionPlanSection } from './ActionPlanSection';
 import { ScoreBreakdownChart } from './ScoreBreakdownChart';
-import { LocalSuppliersSection } from '../LocalSuppliersSection';
-import { DPRExportBar } from './DPRExportBar';
-import { DocumentChecklist } from './DocumentChecklist';
-import { HyperlocalBusinessExplorer } from '@/components/HyperlocalBusinessExplorer/HyperlocalBusinessExplorer';
 import { saveReportOffline, getReportOffline } from '@/lib/offline/offlineStore';
+
+// Below-the-fold: lazy-load heavy components (chart.js, leaflet, jspdf, html2canvas)
+const SectionSkeleton = () => (
+  <div className="animate-pulse rounded-2xl bg-slate-100 h-48" />
+);
+
+const MarketIntelligenceSection = dynamic(
+  () => import('./MarketIntelligenceSection').then(m => ({ default: m.MarketIntelligenceSection })),
+  { loading: () => <SectionSkeleton /> }
+);
+const CompetitionSection = dynamic(
+  () => import('./CompetitionSection').then(m => ({ default: m.CompetitionSection })),
+  { loading: () => <SectionSkeleton /> }
+);
+const FinancialPlanSection = dynamic(
+  () => import('./FinancialPlanSection').then(m => ({ default: m.FinancialPlanSection })),
+  { loading: () => <SectionSkeleton /> }
+);
+const RiskAssessmentSection = dynamic(
+  () => import('./RiskAssessmentSection').then(m => ({ default: m.RiskAssessmentSection })),
+  { loading: () => <SectionSkeleton /> }
+);
+const AIRecommendationSection = dynamic(
+  () => import('./AIRecommendationSection').then(m => ({ default: m.AIRecommendationSection })),
+  { loading: () => <SectionSkeleton /> }
+);
+const ActionPlanSection = dynamic(
+  () => import('./ActionPlanSection').then(m => ({ default: m.ActionPlanSection })),
+  { loading: () => <SectionSkeleton /> }
+);
+const LocalSuppliersSection = dynamic(
+  () => import('../LocalSuppliersSection').then(m => ({ default: m.LocalSuppliersSection })),
+  { loading: () => <SectionSkeleton /> }
+);
+const DPRExportBar = dynamic(
+  () => import('./DPRExportBar').then(m => ({ default: m.DPRExportBar })),
+  { ssr: false }
+);
+const DocumentChecklist = dynamic(
+  () => import('./DocumentChecklist').then(m => ({ default: m.DocumentChecklist })),
+  { loading: () => <SectionSkeleton /> }
+);
+const HyperlocalBusinessExplorer = dynamic(
+  () => import('@/components/HyperlocalBusinessExplorer/HyperlocalBusinessExplorer').then(m => ({ default: m.HyperlocalBusinessExplorer })),
+  { ssr: false, loading: () => <SectionSkeleton /> }
+);
+
 
 export function FeasibilityReportClient({
   reportId,

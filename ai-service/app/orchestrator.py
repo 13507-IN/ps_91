@@ -154,8 +154,12 @@ class Orchestrator:
         risk_result = results_s1[2] if not isinstance(results_s1[2], Exception) else self.risk_agent.fallback(data=data)
         pricing_result = results_s1[3] if not isinstance(results_s1[3], Exception) else self.pricing_agent.fallback(data=data)
 
-        # Now run Opportunity Task with Stage 1 context
-        opportunity_result = await self.opportunity_agent.run(
+        risks = risk_result.get("risks", [])
+
+        logger.info("stage_1_complete", risks_found=len(risks))
+
+        # ── Stage 2: Parallel LLM Execution (Opportunity, SWOT, Recommendation) ──
+        opportunity_task = self.opportunity_agent.run(
             data=data,
             location=data.location,
             market=data.market,
@@ -170,12 +174,6 @@ class Orchestrator:
             language=data.language,
         )
 
-        market_gaps = opportunity_result.get("market_gaps", [])
-        risks = risk_result.get("risks", [])
-
-        logger.info("stage_1_complete", gaps_found=len(market_gaps), risks_found=len(risks))
-
-        # ── Stage 2: Parallel LLM Execution (SWOT, Recommendation) ──
         swot_task = self.swot_agent.run(
             data=data,
             location=data.location,
@@ -188,7 +186,7 @@ class Orchestrator:
             market_score=market_score,
             risk_score=risk_score,
             market_analysis=market_result,
-            market_gaps=market_gaps,
+            market_gaps=[],
             risks=risks,
             language=data.language,
         )
@@ -206,19 +204,23 @@ class Orchestrator:
             risk_score=risk_score,
             viability_score=viability_score,
             market_analysis=market_result,
-            market_gaps=market_gaps,
+            market_gaps=[],
             competition_analysis=competition_result,
             swot={},
             pricing_strategy=pricing_result,
             language=data.language,
         )
 
-        results_s2 = await asyncio.gather(swot_task, recommendation_task, return_exceptions=True)
+        results_s2 = await asyncio.gather(opportunity_task, swot_task, recommendation_task, return_exceptions=True)
 
-        swot_result = results_s2[0] if not isinstance(results_s2[0], Exception) else self.swot_agent.fallback(data=data)
-        recommendation_result = results_s2[1] if not isinstance(results_s2[1], Exception) else self.recommendation_agent.fallback(data=data, market_score=market_score, risk_score=risk_score, viability_score=viability_score, market_gaps=market_gaps)
+        opportunity_result = results_s2[0] if not isinstance(results_s2[0], Exception) else self.opportunity_agent.fallback(data=data)
+        swot_result = results_s2[1] if not isinstance(results_s2[1], Exception) else self.swot_agent.fallback(data=data)
+        recommendation_result = results_s2[2] if not isinstance(results_s2[2], Exception) else self.recommendation_agent.fallback(data=data, market_score=market_score, risk_score=risk_score, viability_score=viability_score, market_gaps=[])
 
         logger.info("stage_2_complete")
+
+        market_gaps = opportunity_result.get("market_gaps", [])
+        logger.info("stage_2_gaps_extracted", gaps_found=len(market_gaps))
 
         # ── Stage 3: Assemble reasoning & confidence ──
         reasoning = _build_reasoning(
@@ -296,6 +298,9 @@ def _collect_ml_signals(data: AssessmentInput) -> dict:
                 "available": True,
                 "daily_demand": result.daily_demand,
                 "model": result.model,
+                "confidence": result.confidence,
+                "is_synthetic": result.is_synthetic,
+                "notes": result.notes,
             }
     except Exception as exc:
         logger.warning("ml_demand_signal_failed", error=str(exc))

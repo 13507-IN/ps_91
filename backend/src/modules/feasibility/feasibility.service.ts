@@ -7,6 +7,7 @@ import {
   SocialCategory,
 } from '@prisma/client';
 import { MarketService } from '../market/market.service.js';
+import { LocationService } from '../location/location.service.js';
 import { AiClient } from '../ai/ai.client.js';
 import {
   calculateProjectCost,
@@ -163,11 +164,13 @@ const CATEGORY_FINANCIAL_PROFILES: Record<string, {
 
 export class FeasibilityService {
   private marketService: MarketService;
+  private locationService: LocationService;
   private aiClient: AiClient;
   private schemeEvaluator: SchemeEvaluator;
 
   constructor(private prisma: PrismaClient) {
     this.marketService = new MarketService(prisma);
+    this.locationService = new LocationService(prisma);
     this.aiClient = new AiClient();
     this.schemeEvaluator = new SchemeEvaluator();
   }
@@ -192,13 +195,22 @@ export class FeasibilityService {
       category = classification.category;
     }
 
-    // 2. Query Market Intelligence, Competitors, and Suppliers in parallel
+    // 2. Query Market Intelligence, Competitors, Suppliers, and Location Context in parallel
     onProgress?.(2, 'Analyzing local market & demographics...', 25);
-    const [marketIntel, competitorIntel, localSuppliers] = await Promise.all([
+    const [marketIntel, competitorIntel, localSuppliers, nearbyVillages] = await Promise.all([
       this.marketService.getMarketIntelligence(lat, lng, radiusKm, category),
       this.marketService.getCompetitorAnalysis(lat, lng, radiusKm, category),
       this.marketService.getLocalSuppliers(lat, lng, radiusKm, category),
+      this.locationService.getNearbyVillages(lat, lng, radiusKm, 1),
     ]);
+    
+    // Resolve location info for AI and Schemes context
+    const locationInfo = nearbyVillages.length > 0 ? nearbyVillages[0] : {
+      name: 'Unknown Village',
+      blockName: 'Unknown Block',
+      districtName: 'Nadia', // Safe fallback for demo
+      stateName: 'West Bengal', // Safe fallback for demo
+    };
 
     // 3. Estimating competition density
     onProgress?.(3, 'Estimating competition density...', 38);
@@ -220,8 +232,8 @@ export class FeasibilityService {
       businessCategory: category,
       projectCost: baseProjectCost.projectCost,
       availableMargin: body.availableCapital,
-      state: 'West Bengal',
-      district: 'Nadia',
+      state: locationInfo.stateName,
+      district: locationInfo.districtName,
     });
 
     const topScheme = schemeMatches[0];
@@ -231,16 +243,16 @@ export class FeasibilityService {
     const subsidyAmount = topScheme?.subsidyAmount ?? 0;
     const netLoanAmount = topScheme?.netLoanAmount ?? baseProjectCost.loanAmount;
 
-    // 6. EMI, Cashflow, Working Capital & Break-even
-    const emiResult = calculateEmi({
-      principal: netLoanAmount,
-      annualRate: interestRate,
-      tenureMonths,
-      moratoriumMonths,
-      moratoriumType: 'INTEREST_ONLY',
-    });
+    // ── Kick off AI Assessment in background (runs in parallel with financial calcs) ──
+    const villageCount = marketIntel.demographics.totalVillages || 1;
+    const estimatedPopulation = marketIntel.demographics.totalPopulation > 0
+      ? marketIntel.demographics.totalPopulation
+      : villageCount * 1200;
+    const estimatedHouseholds = marketIntel.demographics.totalHouseholds > 0
+      ? marketIntel.demographics.totalHouseholds
+      : villageCount * 250;
 
-    // Get category-specific financial profile
+    // Get category-specific financial profile (needed for both AI payload and local calcs)
     const finProfile = CATEGORY_FINANCIAL_PROFILES[category] || CATEGORY_FINANCIAL_PROFILES.OTHER || {
       revenueMultiplier: 0.20,
       rawMaterialRatio: 0.45,
@@ -253,6 +265,57 @@ export class FeasibilityService {
     const estimatedMonthlyRawMaterials = Math.round(estimatedMonthlyRevenue * finProfile.rawMaterialRatio);
     const estimatedMonthlyOperatingCosts = Math.round(estimatedMonthlyRevenue * finProfile.operatingCostRatio);
     const totalMonthlyOperating = estimatedMonthlyRawMaterials + estimatedMonthlyOperatingCosts;
+
+    // 6. EMI calculation (needed for AI payload)
+    const emiResult = calculateEmi({
+      principal: netLoanAmount,
+      annualRate: interestRate,
+      tenureMonths,
+      moratoriumMonths,
+      moratoriumType: 'INTEREST_ONLY',
+    });
+
+    // Fire the AI assessment request NOW — it will run while we compute the rest
+    onProgress?.(6, 'Running AI assessment pipeline...', 65);
+    const assessmentPromise = this.aiClient.runUnifiedAssessment({
+      location: {
+        village: locationInfo.name,
+        block: locationInfo.blockName,
+        district: locationInfo.districtName,
+        state: locationInfo.stateName,
+        latitude: lat,
+        longitude: lng,
+      },
+      business_category: category,
+      business_idea: body.businessIdea,
+      language: body.language ?? 'EN',
+      market: {
+        population: estimatedPopulation,
+        households: estimatedHouseholds,
+        estimated_demand: Math.max(competitorIntel.totalEstimatedMin * 20, estimatedHouseholds * 2),
+        estimated_supply: competitorIntel.totalEstimatedMin * 10,
+      },
+      competition: {
+        verified: competitorIntel.totalObserved,
+        reported: competitorIntel.totalReported,
+        density_per_sq_km: competitorIntel.densityPerSqKm,
+      },
+      financial: {
+        margin: body.availableCapital,
+        project_cost: baseProjectCost.projectCost,
+        loan: netLoanAmount,
+        interest_rate: interestRate,
+        tenure_months: tenureMonths,
+        monthly_emi: emiResult.emi,
+        monthly_revenue_estimate: estimatedMonthlyRevenue,
+        monthly_operating_cost: totalMonthlyOperating,
+        subsidy_amount: subsidyAmount,
+        scheme_name: topScheme?.name,
+      }
+    });
+
+    // 7. Compute remaining financials while AI runs in background
+    onProgress?.(7, 'Computing cashflow & break-even...', 75);
 
     const cashflowResult = calculateCashflow({
       monthlyRevenue: estimatedMonthlyRevenue,
@@ -292,62 +355,19 @@ export class FeasibilityService {
 
     breakEvenResult.paybackPeriodMonths = calculatedPaybackMonth;
 
-    // 7. Stress Testing (Adverse scenario simulation)
+    // 8. Stress Testing (Adverse scenario simulation)
     const stressTestResult = runStressTest({
       monthlyRevenue: estimatedMonthlyRevenue,
       monthlyOperatingCosts: totalMonthlyOperating,
       monthlyEmi: emiResult.emi,
     });
 
-    // 8. Run Unified AI Assessment Pipeline
-    onProgress?.(6, 'Running AI assessment pipeline...', 75);
-    const villageCount = marketIntel.demographics.totalVillages || 1;
-    const estimatedPopulation = marketIntel.demographics.totalPopulation > 0
-      ? marketIntel.demographics.totalPopulation
-      : villageCount * 1200;
-    const estimatedHouseholds = marketIntel.demographics.totalHouseholds > 0
-      ? marketIntel.demographics.totalHouseholds
-      : villageCount * 250;
+    // 9. Await AI assessment result (should already be done or nearly done by now)
+    onProgress?.(8, 'Finalizing AI insights...', 85);
+    const assessmentResult = await assessmentPromise;
 
-    const assessmentResult = await this.aiClient.runUnifiedAssessment({
-      location: {
-        village: 'Nadia Rural Area',
-        block: 'Nadia Block',
-        district: 'Nadia',
-        state: 'West Bengal',
-        latitude: lat,
-        longitude: lng,
-      },
-      business_category: category,
-      business_idea: body.businessIdea,
-      language: body.language ?? 'EN',
-      market: {
-        population: estimatedPopulation,
-        households: estimatedHouseholds,
-        estimated_demand: Math.max(competitorIntel.totalEstimatedMin * 20, estimatedHouseholds * 2),
-        estimated_supply: competitorIntel.totalEstimatedMin * 10,
-      },
-      competition: {
-        verified: competitorIntel.totalObserved,
-        reported: competitorIntel.totalReported,
-        density_per_sq_km: competitorIntel.densityPerSqKm,
-      },
-      financial: {
-        margin: body.availableCapital,
-        project_cost: baseProjectCost.projectCost,
-        loan: netLoanAmount,
-        interest_rate: interestRate,
-        tenure_months: tenureMonths,
-        monthly_emi: emiResult.emi,
-        monthly_revenue_estimate: estimatedMonthlyRevenue,
-        monthly_operating_cost: totalMonthlyOperating,
-        subsidy_amount: subsidyAmount,
-        scheme_name: topScheme?.name,
-      }
-    });
-
-    // 9. Multi-Dimensional Feasibility Scoring (0 to 100)
-    onProgress?.(7, 'Calculating viability score...', 88);
+    // 10. Multi-Dimensional Feasibility Scoring (0 to 100)
+    onProgress?.(9, 'Calculating viability score...', 90);
     let demandScore = Math.round(assessmentResult.market_score / 5);
     demandScore = Math.min(20, Math.max(0, demandScore));
 
@@ -389,8 +409,8 @@ export class FeasibilityService {
       grade,
     };
 
-    // 10. AI Recommendation & Action Plan (Generated by the unified assessment)
-    onProgress?.(8, 'Generating action plan...', 95);
+    // 11. AI Recommendation & Action Plan (Generated by the unified assessment)
+    onProgress?.(10, 'Generating action plan...', 95);
     let decision = 'REVIEW';
     if (assessmentResult.viability_score >= 80) decision = 'PROCEED';
     else if (assessmentResult.viability_score >= 65) decision = 'PROCEED_WITH_MODIFICATIONS';
@@ -406,7 +426,7 @@ export class FeasibilityService {
     const executiveSummary =
       rawReasoningSummary && rawReasoningSummary.length >= 80
         ? rawReasoningSummary
-        : `The ${formattedCatName} business in Nadia district shows strong fundamentals: high local catchment demand, an underserved market opportunity, and multiple nearby villages as target customers. The ${matchedScheme} scheme matches well and the monthly EMI of ${emiFormatted} is comfortably covered by projected monthly net cashflow of ${netProfitFormatted}. The primary risk is market competition — mitigated by product diversification and direct buyer outreach.`;
+        : `The ${formattedCatName} business in ${locationInfo.districtName} district shows strong fundamentals: high local catchment demand, an underserved market opportunity, and multiple nearby villages as target customers. The ${matchedScheme} scheme matches well and the monthly EMI of ${emiFormatted} is comfortably covered by projected monthly net cashflow of ${netProfitFormatted}. The primary risk is market competition — mitigated by product diversification and direct buyer outreach.`;
 
     const aiRecommendation = {
       decision,
