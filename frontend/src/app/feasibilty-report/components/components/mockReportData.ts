@@ -71,12 +71,104 @@ export const mockReport: FeasibilityReport = {
     workingCapital: {
       requiredWorkingCapital: 24600,
       monthsCovered: 3,
+      inventoryDays: 15,
+      receivableDays: 15,
+      payableDays: 10,
+      operatingCycleDays: 20,
+      dailyExpense: 273.33,
+      baseWorkingCapital: 5466.67,
+      bufferAmount: 546.67,
     },
+    dscr: {
+      dscr: 1.64,
+      status: 'EXCELLENT',
+      benchmarkText: 'DSCR is 1.64 (> 1.50). High debt service capacity; highly acceptable to banks and NABARD.',
+    },
+    assumptions: {
+      revenueItems: [
+        {
+          name: 'Fresh Cow Milk Sales',
+          dailyUnits: 30,
+          unitPrice: 45,
+          unitName: 'litres',
+          dailyRevenue: 1350,
+          monthlyRevenue: 40500,
+        },
+        {
+          name: 'Fresh Paneer / Cottage Cheese',
+          dailyUnits: 3,
+          unitPrice: 320,
+          unitName: 'kg',
+          dailyRevenue: 960,
+          monthlyRevenue: 28800,
+        },
+        {
+          name: 'Organic Cow Dung Manure',
+          dailyUnits: 2,
+          unitPrice: 150,
+          unitName: 'bags',
+          dailyRevenue: 300,
+          monthlyRevenue: 9000,
+        },
+      ],
+      costItems: [
+        {
+          category: 'Cattle Feed & Fodder (Green & Dry)',
+          monthlyAmount: 22500,
+          description: '35 kg fodder + 12 kg cattle feed concentrate daily for 4 milch cows',
+          isDirectCost: true,
+        },
+        {
+          category: 'Veterinary Care & Vaccines',
+          monthlyAmount: 2500,
+          description: 'Regular checkups, artificial insemination, and deworming per month',
+          isDirectCost: true,
+        },
+        {
+          category: 'Helpers & Farm Labor (Part-time)',
+          monthlyAmount: 7000,
+          description: '1 part-time milking assistant for morning & evening shift',
+          isDirectCost: false,
+        },
+        {
+          category: 'Shed Utilities & Water Supply',
+          monthlyAmount: 2200,
+          description: 'Electricity for chilling unit, water pumping, shed lighting',
+          isDirectCost: false,
+        },
+        {
+          category: 'Packaging & Delivery Fuel',
+          monthlyAmount: 3800,
+          description: 'Milk cans, bio-degradable paneer pouches, e-rickshaw charging / fuel',
+          isDirectCost: false,
+        },
+      ],
+      methodologyNotes: [
+        'Revenue derived from 4 high-yield crossbred cows producing an average of 10-12 litres/day each.',
+        'Milk pricing is set at local West Bengal rural mandi rate (₹45/litre for 4.5% fat milk).',
+        '20% of milk is converted into value-added paneer (conversion yield: 10L milk → 1.8 kg paneer + whey).',
+        'Operating costs benchmarked using NDDB (National Dairy Development Board) smallholder guidelines.',
+      ],
+    },
+    seasonalMultipliers: [
+      { monthIndex: 0, monthName: 'Jan', multiplier: 1.15, status: 'PEAK', reason: 'High milk yield in winter; peak festival sweet demand (Poush Sankranti)' },
+      { monthIndex: 1, monthName: 'Feb', multiplier: 1.10, status: 'PEAK', reason: 'Favorable climate; high marriage season sweet demand' },
+      { monthIndex: 2, monthName: 'Mar', multiplier: 1.00, status: 'NORMAL', reason: 'Moderate demand and steady milk yield' },
+      { monthIndex: 3, monthName: 'Apr', multiplier: 0.95, status: 'NORMAL', reason: 'Summer onset; slight drop in lactation yield' },
+      { monthIndex: 4, monthName: 'May', multiplier: 0.88, status: 'LEAN', reason: 'Peak summer heat; lower milk yield due to heat stress in cattle' },
+      { monthIndex: 5, monthName: 'Jun', multiplier: 0.82, status: 'LEAN', reason: 'Monsoon onset & humidity; lean lactation period' },
+      { monthIndex: 6, monthName: 'Jul', multiplier: 0.85, status: 'LEAN', reason: 'Green fodder availability improves yield slightly' },
+      { monthIndex: 7, monthName: 'Aug', multiplier: 0.95, status: 'NORMAL', reason: 'Festival season starts (Janmashtami, Raksha Bandhan)' },
+      { monthIndex: 8, monthName: 'Sep', multiplier: 1.05, status: 'NORMAL', reason: 'Preparation for Durga Puja sweet making' },
+      { monthIndex: 9, monthName: 'Oct', multiplier: 1.25, status: 'PEAK', reason: 'Durga Puja & Laxmi Puja peak sweet consumption' },
+      { monthIndex: 10, monthName: 'Nov', multiplier: 1.20, status: 'PEAK', reason: 'Kali Puja, Diwali & winter marriage season' },
+      { monthIndex: 11, monthName: 'Dec', multiplier: 1.15, status: 'PEAK', reason: 'Winter picnic season & high dairy fat yield' },
+    ],
     cashflow: {
       projections: Array.from({ length: 12 }, (_, i) => {
-        const season = [0.75, 0.88, 0.95, 1.0, 0.92, 0.88, 0.94, 1.0, 1.04, 1.08, 1.12, 1.10][i];
-        const rev = Math.round(14500 * season);
-        const ops = 8200;
+        const season = [1.15, 1.10, 1.00, 0.95, 0.88, 0.82, 0.85, 0.95, 1.05, 1.25, 1.20, 1.15][i];
+        const rev = Math.round(78300 * season);
+        const ops = 38000;
         const emi = 3847;
         const net = rev - ops - emi;
         return {
@@ -85,21 +177,21 @@ export const mockReport: FeasibilityReport = {
           operatingCosts: ops,
           emi: emi,
           netCashflow: net,
-          cumulativeCashflow: Math.round((i + 1) * 2453 * season),
+          cumulativeCashflow: Math.round((i + 1) * 36453 * season),
         };
       }),
-      averageMonthlyCashflow: 2450,
+      averageMonthlyCashflow: 36453,
       isCashflowPositive: true,
     },
     breakEven: {
       breakEvenUnits: 820,
-      breakEvenRevenue: 12300,
-      breakEvenMonth: 6,
+      breakEvenRevenue: 38000,
+      breakEvenMonth: 4,
       isViable: true,
       chartData: Array.from({ length: 12 }, (_, i) => ({
         month: i + 1,
-        revenue: 14500 * (i + 1),
-        totalCost: 185000 + 8200 * (i + 1) + 3847 * (i + 1),
+        revenue: 78300 * (i + 1),
+        totalCost: 185000 + 38000 * (i + 1) + 3847 * (i + 1),
       })),
     },
     stressTest: {
@@ -107,13 +199,13 @@ export const mockReport: FeasibilityReport = {
         name: 'Base Case',
         revenueChange: 0,
         costChange: 0,
-        monthlyNetCashflow: 2453,
+        monthlyNetCashflow: 36453,
         canServiceDebt: true,
       },
       scenarios: [
-        { name: '+15% raw material cost', revenueChange: 0, costChange: 0.15, monthlyNetCashflow: 1223, canServiceDebt: true },
-        { name: '-20% demand', revenueChange: -0.2, costChange: 0, monthlyNetCashflow: 553, canServiceDebt: true },
-        { name: 'Drought (-30% revenue)', revenueChange: -0.3, costChange: 0.15, monthlyNetCashflow: -3127, canServiceDebt: false },
+        { name: '+15% raw material cost', revenueChange: 0, costChange: 0.15, monthlyNetCashflow: 30753, canServiceDebt: true },
+        { name: '-20% demand', revenueChange: -0.2, costChange: 0, monthlyNetCashflow: 20793, canServiceDebt: true },
+        { name: 'Drought (-30% revenue)', revenueChange: -0.3, costChange: 0.15, monthlyNetCashflow: 7243, canServiceDebt: true },
       ],
     },
   },

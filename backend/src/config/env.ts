@@ -23,6 +23,14 @@ const envSchema = z.object({
   GEMINI_API_KEY: z.string().optional(),
   GEMINI_MODEL: z.string().default('gemini-3.6-flash'),
 
+  // Groq (Chat Fallback 1)
+  GROQ_API_KEY: z.string().optional(),
+  GROQ_MODEL: z.string().default('groq/compound-mini'),
+
+  // OpenRouter (Chat Fallback 2)
+  OPENROUTER_API_KEY: z.string().optional(),
+  OPENROUTER_MODEL: z.string().default('meta-llama/llama-3.3-70b-instruct:free'),
+
   // Server
   PORT: z.coerce.number().positive().default(3000),
   HOST: z.string().default('0.0.0.0'),

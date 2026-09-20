@@ -148,8 +148,7 @@ async function* callGeminiStream(
   const apiKey = env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    yield 'I am currently unavailable because the AI service is not configured. Please contact the administrator to set up the GEMINI_API_KEY.';
-    return;
+    throw new Error('GEMINI_API_KEY is not configured');
   }
 
   const model = env.GEMINI_MODEL;
@@ -187,18 +186,12 @@ async function* callGeminiStream(
   if (!response.ok) {
     const errText = await response.text();
     console.warn('Gemini API notice:', response.status, errText);
-    if (response.status === 429) {
-      yield 'SaathiBot is currently experiencing high demand. Please try again in 30 seconds!';
-    } else {
-      yield 'Sorry, I encountered an error connecting to the AI service. Please try again in a moment.';
-    }
-    return;
+    throw new Error(`Gemini API error (${response.status}): ${errText}`);
   }
 
   const reader = response.body?.getReader();
   if (!reader) {
-    yield 'Sorry, I could not establish a streaming connection.';
-    return;
+    throw new Error('Could not establish streaming connection');
   }
 
   const decoder = new TextDecoder();
@@ -246,6 +239,81 @@ async function* callGeminiStream(
   }
 }
 
+// ---- OpenAI Compatible SSE Stream Call (Groq & OpenRouter) ----
+async function* callOpenAiCompatibleStream(
+  apiUrl: string,
+  apiKey: string,
+  model: string,
+  systemPrompt: string,
+  history: ChatMessage[],
+  userMessage: string,
+  extraHeaders: Record<string, string> = {},
+): AsyncGenerator<string> {
+  const messages: { role: 'system' | 'user' | 'assistant'; content: string }[] = [];
+  if (systemPrompt) {
+    messages.push({ role: 'system', content: systemPrompt });
+  }
+
+  for (const h of history) {
+    const text = h.parts.map(p => p.text).join('\n');
+    messages.push({
+      role: h.role === 'user' ? 'user' : 'assistant',
+      content: text,
+    });
+  }
+  messages.push({ role: 'user', content: userMessage });
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+      ...extraHeaders,
+    },
+    body: JSON.stringify({
+      model,
+      messages,
+      stream: true,
+      temperature: 0.7,
+    }),
+  });
+
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`OpenAI-compatible API error (${response.status}): ${errText}`);
+  }
+
+  const reader = response.body?.getReader();
+  if (!reader) throw new Error('No readable stream');
+
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop() ?? '';
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (trimmed.startsWith('data: ')) {
+        const dataStr = trimmed.slice(6).trim();
+        if (dataStr === '[DONE]') return;
+        try {
+          const parsed = JSON.parse(dataStr);
+          const chunk = parsed?.choices?.[0]?.delta?.content;
+          if (chunk) yield chunk;
+        } catch {
+          // skip
+        }
+      }
+    }
+  }
+}
+
 // ---- Public API ----
 
 export function getOrCreateSession(sessionId: string): ChatSession {
@@ -286,24 +354,94 @@ export async function* chat(
   const session = getOrCreateSession(sessionId);
 
   const systemPrompt = buildSystemPrompt(userContext);
-
-  // Retain up to 40 messages (20 conversation turns) for deep context recall
   const trimmedHistory = session.history.slice(-40);
+  const env = getEnv();
 
   let fullResponse = '';
-  for await (const chunk of callGeminiStream(systemPrompt, trimmedHistory, userMessage)) {
-    fullResponse += chunk;
-    yield chunk;
+  let streamedAny = false;
+
+  // Tier 1: Gemini Stream
+  if (env.GEMINI_API_KEY) {
+    try {
+      for await (const chunk of callGeminiStream(systemPrompt, trimmedHistory, userMessage)) {
+        streamedAny = true;
+        fullResponse += chunk;
+        yield chunk;
+      }
+      if (streamedAny) {
+        session.history.push(
+          { role: 'user', parts: [{ text: userMessage }] },
+          { role: 'model', parts: [{ text: fullResponse }] },
+        );
+        return;
+      }
+    } catch (err) {
+      console.warn('Gemini chat stream failed, trying Groq fallback:', err);
+    }
   }
 
-  // Update session history
-  session.history.push(
-    { role: 'user', parts: [{ text: userMessage }] },
-    { role: 'model', parts: [{ text: fullResponse }] },
-  );
+  // Tier 2: Groq Stream
+  if (env.GROQ_API_KEY) {
+    try {
+      for await (const chunk of callOpenAiCompatibleStream(
+        'https://api.groq.com/openai/v1/chat/completions',
+        env.GROQ_API_KEY,
+        env.GROQ_MODEL,
+        systemPrompt,
+        trimmedHistory,
+        userMessage,
+      )) {
+        streamedAny = true;
+        fullResponse += chunk;
+        yield chunk;
+      }
+      if (streamedAny) {
+        session.history.push(
+          { role: 'user', parts: [{ text: userMessage }] },
+          { role: 'model', parts: [{ text: fullResponse }] },
+        );
+        return;
+      }
+    } catch (err) {
+      console.warn('Groq chat stream failed, trying OpenRouter fallback:', err);
+    }
+  }
+
+  // Tier 3: OpenRouter Stream
+  if (env.OPENROUTER_API_KEY) {
+    try {
+      for await (const chunk of callOpenAiCompatibleStream(
+        'https://openrouter.ai/api/v1/chat/completions',
+        env.OPENROUTER_API_KEY,
+        env.OPENROUTER_MODEL,
+        systemPrompt,
+        trimmedHistory,
+        userMessage,
+        {
+          'HTTP-Referer': 'https://arthsetu.gov.in',
+          'X-Title': 'ArthSetu SaathiBot',
+        },
+      )) {
+        streamedAny = true;
+        fullResponse += chunk;
+        yield chunk;
+      }
+      if (streamedAny) {
+        session.history.push(
+          { role: 'user', parts: [{ text: userMessage }] },
+          { role: 'model', parts: [{ text: fullResponse }] },
+        );
+        return;
+      }
+    } catch (err) {
+      console.error('OpenRouter chat stream failed:', err);
+    }
+  }
+
+  yield 'SaathiBot is currently unavailable because all AI providers (Gemini, Groq, OpenRouter) are unreachable or rate-limited. Please try again in a moment.';
 }
 
 export function isGeminiConfigured(): boolean {
   const env = getEnv();
-  return Boolean(env.GEMINI_API_KEY);
+  return Boolean(env.GEMINI_API_KEY || env.GROQ_API_KEY || env.OPENROUTER_API_KEY);
 }

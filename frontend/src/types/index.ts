@@ -35,7 +35,51 @@ export interface EmiOutput {
 export interface WorkingCapitalOutput {
   requiredWorkingCapital: number;
   monthsCovered: number;
+  inventoryDays?: number;
+  receivableDays?: number;
+  payableDays?: number;
+  operatingCycleDays?: number;
+  dailyExpense?: number;
+  baseWorkingCapital?: number;
+  bufferAmount?: number;
 }
+
+export interface RevenueAssumptionItem {
+  name: string;
+  dailyUnits: number;
+  unitPrice: number;
+  unitName: string;
+  dailyRevenue: number;
+  monthlyRevenue: number;
+}
+
+export interface CostBreakdownItem {
+  category: string;
+  monthlyAmount: number;
+  description: string;
+  isDirectCost: boolean;
+}
+
+export interface FinancialAssumptions {
+  revenueItems: RevenueAssumptionItem[];
+  costItems: CostBreakdownItem[];
+  methodologyNotes: string[];
+}
+
+export interface DscrOutput {
+  dscr: number;
+  status: 'EXCELLENT' | 'GOOD' | 'MODERATE' | 'HIGH_RISK';
+  benchmarkText: string;
+}
+
+export interface SeasonalMonthInfo {
+  monthIndex: number;
+  monthName: string;
+  multiplier: number;
+  status: 'PEAK' | 'NORMAL' | 'LEAN';
+  reason: string;
+}
+
 
 export interface CashflowEntry {
   month: number;
@@ -193,6 +237,9 @@ export interface FinancialPlan {
   cashflow: CashflowOutput;
   breakEven: BreakEvenOutput;
   stressTest: StressTestOutput;
+  dscr?: DscrOutput;
+  assumptions?: FinancialAssumptions;
+  seasonalMultipliers?: SeasonalMonthInfo[];
 }
 
 export interface FeasibilityReport {

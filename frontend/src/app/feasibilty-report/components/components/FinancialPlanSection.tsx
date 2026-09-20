@@ -1,6 +1,6 @@
 'use client';
 
-import { Landmark, Wallet, ArrowDown, ExternalLink } from 'lucide-react';
+import { Landmark, Wallet, ArrowDown, ExternalLink, ShieldCheck } from 'lucide-react';
 import { FinancialPlan } from '@/types';
 import { percent } from '@/lib/format';
 import { getSchemePortalUrl } from '@/lib/api/feasibility';
@@ -8,27 +8,45 @@ import { EmiSimulator } from './EmiSimulator';
 import { CashflowChart } from './CashflowChart';
 import { BreakEvenChart } from './BreakEvenChart';
 import { StressTestChart } from './StressTestChart';
+import { AssumptionsSection } from './AssumptionsSection';
+import { SeasonalHeatmapCard } from './SeasonalHeatmapCard';
+import { WorkingCapitalCard } from './WorkingCapitalCard';
+import { PnLSummaryCard } from './PnLSummaryCard';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 
 export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPlan; schemeNames: string[] }) {
   const { t, lang } = useTranslation();
 
+  const monthlyRev = plan.cashflow.projections[0]?.revenue || 78300;
+  const monthlyOps = plan.cashflow.projections[0]?.operatingCosts || 38000;
+
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-6">
-      <h2 className="text-lg font-semibold text-slate-900">{t.financial.title}</h2>
-      <p className="mt-1 text-xs text-slate-500">
-        Deterministic calculations from the scheme rule engine — shown as a bridge from your margin to
-        the loan.
-      </p>
+    <section className="rounded-2xl border border-slate-200 bg-white p-6 space-y-6">
+      <div>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <h2 className="text-lg font-semibold text-slate-900">{t.financial.title}</h2>
+          {plan.dscr && (
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-bold text-emerald-800">
+              <ShieldCheck className="h-4 w-4 text-emerald-600" />
+              DSCR: {plan.dscr.dscr}x ({plan.dscr.status})
+            </div>
+          )}
+        </div>
+        <p className="mt-1 text-xs text-slate-500">
+          Deterministic calculations from the scheme rule engine — shown as a bridge from your margin to the loan.
+        </p>
+      </div>
 
       {/* Capital bridge */}
-      <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 items-center gap-3 text-center">
+      <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 text-center">
         <div className="rounded-xl border border-slate-200 p-4">
           <div className="flex items-center justify-center gap-1.5 text-xs text-slate-500">
             <Wallet className="h-3.5 w-3.5" /> Your margin
           </div>
-          <div className="mt-1 text-xl font-bold text-brand-700">{formatIndianNumber(plan.availableCapital, lang, true, true)}</div>
+          <div className="mt-1 text-xl font-bold text-brand-700">
+            {formatIndianNumber(plan.availableCapital, lang, true, true)}
+          </div>
           <div className="text-[11px] text-slate-400">{percent(plan.marginPercentage)} of project</div>
         </div>
         <ArrowDown className="mx-auto h-5 w-5 text-slate-400 rotate-0 sm:-rotate-90 my-1 sm:my-0" />
@@ -36,18 +54,31 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
           <div className="flex items-center justify-center gap-1.5 text-xs text-slate-500">
             <Landmark className="h-3.5 w-3.5" /> Loan required
           </div>
-          <div className="mt-1 text-xl font-bold text-slate-900">{formatIndianNumber(plan.loanRequired, lang, true, true)}</div>
-          <div className="text-[11px] text-slate-400">net {formatIndianNumber(plan.netLoanAmount, lang, true, true)}</div>
+          <div className="mt-1 text-xl font-bold text-slate-900">
+            {formatIndianNumber(plan.loanRequired, lang, true, true)}
+          </div>
+          <div className="text-[11px] text-slate-400">
+            net {formatIndianNumber(plan.netLoanAmount, lang, true, true)}
+          </div>
         </div>
       </div>
+
+      {/* Collapsible Assumptions & Methodology */}
+      <AssumptionsSection
+        assumptions={plan.assumptions}
+        monthlyRevenue={monthlyRev}
+        monthlyOperatingCosts={monthlyOps}
+      />
 
       {/* Matched scheme */}
       {(() => {
         const topSchemeUrl = plan.matchedSchemeUrl || getSchemePortalUrl(plan.matchedSchemeName);
         return (
-          <div className="mt-5 rounded-xl border border-brand-100 bg-brand-50 p-4">
+          <div className="rounded-xl border border-brand-100 bg-brand-50 p-4">
             <div className="flex items-center justify-between">
-              <div className="text-xs font-semibold uppercase tracking-wide text-brand-800">Top Recommended Scheme</div>
+              <div className="text-xs font-semibold uppercase tracking-wide text-brand-800">
+                Top Recommended Scheme
+              </div>
               {schemeNames.length > 0 && (
                 <div className="rounded-full bg-brand-200 px-2.5 py-0.5 text-[10px] font-bold text-brand-800">
                   {formatIndianNumber(schemeNames.length, lang)} Match{schemeNames.length > 1 ? 'es' : ''}
@@ -75,32 +106,42 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
               </div>
               <div className="rounded-lg bg-white/70 p-2.5 border border-brand-100">
                 <div className="text-xs text-slate-500">Tenure</div>
-                <div className="text-sm font-bold text-slate-900">{formatIndianNumber(plan.tenureMonths, lang)} {t.financial.months}</div>
+                <div className="text-sm font-bold text-slate-900">
+                  {formatIndianNumber(plan.tenureMonths, lang)} {t.financial.months}
+                </div>
               </div>
               <div className="rounded-lg bg-white/70 p-2.5 border border-brand-100">
                 <div className="text-xs text-slate-500">Subsidy</div>
-                <div className="text-sm font-bold text-emerald-700">{formatIndianNumber(plan.subsidyAmount, lang, true)}</div>
+                <div className="text-sm font-bold text-emerald-700">
+                  {formatIndianNumber(plan.subsidyAmount, lang, true)}
+                </div>
               </div>
               <div className="rounded-lg bg-white/70 p-2.5 border border-brand-100">
                 <div className="text-xs text-slate-500">Monthly EMI</div>
-                <div className="text-sm font-bold text-brand-700">{formatIndianNumber(plan.emi.emi, lang, true)}</div>
+                <div className="text-sm font-bold text-brand-700 font-mono">
+                  {formatIndianNumber(plan.emi.emi, lang, true)}
+                </div>
               </div>
             </div>
             {schemeNames.length > 1 && (
               <div className="mt-4 border-t border-brand-200/60 pt-3">
-                <div className="text-[11px] font-bold uppercase tracking-wide text-brand-800 mb-2">Alternative Eligible Schemes</div>
+                <div className="text-[11px] font-bold uppercase tracking-wide text-brand-800 mb-2">
+                  Alternative Eligible Schemes
+                </div>
                 <div className="flex flex-wrap gap-2">
-                  {schemeNames.filter((n) => n !== plan.matchedSchemeName).map((altName) => (
-                    <a
-                      key={altName}
-                      href={getSchemePortalUrl(altName)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-brand-200 text-xs font-semibold text-brand-900 hover:bg-brand-100 hover:border-brand-300 transition-colors shadow-xs"
-                    >
-                      {altName} <ExternalLink className="h-3 w-3 text-brand-600" />
-                    </a>
-                  ))}
+                  {schemeNames
+                    .filter((n) => n !== plan.matchedSchemeName)
+                    .map((altName) => (
+                      <a
+                        key={altName}
+                        href={getSchemePortalUrl(altName)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-brand-200 text-xs font-semibold text-brand-900 hover:bg-brand-100 hover:border-brand-300 transition-colors shadow-xs"
+                      >
+                        {altName} <ExternalLink className="h-3 w-3 text-brand-600" />
+                      </a>
+                    ))}
                 </div>
               </div>
             )}
@@ -108,7 +149,20 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
         );
       })()}
 
-      <div className="mt-6 space-y-6">
+      {/* P&L Statement & DSCR Indicator */}
+      <PnLSummaryCard plan={plan} />
+
+      {/* Seasonal Revenue Calendar / Heatmap */}
+      <SeasonalHeatmapCard
+        seasonalData={plan.seasonalMultipliers}
+        baseMonthlyRevenue={monthlyRev}
+      />
+
+      {/* Detailed Working Capital & Operating Cycle Breakdown */}
+      <WorkingCapitalCard workingCapital={plan.workingCapital} />
+
+      {/* Financial Simulators & Interactive Charts */}
+      <div className="space-y-6 pt-2">
         <EmiSimulator
           initialPrincipal={plan.netLoanAmount}
           initialRate={plan.interestRate}

@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — FastAPI Application Entry Point.
 
 Starts the AI microservice on port 8000 with:
@@ -104,11 +104,13 @@ async def health_check():
         "llm": {
             "gemini": settings.has_gemini,
             "groq": settings.has_groq,
+            "openrouter": settings.has_openrouter,
             "any_available": settings.has_any_llm,
         },
         "config": {
             "gemini_model": settings.GEMINI_MODEL if settings.has_gemini else None,
             "groq_model": settings.GROQ_MODEL if settings.has_groq else None,
+            "openrouter_model": settings.OPENROUTER_MODEL if settings.has_openrouter else None,
             "temperature": settings.LLM_TEMPERATURE,
             "max_retries": settings.LLM_MAX_RETRIES,
         },
@@ -129,6 +131,7 @@ async def startup_event():
         debug=settings.DEBUG,
         gemini=settings.has_gemini,
         groq=settings.has_groq,
+        openrouter=settings.has_openrouter,
     )
     if not settings.has_any_llm:
         logger.warning(
@@ -136,6 +139,6 @@ async def startup_event():
             message=(
                 "No LLM API keys found. The service will run with "
                 "deterministic fallback responses only. "
-                "Set GEMINI_API_KEY or GROQ_API_KEY in .env to enable AI."
+                "Set GEMINI_API_KEY, GROQ_API_KEY, or OPENROUTER_API_KEY in .env to enable AI."
             ),
         )
