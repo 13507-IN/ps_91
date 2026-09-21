@@ -1,0 +1,563 @@
+import { BusinessCategory } from '@prisma/client';
+
+export interface BackendEquipmentItem {
+  id: string;
+  name: string;
+  category: 'MACHINERY' | 'INSTRUMENT' | 'TOOL' | 'INFRASTRUCTURE';
+  estimatedCost: number;
+  quantity: number;
+  unit: string;
+  importance: 'ESSENTIAL' | 'RECOMMENDED' | 'OPTIONAL';
+  specification: string;
+  vendorType: string;
+}
+
+interface EquipmentTemplate {
+  id: string;
+  name: string;
+  category: 'MACHINERY' | 'INSTRUMENT' | 'TOOL' | 'INFRASTRUCTURE';
+  importance: 'ESSENTIAL' | 'RECOMMENDED' | 'OPTIONAL';
+  baseCostRatio: number;
+  baseQuantity: number;
+  unit: string;
+  specification: string;
+  vendorType: string;
+}
+
+export const BACKEND_EQUIPMENT_CATALOGUE: Record<BusinessCategory, EquipmentTemplate[]> = {
+  DAIRY: [
+    {
+      id: 'dairy-001',
+      name: 'High-Yield Milch Cattle (Jersey / Crossbred HF / Murrah)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.65,
+      baseQuantity: 2,
+      unit: 'animals',
+      specification: '2nd/3rd lactation yielding 12–16 L/day with veterinary health, pregnancy & vaccination certificates',
+      vendorType: 'Registered Cattle Breeding Farm / State Livestock Development Board',
+    },
+    {
+      id: 'dairy-002',
+      name: 'Automatic Double-Bucket Milking Machine',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.15,
+      baseQuantity: 1,
+      unit: 'unit',
+      specification: '1 HP single-phase vacuum pump motor, pulsator 60/40, food-grade silicone teat cups & SS buckets',
+      vendorType: 'Empanelled Agro-Machinery Distributor / KVIC Approved Vendor',
+    },
+    {
+      id: 'dairy-003',
+      name: 'Stainless Steel Milk Storage Cans (40L SS 304)',
+      category: 'INSTRUMENT',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.08,
+      baseQuantity: 3,
+      unit: 'cans (40L)',
+      specification: 'Food-grade SS 304 seamless spun body with airtight hermetic lid & heavy-duty handles',
+      vendorType: 'Authorized Dairy Equipment Wholesaler / Local Market Hub',
+    },
+    {
+      id: 'dairy-004',
+      name: 'Motorized Fodder Chaff Cutter (3 HP)',
+      category: 'MACHINERY',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.12,
+      baseQuantity: 1,
+      unit: 'machine',
+      specification: '3 HP electric motor, high-carbon steel blades with 600 kg/hr cutting capacity for green/dry fodder',
+      vendorType: 'Certified Agro-Machinery Manufacturer / Cooperative Society',
+    },
+  ],
+
+  FOOD_PROCESSING: [
+    {
+      id: 'food-001',
+      name: 'Heavy-Duty Flour & Grain Pulverizer Mill (10 HP)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.45,
+      baseQuantity: 1,
+      unit: 'mill unit',
+      specification: '10 HP 3-phase motor, alloy steel beaters, 80-100 kg/hr capacity for wheat, maize, gram, and spices',
+      vendorType: 'NSIC Registered Food Machinery Manufacturer / Empanelled Vendor',
+    },
+    {
+      id: 'food-002',
+      name: 'Cold-Press Mustard Oil Expeller (6-Bolt)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.35,
+      baseQuantity: 1,
+      unit: 'expeller unit',
+      specification: 'Heavy-duty 6-bolt chamber with oil collection filter press, 40-50 kg/hr seed crushing rate, high yield recovery',
+      vendorType: 'Authorized Agro-Processing Machinery Hub / KVIC Dealer',
+    },
+    {
+      id: 'food-003',
+      name: 'Continuous Band Sealer with Nitrogen Gas Flushing',
+      category: 'MACHINERY',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.12,
+      baseQuantity: 1,
+      unit: 'sealer',
+      specification: 'Horizontal conveyor pouch sealer, 0-12m/min speed, digital PID temperature controller for FSSAI packaging',
+      vendorType: 'Packaging Automation Distributor / Industrial Equipment Supplier',
+    },
+    {
+      id: 'food-004',
+      name: 'Stainless Steel Prep Tables & Digital Moisture Meter',
+      category: 'INSTRUMENT',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.08,
+      baseQuantity: 2,
+      unit: 'sets',
+      specification: 'SS 304 food-grade surface prep tables (6x3 ft) + handheld microprocessor grain moisture detector (±0.5% accuracy)',
+      vendorType: 'Laboratory & Food Testing Instruments Supplier',
+    },
+  ],
+
+  TEXTILES_TAILORING: [
+    {
+      id: 'tex-001',
+      name: 'Direct-Drive High-Speed Industrial Lockstitch Sewing Machine',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.40,
+      baseQuantity: 3,
+      unit: 'machines',
+      specification: 'Built-in servo direct-drive motor, automatic thread trimmer, 5000 SPM speed, energy saving (70% less power)',
+      vendorType: 'Authorized Industrial Apparel Machinery Dealer (Juki / Jack / Singer)',
+    },
+    {
+      id: 'tex-002',
+      name: '5-Thread Heavy-Duty Industrial Overlock Stitching Machine',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.25,
+      baseQuantity: 1,
+      unit: 'machine',
+      specification: 'High-speed 5-thread safety stitch overedging machine with differential feed for hosiery and garment finishing',
+      vendorType: 'Garment Manufacturing Machinery Distributor',
+    },
+    {
+      id: 'tex-003',
+      name: 'Industrial Vacuum Ironing Table with In-built Steam Boiler',
+      category: 'MACHINERY',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.18,
+      baseQuantity: 1,
+      unit: 'unit',
+      specification: 'Thermostatically heated table surface, powerful suction motor, 5L continuous steam generator with Teflon iron shoe',
+      vendorType: 'Commercial Laundry & Finishing Equipment Hub',
+    },
+    {
+      id: 'tex-004',
+      name: 'Heavy Fabric Layer Cutting Table & Rotary End-Cutter',
+      category: 'TOOL',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.17,
+      baseQuantity: 1,
+      unit: 'set',
+      specification: '8x4 ft laminate flat laying surface with auto-stop electric round-knife fabric cutting machine (100mm blade)',
+      vendorType: 'Apparel Tooling & Workshop Furnishing Supplier',
+    },
+  ],
+
+  POULTRY: [
+    {
+      id: 'poul-001',
+      name: 'Automated Climate-Controlled Brooder Set with IR Lamps',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.35,
+      baseQuantity: 2,
+      unit: 'units',
+      specification: 'Microcontroller temperature sensor with infrared heating bulbs, suitable for 1,000 day-old chicks brooding',
+      vendorType: 'Certified Poultry Hatchery & Equipment Manufacturer',
+    },
+    {
+      id: 'poul-002',
+      name: 'Automatic Bell Drinkers & Linear Suspension Feeders',
+      category: 'INSTRUMENT',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.30,
+      baseQuantity: 25,
+      unit: 'sets',
+      specification: 'Non-leakage polypropylene bell drinkers with water filter regulator + anti-wastage galvanized steel feeders',
+      vendorType: 'Empanelled Agro-Poultry Equipment Wholesaler',
+    },
+    {
+      id: 'poul-003',
+      name: 'High-Pressure Shed Disinfection Sprayer & Fogger',
+      category: 'MACHINERY',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.20,
+      baseQuantity: 1,
+      unit: 'sprayer',
+      specification: '2 HP electric motor pump, 30 bar pressure, brass nozzle lance for biosecurity and shed cooling in summer',
+      vendorType: 'Veterinary Bio-Security Systems Distributor',
+    },
+    {
+      id: 'poul-004',
+      name: 'Egg Sorting / Grading Trays & Live Bird Crates',
+      category: 'TOOL',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.15,
+      baseQuantity: 30,
+      unit: 'crates/trays',
+      specification: 'Heavy-duty HDPE stackable crates (holds 10-12 broilers) + food-grade plastic 30-egg trays (100 units)',
+      vendorType: 'Industrial Plastics & Poultry Supplies Mart',
+    },
+  ],
+
+  RETAIL: [
+    {
+      id: 'ret-001',
+      name: 'Commercial POS Touch Billing Terminal & Thermal Printer',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.35,
+      baseQuantity: 1,
+      unit: 'terminal set',
+      specification: '15.6" capacitive touch display, 80mm high-speed thermal receipt printer, barcode laser gun & GST billing software',
+      vendorType: 'Retail Technology & Automation Systems Dealer',
+    },
+    {
+      id: 'ret-002',
+      name: 'Digital Electronic Platform Scale (300kg / 50g)',
+      category: 'INSTRUMENT',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.15,
+      baseQuantity: 1,
+      unit: 'scale',
+      specification: 'Legal Metrology stamped digital platform scale, SS platter, dual LED display, rechargeable battery backup',
+      vendorType: 'Government Approved Weighing Scales Distributor',
+    },
+    {
+      id: 'ret-003',
+      name: 'Heavy-Duty Powder-Coated Slotted Display Shelving Units',
+      category: 'INFRASTRUCTURE',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.25,
+      baseQuantity: 6,
+      unit: 'bays',
+      specification: '7x3 ft modular slotted angle steel display racks, 5 adjustable shelves per bay, 80 kg load capacity per shelf',
+      vendorType: 'Commercial Shopfitting & Storage Racks Manufacturer',
+    },
+    {
+      id: 'ret-004',
+      name: 'Commercial Display Showcase Refrigerator (400L)',
+      category: 'MACHINERY',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.25,
+      baseQuantity: 1,
+      unit: 'unit',
+      specification: 'Double-glazed glass door, tropicalized compressor suitable for 43°C ambient, LED internal illumination',
+      vendorType: 'Commercial Refrigeration Systems Dealer (Voltas / Blue Star)',
+    },
+  ],
+
+  HANDICRAFT: [
+    {
+      id: 'hand-001',
+      name: 'Variable-Speed Motorized Potter / Ceramic Wheel (1 HP)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.35,
+      baseQuantity: 1,
+      unit: 'wheel unit',
+      specification: '1 HP reversible DC motor with electronic pedal speed controller (0-300 RPM), 14" cast aluminum head',
+      vendorType: 'KVIC / State Handicrafts Development Corporation Emporium',
+    },
+    {
+      id: 'hand-002',
+      name: 'Woodturning Lathe & High-Speed Chisels Set',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.35,
+      baseQuantity: 1,
+      unit: 'lathe set',
+      specification: 'Heavy cast iron bed, 40" distance between centers, 1.5 HP motor, 4-step pulley with 8-piece HSS turning chisel set',
+      vendorType: 'Carpentry & Handicraft Machinery Distributor',
+    },
+    {
+      id: 'hand-003',
+      name: 'HVLP Spray Paint & Lacquer Finishing Booth',
+      category: 'MACHINERY',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.20,
+      baseQuantity: 1,
+      unit: 'spray system',
+      specification: 'High-Volume Low-Pressure turbine sprayer with stainless steel needle, oil-free compressor and fume extractor fan',
+      vendorType: 'Industrial Coating & Finishing Systems Dealer',
+    },
+    {
+      id: 'hand-004',
+      name: 'Bench Grinder & Precision Tool Sharpener (0.5 HP)',
+      category: 'TOOL',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.10,
+      baseQuantity: 1,
+      unit: 'grinder',
+      specification: 'Dual 6" grinding wheels (coarse & fine grit) with eye shields and spark arrestors for blade maintenance',
+      vendorType: 'Hardware & Machine Tool Supplies Wholesaler',
+    },
+  ],
+
+  AGRICULTURE: [
+    {
+      id: 'agri-001',
+      name: 'Multi-Crop Rotary Power Tiller / Cultivator (7.5 HP)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.50,
+      baseQuantity: 1,
+      unit: 'tiller',
+      specification: '7.5 HP 4-stroke direct-injection diesel engine, 32 rotary tines, multi-speed gearbox with reverse, iron wheels included',
+      vendorType: 'State Agro-Industries Corporation / Authorized Tractor & Tiller Dealer',
+    },
+    {
+      id: 'agri-002',
+      name: 'Solar-Powered Submersible Irrigation Pump & Drip Kit (3 HP)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.30,
+      baseQuantity: 1,
+      unit: 'system',
+      specification: '3 HP BLDC solar pump with MPPT controller, PV solar panels array, 1-acre inline drip irrigation lateral network',
+      vendorType: 'MNRE / NABARD Approved Solar Irrigation Provider',
+    },
+    {
+      id: 'agri-003',
+      name: 'Battery-Operated High-Pressure Knapsack Sprayers (16L)',
+      category: 'TOOL',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.10,
+      baseQuantity: 2,
+      unit: 'sprayers',
+      specification: '12V 12Ah lithium-ion battery, dual motor producing 100 PSI, telescopic brass wand with 4 misting nozzles',
+      vendorType: 'Certified Agro-Chemical & Sprayers Distributor',
+    },
+    {
+      id: 'agri-004',
+      name: 'Post-Harvest Solar Polyhouse Dehydration Tunnel (500 kg)',
+      category: 'INFRASTRUCTURE',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.10,
+      baseQuantity: 1,
+      unit: 'unit',
+      specification: 'UV-stabilized polycarbonate tunnel with exhaust ventilation fans for safe drying of grains, spices and seeds',
+      vendorType: 'Renewable Agricultural Drying Technologies Vendor',
+    },
+  ],
+
+  LIVESTOCK: [
+    {
+      id: 'live-001',
+      name: 'Purebred Goat Breeding Herd (15 Does + 1 Buck - Black Bengal / Sirohi)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.55,
+      baseQuantity: 16,
+      unit: 'animals',
+      specification: '6-8 month old vaccinated breeding goats, dewormed with veterinary fitness and breed purity documentation',
+      vendorType: 'State Goat Breeding Research Station / Animal Husbandry Farm',
+    },
+    {
+      id: 'live-002',
+      name: 'Elevated Slotted Polypropylene Goat Shed Flooring Panels',
+      category: 'INFRASTRUCTURE',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.25,
+      baseQuantity: 40,
+      unit: 'panels (1x2m)',
+      specification: 'Interlocking hygienic anti-skid plastic slotted panels for effortless droppings clearance and pneumonia prevention',
+      vendorType: 'Commercial Goat Farm Infrastructure Manufacturer',
+    },
+    {
+      id: 'live-003',
+      name: 'Electric High-Output Fodder Chaff Cutter (2 HP)',
+      category: 'MACHINERY',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.12,
+      baseQuantity: 1,
+      unit: 'machine',
+      specification: '2 HP single phase motor, dual cutting speed, reversible gearbox for maize, sorghum, and dry straw',
+      vendorType: 'Empanelled Agro Machinery Distributor',
+    },
+    {
+      id: 'live-004',
+      name: 'Automatic Stainless Water Troughs & Mineral Salt Dispensers',
+      category: 'INSTRUMENT',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.08,
+      baseQuantity: 8,
+      unit: 'sets',
+      specification: 'Automatic float-valve stainless steel drinking bowls (SS 304) + weather-proof mineral lick block holders',
+      vendorType: 'Livestock Care & Farm Accessories Wholesaler',
+    },
+  ],
+
+  TRANSPORT: [
+    {
+      id: 'trans-001',
+      name: 'High-Payload Electric Cargo Loader E-Rickshaw (1000 kg GVW)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.70,
+      baseQuantity: 1,
+      unit: 'vehicle',
+      specification: '1200W high-torque differential BLDC motor, reinforced leaf spring suspension, hydraulic front shockers, ICAT certified',
+      vendorType: 'ICAT Approved Commercial EV Dealership / State Transport Agency',
+    },
+    {
+      id: 'trans-002',
+      name: 'Advanced LiFePO4 Smart Battery Pack (60V 120Ah)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.18,
+      baseQuantity: 1,
+      unit: 'battery pack',
+      specification: 'Grade-A prismatic lithium iron phosphate cells, 3000+ lifecycle cycles, Bluetooth BMS with thermal runaway cutoff',
+      vendorType: 'Authorized Lithium Battery Manufacturer / Service Centre',
+    },
+    {
+      id: 'trans-003',
+      name: 'Fast-Charging Station (25A) & Waterproof Cargo Cover',
+      category: 'INFRASTRUCTURE',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.12,
+      baseQuantity: 1,
+      unit: 'kit',
+      specification: 'Microprocessor 25A fast charger (charges 0-100% in 3.5 hrs) with heavy-duty 750 GSM PVC waterproof tarp & ratchet tie-downs',
+      vendorType: 'EV Charging Equipment & Cargo Accessories Hub',
+    },
+  ],
+
+  SERVICES: [
+    {
+      id: 'serv-001',
+      name: 'High-Speed Commercial Multifunction Laser Copier / Printer (A3/A4)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.45,
+      baseQuantity: 1,
+      unit: 'machine',
+      specification: 'Heavy-duty 35 PPM duplex printing/scanning, network LAN, automatic document feeder (DADF), 1200x1200 DPI resolution',
+      vendorType: 'Authorized Office Automation Systems Partner (Canon / HP / Kyocera)',
+    },
+    {
+      id: 'serv-002',
+      name: 'Core-i5 Desktop Workstation & 1 KVA Pure Sine Wave UPS',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.28,
+      baseQuantity: 1,
+      unit: 'workstation',
+      specification: '12th Gen Intel Core-i5, 16GB RAM, 512GB NVMe SSD, 21.5" IPS monitor, 1 KVA UPS with 45-min battery backup',
+      vendorType: 'Registered IT Hardware & Systems Integrator',
+    },
+    {
+      id: 'serv-003',
+      name: 'Heavy-Duty Thermal Lamination & Spiral/Comb Binding Machine',
+      category: 'TOOL',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.15,
+      baseQuantity: 2,
+      unit: 'machines',
+      specification: 'A3 hot & cold 4-roller silicon thermal laminator + heavy metal 21-hole comb & spiral punch binding machine',
+      vendorType: 'Digital Print Shop Equipment Distributor',
+    },
+    {
+      id: 'serv-004',
+      name: 'Aadhaar / CSC Certified Biometric Fingerprint & Iris Scanner',
+      category: 'INSTRUMENT',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.12,
+      baseQuantity: 1,
+      unit: 'kit',
+      specification: 'STQC certified optical USB fingerprint reader + dual eye iris scanner for PM-Kisan, banking KYC & CSC delivery',
+      vendorType: 'UIDAI & Banking Correspondent Technology Provider',
+    },
+  ],
+
+  OTHER: [
+    {
+      id: 'other-001',
+      name: 'Commercial Pure Sine Wave Inverter Power Backup System (3 KVA)',
+      category: 'MACHINERY',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.40,
+      baseQuantity: 1,
+      unit: 'system',
+      specification: '3 KVA 24V pure sine wave inverter with dual 150Ah heavy-duty tubular batteries & automatic mains changeover',
+      vendorType: 'Certified Power Systems & Industrial Batteries Distributor',
+    },
+    {
+      id: 'other-002',
+      name: 'Electronic Digital Precision Weighing & Counting Scale',
+      category: 'INSTRUMENT',
+      importance: 'ESSENTIAL',
+      baseCostRatio: 0.20,
+      baseQuantity: 1,
+      unit: 'scale',
+      specification: 'High-precision 100 kg / 10g legal metrology certified counting scale with dual LED display & battery backup',
+      vendorType: 'Government Approved Legal Metrology Weighing Instruments Supplier',
+    },
+    {
+      id: 'other-003',
+      name: 'Heavy-Duty Modular Tool Benches & Storage Racks',
+      category: 'INFRASTRUCTURE',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.25,
+      baseQuantity: 3,
+      unit: 'units',
+      specification: 'Reinforced industrial steel workbench with multi-drawer lockable cabinets and slotted organizing shelves',
+      vendorType: 'Industrial Furniture & Storage Systems Manufacturer',
+    },
+    {
+      id: 'other-004',
+      name: 'Semi-Automatic Thermal Sealer & Packaging Kit',
+      category: 'TOOL',
+      importance: 'RECOMMENDED',
+      baseCostRatio: 0.15,
+      baseQuantity: 1,
+      unit: 'kit',
+      specification: 'Heavy-duty foot-pedal operated impulse heat sealer (18-inch seal bar) with digital timer control',
+      vendorType: 'Commercial Packaging Tools & Equipment Dealer',
+    },
+  ],
+};
+
+export function generateBackendEquipmentList(
+  category: BusinessCategory = 'DAIRY',
+  projectCost: number = 185000,
+): BackendEquipmentItem[] {
+  const templates = BACKEND_EQUIPMENT_CATALOGUE[category] || BACKEND_EQUIPMENT_CATALOGUE.DAIRY;
+  const machineryBudget = Math.max(25000, Math.round(projectCost * 0.60));
+
+  return templates.map((tmpl) => {
+    const allocatedItemCost = Math.max(2000, Math.round(machineryBudget * tmpl.baseCostRatio));
+    let scaledQuantity = tmpl.baseQuantity;
+    if (projectCost > 500000) {
+      scaledQuantity = Math.max(tmpl.baseQuantity, Math.round(tmpl.baseQuantity * (projectCost / 400000)));
+    } else if (projectCost < 100000 && tmpl.baseQuantity > 1) {
+      scaledQuantity = Math.max(1, Math.floor(tmpl.baseQuantity / 2));
+    }
+
+    return {
+      id: tmpl.id,
+      name: tmpl.name,
+      category: tmpl.category,
+      estimatedCost: allocatedItemCost,
+      quantity: scaledQuantity,
+      unit: tmpl.unit,
+      importance: tmpl.importance,
+      specification: tmpl.specification,
+      vendorType: tmpl.vendorType,
+    };
+  });
+}

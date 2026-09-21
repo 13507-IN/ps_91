@@ -1,0 +1,52 @@
+{
+  "schemeId": "sca_term_loan",
+  "name": "State Channelizing Agency (SCA) Term Loan Scheme",
+  "shortName": "SCA Term Loan",
+  "description": "Concessional term loan scheme for rural & semi-urban enterprises with project cost between ₹1.40 Lakh and ₹50.00 Lakh. SCA provides up to 90% (max ₹45 Lakh) at 8.0% p.a. concessional interest with 7-year tenure and 6-month moratorium.",
+  "nodalAgency": "State Channelizing Agencies (SCAs) & Apex Corporations (NBCFDC / NSFDC / NSKFDC / NMDFC)",
+  "targetAudience": "Rural micro & small enterprises, village manufacturing units, agro-processors, transport operators",
+  "eligibility": {
+    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
+    "gender": ["MALE", "FEMALE", "OTHER"],
+    "ageMin": 18,
+    "ageMax": 65,
+    "isMinority": null,
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "AGRICULTURE",
+      "LIVESTOCK",
+      "TRANSPORT",
+      "HANDICRAFT",
+      "SERVICES"
+    ],
+    "minProjectCost": 140001,
+    "maxProjectCost": 5000000
+  },
+  "financial": {
+    "maxLoanAmount": 4500000,
+    "interestRate": 8.0,
+    "subsidyPercentage": 0,
+    "maxSubsidy": 0,
+    "marginPercentage": 10,
+    "tenureMonths": 84,
+    "moratoriumMonths": 6,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card (Mobile linked)",
+    "PAN Card",
+    "Panchayat / Trade License",
+    "Udyam MSME Registration",
+    "Bank Passbook (6-month statement with IFSC)",
+    "Machinery Pro-Forma Quotations (2-3 vendor quotes with GSTIN)"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://socialjustice.gov.in/"
+}

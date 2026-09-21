@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import {
   Menu, X, LayoutDashboard, ShieldCheck, Settings,
   Home, FileText, BookOpen, ClipboardList,
-  LogIn, LogOut, UserPlus, User,
+  LogIn, LogOut, UserPlus, User, PlayCircle,
 } from 'lucide-react';
 import { hasSession, setTokens, getRefreshToken, api, apiEndpoints } from '@/lib/api/client';
 import { useAuthStore } from '@/lib/store/auth';
@@ -90,10 +90,10 @@ export default function GovHeaderBar() {
         <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-4">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-4 group" aria-label="ArthSetu — Home">
-            <div className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-[#1A3A6B] flex items-center justify-center bg-white shadow-sm">
+          <Link href="/" className="flex items-center gap-3 sm:gap-4 group" aria-label="ArthSetu — Home">
+            <div className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl border-2 border-emerald-700/30 flex items-center justify-center bg-white shadow-sm p-1 transition-transform group-hover:scale-105">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt="ArthSetu Logo" className="w-12 h-12 rounded-full object-contain" />
+              <img src="/logo.png" alt="ArthSetu Logo" className="w-full h-full rounded-xl object-contain" />
             </div>
             <div>
               <div className="text-[#E65C00] text-xs font-bold uppercase tracking-widest leading-none mb-0.5">अर्थसेतु</div>
@@ -114,8 +114,18 @@ export default function GovHeaderBar() {
               />
             </div>
 
-            {/* Language Toggle + Auth buttons */}
+            {/* Language Toggle + Video Tour + Auth buttons */}
             <div className="flex items-center gap-2 border-l border-[#EEEEEE] pl-4">
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event('open-arthsetu-intro'))}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-emerald-600/40 bg-emerald-50 text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition-colors"
+                title="Watch Intro Video"
+              >
+                <PlayCircle size={14} className="text-emerald-700" />
+                <span>{lang === 'BN' ? 'ভিডিও গাইড' : lang === 'HI' ? 'वीडियो टूर' : 'Intro Video'}</span>
+              </button>
+
               <button
                 onClick={() => setLang(lang === 'EN' ? 'BN' : lang === 'BN' ? 'HI' : 'EN')}
                 className="flex items-center gap-1.5 px-3 py-1.5 mr-2 rounded border border-[#1A3A6B] text-xs font-semibold text-[#1A3A6B] hover:bg-[#1A3A6B] hover:text-white transition-colors"

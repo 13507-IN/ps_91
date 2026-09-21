@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Providers } from '@/lib/api/Providers';
 import GovHeaderBar from '@/components/GovHeaderBar';
 import GovFooter from '@/components/govFooter';
-import LanguagePickerModal from '@/components/LanguagePickerModal';
+import FirstTimeOnboardingModal from '@/components/Onboarding/FirstTimeOnboardingModal';
 import ChatWidget from '@/components/ChatBot/ChatWidget';
 import PWARegistry from '@/components/pwa/pwa-registry';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <OfflineIndicator />
           <PWARegistry />
-          <LanguagePickerModal />
+          <FirstTimeOnboardingModal />
           <GovHeaderBar />
           <main id="main-content" className="flex-1">{children}</main>
           <GovFooter />

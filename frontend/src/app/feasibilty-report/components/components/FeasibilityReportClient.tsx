@@ -201,6 +201,9 @@ export function FeasibilityReportClient({
           equipmentList={report.equipmentList || report.financialPlan.equipmentList}
           businessCategory={report.businessCategory}
           projectCost={report.financialPlan.projectCost}
+          promoterMargin={report.financialPlan.availableCapital}
+          loanAmount={report.financialPlan.netLoanAmount || report.financialPlan.loanRequired}
+          location={report.marketIntelligence?.catchmentRadiusKm ? `${report.marketIntelligence.catchmentRadiusKm}km Catchment Area` : undefined}
         />
         <RiskAssessmentSection risk={report.riskAssessment} />
 

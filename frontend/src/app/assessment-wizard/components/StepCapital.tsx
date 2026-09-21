@@ -207,9 +207,60 @@ export default function StepCapital({ draft, updateDraft, onNext, onBack }: Step
         {errors.availableCapital && (
           <p className="text-grade-poor text-xs mt-1">{errors.availableCapital.message}</p>
         )}
-        {capitalValue >= 10000 && (
+        {capitalValue >= 10000 ? (
+          <div className="mt-3 rounded-xl border border-teal-200 bg-gradient-to-br from-teal-50/80 via-white to-emerald-50/50 p-3.5 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold text-teal-900 uppercase tracking-wider flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-teal-600 animate-pulse" />
+                SCA 10:90 Capital Bridge & Auto-Routing
+              </span>
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase ${
+                capitalValue * 10 <= 140000 
+                  ? 'bg-amber-100 text-amber-900 border border-amber-300' 
+                  : 'bg-indigo-100 text-indigo-900 border border-indigo-300'
+              }`}>
+                {capitalValue * 10 <= 140000 ? 'Logic A: Micro Finance (≤ ₹1.4L)' : 'Logic B: Term Loan (₹1.4L–₹50L)'}
+              </span>
+            </div>
+
+            {/* 3-Pillar Breakdown */}
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div className="rounded-lg bg-white p-2 border border-slate-200">
+                <span className="text-[10px] text-slate-500 block">Your Margin (10%)</span>
+                <span className="text-xs sm:text-sm font-black text-teal-800 font-mono">
+                  {inr(capitalValue, true)}
+                </span>
+              </div>
+              <div className="rounded-lg bg-teal-100/60 p-2 border border-teal-200">
+                <span className="text-[10px] text-teal-900 block font-semibold">Total Setup (10x)</span>
+                <span className="text-xs sm:text-sm font-black text-teal-950 font-mono">
+                  {inr(capitalValue * 10, true)}
+                </span>
+              </div>
+              <div className="rounded-lg bg-emerald-100/60 p-2 border border-emerald-200">
+                <span className="text-[10px] text-emerald-900 block font-semibold">SCA Loan (90%)</span>
+                <span className="text-xs sm:text-sm font-black text-emerald-900 font-mono">
+                  {inr(Math.min(capitalValue * 9, capitalValue * 10 <= 140000 ? 125000 : 4500000), true)}
+                </span>
+              </div>
+            </div>
+
+            {/* Micro Rate & Moratorium Details */}
+            <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-600 bg-white/80 p-2 rounded-lg border border-slate-200/80">
+              <div>
+                <strong>Interest:</strong> {capitalValue * 10 <= 140000 ? '6.5% p.a.' : '8.0% p.a.'} (Concessional)
+              </div>
+              <div>
+                <strong>Moratorium:</strong> {capitalValue * 10 <= 140000 ? '3 Months Grace' : '6 Months Grace'}
+              </div>
+              <div>
+                <strong>Tenure:</strong> {capitalValue * 10 <= 140000 ? '3 Years' : '7 Years'}
+              </div>
+            </div>
+          </div>
+        ) : (
           <p className="text-flag-green text-xs mt-1 font-medium">
-            ✓ {inr(capitalValue)} — eligible for scheme matching
+            Enter at least ₹10,000 to preview your 10:90 Government SCA Scheme Match.
           </p>
         )}
       </div>

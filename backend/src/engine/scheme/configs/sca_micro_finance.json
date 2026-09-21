@@ -1,0 +1,51 @@
+{
+  "schemeId": "sca_micro_finance",
+  "name": "State Channelizing Agency (SCA) Micro Finance Scheme",
+  "shortName": "SCA Micro Finance",
+  "description": "Concessional credit scheme for small rural income-generating units with a project cost up to ₹1.40 Lakh. SCA provides up to 90% (max ₹1.25 Lakh) at 6.5% p.a. concessional interest with 3-year tenure and 3-month moratorium.",
+  "nodalAgency": "State Channelizing Agencies (SCAs) & National Corporations (NBCFDC / NSFDC / NSKFDC / NMDFC)",
+  "targetAudience": "Rural & semi-urban marginalized beneficiaries, micro-entrepreneurs, self-help groups",
+  "eligibility": {
+    "categories": ["GENERAL", "SC", "ST", "OBC", "MINORITY"],
+    "gender": ["MALE", "FEMALE", "OTHER"],
+    "ageMin": 18,
+    "ageMax": 65,
+    "isMinority": null,
+    "businessCategories": [
+      "DAIRY",
+      "FOOD_PROCESSING",
+      "RETAIL",
+      "TEXTILES_TAILORING",
+      "POULTRY",
+      "AGRICULTURE",
+      "LIVESTOCK",
+      "TRANSPORT",
+      "HANDICRAFT",
+      "SERVICES"
+    ],
+    "minProjectCost": 10000,
+    "maxProjectCost": 140000
+  },
+  "financial": {
+    "maxLoanAmount": 125000,
+    "interestRate": 6.5,
+    "subsidyPercentage": 0,
+    "maxSubsidy": 0,
+    "marginPercentage": 10,
+    "tenureMonths": 36,
+    "moratoriumMonths": 3,
+    "moratoriumType": "INTEREST_ONLY"
+  },
+  "requiredDocuments": [
+    "Aadhaar Card (Mobile linked)",
+    "PAN Card",
+    "Proof of Residence / Panchayat Certificate",
+    "Bank Passbook (6-month statement with IFSC)",
+    "Machinery / Equipment Pro-Forma Quotation"
+  ],
+  "priority": 1,
+  "active": true,
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-01",
+  "applyUrl": "https://socialjustice.gov.in/"
+}

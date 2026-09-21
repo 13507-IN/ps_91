@@ -26,6 +26,7 @@ import { SchemeEvaluator, type MatchedSchemeResult } from '../../engine/scheme/i
 import type { AnalyzeFeasibilityBody } from './feasibility.schema.js';
 import { enrichBusinessIdea } from './ideaEnricher.js';
 import { NotFoundError } from '../../lib/errors.js';
+import { generateBackendEquipmentList, type BackendEquipmentItem } from './equipmentCatalogue.js';
 
 export interface FeasibilityScoreBreakdown {
   marketDemandScore: number; // 0-20
@@ -41,6 +42,7 @@ export interface FeasibilityAnalysisResult {
   id?: string;
   businessCategory: BusinessCategory;
   businessIdea: string;
+  equipmentList?: BackendEquipmentItem[];
   catchment: {
     latitude: number;
     longitude: number;
@@ -508,6 +510,7 @@ export class FeasibilityService {
       } as unknown as Record<string, unknown>,
       localSuppliers: localSuppliers as unknown as Record<string, unknown>[],
       financialPlan,
+      equipmentList: generateBackendEquipmentList(category, financialPlan.projectCost),
       schemeMatches,
       riskAssessment: {
         riskFactors: assessmentResult.risks,
@@ -652,6 +655,10 @@ export class FeasibilityService {
       },
       schemeMatches: (analysis as any).schemeMatch ?? [],
       localSuppliers: suppliers,
+      equipmentList: (analysis as any).equipmentList ?? generateBackendEquipmentList(
+        analysis.businessCategory,
+        ((analysis.financialPlan as any)?.projectCost) || 185000,
+      ),
     };
   }
 }

@@ -18,9 +18,9 @@ export default function GovFooter() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               {/* Mini emblem */}
-              <div className="w-12 h-12 rounded-full border-2 border-[#FF9933] flex items-center justify-center bg-white flex-shrink-0">
+              <div className="w-12 h-12 rounded-xl border border-emerald-500/40 p-1 flex items-center justify-center bg-white flex-shrink-0 shadow-sm">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo.png" alt="ArthSetu Logo" className="w-9 h-9 rounded-full object-contain" />
+                <img src="/logo.png" alt="ArthSetu Logo" className="w-full h-full rounded-lg object-contain" />
               </div>
               <div>
                 <div className="text-[#FF9933] text-xs font-bold uppercase tracking-widest">

@@ -5,6 +5,8 @@ import { FinancialPlan } from '@/types';
 import { percent } from '@/lib/format';
 import { getSchemePortalUrl } from '@/lib/api/feasibility';
 import { EmiSimulator } from './EmiSimulator';
+import { SmartSchemeCalculator } from './SmartSchemeCalculator';
+import { QuarterlyAmortizationSchedule } from './QuarterlyAmortizationSchedule';
 import { CashflowChart } from './CashflowChart';
 import { BreakEvenChart } from './BreakEvenChart';
 import { StressTestChart } from './StressTestChart';
@@ -37,6 +39,9 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
           Deterministic calculations from the scheme rule engine — shown as a bridge from your margin to the loan.
         </p>
       </div>
+
+      {/* Smart Scheme & Capital Structuring Engine (Pillar 2) */}
+      <SmartSchemeCalculator initialCapital={plan.availableCapital} />
 
       {/* Capital bridge */}
       <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-3 text-center">
@@ -160,6 +165,14 @@ export function FinancialPlanSection({ plan, schemeNames }: { plan: FinancialPla
 
       {/* Detailed Working Capital & Operating Cycle Breakdown */}
       <WorkingCapitalCard workingCapital={plan.workingCapital} />
+
+      {/* Official SCA Moratorium & Quarterly Debt Timeline (Pillar 3) */}
+      <QuarterlyAmortizationSchedule
+        initialPrincipal={plan.netLoanAmount || plan.loanRequired}
+        initialRate={plan.interestRate}
+        initialTenureMonths={plan.tenureMonths}
+        initialMoratoriumMonths={plan.tenureMonths <= 36 ? 3 : 6}
+      />
 
       {/* Financial Simulators & Interactive Charts */}
       <div className="space-y-6 pt-2">

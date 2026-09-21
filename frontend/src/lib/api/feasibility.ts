@@ -6,6 +6,7 @@ import type {
   CompetitorAnalysis,
   Confidence,
   EmiOutput,
+  EquipmentItem,
   FeasibilityReport,
   FinancialPlan,
   MarketIntelligence,
@@ -208,6 +209,7 @@ export interface BackendFeasibilityResult {
     breakEven: BackendBreakEvenOutput;
     stressTest: BackendStressTestOutput;
   };
+  equipmentList?: EquipmentItem[];
   schemeMatches: Array<{
     id: string;
     name: string;
@@ -469,6 +471,7 @@ export function toFeasibilityReport(raw: BackendFeasibilityResult): FeasibilityR
     competitorAnalysis: mapCompetitorAnalysis(raw.competitorAnalysis),
     opportunityAnalysis: mapOpportunityAnalysis(raw.opportunityAnalysis),
     financialPlan: mapFinancialPlan(raw.financialPlan),
+    equipmentList: raw.equipmentList,
     schemeMatches: mappedSchemes,
     riskAssessment: mapRiskAssessment(raw.riskAssessment),
     feasibilityScore: raw.feasibilityScore,
