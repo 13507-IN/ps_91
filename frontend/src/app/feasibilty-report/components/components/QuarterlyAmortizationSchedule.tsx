@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Calendar, Clock, DollarSign, TrendingDown, ShieldCheck, CheckCircle2, AlertCircle, ArrowRight, Layers, Table, Sparkles } from 'lucide-react';
+import { Calendar, Clock, CheckCircle2, Layers, Table } from 'lucide-react';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 
@@ -31,13 +31,13 @@ export function QuarterlyAmortizationSchedule({
   initialMoratoriumMonths = 6,
   className = '',
 }: QuarterlyAmortizationScheduleProps) {
-  const { t, lang } = useTranslation();
+  const { lang } = useTranslation();
 
   // State
-  const [principal, setPrincipal] = useState<number>(initialPrincipal);
-  const [annualRate, setAnnualRate] = useState<number>(initialRate);
-  const [tenureMonths, setTenureMonths] = useState<number>(initialTenureMonths);
-  const [moratoriumMonths, setMoratoriumMonths] = useState<number>(initialMoratoriumMonths);
+  const principal = initialPrincipal;
+  const annualRate = initialRate;
+  const tenureMonths = initialTenureMonths;
+  const moratoriumMonths = initialMoratoriumMonths;
   const [activeView, setActiveView] = useState<'QUARTERLY' | 'MONTHLY'>('QUARTERLY');
   const [showAllRows, setShowAllRows] = useState<boolean>(false);
 
@@ -64,7 +64,6 @@ export function QuarterlyAmortizationSchedule({
   const schedule: QuarterRow[] = [];
   let currentBalance = principal;
   let totalInterestSca = 0;
-  let totalPrincipalPaid = 0;
 
   for (let q = 1; q <= totalQuarters; q++) {
     const startMonth = (q - 1) * 3 + 1;
@@ -73,7 +72,7 @@ export function QuarterlyAmortizationSchedule({
     const isMoratorium = q <= moratoriumQuarters;
 
     const opening = currentBalance;
-    let interest = Math.round(opening * quarterlyRate);
+    const interest = Math.round(opening * quarterlyRate);
     let principalPart = 0;
     let installment = 0;
 
@@ -95,7 +94,6 @@ export function QuarterlyAmortizationSchedule({
     }
 
     totalInterestSca += interest;
-    totalPrincipalPaid += principalPart;
 
     schedule.push({
       quarter: q,
@@ -134,7 +132,7 @@ export function QuarterlyAmortizationSchedule({
             </h3>
           </div>
           <p className="mt-1 text-xs text-slate-500">
-            Compliant with <strong>SCA Guidelines</strong> — includes {moratoriumMonths}-Month Setup Grace Period & quarterly debt service.
+            Compliant with <strong>SCA Guidelines</strong> ({isMicroFinance ? 'Micro Finance Scheme' : 'Term Loan Scheme'}) — includes {moratoriumMonths}-Month Setup Grace Period & quarterly debt service.
           </p>
         </div>
 

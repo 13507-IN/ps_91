@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { X, Printer, Download, CheckCircle2, ShieldCheck, Landmark, Building2, User, FileText, Sparkles } from 'lucide-react';
+import { X, Printer, FileText } from 'lucide-react';
 import { EquipmentItem, BusinessCategory } from '@/types';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 import { useTranslation } from '@/lib/i18n/useTranslation';
@@ -100,7 +100,7 @@ export function ProformaQuotationModal({
               & Official Pro-Forma Machinery / Equipment Quotation Format
             </div>
             <div className="inline-block px-3 py-0.5 rounded-full bg-slate-100 border border-slate-300 text-[10px] font-bold text-slate-800">
-              Scheme Tier: {isMicro ? 'Logic A (Micro Finance ≤ ₹1.40 Lakh)' : 'Logic B (Term Loan Scheme ₹1.40L–₹50.00L)'}
+              Scheme Tier: {schemeName} • {tenure}
             </div>
           </div>
 

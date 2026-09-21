@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Landmark, Wallet, ArrowRight, ShieldCheck, Info, Sparkles, CheckCircle2, IndianRupee } from 'lucide-react';
+import { Wallet, ShieldCheck, Info, Sparkles } from 'lucide-react';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 
@@ -13,7 +12,7 @@ interface SmartSchemeCalculatorProps {
 }
 
 export function SmartSchemeCalculator({ initialCapital = 50000, onApplyCapital, className = '' }: SmartSchemeCalculatorProps) {
-  const { t, lang } = useTranslation();
+  const { lang } = useTranslation();
   const [marginInput, setMarginInput] = useState<number>(initialCapital);
 
   // Financial Structuring calculations (10% Margin -> 100% Project Cost -> 90% Loan)
@@ -31,7 +30,6 @@ export function SmartSchemeCalculator({ initialCapital = 50000, onApplyCapital, 
   let moratoriumMonths = 3;
   let schemeName = 'SCA Micro Finance Scheme (Logic A)';
   let schemeTag = 'Micro Finance Tier (≤ ₹1.40L)';
-  let maxLoanLimit = 125000;
 
   if (isMicroFinance) {
     eligibleLoanAmount = Math.min(eligibleLoanAmount, 125000);
@@ -40,7 +38,6 @@ export function SmartSchemeCalculator({ initialCapital = 50000, onApplyCapital, 
     moratoriumMonths = 3;
     schemeName = 'State Channelizing Agency (SCA) Micro Finance Scheme';
     schemeTag = 'Logic A: Micro Finance (≤ ₹1.40 Lakh Project)';
-    maxLoanLimit = 125000;
   } else {
     eligibleLoanAmount = Math.min(eligibleLoanAmount, 4500000);
     interestRate = 8.0;
@@ -48,7 +45,6 @@ export function SmartSchemeCalculator({ initialCapital = 50000, onApplyCapital, 
     moratoriumMonths = 6;
     schemeName = 'State Channelizing Agency (SCA) Term Loan Scheme';
     schemeTag = 'Logic B: Term Loan Scheme (₹1.40L – ₹50.00L Project)';
-    maxLoanLimit = 4500000;
   }
 
   // Quarterly Repayment Estimation factoring Moratorium

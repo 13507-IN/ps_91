@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, SkipForward, CheckCircle2, Volume2, Globe, Sparkles, ArrowRight, X } from 'lucide-react';
+import { Play, SkipForward, CheckCircle2, Volume2, Globe, ArrowRight } from 'lucide-react';
 import { useTranslation, type Lang } from '@/lib/i18n/useTranslation';
 
 const ONBOARDED_KEY = 'arthsetu_onboarded_v1';
@@ -130,6 +130,7 @@ export default function FirstTimeOnboardingModal() {
               <div className="relative">
                 <div className="absolute -inset-4 rounded-full bg-emerald-500/20 blur-xl animate-pulse" />
                 <div className="relative w-28 h-28 rounded-full border-4 border-emerald-600/30 bg-white p-2 shadow-xl flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/logo.png"
                     alt="ArthSetu Logo"
@@ -190,6 +191,7 @@ export default function FirstTimeOnboardingModal() {
             >
               {/* Compact Logo Mark */}
               <div className="mx-auto w-16 h-16 rounded-full border-2 border-emerald-600/30 bg-white p-1 shadow-sm flex items-center justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/logo.png" alt="ArthSetu Logo" className="w-full h-full object-contain rounded-full" />
               </div>
 
@@ -298,6 +300,7 @@ export default function FirstTimeOnboardingModal() {
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-full border border-emerald-600/30 bg-white p-0.5 shadow-2xs">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src="/logo.png" alt="ArthSetu Logo" className="w-full h-full object-contain rounded-full" />
                   </div>
                   <div>

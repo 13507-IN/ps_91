@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Wrench, Printer, CheckCircle2, AlertCircle, ShoppingBag, ShieldCheck,
-  FileText, Plus, Trash2, RotateCcw, Search, SlidersHorizontal, Sparkles
+  Plus, Trash2, RotateCcw, Search, Sparkles
 } from 'lucide-react';
 import { EquipmentItem, BusinessCategory } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
