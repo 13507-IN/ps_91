@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Groq LLM Provider.
 
 Wraps the Groq SDK for Llama 3.3 70B Versatile (fallback provider).
@@ -6,6 +6,7 @@ Wraps the Groq SDK for Llama 3.3 70B Versatile (fallback provider).
 
 from __future__ import annotations
 
+import asyncio
 import time
 import structlog
 from groq import Groq
@@ -29,11 +30,7 @@ class GroqProvider:
         temperature: float | None = None,
     ) -> str:
         """
-        Generate text from Groq.
-
-        Note: Groq SDK is synchronous. We wrap it here for interface
-        consistency with the async pattern. In production you'd use
-        an async-compatible client or run in a thread pool.
+        Generate text from Groq in a thread pool with strict timeout.
         """
         temp = temperature if temperature is not None else settings.LLM_TEMPERATURE
         start = time.perf_counter()
@@ -43,13 +40,20 @@ class GroqProvider:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": prompt})
 
-        try:
-            response = self.client.chat.completions.create(
+        def _sync_call():
+            return self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
                 temperature=temp,
                 max_tokens=4096,
                 response_format={"type": "json_object"},
+            )
+
+        try:
+            timeout_sec = float(settings.LLM_TIMEOUT_SECONDS)
+            response = await asyncio.wait_for(
+                asyncio.to_thread(_sync_call),
+                timeout=timeout_sec,
             )
             elapsed_ms = round((time.perf_counter() - start) * 1000)
             text = response.choices[0].message.content or ""
@@ -66,6 +70,16 @@ class GroqProvider:
                 },
             )
             return text
+
+        except asyncio.TimeoutError:
+            elapsed_ms = round((time.perf_counter() - start) * 1000)
+            logger.error(
+                "groq_timeout",
+                model=self.model,
+                latency_ms=elapsed_ms,
+                timeout_sec=settings.LLM_TIMEOUT_SECONDS,
+            )
+            raise TimeoutError(f"Groq call timed out after {settings.LLM_TIMEOUT_SECONDS}s")
 
         except Exception as exc:
             elapsed_ms = round((time.perf_counter() - start) * 1000)

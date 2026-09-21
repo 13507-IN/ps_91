@@ -583,6 +583,7 @@ const translations = {
     months:        { EN: 'months',                         BN: 'মাস',                         HI: 'महीने' },
     govSchemes:    { EN: 'Government Schemes',             BN: 'সরকারি প্রকল্প',             HI: 'सरकारी योजनाएं' },
     emi:           { EN: 'EMI Calculator',                 BN: 'EMI ক্যালকুলেটর',                 HI: 'EMI कैलकुलेटर' },
+    equipmentTitle:{ EN: 'Required Machinery & Instruments',BN: 'প্রয়োজনীয় যন্ত্রপাতি ও সরঞ্জাম',HI: 'आवश्यक मशीनरी और उपकरण' },
     noSchemes:     { EN: 'No matching schemes found.',     BN: 'কোনো সামঞ্জস্যপূর্ণ প্রকল্প পাওয়া যায়নি।',     HI: 'कोई मेल खाने वाली योजना नहीं मिली।' },
   },
 
@@ -808,6 +809,71 @@ const translations = {
     resendOtpIn:     { EN: 'Resend OTP in',                BN: 'পুনরায় ওটিপি পাঠানোর সময়',      HI: 'ओटीपी पुनः भेजने का समय' },
     resendOtp:       { EN: 'Resend OTP',                   BN: 'পুনরায় ওটিপি পাঠান',            HI: 'ওটিপি पुनः भेजें' },
     continueGoogle:  { EN: 'Continue with Google',         BN: 'Google দিয়ে চালিয়ে যান',        HI: 'Google के साथ जारी रखें' },
+  },
+
+  // ─── Feasibility Report Comprehensive Details (EN, BN, HI) ───
+  feasibilityReportDetails: {
+    headerBadge: { EN: 'Comprehensive Feasibility & Viability Report', BN: 'বিস্তারিত সম্ভাব্যতা ও উপযোগিতা রিপোর্ট', HI: 'व्यापक व्यवहार्यता और उपयोगिता रिपोर्ट' },
+    aiEngineBadge: { EN: 'AI Microservice Orchestrator', BN: 'এআই মাইক্রোসার্ভিস বিশ্লেষণ', HI: 'एआई माइक्रोसर्विस विश्लेषक' },
+    summaryTitle: { EN: 'Executive Summary', BN: 'কার্যকরী সারসংক্ষেপ', HI: 'कार्यकारी सारांश' },
+    verdictLabel: { EN: 'Overall Viability Grade', BN: 'সামগ্রিক সম্ভাব্যতা গ্রেড', HI: 'समग्र व्यवहार्यता ग्रेड' },
+    scoreBreakdownTitle: { EN: 'Multi-Dimensional Score Analysis', BN: 'বহুমাত্রিক নম্বর বিশ্লেষণ', HI: 'बहु-आयामी स्कोर विश्लेषण' },
+    
+    // Revenue & Cost Assumptions
+    assumptionsTitle: { EN: 'Revenue & Cost Assumptions (Methodology)', BN: 'আয় ও খরচের অনুমান (পদ্ধতি)', HI: 'राजस्व और लागत धारणाएं (कार्यप्रणाली)' },
+    assumptionsSub: { EN: 'Transparent breakdown of daily operational estimates and monthly totals.', BN: 'দৈনিক চালনার অনুমিত হিসাব এবং মাসিক মোট পরিমাণের স্পষ্ট বিশ্লেষণ।', HI: 'दैनिक परिचालन अनुमान और मासिक योग का पारदर्शी विवरण।' },
+    dailySales: { EN: 'Daily Sales & Service Revenue', BN: 'দৈনিক বিক্রি ও পরিষেবা আয়', HI: 'दैनिक बिक्री और सेवा राजस्व' },
+    rawMaterials: { EN: 'Raw Materials & Inventory Refill', BN: 'কাঁচামাল ও ইনভেন্টরি পুনঃপূরণ', HI: 'कच्चा माल और इन्वेंट्री पुनः पूर्ति' },
+    rentUtilities: { EN: 'Shop Rent, Electricity & Utilities', BN: 'দোকান ভাড়া, বিদ্যুৎ ও ইউটিলিটি', HI: 'दुकान का किराया, बिजली और उपयोगिताएं' },
+    staffWages: { EN: 'Staff Salaries & Labor Charges', BN: 'কর্মীদের বেতন ও মজুরি', HI: 'कर्मचारियों का वेतन और श्रम शुल्क' },
+    transportation: { EN: 'Transport & Packaging Costs', BN: 'পরিবহন ও প্যাকেজিং খরচ', HI: 'परिवहन और पैकेजिंग लागत' },
+
+    // DSCR & Financial Statement
+    dscrTitle: { EN: 'Debt Service Coverage Ratio (DSCR)', BN: 'ঋণ পরিষেবা কভারেজ অনুপাত (DSCR)', HI: 'ऋण सेवा कवरेज अनुपात (DSCR)' },
+    dscrHealthy: { EN: 'Safe for Bank Loan (> 1.25x)', BN: 'ব্যাংক ঋণের জন্য নিরাপদ (> ১.২৫ গুণ)', HI: 'बैंक लोन के लिए सुरक्षित (> 1.25x)' },
+    dscrRisky: { EN: 'Tight Cashflow Cushion (< 1.1x)', BN: 'মাসিক কিস্তির চাপ বেশি (< ১.১ গুণ)', HI: 'नकद प्रवाह पर दबाव (< 1.1x)' },
+    pnlTitle: { EN: '3-Year Projected Profit & Loss (P&L)', BN: '৩-বছরের আনুমানিক লাভ ও ক্ষতি (P&L)', HI: '3-वर्षीय अनुमानित लाभ और हानि (P&L)' },
+    grossRevenue: { EN: 'Gross Annual Revenue', BN: 'বার্ষিক মোট আয়', HI: 'वार्षिक कुल राजस्व' },
+    operatingExpenses: { EN: 'Operating Expenses (OpEx)', BN: 'পরিচালন ব্যয় (OpEx)', HI: 'परिचालन व्यय (OpEx)' },
+    netProfit: { EN: 'Net Annual Profit', BN: 'বার্ষিক নিট লাভ', HI: 'वार्षिक शुद्ध लाभ' },
+    year1: { EN: 'Year 1', BN: 'বছর ১', HI: 'वर्ष 1' },
+    year2: { EN: 'Year 2', BN: 'বছর ২', HI: 'वर्ष 2' },
+    year3: { EN: 'Year 3', BN: 'বছর ৩', HI: 'वर्ष 3' },
+
+    // Working Capital & Seasonal Heatmap
+    workingCapitalTitle: { EN: 'Working Capital Requirement Breakdown', BN: 'কার্যকরী মূলধনের খতিয়ান', HI: 'कार्यशील पूंजी आवश्यकता विवरण' },
+    inventoryBuffer: { EN: 'Inventory Holding (15 Days)', BN: 'ইনভেন্টরি রিজার্ভ (১৫ দিন)', HI: 'इन्वेंटरी होल्डिंग (15 दिन)' },
+    receivablesBuffer: { EN: 'Receivables Cushion (10 Days)', BN: 'বাকি পাওনা বাফার (১০ দিন)', HI: 'प्राप्य बफर (10 दिन)' },
+    cashReserve: { EN: 'Emergency Cash Reserve', BN: 'জরুরি নগদ সঞ্চয়', HI: 'आपातकालीन नकद आरक्षित' },
+    operatingCycle: { EN: 'Operating Cycle Duration', BN: 'অপারেটিং সাইকেল সময়কাল', HI: 'ऑपरेटिंग चक्र अवधि' },
+
+    seasonalTitle: { EN: 'Seasonal Demand & Revenue Heatmap', BN: 'মরশুমি চাহিদা ও আয়ের হিটম্যাপ', HI: 'मौसमी मांग और राजस्व हीटमैप' },
+    peakMonths: { EN: 'Peak Demand Season', BN: 'উচ্চ চাহিদার মরশুম', HI: 'पीक मांग सीजन' },
+    moderateMonths: { EN: 'Steady Season', BN: 'স্বাভাবিক মরশুম', HI: 'सामान्य सीजन' },
+    leanMonths: { EN: 'Lean Season', BN: 'মন্দা মরশুম', HI: 'मंदी का सीजन' },
+
+    // Equipment & Machinery Requirements
+    equipmentTitle: { EN: 'Machinery, Equipment & Tool Requirements', BN: 'যন্ত্রপাতি, সরঞ্জাম ও টুলস-এর প্রয়োজন', HI: 'मशीनरी, उपकरण और टूल की आवश्यकताएं' },
+    equipmentSub: { EN: 'Required instruments for bank quotation and operational setup.', BN: 'কোটেশন সংগ্রহ ও কারখানা স্থাপনের জন্য প্রয়োজনীয় যন্ত্রপাতির তালিকা।', HI: 'बैंक कोटेशन और परिचालन सेटअप के लिए आवश्यक उपकरण।' },
+    itemNameHeader: { EN: 'Item Name / Model', BN: 'আইটেমের নাম / মডেল', HI: 'वस्तु का नाम / मॉडल' },
+    categoryHeader: { EN: 'Category', BN: 'শ্রেণী', HI: 'श्रेणी' },
+    costHeader: { EN: 'Est. Unit Cost', BN: 'আনুমানিক অনুমিত খরচ', HI: 'अनुमानित इकाई लागत' },
+    specsHeader: { EN: 'Technical Specs / Power', BN: 'কারিগরি প্রযুক্তি ও বিদ্যুৎ', HI: 'तकनीकी विशिष्टताएं / शक्ति' },
+    vendorHeader: { EN: 'Supplier / Vendor Type', BN: 'সরবরাহকারী / বিক্রেতার ধরন', HI: 'आपूर्तिकर्ता / विक्रेता प्रकार' },
+    quotationBtn: { EN: 'Generate Bank Quotation Form', BN: 'ব্যাংক কোটেশন ফর্ম তৈরি করুন', HI: 'बैंक कोटेशन फॉर्म जनरेट करें' },
+
+    // Action Plan & Documents
+    actionPlanTitle: { EN: '30-Day Execution & Funding Milestone Plan', BN: '৩০ দিনের ব্যবসায়িক প্রস্তুতি ও তহবিল মাইলেস্টোন', HI: '30-दिवसीय निष्पादन और निधि मील का पत्थर योजना' },
+    phase1: { EN: 'Phase 1: Foundation & Shop Location (Days 1–10)', BN: 'পর্যায় ১: ভিত্তিপ্রস্তর ও স্থান নির্বাচন (দিন ১–১০)', HI: 'चरण 1: नींव और स्थान चयन (दिन 1-10)' },
+    phase2: { EN: 'Phase 2: Machinery Setup & Scheme Application (Days 11–20)', BN: 'পর্যায় ২: যন্ত্রপাতি স্থাপন ও সরকারি ঋণের আবেদন (দিন ১১–২০)', HI: 'चरण 2: मशीनरी सेटअप और योजना आवेदन (दिन 11-20)' },
+    phase3: { EN: 'Phase 3: Trial Production & Soft Launch (Days 21–30)', BN: 'পর্যায় ৩: ট্রায়াল উৎপাদন ও আনুষ্ঠানিক উদ্বোধন (দিন ২১–৩০)', HI: 'चरण 3: ट्रायल उत्पादन और औपचारिक शुभारंभ (दिन 21-30)' },
+    documentChecklistTitle: { EN: 'Document Checklist for Loan Approval', BN: 'ব্যাংক ঋণের অনুমোদনের জন্য কাগজপত্রের চেকমেট', HI: 'ऋण स्वीकृति के लिए आवश्यक दस्तावेजों की चेकलिस्ट' },
+
+    // DPR Export
+    exportTitle: { EN: 'Export Detailed Project Report (DPR)', BN: 'বিস্তারিত প্রজেক্ট রিপোর্ট (DPR) এক্সপোর্ট করুন', HI: 'विस्तृत परियोजना रिपोर्ट (DPR) निर्यात करें' },
+    downloadPdf: { EN: 'Download Official PDF DPR', BN: 'অফিসিয়াল PDF DPR ডাউনলোড করুন', HI: 'आधिकारिक PDF DPR डाउनलोड करें' },
+    printDpr: { EN: 'Print Application Sheet', BN: 'আবেদনপত্র প্রিন্ট করুন', HI: 'आवेदन पत्र प्रिंट करें' },
+    shareWhatsapp: { EN: 'Share Report on WhatsApp', BN: 'হোয়াটসঅ্যাপে রিপোর্ট শেয়ার করুন', HI: 'व्हाट्सएप पर रिपोर्ट साझा करें' },
   },
 } as const;
 

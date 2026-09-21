@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Gemini LLM Provider.
 
 Wraps the Google GenAI SDK for Gemini 2.5 Flash.
@@ -54,8 +54,12 @@ class GeminiProvider:
             )
 
         try:
-            # Run the synchronous SDK call in a thread pool to avoid blocking the event loop
-            response = await asyncio.to_thread(_sync_call)
+            # Run the synchronous SDK call in a thread pool with strict timeout
+            timeout_sec = float(settings.LLM_TIMEOUT_SECONDS)
+            response = await asyncio.wait_for(
+                asyncio.to_thread(_sync_call),
+                timeout=timeout_sec,
+            )
             elapsed_ms = round((time.perf_counter() - start) * 1000)
             text = response.text or ""
 
@@ -67,6 +71,16 @@ class GeminiProvider:
                 usage=_extract_usage(response),
             )
             return text
+
+        except asyncio.TimeoutError:
+            elapsed_ms = round((time.perf_counter() - start) * 1000)
+            logger.error(
+                "gemini_timeout",
+                model=self.model,
+                latency_ms=elapsed_ms,
+                timeout_sec=settings.LLM_TIMEOUT_SECONDS,
+            )
+            raise TimeoutError(f"Gemini call timed out after {settings.LLM_TIMEOUT_SECONDS}s")
 
         except Exception as exc:
             elapsed_ms = round((time.perf_counter() - start) * 1000)

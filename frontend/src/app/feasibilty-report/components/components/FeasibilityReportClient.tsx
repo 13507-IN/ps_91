@@ -57,6 +57,10 @@ const DocumentChecklist = dynamic(
   () => import('./DocumentChecklist').then(m => ({ default: m.DocumentChecklist })),
   { loading: () => <SectionSkeleton /> }
 );
+const EquipmentRequirementSection = dynamic(
+  () => import('./EquipmentRequirementSection').then(m => ({ default: m.EquipmentRequirementSection })),
+  { loading: () => <SectionSkeleton /> }
+);
 const HyperlocalBusinessExplorer = dynamic(
   () => import('@/components/HyperlocalBusinessExplorer/HyperlocalBusinessExplorer').then(m => ({ default: m.HyperlocalBusinessExplorer })),
   { ssr: false, loading: () => <SectionSkeleton /> }
@@ -192,6 +196,11 @@ export function FeasibilityReportClient({
         <FinancialPlanSection
           plan={report.financialPlan}
           schemeNames={report.schemeMatches.map((s) => s.name)}
+        />
+        <EquipmentRequirementSection
+          equipmentList={report.equipmentList || report.financialPlan.equipmentList}
+          businessCategory={report.businessCategory}
+          projectCost={report.financialPlan.projectCost}
         />
         <RiskAssessmentSection risk={report.riskAssessment} />
 

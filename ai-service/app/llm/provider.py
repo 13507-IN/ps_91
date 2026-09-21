@@ -116,7 +116,8 @@ class LLMClient:
                     )
                     if any(err_term in err_str for err_term in [
                         "429", "503", "504", "resource_exhausted", "quota",
-                        "unavailable", "high demand", "overloaded", "not_found"
+                        "unavailable", "high demand", "overloaded", "not_found",
+                        "timeout", "timed out"
                     ]):
                         logger.info("llm_primary_quota_exceeded", note="Bypassing retries and switching to Groq fallback")
                         break

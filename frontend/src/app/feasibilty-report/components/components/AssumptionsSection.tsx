@@ -14,12 +14,12 @@ interface AssumptionsSectionProps {
 
 export function AssumptionsSection({ assumptions, monthlyRevenue = 78300, monthlyOperatingCosts = 38000 }: AssumptionsSectionProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { lang } = useTranslation();
+  const { t, lang } = useTranslation();
 
   // Fallback defaults if assumptions object is missing
   const revenueItems = assumptions?.revenueItems || [
     {
-      name: 'Primary Product / Service Sales',
+      name: lang === 'HI' ? 'मुख्य उत्पाद / सेवा बिक्री' : lang === 'BN' ? 'প্রধান পণ্য / সেবা বিক্রয়' : 'Primary Product / Service Sales',
       dailyUnits: 30,
       unitPrice: 45,
       unitName: 'units',
@@ -30,29 +30,29 @@ export function AssumptionsSection({ assumptions, monthlyRevenue = 78300, monthl
 
   const costItems = assumptions?.costItems || [
     {
-      category: 'Raw Materials & Supplies',
+      category: lang === 'HI' ? 'कच्चा माल एवं सामग्री' : lang === 'BN' ? 'কাঁচামাল ও সাপ্লাই' : 'Raw Materials & Supplies',
       monthlyAmount: Math.round(monthlyOperatingCosts * 0.6),
-      description: 'Primary input materials and daily production supplies',
+      description: lang === 'HI' ? 'उत्पादन के लिए दैनिक सामग्री' : lang === 'BN' ? 'উৎপাদনের জন্য কাঁচামাল' : 'Primary input materials and daily production supplies',
       isDirectCost: true,
     },
     {
-      category: 'Salaries & Labor',
+      category: lang === 'HI' ? 'वेतन एवं श्रम' : lang === 'BN' ? 'বেতন ও মজুরি' : 'Salaries & Labor',
       monthlyAmount: Math.round(monthlyOperatingCosts * 0.25),
-      description: 'Labor, helpers, and operational staff wages',
+      description: lang === 'HI' ? 'कर्मचारियों व सहायकों की मजदूरी' : lang === 'BN' ? 'কর্মীদের মাসিক বেতন' : 'Labor, helpers, and operational staff wages',
       isDirectCost: false,
     },
     {
-      category: 'Utilities, Rent & Logistics',
+      category: lang === 'HI' ? 'किराया, बिजली व परिवहन' : lang === 'BN' ? 'দোকান ভাড়া, বিদ্যুৎ ও পরিবহন' : 'Utilities, Rent & Logistics',
       monthlyAmount: Math.round(monthlyOperatingCosts * 0.15),
-      description: 'Electricity, fuel, water, and local transport',
+      description: lang === 'HI' ? 'बिजली, पानी व स्थानीय परिवहन' : lang === 'BN' ? 'বিদ্যুৎবিল ও যাতায়াত খরচ' : 'Electricity, fuel, water, and local transport',
       isDirectCost: false,
     },
   ];
 
   const methodologyNotes = assumptions?.methodologyNotes || [
-    'Revenue estimates are derived from local catchment demand and mandi market rates.',
-    'Operating costs are benchmarked against official NABARD / KVIC operational guidelines.',
-    'Daily figures assume 30 operating days per month.',
+    lang === 'HI' ? 'राजस्व अनुमान स्थानीय मांग और मंडी दरों पर आधारित हैं।' : lang === 'BN' ? 'আয়ের হিসাব স্থানীয় বাজার ও মান্ডির হারের ভিত্তিতে তৈরি।' : 'Revenue estimates are derived from local catchment demand and mandi market rates.',
+    lang === 'HI' ? 'परिचालन लागत NABARD / KVIC के आधिकारिक दिशा-निर्देशों के अनुसार है।' : lang === 'BN' ? 'পরিচালন ব্যয় নাবার্ড ও কেভিআইসি নির্দেশিকা দ্বারা নিয়ন্ত্রিত।' : 'Operating costs are benchmarked against official NABARD / KVIC operational guidelines.',
+    lang === 'HI' ? 'दैनिक आंकड़ों में प्रति माह 30 कार्य दिवस माने गए हैं।' : lang === 'BN' ? 'দৈনিক হিসাবে মাসে ৩০ কার্যদিবস ধরা হয়েছে।' : 'Daily figures assume 30 operating days per month.',
   ];
 
   const totalMonthlyRevenueCalc = revenueItems.reduce((acc, item) => acc + item.monthlyRevenue, 0);
@@ -70,18 +70,18 @@ export function AssumptionsSection({ assumptions, monthlyRevenue = 78300, monthl
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-slate-900">Revenue & Cost Assumptions</h3>
+              <h3 className="text-sm font-bold text-slate-900">{t.feasibilityReportDetails.assumptionsTitle}</h3>
               <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold text-emerald-800">
-                Transparent Methodology
+                {t.feasibilityReportDetails.assumptionsSub}
               </span>
             </div>
             <p className="text-xs text-slate-500 mt-0.5">
-              Unit economics, price per unit, raw materials & cost breakdown driving the financial forecast
+              {t.feasibilityReportDetails.dailySales} &amp; {t.feasibilityReportDetails.rawMaterials}
             </p>
           </div>
         </div>
         <div className="flex items-center gap-2 text-xs font-semibold text-brand-700">
-          <span>{isOpen ? 'Hide Breakdown' : 'View Assumptions'}</span>
+          <span>{isOpen ? (lang === 'HI' ? 'विवरण छिपाएं' : lang === 'BN' ? 'হিসাব লুকান' : 'Hide Breakdown') : (lang === 'HI' ? 'अनुमान देखें' : lang === 'BN' ? 'অনুমান দেখুন' : 'View Assumptions')}</span>
           {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </div>
       </button>

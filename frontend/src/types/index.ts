@@ -80,6 +80,19 @@ export interface SeasonalMonthInfo {
   reason: string;
 }
 
+export interface EquipmentItem {
+  id: string;
+  name: string;
+  category: 'MACHINERY' | 'INSTRUMENT' | 'TOOL' | 'INFRASTRUCTURE' | 'SAFETY';
+  estimatedCost: number;
+  quantity: number;
+  unit: string;
+  importance: 'ESSENTIAL' | 'RECOMMENDED' | 'OPTIONAL';
+  specification: string;
+  vendorType: string;
+}
+
+
 
 export interface CashflowEntry {
   month: number;
@@ -240,6 +253,7 @@ export interface FinancialPlan {
   dscr?: DscrOutput;
   assumptions?: FinancialAssumptions;
   seasonalMultipliers?: SeasonalMonthInfo[];
+  equipmentList?: EquipmentItem[];
 }
 
 export interface FeasibilityReport {
@@ -252,6 +266,7 @@ export interface FeasibilityReport {
   opportunityAnalysis: OpportunityAnalysis;
   financialPlan: FinancialPlan;
   localSuppliers?: SupplierItem[];
+  equipmentList?: EquipmentItem[];
   schemeMatches: MatchedSchemeResult[];
   riskAssessment: RiskAssessment;
   feasibilityScore: FeasibilityScore;

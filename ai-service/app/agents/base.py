@@ -96,7 +96,15 @@ class BaseAgent:
             target_lang = lang_map.get(str(language_code).upper(), "English")
             system = self.system_prompt
             if target_lang != "English":
-                system += f" Provide all textual reasoning, explanations, recommendations, strengths, and weaknesses in {target_lang}."
+                system += (
+                    f" CRITICAL INSTRUCTION: Write all descriptive textual string values in the JSON output "
+                    f"(such as summaries, recommendations, strengths, weaknesses, risk details, mitigations, "
+                    f"action plan milestone descriptions, equipment descriptions, and reasoning) "
+                    f"entirely in {target_lang}. "
+                    f"IMPORTANT: All enum status/level codes (e.g., 'high', 'medium', 'low', 'promising', 'moderate', 'challenging', 'saturated', 'very_high', 'critical', 'market', 'financial', 'operational', etc.) "
+                    f"and JSON dictionary keys MUST REMAIN STRICTLY IN LOWERCASE ENGLISH as specified in the schema. Do NOT translate enum codes."
+                )
+
 
             raw_response = await (
                 self.llm.generate_secondary(prompt=prompt, system=system)

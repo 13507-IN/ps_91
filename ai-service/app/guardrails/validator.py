@@ -1,4 +1,4 @@
-﻿"""
+"""
 ArthSetu — Output Validator (Guardrails).
 
 Post-processing validation layer that checks AI outputs for:
@@ -34,6 +34,107 @@ class ValidationResult:
         logger.warning("guardrail_correction", message=msg)
 
 
+# ── Enum Normalization Mappings ──────────────────────────────────────────
+
+_LEVEL_MAP = {
+    "high": "high", "উচ্চ": "high", "उच्च": "high", "highest": "high", "h": "high", "high_priority": "high",
+    "medium": "medium", "মাঝারি": "medium", "মধ্যম": "medium", "मध्यम": "medium", "med": "medium", "moderate": "medium", "m": "medium", "average": "medium",
+    "low": "low", "কম": "low", "নিম্ন": "low", "निम्न": "low", "l": "low", "lowest": "low", "safe": "low"
+}
+
+_CONDITION_MAP = {
+    "promising": "promising", "প্রতিশ্রুতিশীল": "promising", "উজ্জ্বল": "promising", "उम्मीदजनक": "promising", "good": "promising", "positive": "promising",
+    "moderate": "moderate", "মাঝারি": "moderate", "মধ্যম": "moderate", "मध्यम": "moderate", "average": "moderate", "stable": "moderate",
+    "challenging": "challenging", "কঠিন": "challenging", "চ্যালেঞ্জিং": "challenging", "कठिन": "challenging", "tough": "challenging",
+    "saturated": "saturated", "সম্পৃক্ত": "saturated", "পূর্ণ": "saturated", "संतृप्त": "saturated", "crowded": "saturated"
+}
+
+_COMP_MAP = {
+    "very_high": "very_high", "very high": "very_high", "খুব উচ্চ": "very_high", "অত্যধিক": "very_high", "अत्यधिक": "very_high", "severe": "very_high",
+    "high": "high", "উচ্চ": "high", "उच्च": "high", "intense": "high",
+    "moderate": "moderate", "মাঝারি": "moderate", "মধ্যম": "moderate", "मध्यम": "moderate", "medium": "moderate",
+    "low": "low", "কম": "low", "নিম্ন": "low", "निम्न": "low", "minimal": "low"
+}
+
+_SEVERITY_MAP = {
+    "critical": "critical", "মারাত্মক": "critical", "সংকটজনক": "critical", "গম্ভীর": "critical", "गंभीर": "critical", "extreme": "critical",
+    "high": "high", "উচ্চ": "high", "उच्च": "high",
+    "medium": "medium", "মাঝারি": "medium", "মধ্যম": "medium", "मध्यम": "medium", "moderate": "medium",
+    "low": "low", "কম": "low", "নিম্ন": "low", "निम्न": "low"
+}
+
+_RISK_CAT_MAP = {
+    "market": "market", "বাজার": "market", "बाजार": "market",
+    "financial": "financial", "আর্থিক": "financial", "वित्तीय": "financial",
+    "supply_chain": "supply_chain", "supply chain": "supply_chain", "সাপ্লাই চেইন": "supply_chain", "आपूर्ति": "supply_chain",
+    "operational": "operational", "পরিচালন": "operational", "परिचालन": "operational",
+    "seasonal": "seasonal", "মরশুমি": "seasonal", "मौसमी": "seasonal",
+    "competition": "competition", "প্রতিযোগিতা": "competition", "प्रतिस्पर्धा": "competition",
+    "infrastructure": "infrastructure", "অবকাঠামো": "infrastructure", "बुनियादी ढांचा": "infrastructure",
+    "customer_concentration": "customer_concentration", "গ্রাহক": "customer_concentration", "ग्राहक": "customer_concentration",
+    "regulatory": "regulatory", "নিয়ন্ত্রক": "regulatory", "नियामक": "regulatory"
+}
+
+
+def _norm_str(v: Any) -> str:
+    return str(v).strip().lower() if v is not None else ""
+
+
+def _normalize_enums(output: dict, result: ValidationResult) -> dict:
+    """Normalize translated, localized, or casing-variant enum strings."""
+    # Top-level confidence
+    if "confidence" in output:
+        raw = _norm_str(output["confidence"])
+        output["confidence"] = _LEVEL_MAP.get(raw, "medium")
+
+    # Market Analysis
+    ma = output.get("market_analysis")
+    if isinstance(ma, dict):
+        if "demand_level" in ma:
+            ma["demand_level"] = _LEVEL_MAP.get(_norm_str(ma["demand_level"]), "medium")
+        if "market_condition" in ma:
+            ma["market_condition"] = _CONDITION_MAP.get(_norm_str(ma["market_condition"]), "moderate")
+        if "confidence" in ma:
+            ma["confidence"] = _LEVEL_MAP.get(_norm_str(ma["confidence"]), "medium")
+
+    # Competition Analysis
+    ca = output.get("competition_analysis")
+    if isinstance(ca, dict):
+        if "competition_level" in ca:
+            ca["competition_level"] = _COMP_MAP.get(_norm_str(ca["competition_level"]), "moderate")
+        if "confidence" in ca:
+            ca["confidence"] = _LEVEL_MAP.get(_norm_str(ca["confidence"]), "medium")
+
+    # Pricing Strategy
+    ps = output.get("pricing_strategy")
+    if isinstance(ps, dict):
+        if "confidence" in ps:
+            ps["confidence"] = _LEVEL_MAP.get(_norm_str(ps["confidence"]), "medium")
+
+    # Market Gaps
+    gaps = output.get("market_gaps")
+    if isinstance(gaps, list):
+        for g in gaps:
+            if isinstance(g, dict) and "opportunity" in g:
+                g["opportunity"] = _LEVEL_MAP.get(_norm_str(g["opportunity"]), "medium")
+
+    # Risks
+    risks = output.get("risks")
+    if isinstance(risks, list):
+        for r in risks:
+            if isinstance(r, dict):
+                if "probability" in r:
+                    r["probability"] = _LEVEL_MAP.get(_norm_str(r["probability"]), "medium")
+                if "impact" in r:
+                    r["impact"] = _LEVEL_MAP.get(_norm_str(r["impact"]), "medium")
+                if "severity" in r:
+                    r["severity"] = _SEVERITY_MAP.get(_norm_str(r["severity"]), "medium")
+                if "category" in r:
+                    r["category"] = _RISK_CAT_MAP.get(_norm_str(r["category"]), "operational")
+
+    return output
+
+
 def validate_assessment(output: dict) -> tuple[dict, ValidationResult]:
     """
     Validate and optionally correct an AssessmentOutput dict.
@@ -41,6 +142,9 @@ def validate_assessment(output: dict) -> tuple[dict, ValidationResult]:
     Returns the (possibly corrected) output and a ValidationResult.
     """
     result = ValidationResult()
+
+    # 0. Normalize multilingual / localized enum values
+    output = _normalize_enums(output, result)
 
     # 1. Score bounds
     output = _validate_scores(output, result)

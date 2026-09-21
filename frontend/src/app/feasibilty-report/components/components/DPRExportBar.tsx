@@ -5,6 +5,7 @@ import { Download, Printer, Share2, Loader2, MessageCircle } from 'lucide-react'
 import { downloadDPR, shareViaWhatsApp, type DPRApplicant } from '@/lib/pdf/generateDPR';
 import { useAuthStore } from '@/lib/store/auth';
 import type { FeasibilityReport } from '@/types';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 interface DPRExportBarProps {
   report: FeasibilityReport;
@@ -14,6 +15,7 @@ export function DPRExportBar({ report }: DPRExportBarProps) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSharing, setIsSharing] = useState(false);
   const user = useAuthStore((s) => s.user);
+  const { t, lang } = useTranslation();
 
   const applicant: DPRApplicant = {
     name: user?.name ?? undefined,
@@ -61,8 +63,10 @@ export function DPRExportBar({ report }: DPRExportBarProps) {
           <div className="flex items-center justify-between gap-3">
             {/* Left label */}
             <div className="hidden sm:block">
-              <p className="text-xs font-semibold text-teal-900">Export Report</p>
-              <p className="text-[10px] text-slate-400">Bankable DPR Document</p>
+              <p className="text-xs font-semibold text-teal-900">{t.feasibilityReportDetails.exportTitle}</p>
+              <p className="text-[10px] text-slate-400">
+                {lang === 'HI' ? 'बैंक स्वीकार्य आधिकारिक रिपोर्ट (DPR)' : lang === 'BN' ? 'ব্যাংক গ্রহণযোগ্য অফিশিয়াল রিপোর্ট (DPR)' : 'Bankable DPR Document'}
+              </p>
             </div>
 
             {/* Action buttons */}
@@ -79,7 +83,7 @@ export function DPRExportBar({ report }: DPRExportBarProps) {
                   <Download className="h-4 w-4" />
                 )}
                 <span className="hidden xs:inline">
-                  {isGenerating ? 'Generating...' : 'Download PDF'}
+                  {isGenerating ? t.common.loading : t.feasibilityReportDetails.downloadPdf}
                 </span>
                 <span className="xs:hidden">PDF</span>
               </button>
@@ -90,7 +94,7 @@ export function DPRExportBar({ report }: DPRExportBarProps) {
                 className="inline-flex items-center gap-2 px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:bg-slate-50 active:scale-[0.97] transition-all"
               >
                 <Printer className="h-4 w-4" />
-                <span className="hidden sm:inline">Print</span>
+                <span className="hidden sm:inline">{t.feasibilityReportDetails.printDpr}</span>
               </button>
 
               {/* WhatsApp Share */}
@@ -104,7 +108,7 @@ export function DPRExportBar({ report }: DPRExportBarProps) {
                 ) : (
                   <MessageCircle className="h-4 w-4" />
                 )}
-                <span className="hidden xs:inline">WhatsApp</span>
+                <span className="hidden xs:inline">{t.feasibilityReportDetails.shareWhatsapp}</span>
               </button>
 
               {/* Native Share (mobile) */}

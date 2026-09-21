@@ -431,12 +431,21 @@ export class FeasibilityService {
     else decision = 'HIGH_RISK';
 
     const formattedCatName = category.replaceAll('_', ' ').toLowerCase();
-    const rawReasoningSummary = assessmentResult.reasoning?.map((r) => r.claim).join('. ');
     const emiFormatted = `₹${emiResult.emi.toLocaleString('en-IN')}`;
     const netProfitFormatted = `₹${Math.round(cashflowResult.avgMonthlyNetCashflow).toLocaleString('en-IN')}`;
     const matchedScheme = topScheme?.name ?? 'MUDRA Kishore';
 
-    const executiveSummary = `The ${formattedCatName} business in ${locationInfo.districtName} district shows strong fundamentals: high local catchment demand, an underserved market opportunity, and multiple nearby villages as target customers. The ${matchedScheme} scheme matches well and the monthly EMI of ${emiFormatted} is comfortably covered by projected monthly net cashflow of ${netProfitFormatted}. The primary risk is market competition — mitigated by product diversification and direct buyer outreach.`;
+    const lang = (body.language || 'EN').toUpperCase();
+    let executiveSummary = `The ${formattedCatName} business in ${locationInfo.districtName} district shows strong fundamentals: high local catchment demand, an underserved market opportunity, and multiple nearby villages as target customers. The ${matchedScheme} scheme matches well and the monthly EMI of ${emiFormatted} is comfortably covered by projected monthly net cashflow of ${netProfitFormatted}. The primary risk is market competition — mitigated by product diversification and direct buyer outreach.`;
+    let recommendedNextStep = `Review the recommended business model: ${assessmentResult.recommended_business_model.name}`;
+
+    if (lang === 'HI') {
+      executiveSummary = `${locationInfo.districtName} जिले में ${formattedCatName} व्यवसाय की स्थिति मजबूत है: स्थानीय मांग अधिक है, बाजार में नई संभावनाएं हैं और आसपास के गांव आपके मुख्य ग्राहक हैं। ${matchedScheme} योजना बेहद उपयुक्त है और मासिक ईएमआई (${emiFormatted}) अनुमानित शुद्ध मासिक लाभ (${netProfitFormatted}) से आसानी से कवर हो जाती है। मुख्य जोखिम प्रतिस्पर्धा है — जिसे उत्पाद विविधीकरण और सीधे ग्राहक संपर्क द्वारा नियंत्रित किया जा सकता है।`;
+      recommendedNextStep = `अनुशंसित व्यवसाय मॉडल की समीक्षा करें: ${assessmentResult.recommended_business_model.name}`;
+    } else if (lang === 'BN') {
+      executiveSummary = `${locationInfo.districtName} জেলায় ${formattedCatName} ব্যবসার সম্ভাবনা অত্যন্ত প্রবল: স্থানীয় বাজারে ভালো চাহিদা, ব্যবসায়িক সুযোগ এবং আশেপাশের গ্রামগুলি আপনার প্রধান গ্রাহক। ${matchedScheme} স্কিমটি অত্যন্ত মানানসই এবং মাসিক ইএমআই (${emiFormatted}) অনুমিত নিট মাসিক লাভ (${netProfitFormatted}) দিয়ে সহজেই পরিশোধযোগ্য। প্রধান ঝুঁকি প্রতিযোগিতা — যা পণ্য বৈচিত্র্য ও সরাসরি ক্রেতা যোগাযোগের মাধ্যমে সমাধান করা সম্ভব।`;
+      recommendedNextStep = `সুপারিশকৃত ব্যবসায়িক মডেল পরীক্ষা করুন: ${assessmentResult.recommended_business_model.name}`;
+    }
 
     const aiRecommendation = {
       decision,
@@ -444,7 +453,7 @@ export class FeasibilityService {
       summary: executiveSummary,
       strengths: assessmentResult.swot.strengths,
       weaknesses: assessmentResult.swot.weaknesses,
-      recommendedNextStep: `Review the recommended business model: ${assessmentResult.recommended_business_model.name}`,
+      recommendedNextStep,
     };
     
     // We will generate the action plan locally via fallback for now, or you could extend the unified AI for this.
