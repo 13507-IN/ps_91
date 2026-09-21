@@ -23,6 +23,8 @@ export interface StressTestInput {
 export interface StressScenarioResult {
   scenarioName: string;
   description: string;
+  revenueChangePct: number;
+  costChangePct: number;
   stressedRevenue: number;
   stressedCosts: number;
   stressedEmi: number;
@@ -97,9 +99,14 @@ export function runStressTest(input: StressTestInput): StressTestOutput {
     const isViable = stressedNetNum > 0;
     if (!isViable) unviableCount++;
 
+    const revDiffPct = new Decimal(sc.demandChangePct ?? 0).plus(sc.sellingPriceChangePct ?? 0).toNumber();
+    const costDiffPct = new Decimal(sc.rawMaterialCostChangePct ?? 0).toNumber();
+
     scenarioResults.push({
       scenarioName: sc.name,
       description: sc.description,
+      revenueChangePct: revDiffPct,
+      costChangePct: costDiffPct,
       stressedRevenue: stressedRev.toDecimalPlaces(2, Decimal.ROUND_HALF_UP).toNumber(),
       stressedCosts: stressedCost.toDecimalPlaces(2, Decimal.ROUND_HALF_UP).toNumber(),
       stressedEmi: stressedEmi.toDecimalPlaces(2, Decimal.ROUND_HALF_UP).toNumber(),

@@ -470,6 +470,20 @@ const translations = {
     lowConf:         { EN: 'Low Confidence',               BN: 'নিম্ন আস্থা',               HI: 'निम्न विश्वास' },
     localSuppliers:  { EN: 'Local Suppliers',              BN: 'স্থানীয় সরবরাহকারী',              HI: 'स्थानीय आपूर्तिकर्ता' },
     hyperlocalTitle: { EN: 'Hyperlocal UDYAM & MSME Registered Business Explorer', BN: 'স্থানীয় উদ্যম এবং MSME নিবন্ধিত ব্যবসা এক্সপ্লোরার', HI: 'हाइपरलोकल उद्यम और MSME पंजीकृत व्यापार अन्वेषक' },
+    viewModeSummary: { EN: '📋 Quick Summary',             BN: '📋 সহজ সারসংক্ষেপ',            HI: '📋 आसान सारांश' },
+    viewModeFull:    { EN: '📊 Full Detailed Report',      BN: '📊 সম্পূর্ণ বিস্তারিত রিপোর্ট',  HI: '📊 पूरी विस्तृत रिपोर्ट' },
+    viewFullReportCta: { EN: 'View Full In-Depth Report & Technical Breakdown', BN: 'সম্পূর্ণ বিস্তারিত রিপোর্ট ও প্রযুক্তিগত বিশ্লেষণ দেখুন', HI: 'पूरी विस्तृत रिपोर्ट और वित्तीय विश्लेषण देखें' },
+    viewFullReportSub: {
+      EN: 'Access all 12 modules: Interactive Market Map, Equipment Quotations, Cashflow Charts, 7-Year Amortization Schedule & Bank Checklist.',
+      BN: '১২টি পূর্ণাঙ্গ মডিউল দেখুন: ইন্টারেক্টিভ মার্কেট ম্যাপ, মেশিনের কোটেশন, ক্যাশফ্লো চার্ট, ৭ বছরের পরিশোধ তালিকা ও ব্যাংকের চেকলিস্ট।',
+      HI: 'सभी 12 मॉड्यूल देखें: इंटरएक्टिव बाज़ार नक्शा, मशीनरी कोटेशन, कैशफ्लो चार्ट, 7 साल की किस्त अनुसूची और बैंक दस्तावेज़ सूची।'
+    },
+    backToSummary:   { EN: 'Back to Quick Summary',        BN: 'সহজ সারসংক্ষেপে ফিরুন',         HI: 'वापस आसान सारांश पर जाएं' },
+    summaryModeDesc: {
+      EN: 'Showing high-level executive summary tailored for entrepreneurs. Click below to inspect deep-dive technical analytics.',
+      BN: 'উদ্যোক্তাদের জন্য উপযোগী সহজ সারসংক্ষেপ দেখানো হচ্ছে। বিস্তারিত বিশ্লেষণ দেখতে নিচে ক্লিক করুন।',
+      HI: 'उद्यमियों के लिए तैयार सरल सारांश दिखाया जा रहा है। विस्तृत तकनीकी आंकड़े देखने के लिए नीचे क्लिक करें।'
+    },
   },
 
   // ─── Plain Language Summary (for rural/non-technical entrepreneurs) ───

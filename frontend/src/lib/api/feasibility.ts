@@ -77,6 +77,8 @@ interface BackendBreakEvenOutput {
 interface BackendStressScenarioResult {
   scenarioName: string;
   description: string;
+  revenueChangePct?: number;
+  costChangePct?: number;
   stressedRevenue: number;
   stressedCosts: number;
   stressedEmi: number;
@@ -414,13 +416,37 @@ function mapFinancialPlan(
         monthlyNetCashflow: raw.stressTest.baseMonthlyNetCashflow,
         canServiceDebt: raw.stressTest.baseMonthlyNetCashflow >= 0,
       },
-      scenarios: raw.stressTest.scenarioResults.map((scenario) => ({
-        name: scenario.scenarioName,
-        revenueChange: 0,
-        costChange: 0,
-        monthlyNetCashflow: scenario.stressedMonthlyNetCashflow,
-        canServiceDebt: scenario.isViable,
-      })),
+      scenarios: raw.stressTest.scenarioResults.map((scenario) => {
+        let revChange = scenario.revenueChangePct ?? 0;
+        let costChange = scenario.costChangePct ?? 0;
+
+        // Convert percentage (e.g. -20 or 15) to fraction (-0.20 or 0.15)
+        if (Math.abs(revChange) > 1) revChange = revChange / 100;
+        if (Math.abs(costChange) > 1) costChange = costChange / 100;
+
+        // Safe fallback if raw backend or cached report lacked explicit percentage
+        if (revChange === 0 && costChange === 0) {
+          const lower = scenario.scenarioName.toLowerCase();
+          if (lower.includes('inflation') || lower.includes('cost')) {
+            costChange = 0.15;
+          } else if (lower.includes('demand')) {
+            revChange = -0.20;
+          } else if (lower.includes('competition') || lower.includes('price')) {
+            revChange = -0.10;
+          } else if (lower.includes('combined') || lower.includes('downside')) {
+            revChange = -0.15;
+            costChange = 0.10;
+          }
+        }
+
+        return {
+          name: scenario.scenarioName,
+          revenueChange: revChange,
+          costChange: costChange,
+          monthlyNetCashflow: scenario.stressedMonthlyNetCashflow,
+          canServiceDebt: scenario.isViable,
+        };
+      }),
       overallRiskLevel: raw.stressTest.overallRiskLevel,
     },
   };

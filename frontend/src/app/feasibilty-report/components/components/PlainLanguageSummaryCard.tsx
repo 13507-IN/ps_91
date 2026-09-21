@@ -32,7 +32,13 @@ import { TextToSpeech } from '@/components/TextToSpeech';
  *
  * All numbers are pulled from the REAL report data, not hardcoded.
  */
-export function PlainLanguageSummaryCard({ report }: { report: FeasibilityReport }) {
+export function PlainLanguageSummaryCard({
+  report,
+  onViewFullReport,
+}: {
+  report: FeasibilityReport;
+  onViewFullReport?: () => void;
+}) {
   const { t, lang } = useTranslation();
   const ps = t?.plainSummary;
 
@@ -253,6 +259,9 @@ export function PlainLanguageSummaryCard({ report }: { report: FeasibilityReport
             </div>
           )}
           <div className="mt-1 space-y-1 text-xs text-slate-600">
+            <div className="inline-flex items-center gap-1 rounded-full bg-sky-100 px-2 py-0.5 text-[10px] font-black text-sky-900 uppercase tracking-wide mb-1">
+              {lang === 'HI' ? '10:90 सरकारी वित्तपोषण' : lang === 'BN' ? '১০:৯০ সরকারি ঋণ সহায়তা' : '10:90 Scheme Matching'}
+            </div>
             {ownCapital > 0 && (
               <div>{ps?.costFromYou ?? 'From your pocket'}: <span className="font-bold text-slate-800">₹{formatIndianNumber(ownCapital, lang)}</span></div>
             )}
@@ -419,6 +428,32 @@ export function PlainLanguageSummaryCard({ report }: { report: FeasibilityReport
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* ─── Bottom CTA to View Full Detailed Report ─── */}
+      {onViewFullReport && (
+        <div className="mt-6 rounded-2xl border-2 border-teal-500/40 bg-gradient-to-r from-teal-900 via-teal-800 to-emerald-900 p-5 text-white shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-1 text-center sm:text-left">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-700/80 text-[11px] font-bold uppercase tracking-wider text-teal-200">
+              <Sparkles className="h-3 w-3 text-amber-300" />
+              {lang === 'HI' ? '12 विस्तृत तकनीकी मॉड्यूल उपलब्ध' : lang === 'BN' ? '১২টি বিস্তারিত মডিউল উপলব্ধ' : '12 In-Depth Modules Available'}
+            </span>
+            <h3 className="text-base sm:text-lg font-bold text-white">
+              {lang === 'HI' ? 'पूरी विस्तृत रिपोर्ट, वित्तीय बैलेंस शीट और मशीनरी सूची देखें' : lang === 'BN' ? 'সম্পূর্ণ বিস্তারিত রিপোর্ট ও যন্ত্রপাতির তালিকা দেখুন' : 'Inspect Full Financial Plan, Machinery Quotes & Local Map'}
+            </h3>
+            <p className="text-xs text-teal-100 max-w-xl">
+              {t.report.viewFullReportSub}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onViewFullReport}
+            className="shrink-0 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 font-black text-slate-900 text-sm transition-all shadow-lg hover:shadow-xl cursor-pointer"
+          >
+            <span>{t.report.viewFullReportCta}</span>
+            <ArrowRight className="h-4 w-4" />
+          </button>
         </div>
       )}
     </div>
