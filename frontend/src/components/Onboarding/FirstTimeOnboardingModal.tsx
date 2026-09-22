@@ -20,22 +20,35 @@ export const INTRO_VIDEO_CONFIG: Record<Lang, {
   EN: {
     title: 'Welcome to ArthSetu — Platform Walkthrough',
     description: 'Discover how ArthSetu transforms your rural enterprise idea into a bank-approved feasibility report and matches 10:90 concessional government schemes.',
-    videoUrl: '', // To be supplied by user
+    videoUrl: '/intro-en.mp4',
     duration: '2:15 min',
   },
   HI: {
     title: 'अर्थसेतु में आपका स्वागत है — परिचयात्मक वीडियो',
     description: 'जानिए कैसे अर्थसेतु आपके ग्रामीण व्यापार विचार को बैंक-स्वीकृत व्यवहार्यता रिपोर्ट में बदलता है और 10:90 रियायती सरकारी योजनाएं प्रदान करता है।',
-    videoUrl: '', // To be supplied by user
+    videoUrl: '/intro-hi.mp4',
     duration: '2:15 min',
   },
   BN: {
     title: 'অর্থসেতুতে আপনাকে স্বাগতম — পরিচিতি ও ব্যবহারের নির্দেশিকা',
     description: 'জানুন কীভাবে অর্থসেতু আপনার গ্রামীণ ব্যবসার পরিকল্পনাকে ব্যাংক-অনুমোদিত সম্ভাব্যতা রিপোর্টে রূপান্তর করে এবং ১০:৯০ সরকারি ঋণ সুবিধা প্রদান করে।',
-    videoUrl: '', // To be supplied by user
+    videoUrl: '/intro-bn.mp4',
     duration: '2:15 min',
   },
 };
+
+function formatVideoEmbedUrl(url: string): string {
+  if (!url) return '';
+  if (url.includes('youtube.com/watch?v=')) {
+    const videoId = url.split('v=')[1]?.split('&')[0];
+    if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  }
+  if (url.includes('youtu.be/')) {
+    const videoId = url.split('youtu.be/')[1]?.split('?')[0];
+    if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  }
+  return url;
+}
 
 type OnboardingStage = 'LOADER' | 'LANG_SELECT' | 'VIDEO';
 
@@ -330,7 +343,7 @@ export default function FirstTimeOnboardingModal() {
                   // Embed iframe (YouTube/Vimeo) or HTML5 Video
                   currentVideo.videoUrl.includes('youtube.com') || currentVideo.videoUrl.includes('youtu.be') ? (
                     <iframe
-                      src={currentVideo.videoUrl}
+                      src={formatVideoEmbedUrl(currentVideo.videoUrl)}
                       title={currentVideo.title}
                       className="w-full h-full border-0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -341,7 +354,8 @@ export default function FirstTimeOnboardingModal() {
                       src={currentVideo.videoUrl}
                       controls
                       autoPlay
-                      className="w-full h-full object-cover"
+                      playsInline
+                      className="w-full h-full object-contain bg-black"
                     />
                   )
                 ) : (
