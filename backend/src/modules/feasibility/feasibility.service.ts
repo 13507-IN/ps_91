@@ -42,6 +42,10 @@ export interface FeasibilityAnalysisResult {
   id?: string;
   businessCategory: BusinessCategory;
   businessIdea: string;
+  villageName?: string;
+  blockName?: string;
+  districtName?: string;
+  stateName?: string;
   equipmentList?: BackendEquipmentItem[];
   catchment: {
     latitude: number;
@@ -207,13 +211,34 @@ export class FeasibilityService {
       this.locationService.getNearbyVillages(lat, lng, radiusKm, 1),
     ]);
     
-    // Resolve location info for AI and Schemes context
-    const locationInfo = nearbyVillages[0] ?? {
-      name: 'Unknown Village',
-      blockName: 'Unknown Block',
-      districtName: 'Nadia', // Safe fallback for demo
-      stateName: 'West Bengal', // Safe fallback for demo
+    // Resolve location info for AI, Market and Schemes context
+    let locationInfo = {
+      name: body.villageName || nearbyVillages[0]?.name || 'Local Village',
+      blockName: body.block || nearbyVillages[0]?.blockName || '',
+      districtName: body.district || nearbyVillages[0]?.districtName || '',
+      stateName: body.state || nearbyVillages[0]?.stateName || 'West Bengal',
     };
+
+    if (body.villageId) {
+      try {
+        const v = await this.prisma.village.findUnique({
+          where: { id: body.villageId },
+          include: { block: { include: { district: { include: { state: true } } } } },
+        });
+        if (v) {
+          locationInfo = {
+            name: v.name,
+            blockName: v.block?.name || '',
+            districtName: v.block?.district?.name || '',
+            stateName: v.block?.district?.state?.name || 'West Bengal',
+          };
+        }
+      } catch {
+        // fallback
+      }
+    } else if (nearbyVillages[0] && !body.villageName) {
+      locationInfo = nearbyVillages[0];
+    }
 
     // Enrich brief/sparse business idea for rural user (e.g. 1-2 words expanded to full operational context)
     const enrichedConcept = enrichBusinessIdea({
@@ -491,6 +516,10 @@ export class FeasibilityService {
     const analysisData: FeasibilityAnalysisResult = {
       businessCategory: category,
       businessIdea: enrichedConcept.enrichedIdea,
+      villageName: locationInfo.name,
+      blockName: locationInfo.blockName,
+      districtName: locationInfo.districtName,
+      stateName: locationInfo.stateName,
       catchment: {
         latitude: lat,
         longitude: lng,
@@ -499,6 +528,10 @@ export class FeasibilityService {
       marketIntelligence: marketIntel as unknown as Record<string, unknown>,
       competitorAnalysis: competitorIntel as unknown as Record<string, unknown>,
       opportunityAnalysis: {
+        villageName: locationInfo.name,
+        blockName: locationInfo.blockName,
+        districtName: locationInfo.districtName,
+        stateName: locationInfo.stateName,
         marketGaps: assessmentResult.market_gaps.map(g => g.name),
         potentialNiches: assessmentResult.market_gaps.map(g => g.reason),
         recommendedModel: assessmentResult.recommended_business_model.name,
@@ -530,7 +563,7 @@ export class FeasibilityService {
       const saved = await this.prisma.analysis.create({
         data: {
           userId,
-          villageId: body.villageId,
+          villageId: body.villageId ?? (nearbyVillages[0]?.id ? nearbyVillages[0].id : null),
           latitude: lat,
           longitude: lng,
           catchmentRadiusKm: radiusKm,
@@ -544,6 +577,10 @@ export class FeasibilityService {
           marketIntelligence: marketIntel as never,
           competitorAnalysis: competitorIntel as never,
           opportunityAnalysis: {
+            villageName: locationInfo.name,
+            blockName: locationInfo.blockName,
+            districtName: locationInfo.districtName,
+            stateName: locationInfo.stateName,
             marketGaps: assessmentResult.market_gaps.map(g => g.name),
             potentialNiches: assessmentResult.market_gaps.map(g => g.reason),
             recommendedModel: assessmentResult.recommended_business_model.name,
@@ -595,35 +632,129 @@ export class FeasibilityService {
       },
     });
 
-    // Map to frontend-expected shape
-    return raw.map((item: any) => {
-      const scoreBlob = item.feasibilityScore as Record<string, unknown> | null;
-      const overallScore: number | null =
-        scoreBlob && typeof scoreBlob['totalScore'] === 'number'
-          ? scoreBlob['totalScore']
-          : null;
+    const villageIds = Array.from(
+      new Set(
+        raw
+          .map((r) => r.villageId)
+          .filter((id): id is number => typeof id === 'number' && id > 0)
+      )
+    );
 
-      // Try to extract location from opportunityAnalysis or leave as Nadia
-      const oppBlob = item.opportunityAnalysis as Record<string, unknown> | null;
-      const villageName: string = 'Nadia Rural';
-      const district: string = 'Nadia';
+    const villageMap = new Map<number, { name: string; blockName: string; districtName: string; stateName: string }>();
+    if (villageIds.length > 0) {
+      try {
+        const villages = await this.prisma.village.findMany({
+          where: { id: { in: villageIds } },
+          include: {
+            block: {
+              include: {
+                district: {
+                  include: {
+                    state: true,
+                  },
+                },
+              },
+            },
+          },
+        });
+        for (const v of villages) {
+          villageMap.set(v.id, {
+            name: v.name,
+            blockName: v.block?.name || '',
+            districtName: v.block?.district?.name || '',
+            stateName: v.block?.district?.state?.name || '',
+          });
+        }
+      } catch {
+        // ignore
+      }
+    }
 
-      return {
-        id: item.id,
-        businessCategory: item.businessCategory,
-        businessIdea: item.businessIdea,
-        availableCapital: item.availableCapital,
-        catchmentRadiusKm: item.catchmentRadiusKm,
-        latitude: item.latitude,
-        longitude: item.longitude,
-        status: item.status,
-        confidence: item.confidence,
-        overallScore,
-        villageName,
-        district,
-        createdAt: item.createdAt.toISOString(),
-      };
-    });
+    return Promise.all(
+      raw.map(async (item: any) => {
+        const scoreBlob = item.feasibilityScore as Record<string, unknown> | null;
+        const overallScore: number | null =
+          scoreBlob && typeof scoreBlob['totalScore'] === 'number'
+            ? scoreBlob['totalScore']
+            : null;
+
+        const oppBlob = item.opportunityAnalysis as Record<string, unknown> | null;
+
+        let villageName: string | null = null;
+        let blockName: string | null = null;
+        let district: string | null = null;
+        let state: string | null = null;
+
+        // 1. From villageId DB join
+        if (item.villageId && villageMap.has(item.villageId)) {
+          const v = villageMap.get(item.villageId)!;
+          villageName = v.name;
+          blockName = v.blockName;
+          district = v.districtName;
+          state = v.stateName;
+        }
+
+        // 2. From saved opportunityAnalysis location metadata
+        if (!villageName && oppBlob) {
+          if (typeof oppBlob['villageName'] === 'string' && oppBlob['villageName'].trim()) {
+            villageName = oppBlob['villageName'];
+          }
+          if (typeof oppBlob['blockName'] === 'string' && oppBlob['blockName'].trim()) {
+            blockName = oppBlob['blockName'];
+          }
+          if (typeof oppBlob['districtName'] === 'string' && oppBlob['districtName'].trim()) {
+            district = oppBlob['districtName'];
+          }
+          if (typeof oppBlob['stateName'] === 'string' && oppBlob['stateName'].trim()) {
+            state = oppBlob['stateName'];
+          }
+        }
+
+        // 3. From businessIdea text (e.g. "in Jhikra, Nadia", "near Bishpur, Bankura")
+        if (!villageName && item.businessIdea) {
+          const match = item.businessIdea.match(
+            /(?:in|at|near)\s+([A-Za-z0-9\s'-]+?),\s*([A-Za-z0-9\s'-]+?)(?:$|[,.\n]|\s+(?:providing|producing|using|with|for|to|and))/i
+          );
+          if (match && match[1] && match[2]) {
+            villageName = match[1].trim();
+            district = match[2].trim();
+          }
+        }
+
+        // 4. From spatial coordinates lookup if villageName or district is still missing
+        if ((!villageName || !district) && typeof item.latitude === 'number' && typeof item.longitude === 'number') {
+          try {
+            const nearby = await this.locationService.getNearbyVillages(item.latitude, item.longitude, 25, 1);
+            if (nearby && nearby.length > 0) {
+              villageName = villageName || nearby[0].name;
+              blockName = blockName || nearby[0].blockName;
+              district = district || nearby[0].districtName;
+              state = state || nearby[0].stateName;
+            }
+          } catch {
+            // fallback
+          }
+        }
+
+        return {
+          id: item.id,
+          businessCategory: item.businessCategory,
+          businessIdea: item.businessIdea,
+          availableCapital: item.availableCapital,
+          catchmentRadiusKm: item.catchmentRadiusKm,
+          latitude: item.latitude,
+          longitude: item.longitude,
+          status: item.status,
+          confidence: item.confidence,
+          overallScore,
+          villageName: villageName || null,
+          blockName: blockName || null,
+          district: district || null,
+          state: state || null,
+          createdAt: item.createdAt.toISOString(),
+        };
+      })
+    );
   }
 
   /**
@@ -646,8 +777,58 @@ export class FeasibilityService {
       );
     }
 
+    let villageName = oppBlob?.['villageName'] as string | undefined;
+    let blockName = oppBlob?.['blockName'] as string | undefined;
+    let districtName = oppBlob?.['districtName'] as string | undefined;
+    let stateName = oppBlob?.['stateName'] as string | undefined;
+
+    if (analysis.villageId && (!villageName || !districtName)) {
+      try {
+        const v = await this.prisma.village.findUnique({
+          where: { id: analysis.villageId },
+          include: { block: { include: { district: { include: { state: true } } } } },
+        });
+        if (v) {
+          villageName = v.name;
+          blockName = v.block?.name || '';
+          districtName = v.block?.district?.name || '';
+          stateName = v.block?.district?.state?.name || '';
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    if ((!villageName || !districtName) && analysis.businessIdea) {
+      const match = analysis.businessIdea.match(
+        /(?:in|at|near)\s+([A-Za-z0-9\s'-]+?),\s*([A-Za-z0-9\s'-]+?)(?:$|[,.\n]|\s+(?:providing|producing|using|with|for|to|and))/i
+      );
+      if (match && match[1] && match[2]) {
+        villageName = villageName || match[1].trim();
+        districtName = districtName || match[2].trim();
+      }
+    }
+
+    if ((!villageName || !districtName) && analysis.latitude && analysis.longitude) {
+      try {
+        const nearby = await this.locationService.getNearbyVillages(analysis.latitude, analysis.longitude, 25, 1);
+        if (nearby && nearby.length > 0) {
+          villageName = villageName || nearby[0].name;
+          blockName = blockName || nearby[0].blockName;
+          districtName = districtName || nearby[0].districtName;
+          stateName = stateName || nearby[0].stateName;
+        }
+      } catch {
+        // ignore
+      }
+    }
+
     return {
       ...analysis,
+      villageName,
+      blockName,
+      districtName,
+      stateName,
       catchment: {
         latitude: analysis.latitude,
         longitude: analysis.longitude,

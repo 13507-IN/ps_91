@@ -52,10 +52,10 @@ function SettingsContent() {
   const [expectedWorkingHours, setExpectedWorkingHours] = useState<number | ''>('');
 
   // Location & Enterprise Preferences
-  const [village, setVillage] = useState('Nadia Rural');
-  const [block, setBlock] = useState('Nadia Block');
-  const [district, setDistrict] = useState('Nadia');
-  const [state, setState] = useState('West Bengal');
+  const [village, setVillage] = useState('');
+  const [block, setBlock] = useState('');
+  const [district, setDistrict] = useState('');
+  const [state, setState] = useState('');
   const [catchmentRadiusKm, setCatchmentRadiusKm] = useState(10);
   const [preferredCategory, setPreferredCategory] = useState<BusinessCategory>('DAIRY');
 
@@ -361,6 +361,7 @@ function SettingsContent() {
                       type="text"
                       value={village}
                       onChange={(e) => setVillage(e.target.value)}
+                      placeholder="e.g. Jhikra"
                       className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-[#1A3A6B]"
                     />
                   </div>
@@ -371,6 +372,7 @@ function SettingsContent() {
                       type="text"
                       value={block}
                       onChange={(e) => setBlock(e.target.value)}
+                      placeholder="e.g. Krishnanagar-II"
                       className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-[#1A3A6B]"
                     />
                   </div>
@@ -381,6 +383,7 @@ function SettingsContent() {
                       type="text"
                       value={district}
                       onChange={(e) => setDistrict(e.target.value)}
+                      placeholder="e.g. Nadia"
                       className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-[#1A3A6B]"
                     />
                   </div>
@@ -391,6 +394,7 @@ function SettingsContent() {
                       type="text"
                       value={state}
                       onChange={(e) => setState(e.target.value)}
+                      placeholder="e.g. West Bengal"
                       className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-[#1A3A6B]"
                     />
                   </div>

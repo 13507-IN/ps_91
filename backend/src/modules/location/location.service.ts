@@ -1,7 +1,7 @@
 import type { PrismaClient, Village, Block, District, State } from '@prisma/client';
 import { NotFoundError } from '../../lib/errors.js';
 import { cacheGet, cacheSet, cacheKey } from '../../lib/cache.js';
-import { geocodePlace, type Geocoder } from './geocode.js';
+import { geocodePlace, reverseGeocodeCoords, type Geocoder } from './geocode.js';
 import type { CreateVillageInput } from './location.schema.js';
 
 export interface VillageSummary {
@@ -388,4 +388,73 @@ export class LocationService {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
+
+  /**
+   * Reverse geocode coordinates to find the matching village/town name.
+   * Checks local database first within 25km. If none found, falls back to OSM Nominatim.
+   */
+  async reverseGeocode(lat: number, lng: number): Promise<{
+    villageId?: number;
+    villageName: string;
+    blockName?: string;
+    districtName?: string;
+    stateName?: string;
+    latitude: number;
+    longitude: number;
+    displayName?: string;
+    source: 'DATABASE' | 'GEOCODER' | 'COORDINATES';
+  }> {
+    // 1. Try local database lookup within 25km
+    try {
+      const nearby = await this.getNearbyVillages(lat, lng, 25, 1);
+      if (nearby && nearby.length > 0) {
+        const v = nearby[0]!;
+        return {
+          villageId: v.id,
+          villageName: v.name,
+          blockName: v.blockName,
+          districtName: v.districtName,
+          stateName: v.stateName,
+          latitude: lat,
+          longitude: lng,
+          displayName: `${v.name}, ${v.blockName}, ${v.districtName}, ${v.stateName}`,
+          source: 'DATABASE',
+        };
+      }
+    } catch {
+      // fallback
+    }
+
+    // 2. Fall back to OSM Nominatim reverse geocoding
+    try {
+      const rev = await reverseGeocodeCoords(lat, lng);
+      if (rev && rev.villageName && rev.villageName !== 'Local Village') {
+        return {
+          villageName: rev.villageName,
+          blockName: rev.blockName,
+          districtName: rev.districtName,
+          stateName: rev.stateName,
+          latitude: lat,
+          longitude: lng,
+          displayName: rev.displayName,
+          source: 'GEOCODER',
+        };
+      }
+    } catch {
+      // fallback
+    }
+
+    // 3. Fallback
+    return {
+      villageName: 'Local Village',
+      blockName: '',
+      districtName: '',
+      stateName: 'West Bengal',
+      latitude: lat,
+      longitude: lng,
+      displayName: `${lat.toFixed(4)}, ${lng.toFixed(4)}`,
+      source: 'COORDINATES',
+    };
+  }
 }
+

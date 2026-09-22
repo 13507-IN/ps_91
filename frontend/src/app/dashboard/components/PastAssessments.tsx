@@ -36,13 +36,29 @@ export function PastAssessments() {
         if (sessionRaw) {
           const parsed = JSON.parse(sessionRaw) as FeasibilityReport;
           if (parsed && parsed.id) {
+            const vName =
+              parsed.villageName ||
+              parsed.opportunityAnalysis?.villageName ||
+              (parsed as unknown as { location?: { villageName?: string } })?.location?.villageName ||
+              null;
+            const dName =
+              parsed.district ||
+              parsed.opportunityAnalysis?.districtName ||
+              (parsed as unknown as { location?: { district?: string } })?.location?.district ||
+              null;
+            const sName =
+              parsed.state ||
+              parsed.opportunityAnalysis?.stateName ||
+              (parsed as unknown as { location?: { state?: string } })?.location?.state ||
+              'West Bengal';
+
             items.push({
               id: parsed.id,
               businessCategory: parsed.businessCategory,
               businessIdea: parsed.businessIdea,
-              villageName: 'Nadia Rural',
-              district: 'Nadia',
-              state: 'West Bengal',
+              villageName: vName,
+              district: dName,
+              state: sName,
               overallScore: parsed.feasibilityScore?.totalScore ?? null,
               createdAt: parsed.createdAt || new Date().toISOString(),
             });
@@ -57,13 +73,18 @@ export function PastAssessments() {
         const cached = await listCachedReports();
         for (const c of cached) {
           if (!items.some((i) => i.id === c.id)) {
+            const cAny = c as unknown as { villageName?: string; district?: string; state?: string; location?: { villageName?: string; district?: string; state?: string } };
+            const vName = cAny.villageName || cAny.location?.villageName || null;
+            const dName = cAny.district || cAny.location?.district || null;
+            const sName = cAny.state || cAny.location?.state || 'West Bengal';
+
             items.push({
               id: c.id,
               businessCategory: c.category,
               businessIdea: c.idea,
-              villageName: 'Nadia Rural',
-              district: 'Nadia',
-              state: 'West Bengal',
+              villageName: vName,
+              district: dName,
+              state: sName,
               overallScore: null,
               createdAt: c.savedAt || new Date().toISOString(),
             });
@@ -165,10 +186,9 @@ export function PastAssessments() {
 
               <div className="space-y-1.5 mt-auto">
                 <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                  <MapPin className="h-3.5 w-3.5 text-gray-400" />
+                  <MapPin className="h-3.5 w-3.5 text-gray-400 flex-shrink-0" />
                   <span className="truncate">
-                    {analysis.villageName || 'Nadia Rural'}
-                    {analysis.district ? `, ${analysis.district}` : ', Nadia'}
+                    {[analysis.villageName, analysis.district].filter(Boolean).join(', ') || 'Local Village'}
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-gray-500">

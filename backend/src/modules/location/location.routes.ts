@@ -5,6 +5,7 @@ import {
   getVillageParamsSchema,
   nearbyVillagesQuerySchema,
   createVillageSchema,
+  reverseGeocodeQuerySchema,
 } from './location.schema.js';
 
 export const locationRoutes: FastifyPluginAsync = async (fastify) => {
@@ -70,6 +71,30 @@ export const locationRoutes: FastifyPluginAsync = async (fastify) => {
         total: villages.length,
         villages,
       });
+    },
+  });
+
+  /**
+   * GET /api/locations/reverse-geocode
+   * Reverse geocode latitude and longitude into village/town name
+   */
+  fastify.get('/reverse-geocode', {
+    schema: {
+      tags: ['Geospatial & Location'],
+      summary: 'Reverse geocode coordinates into village or town name with administrative context',
+      querystring: {
+        type: 'object',
+        properties: {
+          lat: { type: 'number', description: 'Latitude' },
+          lng: { type: 'number', description: 'Longitude' },
+        },
+        required: ['lat', 'lng'],
+      },
+    },
+    handler: async (request, reply) => {
+      const query = reverseGeocodeQuerySchema.parse(request.query);
+      const result = await service.reverseGeocode(query.lat, query.lng);
+      return reply.send(result);
     },
   });
 

@@ -69,6 +69,63 @@ export async function geocodePlace(parts: GeocodeParts): Promise<GeocodeResult |
 
 export type Geocoder = (parts: GeocodeParts) => Promise<GeocodeResult | null>;
 
+export interface ReverseGeocodeResult {
+  villageName: string;
+  blockName?: string;
+  districtName?: string;
+  stateName?: string;
+  displayName?: string;
+}
+
+/**
+ * Reverse geocode latitude and longitude into an Indian village/town location using OpenStreetMap Nominatim.
+ */
+export async function reverseGeocodeCoords(lat: number, lng: number): Promise<ReverseGeocodeResult | null> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`;
+    const res = await fetch(url, {
+      headers: { 'User-Agent': USER_AGENT },
+      signal: controller.signal,
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as {
+      display_name?: string;
+      address?: Record<string, string>;
+    };
+    if (!data || !data.address) return null;
+    const addr = data.address;
+    const villageName =
+      addr.village ||
+      addr.hamlet ||
+      addr.town ||
+      addr.suburb ||
+      addr.neighbourhood ||
+      addr.residential ||
+      addr.city_district ||
+      addr.municipality ||
+      addr.city ||
+      addr.county ||
+      'Local Village';
+    const blockName = addr.subdistrict || addr.county || '';
+    const districtName = addr.state_district || addr.district || addr.county || '';
+    const stateName = addr.state || 'West Bengal';
+
+    return {
+      villageName,
+      blockName,
+      districtName,
+      stateName,
+      displayName: data.display_name,
+    };
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /**
  * Default geocoder bound to a Fastify instance so tests can swap it out.
  * Exposed via app decorators if needed; kept simple for now.

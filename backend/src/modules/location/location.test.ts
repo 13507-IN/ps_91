@@ -101,4 +101,30 @@ describe('LocationService', () => {
     expect(results[0]?.name).toBe('Nearby Village');
     expect(results[0]?.distanceKm).toBeLessThan(10);
   });
+
+  it('reverse geocodes coordinates to village or town name', async () => {
+    (mockPrisma.village.findMany as ReturnType<typeof vi.fn>).mockResolvedValueOnce([
+      {
+        id: 321514,
+        name: 'Jhikra',
+        nameLocal: null,
+        latitude: 23.401,
+        longitude: 88.502,
+        block: {
+          name: 'Krishnanagar-II',
+          district: {
+            name: 'Nadia',
+            state: { name: 'West Bengal' },
+          },
+        },
+        censusData: { totalPopulation: 3500, totalHouseholds: 700 },
+      },
+    ]);
+
+    const res = await service.reverseGeocode(23.4, 88.5);
+    expect(res.villageName).toBe('Jhikra');
+    expect(res.districtName).toBe('Nadia');
+    expect(res.source).toBe('DATABASE');
+  });
 });
+

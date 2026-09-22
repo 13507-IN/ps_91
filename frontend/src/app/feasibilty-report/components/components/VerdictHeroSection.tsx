@@ -54,6 +54,17 @@ export function VerdictHeroSection({ report }: { report: FeasibilityReport }) {
           <div className="mt-4 flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2 text-xs text-slate-500">
             <span className="inline-flex items-center gap-1.5 font-medium">
               <MapPin className="h-3.5 w-3.5 text-slate-400" />
+              {[
+                report.villageName || report.opportunityAnalysis?.villageName,
+                report.district || report.opportunityAnalysis?.districtName,
+              ].filter(Boolean).length > 0 && (
+                <span className="font-semibold text-slate-700">
+                  {[
+                    report.villageName || report.opportunityAnalysis?.villageName,
+                    report.district || report.opportunityAnalysis?.districtName,
+                  ].filter(Boolean).join(', ')} ·{' '}
+                </span>
+              )}
               {catchment.latitude.toFixed(4)}, {catchment.longitude.toFixed(4)} · {catchment.radiusKm} km radius
             </span>
             <span className="inline-flex items-center gap-1.5 font-medium">

@@ -175,6 +175,7 @@ export const apiEndpoints = {
   locations: {
     search: '/api/locations/search',
     nearby: '/api/locations/nearby',
+    reverseGeocode: '/api/locations/reverse-geocode',
     create: '/api/locations/villages',
   },
   market: {

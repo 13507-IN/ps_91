@@ -103,6 +103,8 @@ export function ReportBusinessForm({ onReportSubmitted }: { onReportSubmitted?: 
       return;
     }
     setDetectingGps(true);
+    const toastId = toast.loading('Detecting GPS & fetching village or town...');
+
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
         const lat = pos.coords.latitude;
@@ -111,23 +113,113 @@ export function ReportBusinessForm({ onReportSubmitted }: { onReportSubmitted?: 
         setCustomLng(lng);
 
         try {
-          const res = await api<{ villages: VillageOption[] }>(
-            `${apiEndpoints.locations.nearby}?lat=${lat}&lng=${lng}&radiusKm=15`,
-          );
-          if (res.villages && res.villages.length > 0) {
-            handleSelectVillage(res.villages[0]!);
-            toast.success(`Location detected near ${res.villages[0]!.name}`);
+          // 1. Try reverse geocoding via backend API (checks local DB first within 25km, then geocodes)
+          let resolved: {
+            villageId?: number;
+            villageName: string;
+            blockName?: string;
+            districtName?: string;
+            stateName?: string;
+          } | null = null;
+
+          try {
+            const res = await api<{
+              villageId?: number;
+              villageName: string;
+              blockName?: string;
+              districtName?: string;
+              stateName?: string;
+            }>(`${apiEndpoints.locations.reverseGeocode}?lat=${lat}&lng=${lng}`);
+            if (res && res.villageName && res.villageName !== 'Local Village') {
+              resolved = res;
+            }
+          } catch {
+            // fallback to nearby query
+          }
+
+          // 2. Try nearby database query within 25km
+          if (!resolved) {
+            try {
+              const resNearby = await api<{ villages: VillageOption[] }>(
+                `${apiEndpoints.locations.nearby}?lat=${lat}&lng=${lng}&radiusKm=25`,
+              );
+              if (resNearby.villages && resNearby.villages.length > 0) {
+                const nearest = resNearby.villages[0]!;
+                resolved = {
+                  villageId: nearest.id,
+                  villageName: nearest.name,
+                  blockName: nearest.blockName,
+                  districtName: nearest.districtName,
+                  stateName: nearest.stateName,
+                };
+              }
+            } catch {
+              // fallback to client-side nominatim
+            }
+          }
+
+          // 3. Fall back to client-side OpenStreetMap Nominatim reverse geocode
+          if (!resolved) {
+            try {
+              const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`;
+              const nomRes = await fetch(url, { headers: { 'User-Agent': 'ArthSetu/1.0' } });
+              if (nomRes.ok) {
+                const nomData = await nomRes.json();
+                if (nomData?.address) {
+                  const addr = nomData.address;
+                  const vName =
+                    addr.village ||
+                    addr.hamlet ||
+                    addr.town ||
+                    addr.suburb ||
+                    addr.neighbourhood ||
+                    addr.residential ||
+                    addr.city_district ||
+                    addr.municipality ||
+                    addr.city ||
+                    addr.county;
+                  if (vName) {
+                    resolved = {
+                      villageName: vName,
+                      blockName: addr.subdistrict || addr.county || '',
+                      districtName: addr.state_district || addr.district || addr.county || '',
+                      stateName: addr.state || 'West Bengal',
+                    };
+                  }
+                }
+              }
+            } catch {
+              // fallback
+            }
+          }
+
+          if (resolved) {
+            const vOpt: VillageOption = {
+              id: resolved.villageId || 0,
+              name: resolved.villageName,
+              nameLocal: null,
+              blockName: resolved.blockName || '',
+              districtName: resolved.districtName || '',
+              stateName: resolved.stateName || 'West Bengal',
+              latitude: lat,
+              longitude: lng,
+            };
+            handleSelectVillage(vOpt);
+            toast.success(
+              `Location detected: ${resolved.villageName}${resolved.districtName ? `, ${resolved.districtName}` : ''}`,
+              { id: toastId },
+            );
           } else {
-            toast.success(`GPS coordinates captured: ${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+            toast.success(`GPS coordinates captured: ${lat.toFixed(4)}, ${lng.toFixed(4)}`, { id: toastId });
           }
         } catch {
-          toast.success(`GPS coordinates captured: ${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+          toast.success(`GPS coordinates captured: ${lat.toFixed(4)}, ${lng.toFixed(4)}`, { id: toastId });
         } finally {
           setDetectingGps(false);
         }
       },
       (err) => {
-        toast.error(`GPS detection failed: ${err.message}`);
+        toast.error(`GPS detection failed: ${err.message}`, { id: toastId });
         setDetectingGps(false);
       },
       { timeout: 10000, enableHighAccuracy: true },

@@ -176,6 +176,10 @@ export interface CompetitorAnalysis {
 }
 
 export interface OpportunityAnalysis {
+  villageName?: string;
+  blockName?: string;
+  districtName?: string;
+  stateName?: string;
   marketGaps: string[];
   potentialNiches: string[];
   recommendedModel: string;
@@ -260,6 +264,10 @@ export interface FeasibilityReport {
   id?: string;
   businessCategory: BusinessCategory;
   businessIdea: string;
+  villageName?: string;
+  blockName?: string;
+  district?: string;
+  state?: string;
   catchment: { latitude: number; longitude: number; radiusKm: number };
   marketIntelligence: MarketIntelligence;
   competitorAnalysis: CompetitorAnalysis;

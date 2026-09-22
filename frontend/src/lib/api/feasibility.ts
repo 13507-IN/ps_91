@@ -144,6 +144,10 @@ interface BackendCompetitorAnalysis {
 }
 
 interface BackendOpportunityAnalysis {
+  villageName?: string;
+  blockName?: string;
+  districtName?: string;
+  stateName?: string;
   marketGaps: string[];
   potentialNiches: string[];
   recommendedModel: string;
@@ -190,6 +194,10 @@ export interface BackendFeasibilityResult {
   id?: string;
   businessCategory: BusinessCategory;
   businessIdea: string;
+  villageName?: string;
+  blockName?: string;
+  districtName?: string;
+  stateName?: string;
   catchment: { latitude: number; longitude: number; radiusKm: number };
   marketIntelligence: BackendMarketIntelligence;
   competitorAnalysis: BackendCompetitorAnalysis;
@@ -319,6 +327,10 @@ function mapCompetitorAnalysis(raw: BackendCompetitorAnalysis): CompetitorAnalys
 
 function mapOpportunityAnalysis(raw: BackendOpportunityAnalysis): OpportunityAnalysis {
   return {
+    villageName: raw.villageName,
+    blockName: raw.blockName,
+    districtName: raw.districtName,
+    stateName: raw.stateName,
     marketGaps: raw.marketGaps ?? [],
     potentialNiches: raw.potentialNiches ?? [],
     recommendedModel: raw.recommendedModel ?? '',
@@ -492,6 +504,10 @@ export function toFeasibilityReport(raw: BackendFeasibilityResult): FeasibilityR
     id: raw.id,
     businessCategory: raw.businessCategory,
     businessIdea: raw.businessIdea,
+    villageName: raw.villageName ?? raw.opportunityAnalysis?.villageName,
+    blockName: raw.blockName ?? raw.opportunityAnalysis?.blockName,
+    district: raw.districtName ?? raw.opportunityAnalysis?.districtName,
+    state: raw.stateName ?? raw.opportunityAnalysis?.stateName,
     catchment: raw.catchment,
     marketIntelligence: mapMarketIntelligence(raw.marketIntelligence),
     competitorAnalysis: mapCompetitorAnalysis(raw.competitorAnalysis),

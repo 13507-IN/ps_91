@@ -116,4 +116,61 @@ describe('FeasibilityService', () => {
     expect(analysis.id).toBe('analysis-123');
     expect(mockPrisma.analysis.create).toHaveBeenCalled();
   });
+
+  it('correctly resolves real village and district in listUserAnalyses without hardcoding Nadia Rural', async () => {
+    (mockPrisma.analysis.findMany as any).mockResolvedValueOnce([
+      {
+        id: 'ana-1',
+        businessCategory: BusinessCategory.DAIRY,
+        businessIdea: 'Dairy unit in Jhikra, Nadia with milk chilling',
+        availableCapital: 50000,
+        catchmentRadiusKm: 10,
+        latitude: 23.4,
+        longitude: 88.5,
+        villageId: 101,
+        status: 'COMPLETED',
+        confidence: 'HIGH',
+        feasibilityScore: { totalScore: 82 },
+        opportunityAnalysis: { villageName: 'Jhikra', districtName: 'Nadia' },
+        createdAt: new Date('2026-03-20T10:00:00Z'),
+      },
+      {
+        id: 'ana-2',
+        businessCategory: BusinessCategory.POULTRY,
+        businessIdea: 'Poultry farm in Nekrisole, Bankura',
+        availableCapital: 60000,
+        catchmentRadiusKm: 10,
+        latitude: 23.1,
+        longitude: 87.1,
+        villageId: null,
+        status: 'COMPLETED',
+        confidence: 'MEDIUM',
+        feasibilityScore: { totalScore: 75 },
+        opportunityAnalysis: null,
+        createdAt: new Date('2026-03-21T10:00:00Z'),
+      },
+    ]);
+
+    (mockPrisma.village.findMany as any).mockResolvedValueOnce([
+      {
+        id: 101,
+        name: 'Jhikra',
+        block: {
+          name: 'Krishnanagar-II',
+          district: {
+            name: 'Nadia',
+            state: { name: 'West Bengal' },
+          },
+        },
+      },
+    ]);
+
+    const list = await service.listUserAnalyses('user-cuid-123');
+    expect(list).toHaveLength(2);
+    expect(list[0].villageName).toBe('Jhikra');
+    expect(list[0].district).toBe('Nadia');
+    expect(list[1].villageName).toBe('Nekrisole');
+    expect(list[1].district).toBe('Bankura');
+  });
 });
+

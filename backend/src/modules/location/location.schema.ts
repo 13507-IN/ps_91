@@ -25,7 +25,14 @@ export const createVillageSchema = z.object({
   longitude: z.number().min(-180).max(180).optional(),
 });
 
+export const reverseGeocodeQuerySchema = z.object({
+  lat: z.coerce.number().min(-90).max(90, 'Invalid latitude'),
+  lng: z.coerce.number().min(-180).max(180, 'Invalid longitude'),
+});
+
 export type SearchVillagesQuery = z.infer<typeof searchVillagesQuerySchema>;
 export type GetVillageParams = z.infer<typeof getVillageParamsSchema>;
 export type NearbyVillagesQuery = z.infer<typeof nearbyVillagesQuerySchema>;
 export type CreateVillageInput = z.infer<typeof createVillageSchema>;
+export type ReverseGeocodeQuery = z.infer<typeof reverseGeocodeQuerySchema>;
+
