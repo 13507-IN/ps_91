@@ -57,5 +57,55 @@ describe('BusinessService', () => {
     expect(created.name).toBe('Local Tailoring Shop');
     expect(created.verificationStatus).toBe('UNVERIFIED');
     expect(created.confidence).toBe('MEDIUM');
+    expect(created.validationsCount).toBe(1);
+  });
+
+  it('keeps business UNVERIFIED when validations < 10', async () => {
+    (mockPrisma.business as any).findUnique = vi.fn().mockResolvedValueOnce({
+      id: 'b-pending',
+      validationsCount: 5,
+      flagsCount: 0,
+      verificationStatus: 'UNVERIFIED',
+      confidence: 'MEDIUM',
+    });
+    (mockPrisma.business as any).update = vi.fn().mockImplementationOnce(({ data }) =>
+      Promise.resolve({
+        id: 'b-pending',
+        ...data,
+      }),
+    );
+    (mockPrisma as any).businessVerification = { create: vi.fn().mockResolvedValue({}) };
+
+    const result = await service.verifyBusiness('b-pending', 'user-1', 'CONFIRM');
+    expect(result.validationsCount).toBe(6);
+    expect(result.verificationStatus).toBe('UNVERIFIED');
+    expect(result.isVerified).toBe(false);
+    expect(result.remainingValidations).toBe(4);
+    expect(result.progressPct).toBe(60);
+  });
+
+  it('promotes business to VERIFIED when reaching 10 validations', async () => {
+    (mockPrisma.business as any).findUnique = vi.fn().mockResolvedValueOnce({
+      id: 'b-pending',
+      validationsCount: 9,
+      flagsCount: 0,
+      verificationStatus: 'UNVERIFIED',
+      confidence: 'MEDIUM',
+    });
+    (mockPrisma.business as any).update = vi.fn().mockImplementationOnce(({ data }) =>
+      Promise.resolve({
+        id: 'b-pending',
+        ...data,
+      }),
+    );
+    (mockPrisma as any).businessVerification = { create: vi.fn().mockResolvedValue({}) };
+
+    const result = await service.verifyBusiness('b-pending', 'user-10', 'CONFIRM');
+    expect(result.validationsCount).toBe(10);
+    expect(result.verificationStatus).toBe('VERIFIED');
+    expect(result.confidence).toBe('HIGH');
+    expect(result.isVerified).toBe(true);
+    expect(result.remainingValidations).toBe(0);
+    expect(result.progressPct).toBe(100);
   });
 });

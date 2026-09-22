@@ -11,8 +11,11 @@ export default function CommunityPage() {
   const [activeTab, setActiveTab] = useState<'report' | 'verify' | 'leaderboard' | 'map'>('report');
   const [refreshKey, setRefreshKey] = useState(0);
 
-  function triggerRefresh() {
+  function triggerRefresh(switchToVerify = false) {
     setRefreshKey((k) => k + 1);
+    if (switchToVerify) {
+      setActiveTab('verify');
+    }
   }
 
   return (

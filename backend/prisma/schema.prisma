@@ -265,16 +265,34 @@ model Business {
   lastVerified       DateTime?
   confidence         Confidence         @default(MEDIUM)
   registrationId     String?
+  validationsCount   Int                @default(1)
+  flagsCount         Int                @default(0)
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
 
   // PostGIS geometry column — use $queryRaw for spatial queries
   geom  Unsupported("geometry(Point,4326)")?
 
+  verifications      BusinessVerification[]
+
   @@index([category])
   @@index([villageId])
   @@index([latitude, longitude])
   @@index([registrationId])
+  @@index([verificationStatus])
+}
+
+model BusinessVerification {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  userId     String?
+  action     String
+  notes      String?
+  createdAt  DateTime @default(now())
+
+  @@index([businessId])
+  @@index([userId])
 }
 
 // ===================== LIVESTOCK DATA =====================
