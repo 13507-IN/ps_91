@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Public Sans — Official US Federal Government font (USWDS) ── */
+/* Variable font: covers all weights 100–900 in a single file */
+@font-face {
+  font-family: 'Public Sans';
+  src: url('/Font/PublicSans-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Public Sans';
+  src: url('/Font/PublicSans-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   /* Primary nav/header navy — MHA-style dark blue */
   --brand-navy: #1A3A6B;
@@ -61,7 +78,7 @@
   --input: #F0F0F0;
   --ring: #E65C00;
   --radius: 0.5rem;
-  --font-sans: var(--font-noto-sans), sans-serif;
+  --font-sans: 'Public Sans', system-ui, sans-serif;
 }
 
 @layer base {
@@ -76,11 +93,27 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  h1, h2, h3, h4, h5, h6, p {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
     margin: 0;
+  }
+  p {
+    margin: 0;
+    line-height: 1.65;
+  }
+  /* Government-style: labels, badges, small caps */
+  small, .text-xs, .text-sm {
+    letter-spacing: 0.015em;
   }
 }
 
