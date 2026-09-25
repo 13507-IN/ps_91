@@ -51,7 +51,7 @@ export default function SeasonalCalendarPage() {
     <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Hero Header */}
-        <div className="bg-gradient-to-r from-teal-900 via-teal-800 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+        <div className="bg-gradient-to-r from-[#102347] via-[#1A3A6B] to-[#1E4A8A] rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
           <div className="relative z-10 max-w-2xl space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-amber-300 text-xs font-semibold">
               <Sparkles size={14} />
@@ -60,7 +60,7 @@ export default function SeasonalCalendarPage() {
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Seasonal Business Calendar
             </h1>
-            <p className="text-sm text-teal-100/90 leading-relaxed">
+            <p className="text-sm text-blue-100/90 leading-relaxed">
               Identify the best launch window, peak festive demand surges, raw material harvest discounts, and cashflow buffer strategies across 12 months.
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function SeasonalCalendarPage() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full sm:w-auto px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-teal-800"
+              className="w-full sm:w-auto px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#1A3A6B]"
             >
               {CATEGORIES.map((c) => (
                 <option key={c.value} value={c.value}>{c.label}</option>
@@ -86,7 +86,7 @@ export default function SeasonalCalendarPage() {
             <select
               value={district}
               onChange={(e) => setDistrict(e.target.value)}
-              className="px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-teal-800"
+              className="px-3.5 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#1A3A6B]"
             >
               <option value="Nadia">Nadia (Pilot District)</option>
               <option value="Murshidabad">Murshidabad</option>
@@ -98,7 +98,7 @@ export default function SeasonalCalendarPage() {
 
         {loading ? (
           <div className="py-20 flex flex-col items-center justify-center gap-2 text-slate-400">
-            <Loader2 size={32} className="animate-spin text-teal-800" />
+            <Loader2 size={32} className="animate-spin text-[#1A3A6B]" />
             <p className="text-xs">Computing 12-month agricultural & festive demand trends...</p>
           </div>
         ) : data ? (

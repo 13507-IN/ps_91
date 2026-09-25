@@ -11,12 +11,12 @@ export function StoryCard({ story }: { story: SuccessStory }) {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
       {/* Top Banner with Scheme Badge */}
-      <div className="bg-gradient-to-r from-teal-900 to-teal-800 p-5 text-white">
+      <div className="bg-gradient-to-r from-[#102347] to-[#1A3A6B] p-5 text-white">
         <div className="flex items-center justify-between gap-2 mb-2">
           <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-900 shadow-sm">
             {story.loanScheme}
           </span>
-          <span className="text-xs text-teal-200 font-medium">
+          <span className="text-xs text-blue-200 font-medium">
             {story.breakevenMonths} Mo. Payback
           </span>
         </div>
@@ -25,7 +25,7 @@ export function StoryCard({ story }: { story: SuccessStory }) {
           {story.businessName}
         </h3>
 
-        <div className="flex items-center gap-2 text-xs text-teal-200 mt-2">
+        <div className="flex items-center gap-2 text-xs text-blue-200 mt-2">
           <span className="font-semibold text-white">{story.entrepreneurName} ({story.age})</span>
           <span>·</span>
           <span className="inline-flex items-center gap-1">
@@ -53,8 +53,8 @@ export function StoryCard({ story }: { story: SuccessStory }) {
 
         <div>
           <div className="text-xs text-slate-500 font-medium">Jobs Created</div>
-          <div className="text-sm font-extrabold text-teal-900 mt-0.5 flex items-center justify-center gap-1">
-            <Users size={14} className="text-teal-700" />
+          <div className="text-sm font-extrabold text-[#1A3A6B] mt-0.5 flex items-center justify-center gap-1">
+            <Users size={14} className="text-[#1A3A6B]" />
             {story.jobsCreated}
           </div>
         </div>
@@ -89,7 +89,7 @@ export function StoryCard({ story }: { story: SuccessStory }) {
         <button
           type="button"
           onClick={() => setExpanded(!expanded)}
-          className="w-full flex items-center justify-center gap-1.5 text-xs font-semibold text-teal-800 hover:text-teal-950 pt-1"
+          className="w-full flex items-center justify-center gap-1.5 text-xs font-semibold text-[#1A3A6B] hover:text-[#102347] pt-1"
         >
           <span>{expanded ? 'Hide Details' : 'Read Full Journey'}</span>
           {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}

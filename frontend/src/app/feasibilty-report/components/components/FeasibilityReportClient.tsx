@@ -242,8 +242,8 @@ export function FeasibilityReportClient({
         />
 
         {viewMode === 'SUMMARY' && (
-          <div className="rounded-3xl border-2 border-teal-600/30 bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 text-white p-6 sm:p-8 shadow-xl text-center flex flex-col items-center justify-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-700/80 border border-teal-500/40 text-xs font-bold text-amber-300">
+          <div className="rounded-3xl border-2 border-[#1A3A6B]/40 bg-gradient-to-br from-[#102347] via-[#1A3A6B] to-[#0D1D3A] text-white p-6 sm:p-8 shadow-xl text-center flex flex-col items-center justify-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold text-amber-300">
               <Sparkles className="h-4 w-4" />
               <span>{lang === 'HI' ? 'विस्तृत बैंक प्रस्तुति के लिए' : lang === 'BN' ? 'ব্যাংক উপস্থাপনার জন্য' : 'For Bank Approval & Technical Review'}</span>
             </div>
@@ -254,7 +254,7 @@ export function FeasibilityReportClient({
                 ? 'আপনি কি সম্পূর্ণ আর্থিক পরিকল্পনা, মেশিনের খরচ ও গ্রামের মানচিত্র দেখতে চান?'
                 : 'Need the complete financial plan, equipment quotes & local market map?'}
             </h2>
-            <p className="text-xs sm:text-sm text-teal-100/90 max-w-lg">
+            <p className="text-xs sm:text-sm text-blue-100/90 max-w-lg">
               {t.report.viewFullReportSub}
             </p>
             <button

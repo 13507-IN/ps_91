@@ -63,9 +63,9 @@ export function DPRExportBar({ report }: DPRExportBarProps) {
           <div className="flex items-center justify-between gap-3">
             {/* Left label */}
             <div className="hidden sm:block">
-              <p className="text-xs font-semibold text-teal-900">{t.feasibilityReportDetails.exportTitle}</p>
+              <p className="text-xs font-semibold text-[#1A3A6B]">{t.feasibilityReportDetails.exportTitle}</p>
               <p className="text-[10px] text-slate-400">
-                {lang === 'HI' ? 'बैंक स्वीकार्य आधिकारिक रिपोर्ट (DPR)' : lang === 'BN' ? 'ব্যাংক গ্রহণযোগ্য অফিশিয়াল রিপোর্ট (DPR)' : 'Bankable DPR Document'}
+                {lang === 'HI' ? 'बैंक स्वीकार्य आधिकारिक रिपोर्ट (DPR)' : lang === 'BN' ? 'ব্যাংক গ্রহণযোগ্য অফিশিয়াল रिपोर्ट (DPR)' : 'Bankable DPR Document'}
               </p>
             </div>
 
@@ -75,7 +75,7 @@ export function DPRExportBar({ report }: DPRExportBarProps) {
               <button
                 onClick={handleDownload}
                 disabled={isGenerating}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-800 text-white text-sm font-semibold hover:bg-teal-900 active:scale-[0.97] transition-all disabled:opacity-60 disabled:cursor-wait shadow-sm"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#1A3A6B] text-white text-sm font-semibold hover:bg-[#152e55] active:scale-[0.97] transition-all disabled:opacity-60 disabled:cursor-wait shadow-sm"
               >
                 {isGenerating ? (
                   <Loader2 className="h-4 w-4 animate-spin" />

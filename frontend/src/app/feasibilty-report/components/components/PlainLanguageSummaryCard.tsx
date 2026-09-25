@@ -433,16 +433,16 @@ export function PlainLanguageSummaryCard({
 
       {/* ─── Bottom CTA to View Full Detailed Report ─── */}
       {onViewFullReport && (
-        <div className="mt-6 rounded-2xl border-2 border-teal-500/40 bg-gradient-to-r from-teal-900 via-teal-800 to-emerald-900 p-5 text-white shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-6 rounded-2xl border-2 border-[#1A3A6B]/40 bg-gradient-to-r from-[#102347] via-[#1A3A6B] to-[#1E4A8A] p-5 text-white shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-700/80 text-[11px] font-bold uppercase tracking-wider text-teal-200">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/20 text-[11px] font-bold uppercase tracking-wider text-amber-300">
               <Sparkles className="h-3 w-3 text-amber-300" />
               {lang === 'HI' ? '12 विस्तृत तकनीकी मॉड्यूल उपलब्ध' : lang === 'BN' ? '১২টি বিস্তারিত মডিউল উপলব্ধ' : '12 In-Depth Modules Available'}
             </span>
             <h3 className="text-base sm:text-lg font-bold text-white">
               {lang === 'HI' ? 'पूरी विस्तृत रिपोर्ट, वित्तीय बैलेंस शीट और मशीनरी सूची देखें' : lang === 'BN' ? 'সম্পূর্ণ বিস্তারিত রিপোর্ট ও যন্ত্রপাতির তালিকা দেখুন' : 'Inspect Full Financial Plan, Machinery Quotes & Local Map'}
             </h3>
-            <p className="text-xs text-teal-100 max-w-xl">
+            <p className="text-xs text-blue-100/90 max-w-xl">
               {t.report.viewFullReportSub}
             </p>
           </div>

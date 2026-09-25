@@ -22,7 +22,7 @@ export default function CommunityPage() {
     <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Hero Header */}
-        <div className="bg-gradient-to-r from-teal-900 via-teal-800 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+        <div className="bg-gradient-to-r from-[#102347] via-[#1A3A6B] to-[#1E4A8A] rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
           <div className="relative z-10 max-w-2xl space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-amber-300 text-xs font-semibold">
               <Sparkles size={14} />
@@ -31,7 +31,7 @@ export default function CommunityPage() {
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Community Intelligence Hub
             </h1>
-            <p className="text-sm text-teal-100/90 leading-relaxed">
+            <p className="text-sm text-blue-100/90 leading-relaxed">
               Help your village map informal businesses, discover hidden market opportunities, and verify local enterprise data to power hyper-local AI feasibility reports.
             </p>
           </div>
@@ -43,7 +43,7 @@ export default function CommunityPage() {
             onClick={() => setActiveTab('report')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${
               activeTab === 'report'
-                ? 'bg-teal-800 text-white shadow-sm'
+                ? 'bg-[#1A3A6B] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
@@ -54,7 +54,7 @@ export default function CommunityPage() {
             onClick={() => setActiveTab('verify')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${
               activeTab === 'verify'
-                ? 'bg-teal-800 text-white shadow-sm'
+                ? 'bg-[#1A3A6B] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
@@ -65,7 +65,7 @@ export default function CommunityPage() {
             onClick={() => setActiveTab('leaderboard')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${
               activeTab === 'leaderboard'
-                ? 'bg-teal-800 text-white shadow-sm'
+                ? 'bg-[#1A3A6B] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
@@ -76,7 +76,7 @@ export default function CommunityPage() {
             onClick={() => setActiveTab('map')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${
               activeTab === 'map'
-                ? 'bg-teal-800 text-white shadow-sm'
+                ? 'bg-[#1A3A6B] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
