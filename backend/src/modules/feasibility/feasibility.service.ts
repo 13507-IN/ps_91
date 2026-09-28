@@ -725,7 +725,7 @@ export class FeasibilityService {
         if ((!villageName || !district) && typeof item.latitude === 'number' && typeof item.longitude === 'number') {
           try {
             const nearby = await this.locationService.getNearbyVillages(item.latitude, item.longitude, 25, 1);
-            if (nearby && nearby.length > 0) {
+            if (nearby && nearby.length > 0 && nearby[0]) {
               villageName = villageName || nearby[0].name;
               blockName = blockName || nearby[0].blockName;
               district = district || nearby[0].districtName;
@@ -812,7 +812,7 @@ export class FeasibilityService {
     if ((!villageName || !districtName) && analysis.latitude && analysis.longitude) {
       try {
         const nearby = await this.locationService.getNearbyVillages(analysis.latitude, analysis.longitude, 25, 1);
-        if (nearby && nearby.length > 0) {
+        if (nearby && nearby.length > 0 && nearby[0]) {
           villageName = villageName || nearby[0].name;
           blockName = blockName || nearby[0].blockName;
           districtName = districtName || nearby[0].districtName;

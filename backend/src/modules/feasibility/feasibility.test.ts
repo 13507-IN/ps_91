@@ -167,10 +167,10 @@ describe('FeasibilityService', () => {
 
     const list = await service.listUserAnalyses('user-cuid-123');
     expect(list).toHaveLength(2);
-    expect(list[0].villageName).toBe('Jhikra');
-    expect(list[0].district).toBe('Nadia');
-    expect(list[1].villageName).toBe('Nekrisole');
-    expect(list[1].district).toBe('Bankura');
+    expect(list[0]?.villageName).toBe('Jhikra');
+    expect(list[0]?.district).toBe('Nadia');
+    expect(list[1]?.villageName).toBe('Nekrisole');
+    expect(list[1]?.district).toBe('Bankura');
   });
 });
 
