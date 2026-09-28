@@ -18,6 +18,14 @@ import type { FeasibilityReport } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
 import { TextToSpeech } from '@/components/TextToSpeech';
+import {
+  getLocalizedAiSummary,
+  getLocalizedNextStep,
+  translateCategory,
+  translateDistrict,
+  translateScheme,
+  formatLocalizedNumber,
+} from '@/lib/i18n/reportTranslator';
 
 /**
  * PlainLanguageSummaryCard
@@ -91,7 +99,6 @@ export function PlainLanguageSummaryCard({
   const recommendedModel = report.opportunityAnalysis?.recommendedModel || '';
 
   // AI recommendation
-  const aiSummary = report.aiRecommendation?.summary || '';
   const nextStep = report.aiRecommendation?.recommendedNextStep || '';
   const strengths = report.aiRecommendation?.strengths || [];
 
@@ -112,45 +119,90 @@ export function PlainLanguageSummaryCard({
 
   // ─── Build a REAL narration from actual report data ─────────
   const buildNarration = (): string => {
-    const bizName = report.businessIdea || report.businessCategory?.replace(/_/g, ' ') || 'your business';
+    const rawBiz = report.businessIdea || report.businessCategory?.replace(/_/g, ' ') || 'your business';
+    const catLocalized = translateCategory(report.businessCategory || report.businessIdea || '', lang);
+    const districtLocalized = translateDistrict(report.district || '', lang);
+    const schemeLocalized = translateScheme(displaySchemeName, lang);
+    const localizedSummary = getLocalizedAiSummary(report, lang);
+    const localizedNextStep = getLocalizedNextStep(report, lang);
+
+    if (lang === 'BN') {
+      const bizName = catLocalized || rawBiz;
+      const verdictLine = isGood
+        ? `অভিনন্দন! ${districtLocalized ? `${districtLocalized} জেলায় ` : ''}${bizName} ব্যবসার জন্য পরিস্থিতি অত্যন্ত অনুকূল ও লাভজনক।`
+        : isCaution
+          ? `${districtLocalized ? `${districtLocalized} জেলায় ` : ''}${bizName} ব্যবসা শুরু করা সম্ভব, তবে পরিকল্পনা অনুযায়ী সতর্কতা জরুরি।`
+          : `${bizName} ব্যবসায় ঝুঁকি বেশি। অতিরিক্ত সতর্কতার সাথে পদক্ষেপ নিন।`;
+
+      const popLine = pop > 0
+        ? `আপনার এলাকায় প্রায় ${formatLocalizedNumber(pop, 'BN')} জন সম্ভাব্য ক্রেতা রয়েছেন।`
+        : '';
+
+      const moneyLine = projectCost > 0
+        ? `মোট প্রকল্প খরচ ₹${formatLocalizedNumber(projectCost, 'BN')}। আপনার নিজস্ব পুঁজি ₹${formatLocalizedNumber(ownCapital, 'BN')}, এবং বাকি ₹${formatLocalizedNumber(netLoanAmount || loanRequired, 'BN')} ${schemeLocalized} প্রকল্প থেকে ঋণ পাওয়া সম্ভব।`
+        : '';
+
+      const profitLine = monthlyProfit !== 0
+        ? `ইএমআই পরিশোধের পর প্রতি মাসে আনুমানিক ₹${formatLocalizedNumber(Math.abs(monthlyProfit), 'BN')} ${monthlyProfit > 0 ? 'নিট লাভ হবে' : 'লোকসান হতে পারে'}।`
+        : '';
+
+      const nextStepLine = localizedNextStep
+        ? `পরবর্তী পদক্ষেপ: ${localizedNextStep}`
+        : '';
+
+      return [verdictLine, localizedSummary, popLine, moneyLine, profitLine, nextStepLine].filter(Boolean).join(' ');
+    }
+
+    if (lang === 'HI') {
+      const bizName = catLocalized || rawBiz;
+      const verdictLine = isGood
+        ? `बधाई हो! ${districtLocalized ? `${districtLocalized} जिले में ` : ''}${bizName} व्यवसाय के लिए स्थिति बहुत अच्छी और लाभकारी है।`
+        : isCaution
+          ? `${districtLocalized ? `${districtLocalized} जिले में ` : ''}${bizName} शुरू किया जा सकता है, लेकिन सावधानीपूर्वक योजना जरूरी है।`
+          : `${bizName} में जोखिम अधिक है। सोच-समझकर आगे बढ़ें।`;
+
+      const popLine = pop > 0
+        ? `आपके इलाके में लगभग ${formatLocalizedNumber(pop, 'HI')} लोग रहते हैं।`
+        : '';
+
+      const moneyLine = projectCost > 0
+        ? `कुल लागत ₹${formatLocalizedNumber(projectCost, 'HI')} है। आपकी पूंजी ₹${formatLocalizedNumber(ownCapital, 'HI')}, और बाकी ₹${formatLocalizedNumber(netLoanAmount || loanRequired, 'HI')} ${schemeLocalized} योजना से ऋण मिल सकता है।`
+        : '';
+
+      const profitLine = monthlyProfit !== 0
+        ? `ईएमআই चुकाने के बाद हर महीने लगभग ₹${formatLocalizedNumber(Math.abs(monthlyProfit), 'HI')} ${monthlyProfit > 0 ? 'बचत और शुद्ध लाभ होगा' : 'घाटा हो सकता है'}।`
+        : '';
+
+      const nextStepLine = localizedNextStep
+        ? `अगला कदम: ${localizedNextStep}`
+        : '';
+
+      return [verdictLine, localizedSummary, popLine, moneyLine, profitLine, nextStepLine].filter(Boolean).join(' ');
+    }
 
     const verdictLine = isGood
-      ? lang === 'HI' ? `बधाई हो! "${bizName}" के लिए हालात बहुत अच्छे हैं।`
-        : lang === 'BN' ? `অভিনন্দন! "${bizName}" এর জন্য পরিস্থিতি চমৎকার।`
-          : `Great news! "${bizName}" has a high chance of success in your area.`
+      ? `Great news! "${rawBiz}" has a high chance of success in your area.`
       : isCaution
-        ? lang === 'HI' ? `"${bizName}" शुरू किया जा सकता है, लेकिन सावधानी रखें।`
-          : lang === 'BN' ? `"${bizName}" শুরু করা যায়, তবে সতর্কতা জরুরি।`
-            : `"${bizName}" is feasible but needs careful planning.`
-        : lang === 'HI' ? `"${bizName}" में जोखिम अधिक है। सोच-समझकर आगे बढ़ें।`
-          : lang === 'BN' ? `"${bizName}" এ ঝুঁকি বেশি। সতর্কতার সাথে এগিয়ে যান।`
-            : `"${bizName}" carries high risk. Proceed with extreme caution.`;
+        ? `"${rawBiz}" is feasible but needs careful planning.`
+        : `"${rawBiz}" carries high risk. Proceed with extreme caution.`;
 
     const popLine = pop > 0
-      ? lang === 'HI' ? `आपके इलाके में ${formatIndianNumber(pop, lang)} लोग रहते हैं।`
-        : lang === 'BN' ? `আপনার এলাকায় ${formatIndianNumber(pop, lang)} জন বাস করেন।`
-          : `Your area has ${formatIndianNumber(pop, lang)} people.`
+      ? `Your area has ${formatIndianNumber(pop, lang)} people.`
       : '';
 
     const moneyLine = projectCost > 0
-      ? lang === 'HI' ? `कुल लागत ₹${formatIndianNumber(projectCost, lang)} है। आपकी पूंजी ₹${formatIndianNumber(ownCapital, lang)}, बाकी ₹${formatIndianNumber(loanRequired, lang)} ${displaySchemeName} योजना से लोन।`
-        : lang === 'BN' ? `মোট খরচ ₹${formatIndianNumber(projectCost, lang)}। আপনার পুঁজি ₹${formatIndianNumber(ownCapital, lang)}, বাকি ₹${formatIndianNumber(loanRequired, lang)} ${displaySchemeName} প্রকল্প থেকে ঋণ।`
-          : `Total cost ₹${formatIndianNumber(projectCost, lang)}. Your capital ₹${formatIndianNumber(ownCapital, lang)}, rest ₹${formatIndianNumber(loanRequired, lang)} via ${displaySchemeName}.`
+      ? `Total cost ₹${formatIndianNumber(projectCost, lang)}. Your capital ₹${formatIndianNumber(ownCapital, lang)}, rest ₹${formatIndianNumber(loanRequired, lang)} via ${displaySchemeName}.`
       : '';
 
     const profitLine = monthlyProfit !== 0
-      ? lang === 'HI' ? `EMI चुकाने के बाद हर महीने लगभग ₹${formatIndianNumber(Math.abs(monthlyProfit), lang)} ${monthlyProfit > 0 ? 'बचत' : 'घाटा'}।`
-        : lang === 'BN' ? `EMI দেওয়ার পর প্রতি মাসে প্রায় ₹${formatIndianNumber(Math.abs(monthlyProfit), lang)} ${monthlyProfit > 0 ? 'লাভ' : 'লোকসান'}।`
-          : `After EMI, estimated monthly ${monthlyProfit > 0 ? 'profit' : 'loss'}: ₹${formatIndianNumber(Math.abs(monthlyProfit), lang)}.`
+      ? `After EMI, estimated monthly ${monthlyProfit > 0 ? 'profit' : 'loss'}: ₹${formatIndianNumber(Math.abs(monthlyProfit), lang)}.`
       : '';
 
-    const nextStepLine = nextStep
-      ? lang === 'HI' ? `अगला कदम: ${nextStep}`
-        : lang === 'BN' ? `পরবর্তী পদক্ষেপ: ${nextStep}`
-          : `Next step: ${nextStep}`
+    const nextStepLine = localizedNextStep
+      ? `Next step: ${localizedNextStep}`
       : '';
 
-    return [verdictLine, popLine, moneyLine, profitLine, nextStepLine].filter(Boolean).join(' ');
+    return [verdictLine, localizedSummary, popLine, moneyLine, profitLine, nextStepLine].filter(Boolean).join(' ');
   };
 
   const narrationScript = buildNarration();
@@ -210,7 +262,7 @@ export function PlainLanguageSummaryCard({
             </h3>
             {/* Use the REAL AI summary from the report */}
             <p className="mt-1 text-sm leading-relaxed opacity-95">
-              {aiSummary || (isGood
+              {getLocalizedAiSummary(report, lang) || (isGood
                 ? (ps?.statusGoodDesc ?? '')
                 : isCaution ? (ps?.statusCautionDesc ?? '') : (ps?.statusRiskDesc ?? ''))}
             </p>
@@ -269,7 +321,7 @@ export function PlainLanguageSummaryCard({
               <div className="bg-sky-50 rounded-md p-1.5 font-medium">
                 {ps?.costFromGovt ?? 'Govt Loan Scheme'}: <span className="font-bold text-sky-900">₹{formatIndianNumber(netLoanAmount || loanRequired, lang)}</span>
                 <span className="block text-[11px] font-bold text-sky-800 mt-0.5">
-                  {lang === 'HI' ? 'योजना' : lang === 'BN' ? 'প্রকল্প' : 'Scheme'}: {displaySchemeName}
+                  {lang === 'HI' ? 'योजना' : lang === 'BN' ? 'প্রকল্প' : 'Scheme'}: {translateScheme(displaySchemeName, lang)}
                 </span>
                 {subsidyAmount > 0 && (
                   <span className="block text-[11px] font-bold text-emerald-700">
@@ -352,7 +404,7 @@ export function PlainLanguageSummaryCard({
                   </div>
                   <div className="mt-1 text-sm font-bold text-white flex items-center gap-2">
                     <FileText className="h-4 w-4 text-teal-400 shrink-0" />
-                    {displaySchemeName}
+                    {translateScheme(displaySchemeName, lang)}
                   </div>
                 </div>
               )}
@@ -363,7 +415,7 @@ export function PlainLanguageSummaryCard({
                   </div>
                   <div className="mt-1 text-sm text-slate-200 flex items-start gap-2">
                     <ArrowRight className="h-4 w-4 mt-0.5 text-brand-300 shrink-0" />
-                    <span>{nextStep}</span>
+                    <span>{getLocalizedNextStep(report, lang)}</span>
                   </div>
                 </div>
               )}

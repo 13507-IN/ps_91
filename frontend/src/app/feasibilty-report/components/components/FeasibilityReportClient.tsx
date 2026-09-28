@@ -314,7 +314,7 @@ export function FeasibilityReportClient({
             <RiskAssessmentSection risk={report.riskAssessment} />
 
             <div className="grid gap-6 lg:grid-cols-1">
-              <AIRecommendationSection recommendation={report.aiRecommendation} />
+              <AIRecommendationSection recommendation={report.aiRecommendation} report={report} />
             </div>
 
             <ActionPlanSection plan={report.actionPlan} />

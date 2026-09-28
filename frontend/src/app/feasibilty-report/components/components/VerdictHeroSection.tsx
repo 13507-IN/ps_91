@@ -7,7 +7,13 @@ import { dateTime } from '@/lib/format';
 import type { FeasibilityReport } from '@/types';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 import { formatIndianNumber } from '@/lib/i18n/formatNumber';
-import { translateDecision, translateGrade } from '@/lib/i18n/reportTranslator';
+import {
+  translateDecision,
+  translateGrade,
+  getLocalizedAiSummary,
+  translateScheme,
+  getLocalizedBusinessIdea,
+} from '@/lib/i18n/reportTranslator';
 
 const bgGradient: Record<string, string> = {
   EXCELLENT: 'bg-gradient-to-br from-emerald-50/90 via-teal-50/50 to-white border-emerald-200',
@@ -39,7 +45,9 @@ export function VerdictHeroSection({ report }: { report: FeasibilityReport }) {
             </span>
           </div>
 
-          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight">{businessIdea}</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight">
+            {getLocalizedBusinessIdea(businessIdea, report.businessCategory, lang)}
+          </h1>
 
           <div className="mt-3 flex flex-wrap items-center justify-center md:justify-start gap-2">
             <span className={`rounded-full border px-3 py-1 text-xs font-bold ${decisionObj.bg} ${decisionObj.text} ${decisionObj.border}`}>
@@ -92,7 +100,7 @@ export function VerdictHeroSection({ report }: { report: FeasibilityReport }) {
         </div>
 
         <p className="text-sm md:text-base leading-relaxed text-slate-800 font-normal">
-          {aiRecommendation.summary}
+          {getLocalizedAiSummary(report, lang)}
         </p>
 
         {/* Snapshot Badges */}
@@ -110,7 +118,7 @@ export function VerdictHeroSection({ report }: { report: FeasibilityReport }) {
           {matchedSchemeName && (
             <div className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 border border-sky-200/60 font-semibold text-slate-700 shadow-xs">
               <Landmark className="h-3.5 w-3.5 text-sky-600" />
-              {t.plainSummary.costFromGovt}: <span className="font-bold text-slate-900">{matchedSchemeName}</span>
+              {t.plainSummary.costFromGovt}: <span className="font-bold text-slate-900">{translateScheme(matchedSchemeName, lang)}</span>
             </div>
           )}
         </div>
