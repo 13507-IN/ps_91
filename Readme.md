@@ -1,4 +1,4 @@
-# ArthSetu (UdyamSetu AI)
+# ArthSetu
 
 ### Hyper-Local Enterprise Intelligence & Credit Readiness Platform for Rural & Semi-Urban Entrepreneurs
 
@@ -633,71 +633,6 @@ All Fastify backend endpoints are prefixed with `/api/v1` and documented via Ope
 | `POST` | `/api/v1/chat` | Conversational query assistant endpoint | No |
 | `POST` | `/api/v1/admin/ingest/run` | Trigger dataset ingestion pipeline | Yes (Admin) |
 
----
-
-## 🚀 Local Development & Setup Guide
-
-### Prerequisites
-* **Node.js** `>= 20.0.0`
-* **Python** `>= 3.11`
-* **PostgreSQL** `>= 15` with **PostGIS** extension enabled
-* **Redis** (Local instance or Upstash Redis URL)
-
-### 1. Backend Setup
-
-```bash
-cd backend
-npm install
-
-# Configure environment
-cp .env.example .env
-# Ensure DATABASE_URL includes postgis extension:
-# DATABASE_URL="postgresql://user:password@localhost:5432/arthsetu?schema=public"
-
-# Run database migrations and generate Prisma client
-npm run db:push
-npm run db:generate
-
-# Seed initial geographic and scheme data
-npm run db:seed
-
-# Start backend development server (Port 5000)
-npm run dev
-```
-
-### 2. Python AI Service Setup
-
-```bash
-cd ai-service
-python3 -m venv venv
-source venv/bin/activate   # On Windows: .\venv\Scripts\activate
-pip install -r requirements.txt
-
-# Configure environment
-cp .env.example .env
-# Set GEMINI_API_KEY or GROQ_API_KEY
-
-# Start FastAPI AI microservice (Port 8000)
-uvicorn app.main:app --reload --port 8000
-```
-
-### 3. Frontend Setup
-
-```bash
-cd frontend
-npm install
-
-# Configure environment
-cp .env.example .env.local
-# Set NEXT_PUBLIC_API_URL="http://localhost:5000/api/v1"
-
-# Start Next.js development server (Port 3000)
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser to interact with the platform. Interactive Swagger API documentation will be available at [http://localhost:5000/documentation](http://localhost:5000/documentation).
-
----
 
 ## 📄 License & Attribution
 
