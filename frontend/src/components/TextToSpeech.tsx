@@ -10,7 +10,7 @@ interface TextToSpeechProps {
   autoPlay?: boolean;
 }
 
-// In-memory cache to prevent re-fetching the same audio from ElevenLabs (saves character quota)
+// In-memory cache to prevent re-fetching the same audio from Sarvam / ElevenLabs
 const audioUrlCache = new Map<string, string>();
 
 export function TextToSpeech({ text, className = '' }: TextToSpeechProps) {
@@ -18,7 +18,7 @@ export function TextToSpeech({ text, className = '' }: TextToSpeechProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [voiceSource, setVoiceSource] = useState<'elevenlabs' | 'browser' | null>(null);
+  const [voiceSource, setVoiceSource] = useState<'sarvam' | 'elevenlabs' | 'browser' | null>(null);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const browserSupported = typeof window !== 'undefined' && 'speechSynthesis' in window;
@@ -86,7 +86,7 @@ export function TextToSpeech({ text, className = '' }: TextToSpeechProps) {
 
     // If currently playing, toggle pause/play
     if (isPlaying) {
-      if (voiceSource === 'elevenlabs' && audioRef.current) {
+      if ((voiceSource === 'sarvam' || voiceSource === 'elevenlabs') && audioRef.current) {
         if (!isPaused) {
           audioRef.current.pause();
           setIsPaused(true);
@@ -117,14 +117,14 @@ export function TextToSpeech({ text, className = '' }: TextToSpeechProps) {
     // If we have a cached audio URL, play it directly
     if (audioUrlCache.has(cacheKey)) {
       const cachedUrl = audioUrlCache.get(cacheKey)!;
-      playAudioUrl(cachedUrl);
+      playAudioUrl(cachedUrl, voiceSource === 'elevenlabs' ? 'elevenlabs' : 'sarvam');
       return;
     }
 
     setIsLoading(true);
 
     try {
-      // Attempt natural ElevenLabs synthesis via server API route
+      // Attempt natural Indic speech synthesis (Sarvam AI with ElevenLabs fallback)
       const res = await fetch('/api/tts', {
         method: 'POST',
         headers: {
@@ -141,11 +141,13 @@ export function TextToSpeech({ text, className = '' }: TextToSpeechProps) {
         const objectUrl = URL.createObjectURL(audioBlob);
         audioUrlCache.set(cacheKey, objectUrl);
         setIsLoading(false);
-        playAudioUrl(objectUrl);
+        const providerHeader = res.headers.get('x-tts-provider');
+        const provider = providerHeader === 'elevenlabs' ? 'elevenlabs' : 'sarvam';
+        playAudioUrl(objectUrl, provider);
         return;
       }
 
-      // If ElevenLabs returned non-200 (e.g. key missing/rate limit), silently fallback to browser
+      // If server returned non-200 (e.g. key missing/rate limit), silently fallback to browser
       setIsLoading(false);
       playBrowserSpeech(text);
     } catch {
@@ -155,7 +157,7 @@ export function TextToSpeech({ text, className = '' }: TextToSpeechProps) {
     }
   }
 
-  function playAudioUrl(url: string) {
+  function playAudioUrl(url: string, provider: 'sarvam' | 'elevenlabs' = 'sarvam') {
     if (!audioRef.current) {
       audioRef.current = new Audio();
     }
@@ -179,7 +181,7 @@ export function TextToSpeech({ text, className = '' }: TextToSpeechProps) {
       .then(() => {
         setIsPlaying(true);
         setIsPaused(false);
-        setVoiceSource('elevenlabs');
+        setVoiceSource(provider);
       })
       .catch(() => {
         playBrowserSpeech(text);
@@ -188,7 +190,7 @@ export function TextToSpeech({ text, className = '' }: TextToSpeechProps) {
 
   return (
     <div className={`inline-flex items-center gap-1.5 ${className}`}>
-      {/* Hidden audio element for ElevenLabs playback */}
+      {/* Hidden audio element for Sarvam/ElevenLabs playback */}
       <audio ref={audioRef} className="hidden" preload="auto" />
 
       {/* Main Play / Pause Button */}
