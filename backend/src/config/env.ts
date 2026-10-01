@@ -50,6 +50,13 @@ const envSchema = z.object({
   // Leave blank in development — the webhook endpoint will return 503.
   HTTPSMS_WEBHOOK_SECRET: z.string().optional(),
 
+  // Telnyx (SMS & Voice/Call Provider)
+  TELNYX_API_KEY: z.string().optional(),
+  TELNYX_PHONE_NUMBER: z.string().optional(),
+  TELNYX_MESSAGING_PROFILE_ID: z.string().optional(),
+  TELNYX_CONNECTION_ID: z.string().optional(),
+  TELNYX_PUBLIC_KEY: z.string().optional(),
+
   // Google OAuth & Session
   GOOGLE_CLIENT_ID: z.string().optional(),
   GOOGLE_CLIENT_SECRET: z.string().optional(),

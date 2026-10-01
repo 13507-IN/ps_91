@@ -29,6 +29,7 @@ import { aiRoutes } from './modules/ai/ai.routes.js';
 import { feasibilityRoutes } from './modules/feasibility/feasibility.routes.js';
 import { chatRoutes } from './modules/chat/chat.routes.js';
 import httpsmsWebhookRoutes from './modules/webhooks/httpsms.webhook.rout.js';
+import { telnyxRoutes } from './modules/telnyx/telnyx.routes.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const env = getEnv();
@@ -63,6 +64,20 @@ export async function buildApp(): Promise<FastifyInstance> {
     global: true,
     contentSecurityPolicy: env.NODE_ENV === 'production' ? undefined : false,
   });
+
+  // Support application/x-www-form-urlencoded for webhook inputs (e.g. Telnyx Voice Gather)
+  app.addContentTypeParser(
+    'application/x-www-form-urlencoded',
+    { parseAs: 'string' },
+    (_req, body, defaultDoneHandler) => {
+      try {
+        const parsed = Object.fromEntries(new URLSearchParams(body as string));
+        defaultDoneHandler(null, parsed);
+      } catch (err) {
+        defaultDoneHandler(err as Error, undefined);
+      }
+    },
+  );
 
   // ---- Swagger (before routes so it picks up schemas) ----
   await app.register(swaggerPlugin);
@@ -146,7 +161,7 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   // ---- API Routes ----
   await app.register(authRoutes, { prefix: `${API_PREFIX}/auth` });
-  // await app.register(otpAuthRoutes, { prefix: `${API_PREFIX}/auth` });
+  await app.register(otpAuthRoutes, { prefix: `${API_PREFIX}/auth` });
   await app.register(googleAuthRoutes, { prefix: `${API_PREFIX}/auth` });
   await app.register(userRoutes, { prefix: `${API_PREFIX}/users` });
   await app.register(adminRoutes, { prefix: `${API_PREFIX}/admin` });
@@ -161,6 +176,9 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   // ---- Webhooks (no API prefix — called by external services) ----
   await app.register(httpsmsWebhookRoutes, { prefix: '/webhooks' });
+
+  // ---- Telnyx SMS & Voice Conversational Routes ----
+  await app.register(telnyxRoutes);
 
   return app;
 }

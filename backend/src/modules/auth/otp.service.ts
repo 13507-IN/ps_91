@@ -13,6 +13,7 @@ import type { OtpPurpose } from '../../config/otp.js';
 import { getEnv } from '../../config/env.js';
 import { BadRequestError, ServiceUnavailableError, TooManyRequestsError, UnauthorizedError } from '../../lib/errors.js';
 import { sendSms } from '../../lib/httpsms.js';
+import { sendTelnyxSms, isTelnyxConfigured } from '../../lib/telnyx.js';
 import type { SendOtpResponse, VerifyOtpResponse } from './otp.mdel.js';
 import { AuthService } from './auth.service.js';
 
@@ -80,8 +81,29 @@ export class OtpService {
     });
 
     // ----------------------------------------------------------
-    // Send via httpSMS (or dev fallback if httpSMS not configured)
+    // Send via Telnyx SMS (Primary) or httpSMS (Secondary)
     // ----------------------------------------------------------
+    if (isTelnyxConfigured()) {
+      try {
+        await sendTelnyxSms({
+          to: normalizedPhone,
+          text:
+            `Your ArthSetu verification code is: ${plainCode}. ` +
+            `Valid for ${OTP_EXPIRY_MINUTES} minutes. Do not share this code with anyone.`,
+        });
+        this.fastify.log.info({ phone: normalizedPhone, purpose }, '📱 OTP sent via Telnyx SMS');
+        return {
+          message: `OTP sent to ${normalizedPhone}`,
+          expiresInMinutes: OTP_EXPIRY_MINUTES,
+        };
+      } catch (err) {
+        this.fastify.log.warn(
+          { phone: normalizedPhone, purpose, error: (err as Error).message },
+          '⚠️ Telnyx SMS send failed, checking secondary providers...',
+        );
+      }
+    }
+
     if (env.HTTPSMS_API_KEY && env.HTTPSMS_FROM_NUMBER) {
       try {
         await sendSms({
