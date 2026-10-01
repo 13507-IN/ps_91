@@ -24,6 +24,7 @@
    - [4.3 Ingestion Pipelines (`backend/src/ingestion`)](#43-ingestion-pipelines)
    - [4.4 AI Service Multi-Agent System (`ai-service/app`)](#44-ai-service-multi-agent-system)
    - [4.5 Machine Learning Pipelines (`ML/src`)](#45-machine-learning-pipelines)
+   - [4.6 Telephony, Conversational SMS & Voice IVR Subsystem (`backend/src/modules/telnyx`)](#46-telephony-conversational-sms--voice-ivr-subsystem)
 5. [Core Implementations & Mathematical Logic](#-core-implementations--mathematical-logic)
    - [5.1 Deterministic Feasibility Scoring Engine](#51-deterministic-feasibility-scoring-engine)
    - [5.2 Financial Modelling & EMI Calculator](#52-financial-modelling--emi-calculator)
@@ -90,6 +91,8 @@ into:
 | **AI LLM Providers** | **Google GenAI (Gemini)** & **Groq** | `1.16` / `0.25` | Gemini 1.5 Flash / Pro and Groq Llama 3 70B for fast cognitive inference |
 | **Prompt Engineering**| **Jinja2** | `3.1.6` | Structured prompt templating with schema-enforced JSON guardrails |
 | **ML Frameworks** | **Prophet**, **XGBoost**, **Scikit-learn**| Latest | Time-series commodity price forecasting and rural demand regression |
+| **Telephony & SMS** | **Telnyx API (v2)** | REST / TeXML | Conversational SMS bot, OTP delivery, automated Voice IVR feasibility delivery |
+| **Indic Regional TTS** | **Sarvam AI (Bulbul:v3)**| API v1 | High-fidelity Bengali (roopa/rehan) & Hindi (shubh) text-to-speech voice playback |
 
 ---
 
@@ -381,6 +384,22 @@ Built with FastAPI and a multi-agent cognitive pattern:
   * Employs **HistGradientBoostingRegressor** on village-level consumption indicators.
   * Estimates baseline consumption demand for critical rural enterprise categories (dairy, flour milling, poultry, garment stitching).
 
+### 4.6 Telephony, Conversational SMS & Voice IVR Subsystem (`backend/src/modules/telnyx`)
+
+Designed specifically for **last-mile rural inclusion**, where entrepreneurs lack smartphones or broadband internet:
+* **Passwordless Mobile Account Creation**: Unregistered entrepreneurs simply text `START` or their business idea to the ArthSetu phone number (`+19282493360`). The carrier network authenticates their SIM card directly; their account is automatically provisioned in PostgreSQL with `isPhoneVerified: true` without requiring OTP input.
+* **Conversational Multi-Turn SMS Assessment**: An interactive state machine guides the user through Language Selection (`English`, `বাংলা`, `हिंदी`), Business Idea, District, and Planned Capital.
+* **Natural Language Single-Shot Parsing**: Entrepreneurs can text a natural query in one shot (e.g. `"Dairy farming in Nadia capital 50000"`). The parser extracts the enterprise type, district coordinates, and budget, immediately invoking `FeasibilityService.analyze()`.
+* **Hyper-Localized SMS Feasibility Summary**: Sends clear, formatted SMS reports detailing:
+  * Feasibility Score (0–100) and Viability Grade.
+  * Project Cost, Equity Margin, and Matched Government Scheme (PMEGP, Mudra, PM-SVANidhi).
+  * Monthly EMI and Projected Net Monthly Profit.
+  * Next actionable milestone.
+* **TeXML Automated Voice AI (Inbound & Outbound Calling)**:
+  * **Inbound Voice IVR**: Entrepreneurs dialing the hotline hear their latest feasibility report spoken aloud via automated text-to-speech. DTMF keypress (`Press 1`) automatically triggers full report delivery via SMS.
+  * **Outbound Voice Calls**: Texting `CALL` prompts ArthSetu to dial the user's phone directly and recite their assessment results.
+* **Carrier-Grade OTP Delivery**: Integrates Telnyx outbound SMS for web application registration and login, with automatic secondary fallback to httpSMS.
+
 ---
 
 ## ⚙️ Core Implementations & Mathematical Logic
@@ -505,6 +524,7 @@ The frontend is implemented as a modern, accessible civic portal using Next.js 1
   * **AI SWOT Matrix**: Interactive 4-quadrant SWOT analysis specific to the selected village and business category.
   * **Stress Test Visualizer**: Chart.js bar graph comparing base-case net margin against stressed input-cost and demand-shock scenarios.
   * **30-Day Action Roadmap**: Checklist covering supplier sourcing, quotation collection, scheme documentation, and bank submission.
+  * **Sarvam AI Indic Voice Narration**: In-app text-to-speech engine powered by Sarvam AI (`bulbul:v3`), reciting the full executive summary in natural vernacular Bengali (`roopa` / `rehan`) and Hindi (`shubh`), with ElevenLabs and browser speech fallbacks.
   * **DPR Export**: One-click printable view formatted for bank loan officers.
 
 ### 5. Government Schemes Explorer (`/schemes` & `/schemes/[id]`)
@@ -632,6 +652,14 @@ All Fastify backend endpoints are prefixed with `/api/v1` and documented via Ope
 | `POST` | `/api/v1/ai/demand-estimate` | AI demand estimation for micro-market catchment | No |
 | `POST` | `/api/v1/chat` | Conversational query assistant endpoint | No |
 | `POST` | `/api/v1/admin/ingest/run` | Trigger dataset ingestion pipeline | Yes (Admin) |
+| `POST` | `/webhooks/telnyx/sms` | Telnyx inbound SMS webhook (conversational assessment & account creation) | No (Telnyx) |
+| `POST` | `/webhooks/telnyx/voice` | Telnyx inbound voice call TeXML IVR handler | No (Telnyx) |
+| `POST` | `/webhooks/telnyx/voice/gather` | Telnyx DTMF keypress processing for voice actions | No (Telnyx) |
+| `POST` | `/api/telnyx/simulate-sms` | Test / simulate conversational SMS flow without real SMS | No |
+| `POST` | `/api/telnyx/send-sms` | Send arbitrary outbound SMS message via Telnyx | Yes |
+| `POST` | `/api/telnyx/outbound-call` | Trigger automated voice call to speak feasibility report | Yes |
+| `GET` | `/api/telnyx/status` | Telemetry endpoint for Telnyx SMS & Voice configuration | No |
+| `POST` | `/api/tts` | Sarvam AI Indic text-to-speech endpoint (Bengali & Hindi) | No |
 
 
 ## 📄 License & Attribution
