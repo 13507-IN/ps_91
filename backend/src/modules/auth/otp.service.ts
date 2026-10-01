@@ -97,11 +97,23 @@ export class OtpService {
           expiresInMinutes: OTP_EXPIRY_MINUTES,
         };
       } catch (err) {
-        this.fastify.log.warn(
+        this.fastify.log.error(
           { phone: normalizedPhone, purpose, error: (err as Error).message },
-          '⚠️ Telnyx SMS send failed, checking secondary providers...',
+          '❌ Telnyx SMS send failed',
         );
+        await this.fastify.prisma.otpCode.deleteMany({
+          where: { phone: normalizedPhone, purpose, verified: false },
+        });
+        throw new ServiceUnavailableError(`Telnyx SMS failed: ${(err as Error).message}`);
       }
+    } else {
+      this.fastify.log.warn(
+        {
+          hasTelnyxApiKey: Boolean(env.TELNYX_API_KEY),
+          hasTelnyxPhone: Boolean(env.TELNYX_PHONE_NUMBER),
+        },
+        '⚠️ Telnyx is NOT configured in server environment variables. Please set TELNYX_API_KEY and TELNYX_PHONE_NUMBER.',
+      );
     }
 
     if (env.HTTPSMS_API_KEY && env.HTTPSMS_FROM_NUMBER) {
